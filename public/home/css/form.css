@@ -1,0 +1,209 @@
+#form_contacto {text-align:left; margin-top:30px;}
+
+form ul
+{
+	font-size:100%;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	width:100%;
+}
+
+form li
+{
+	display:block;
+	margin:0;
+	position:relative;
+}
+
+form li:after {	clear:both;	content:".";	display:block;	height:0;	visibility:hidden;}
+
+.buttons:after {clear:both;	content:".";display:block;height:0;	visibility:hidden;}
+
+#form_contacto .buttons {clear:both; display:block; margin-top:10px; height:45px}
+
+form li div label{	clear:both;	color:#444;	display:block;	font-size:9px;	line-height:9px;
+	margin:0;
+	padding-top:3px;
+}
+
+form li span label
+{
+	clear:both;
+	color:#444;
+	display:block;
+	font-size:9px;
+	line-height:9px;
+	margin:0;
+	padding-top:3px;
+}
+
+
+
+.form_contacto
+{
+	border-bottom:1px dotted #ccc;
+	clear:both;
+	display:inline-block;
+	margin:0 0 1em;
+}
+
+.form_contacto[class]
+{
+	display:block;
+}
+
+
+.form_contacto p
+{
+	font-size:95%;
+	line-height:130%;
+	margin:0 0 12px;
+}
+
+form hr
+{
+	display:none;
+}
+
+form li.section_break
+{
+	border-top:1px dotted #ccc;
+	margin-top:9px;
+	padding-bottom:0;
+	padding-left:9px;
+	padding-top:13px;
+	width:97% !important;
+}
+
+form ul li.first
+{
+	border-top:none !important;
+	margin-top:0 !important;
+	padding-top:0 !important;
+}
+
+form .section_break h3
+{
+	font-size:110%;
+	font-weight:400;
+	line-height:130%;
+	margin:0 0 2px;
+}
+
+form .section_break p
+{
+	font-size:85%;
+
+	margin:0 0 10px;
+}
+
+/**** Buttons ****/
+input.button_text
+{
+	overflow:visible;
+	padding:0 7px;
+	width:auto;
+}
+
+.buttons input
+{
+	font-size:100%; float:right;
+	
+}
+
+
+
+span.symbol
+{font-size:115%;
+	line-height:130%;
+}
+
+input.text {height:40px; border:1px solid #ecf0f1; background-color:#ecf0f1; color:#737f80; margin-bottom:15px; font-size:18px; font-family:'ralewayregular',  'Raleway', sans-serif; padding-left:5px; -webkit-box-shadow:  4px 4px 2px 0px #0e6655; box-shadow:  4px 4px 0px 0px #0e6655; }
+
+input.text:focus {border:1px solid #0e6655; background-color:#17a387; color:#ecf0f1}
+	
+textarea.textarea:focus {border:1px solid #0e6655; background-color:#17a387; color:#ecf0f1}
+
+
+textarea.textarea {border:1px solid #ecf0f1; color:#737f80; margin-bottom:20px; font-size:18px;	background-color:#ecf0f1; width:100%; max-width:100%; font-family:'ralewayregular',  'Raleway', sans-serif; padding:10px 0 0 5px;  -webkit-box-shadow:  4px 4px 2px 0px #0e6655; box-shadow:  4px 4px 0px 0px #0e6655;}
+
+select.select
+{
+	color:#333;
+	font-size:100%;
+	margin:1px 0;
+	padding:1px 0 0;
+	background:#fff url(shadow.gif) repeat-x top;
+	border-bottom:1px solid #ddd;
+	border-left:1px solid #c3c3c3;
+	border-right:1px solid #c3c3c3;
+	border-top:1px solid #7c7c7c;
+}
+
+
+
+
+select.select[class]
+{
+	margin:0;
+	padding:1px 0;
+}
+
+*:first-child+html select.select[class]
+{
+	margin:1px 0;
+}
+
+.safari select.select
+{
+	font-size:120% !important;
+	margin-bottom:1px;
+}
+
+
+
+
+input.medium {width:100%;}
+
+
+textarea.medium {height:150px; max-height:150px}
+
+
+/*miooo*/
+#form_contacto #formizq { width:490px; float:left}
+#form_contacto #formder { width:490px; float:right}
+
+#element_6 {overflow:hidden;}
+#botonesform { width:497px}
+
+.izq {float:left; width:47%}
+
+.der {float:right; width:47%;}
+
+
+
+#saveForm { width:160px !important; height:36px; padding: 0; background-color:#17A387; color:#FFF;  border:0; letter-spacing:1px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; font-size:14px; -webkit-box-shadow: 0px 3px 0px 0px #10705D; -moz-box-shadow: 0px 0px 0px 0px #10705D; -o-box-shadow: 0px 0px 0px 0px #10705D; box-shadow:  0px 3px 0px 0px #10705D; opacity:1 !important; margin-left:20px}
+
+
+#saveForm:hover {background-color:#17A387; -webkit-box-shadow: 0px 0px 0px 0px #10705D; -moz-box-shadow: 0px 0px 0px 0px #10705D; -o-box-shadow: 0px 0px 0px 0px #10705D; box-shadow:  0px 0px 0px 0px #10705D; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
+
+
+#borrar {width:160px !important; height:36px; padding:0; background-color:#A31717; color:#FFF;  border:0; letter-spacing:1px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; font-size:14px; -webkit-box-shadow: 0px 3px 0px 0px #701010; -moz-box-shadow: 0px 0px 0px 0px #701010; -o-box-shadow: 0px 0px 0px 0px #701010; box-shadow:  0px 3px 0px 0px #701010; opacity:1 !important}
+
+#borrar:hover {background-color:#A31717; -webkit-box-shadow: 0px 0px 0px 0px #10705D; -moz-box-shadow: 0px 0px 0px 0px #10705D; -o-box-shadow: 0px 0px 0px 0px #10705D; box-shadow:  0px 0px 0px 0px #10705D; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

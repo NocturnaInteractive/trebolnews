@@ -1,0 +1,30 @@
+* {
+	font-family: Tahoma, Geneva, sans-serif;
+}
+
+table {
+	padding: 5;
+	border: 5px solid gray;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+tr:first-child {
+	background: silver;
+}
+
+tr:not(:first-child):hover {
+	background: gainsboro;
+}
+
+th {
+	font-weight: bold;
+	border: 2px solid gray;
+	padding: 5px;
+}
+
+td {
+	border: 2px solid gray;
+	text-align: center;
+	padding: 5px;
+}
