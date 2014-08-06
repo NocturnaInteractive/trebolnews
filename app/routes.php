@@ -17,7 +17,7 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function() {
-	echo('hola');
+	var_dump(App::environment());
 });
 
 // desde acá

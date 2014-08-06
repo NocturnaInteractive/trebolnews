@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '104.131.143.16',
+			'host'      => 'localhost',
 			'database'  => 'trebolnews',
-			'username'  => 'forge',
-			'password'  => 'Q5t2gtXYpw25D52xQapW',
+			'username'  => 'homestead',
+			'password'  => 'secret',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
