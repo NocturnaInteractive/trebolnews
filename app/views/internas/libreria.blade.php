@@ -19,30 +19,18 @@
       <!--chat-->
 	    {{ HTML::script('home/js/modernizr.custom.js') }}
       <!--chat-->
-    <script>
-    $(function() {
-        $('#btn_mipc, #btn_redes').on('click', function(e) {
-            e.preventDefault();
 
-            $.ajax({
-                url: $(this).attr('ajax'),
-                success: function(data) {
-                    $('#popup').html('');
-                    $('#popup').html(data.popup);
-                    $('#popup').fadeIn(400);
-                }
-            });
-        });
-    });
-    </script>
     </head>
     <body>
-       <header>
+      <input type="hidden" id="id_carpeta" value="{{ isset($carpeta_seleccionada) ? $carpeta_seleccionada->id : '' }}" />
+      <header>
     <div id="conheader">
-    <h1>TrebolNEWS</h1>
+    <h1><a href="{{ url('/') }}">TrebolNEWS</a></h1>
 
-<div id="menu" class="cbp-fbscroller" >
+<div id="menu" class="cbp-fbscroller">
+
   @include('menu')
+
   <input type="hidden" id="menu_principal" value="librerias" />
   <div class="cleaner"></div>
 </div>
@@ -104,8 +92,8 @@
               <ul id="subiralibreria">
               <li><a class="subiralibreria">SUBIR A LIBRER&Iacute;A</a>
               <ul>
-              <li><a id="btn_mipc" href="#" ajax="{{ url('popup_libreria_mipc') }}">Mi PC</a></li>
-              <li><a id="btn_redes" href="#" ajax="{{ url('popup_libreria_redes') }}">Redes Sociales</a></li>
+              <li><a id="btn_mipc" href="subir" popup="{{ url('popup/libreria_mipc') }}">Mi PC</a></li>
+              <li><a id="btn_redes" href="subir" popup="{{ url('popup/libreria_redes') }}">Redes Sociales</a></li>
               <li><a href="{{ route('banco') }}">Banco de im&aacute;genes</a></li>
               </ul>
               </li>
@@ -118,23 +106,19 @@
     <ul>
         <?php
         $cantidad = 0;
-        $carpeta_imagenes = Carpeta::where('id_usuario', '=', Auth::user()->id)->where('nombre', '=', 'imagenes')->first();
-        $carpetas = Carpeta::where('id_usuario', '=', Auth::user()->id)->where('nombre', '=!', 'basura')->get();
         ?>
         @foreach($carpetas as $carpeta)
         <?php $cantidad += count($carpeta->imagenes); ?>
         @endforeach
-        <li><a href="#" id="filtrotodo" class="apretado">Todo <span>({{ $cantidad + count($carpeta_imagenes->imagenes) }})</span></a></li>
-        <li><a href="#" id="filtroimag">Im&aacute;genes <span>({{ count($carpeta_imagenes->imagenes) }})</span></a></li>
+        <li><a href="{{ route('librerias') }}" id="filtrotodo" {{ isset($carpeta_seleccionada) ? '' : 'class="apretado"' }}>Todo <span>({{ $cantidad + count($carpeta_imagenes->imagenes) }})</span></a></li>
+        <li><a href="{{ route('carpeta', 1) }}" id="filtroimag" {{ isset($carpeta_seleccionada) ? ( $carpeta_seleccionada->id == 1 ? 'class="apretado"' : '' ) : '' }}>Im&aacute;genes <span>({{ count($carpeta_imagenes->imagenes) }})</span></a></li>
         @foreach($carpetas as $carpeta)
-        <li><a href="#" id="filtrocarpeta">{{ $carpeta->nombre }} <span>({{ count($carpeta->imagenes) }})</span></a></li>
+        <li><a href="{{ route('carpeta', $carpeta->id) }}" id="filtrocarpeta" {{ isset($carpeta_seleccionada) ? ($carpeta_seleccionada->id == $carpeta->id ? 'class="apretado"' : '') : '' }}>{{ $carpeta->nombre }} <span>({{ count($carpeta->imagenes) }})</span></a></li>
         @endforeach
-        <li><a href="#" id="filtrobasura">Basura <span>({{ count(Carpeta::where('id_usuario', '=', Auth::user()->id)->where('nombre', '=', 'basura')->first()->imagenes) }})</span></a></li>
-        <li><a href="#" id="filtrocrear">Crear carpeta</a></li>
+        <li><a href="{{ route('carpeta', $carpeta_basura->id) }}" id="filtrobasura" {{ isset($carpeta_seleccionada) ? ($carpeta_seleccionada->id == $carpeta_basura->id ? 'class="apretado"' : '') : '' }}>Basura <span>({{ count($carpeta_basura->imagenes) }})</span></a></li>
+        <li><a href="#" id="filtrocrear" popup="{{ url('popup/crear_carpeta_libreria') }}">Crear carpeta</a></li>
     </ul>
     </div><!--filtrolibreria-->
-
-
 
      <div id="tablalibreria">
 
@@ -147,8 +131,8 @@
 
 
      <ul id="filtrover">
-     <li><a id="filtroiconlinsta" class="apretado" href="libreria.html"><img src="{{ asset('internas/imagenes/filtroiconlinsta.png') }}" width="25" height="25"></a></li>
-     <li><a id="filtroiconimagen" href="libreria2.html"><img src="{{ asset('internas/imagenes/filtroiconimagen.png') }}" width="25" height="25"></a></li>
+     <li><a id="filtroiconlinsta" class="apretado" href="#"><img src="{{ asset('internas/imagenes/filtroiconlinsta.png') }}" width="25" height="25"></a></li>
+     <li><a id="filtroiconimagen" href="#"><img src="{{ asset('internas/imagenes/filtroiconimagen.png') }}" width="25" height="25"></a></li>
      </ul>
 
      <ul id="cantidad">
@@ -179,7 +163,8 @@
     <th scope="col" width="99px">Tama&ntilde;o</th>
     <th scope="col" width="100px"></th>
   </tr>
-  @foreach($carpeta_imagenes->imagenes as $imagen)
+  @foreach($imagenes as $imagen)
+  <?php if(isset($carpeta_seleccionada) && $carpeta_seleccionada->id != 1) { $ruta = 'uploads/imagenes/'; } else { $ruta = 'img/libreria/'; } ?>
   <tr>
     <td>
      <form class="checkbox">
@@ -187,15 +172,20 @@
      <label for="checkbox2"></label>
      </form>
     </td>
-    <td class="libre_img"><a href="#"><label for="checkbox2"><img src="{{ asset('img/libreria/' . $imagen->archivo) }}" height="75"></label></a></td>
+    <td class="libre_img"><a href="#"><label for="checkbox2"><img src="{{ asset($ruta . $imagen->archivo) }}" height="75"></label></a></td>
     <td class="nombrelibreria">{{ $imagen->nombre }}</td>
-    <?php $dim = getimagesize(public_path() . '/img/libreria/' . $imagen->archivo); ?>
+    <?php $dim = getimagesize(public_path() . '/' . $ruta . $imagen->archivo); ?>
     <td>{{ $dim[0] . ' x ' . $dim[1] }}</td>
-    <td>{{ round(filesize(public_path() . '/img/libreria/' . $imagen->archivo) / 1024, 2, PHP_ROUND_HALF_DOWN) . ' Kb' }}</td>
+    <td>{{ round(filesize(public_path() . '/' . $ruta . $imagen->archivo) / 1024, 2, PHP_ROUND_HALF_DOWN) . ' Kb' }}</td>
     <td><a class="ver_libreria" href="#"><img src="{{ asset('internas/imagenes/ojoicono.png') }}" width="28" height="25"></a><a class="editarcampam" href="#"><img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a><a class="borrarcam" href="#"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a><div class="cleaner"></div></td>
   </tr>
   @endforeach
 </table>
+<div id="paginador">
+  @if(count($imagenes) > 0)
+    {{ $imagenes->links('paginador') }}
+  @endif
+</div><!--paginador-->
 </div><!--tablalibreria-->
 
         <div class="cleaner"></div>

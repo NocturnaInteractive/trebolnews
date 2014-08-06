@@ -1,14 +1,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es-ES" class="no-js">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
         <title>TrebolNEWS</title>
 
-		<link rel="shortcut icon" href="favicon.ico">
+        <link rel="shortcut icon" href="favicon.ico">
         <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,900,700,600,500,300,200,100' rel='stylesheet' type='text/css' />
         {{ HTML::style('home/css/estilo.css') }}
         {{ HTML::style('home/css/form.css') }}
@@ -19,217 +19,206 @@
         {{ HTML::script('js/jquery.noty.packaged.min.js') }}
         {{ HTML::script('home/js/modernizr.custom.js') }}
         {{ HTML::script('home/js/js/modernizr.custom.28468.js') }}
-    <script>
-    $(function() {
-      $('#loginentrar').one('click', login_handler);
+        {{ HTML::script('home/js/js/jquery.cslider.js') }}
+        {{ HTML::script('home/js/jquery.easing.min.js') }}
+        {{ HTML::script('home/js/waypoints.min.js') }}
+        {{ HTML::script('home/js/jquery.debouncedresize.js') }}
+        {{ HTML::script('home/js/cbpFixedScrollLayout.min.js') }}
+        <script>
+        $(function() {
+            $('#loginentrar').one('click', login_handler);
 
-      function login_handler(e) {
-        e.preventDefault();
+            function login_handler(e) {
+                e.preventDefault();
 
-        $('#loginentrar').on('click', function(e) {
-            e.preventDefault();
-        });
+                $('#loginentrar').on('click', function(e) {
+                    e.preventDefault();
+                });
 
-        $('#frm_login').ajaxSubmit({
-            success: function(data) {
-                if(data.status == 'ok') {
-                    location.reload();
-                } else {
-                    $('#validator').css('display', 'none');
-                    if(data.validator) {
-                        $.each(data.validator, function(i, v) {
-                            $('#validator').text(v);
-                            return false;
-                            // noty({
-                            //     text: v,
-                            //     layout: 'topCenter',
-                            //     timeout: 5000
-                            // });
-                        });
-                        $('#validator').fadeIn(50, function(){
-                            setTimeout(function(){
-                                $('#validator').fadeOut(50, function() {
-                                    $('#validator').text('').css('display', 'block');
+                $('#frm_login').ajaxSubmit({
+                    beforeSubmit: function() {
+                        $('*').css('cursor', 'wait');
+                    },
+                    success: function(data) {
+                        if(data.status == 'ok') {
+                            location.reload();
+                        } else {
+                            $('#validator').css('display', 'none');
+                            if(data.validator) {
+                                $.each(data.validator, function(i, v) {
+                                    $('#validator').text(v);
+                                    return false;
+                                    // noty({
+                                    //     text: v,
+                                    //     layout: 'topCenter',
+                                    //     timeout: 5000
+                                    // });
                                 });
-                            }, 5000)
-                        });
-                    } else {
-                        $('#validator').text(data.mensaje);
-                        $('#validator').fadeIn(50, function(){
-                            setTimeout(function(){
-                                $('#validator').fadeOut(50, function(){
-                                    $('#validator').text('').css('display', 'block');
+                                $('#validator').fadeIn(50, function(){
+                                    setTimeout(function(){
+                                        $('#validator').fadeOut(50, function() {
+                                            $('#validator').text('').css('display', 'block');
+                                        });
+                                    }, 5000)
                                 });
-                            }, 5000)
-                        });
-                        // noty({
-                        //     text: data.mensaje,
-                        //     layout: 'topCenter',
-                        //     timeout: 5000
-                        // });
+                            } else {
+                                $('#validator').text(data.mensaje);
+                                $('#validator').fadeIn(50, function(){
+                                    setTimeout(function(){
+                                        $('#validator').fadeOut(50, function(){
+                                            $('#validator').text('').css('display', 'block');
+                                        });
+                                    }, 5000)
+                                });
+                                // noty({
+                                //     text: data.mensaje,
+                                //     layout: 'topCenter',
+                                //     timeout: 5000
+                                // });
+                            }
+                        }
+                    },
+                    complete: function() {
+                        $('#loginentrar').one('click', login_handler);
+                        $('*').css('cursor', 'auto');
                     }
-                }
-            },
-            complete: function() {
-                $('#loginentrar').one('click', login_handler);
+                });
             }
-        });
-      }
 
-      $('#frm_login input').on('keypress', function(e) {
-        if(e.which == 13) {
-          $('#loginentrar').trigger('click');
-        }
-      });
-
-      $('#login').on('click', function(e) {
-        e.preventDefault();
-      });
-
-        $('#face').on('click', function(e) {
-            e.preventDefault();
-
-            FB.getLoginStatus(function(response) {
-                if(response.status === 'connected') {
-                    FB.api('/me', function(response) {
-                        login_con_fb(response);
-                    });
-                } else if(response.status == 'not_authorized') {
-                    FB.login(function(response) {
-                        if(response.status === 'connected') {
-                            FB.api('/me', function(response) {
-                                login_con_fb(response);
-                            });
-                        }
-                    });
-                } else {
-                    FB.login(function(response) {
-                        if(response.status === 'connected') {
-                            login_con_fb(response);
-                        }
-                    });
+            $('#frm_login input').on('keypress', function(e) {
+                if(e.which == 13) {
+                    $('#loginentrar').trigger('click');
                 }
             });
-        });
-    });
 
-    function login_con_fb(response) {
-        $.ajax({
-            url: $('#face').attr('ajax'),
-            type: 'post',
-            data: response,
-            success: function(data) {
-                if(data.status == 'ok') {
-                    location.reload();
+            $('#login').on('click', function(e) {
+                e.preventDefault();
+            });
+
+            $('#face').on('click', function(e) {
+                e.preventDefault();
+
+                FB.getLoginStatus(function(response) {
+                    if(response.status === 'connected') {
+                        FB.api('/me', function(response) {
+                            login_con_fb(response);
+                        });
+                    } else if(response.status == 'not_authorized') {
+                        FB.login(function(response) {
+                            if(response.status === 'connected') {
+                                FB.api('/me', function(response) {
+                                    login_con_fb(response);
+                                });
+                            }
+                        });
+                    } else {
+                        FB.login(function(response) {
+                            if(response.status === 'connected') {
+                                login_con_fb(response);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        function login_con_fb(response) {
+            $.ajax({
+                url: $('#face').attr('ajax'),
+                type: 'post',
+                data: response,
+                success: function(data) {
+                    if(data.status == 'ok') {
+                        location.reload();
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
+        </script>
+    </head>
 
-    </script>
-	</head>
-	<body>
+    <body>
     <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '594990277275305',
-          xfbml      : true,
-          version    : 'v2.0'
-        });
-      };
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId: '594990277275305',
+            xfbml: true,
+            version: 'v2.0'
+            });
+        };
 
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/es_LA/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/es_LA/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     </script>
 
     <header>
-    <div id="conheader">
-    <a href="{{ url('/') }}"><h1>TrebolNEWS</h1></a>
+        <div id="conheader">
+            <a href="{{ url('/') }}"><h1>TrebolNEWS</h1></a>
+            <div id="menu" class="cbp-fbscroller" >
+                <nav>
+                    <a href="#fbsection1"></a>
+                    <a href="#fbsection2" class="apretado">&iquest;Qu&eacute; es Trebol News?</a>
+                    <a href="#fbsection3">Servicios</a>
+                    <a href="#fbsection4">&iquest;Por qu&eacute; elegirnos?</a>
+                    <a href="#fbsection5">Planes</a>
+                    <a href="#fbsection6">Contacto</a>
+                    <div id="sublogin"><a href="#" id="login"><img src="{{ asset('home/imagenes/iconlogin.png') }}" width="12px" height="14px" alt="icono de login">Iniciar Sesi&oacute;n</a>
+                    <ul>
+                        <span id="subflecha"></span>
+                        <div id="formasublogin">
+                            <form id="frm_login"  action="{{ action('UsuarioController@login') }}" method="post">
+                                <li class="loginizq"><input name="email" type="text"  id="loginemail" placeholder="Email:" /></li>
+                                <li class="loginder"><input name="password" type="password"  id="loginpass"  placeholder="Password:" /></li>
+                                <li class="loginizq"><input class="btn"  id="loginborrar" type="reset" value="BORRAR" name="Enviar2" /></li>
+                                <li class="loginder"><input type="button" value="ENTRAR" name="submit1" id="loginentrar" /></li>
+                            </form>
+                            <div class="cleaner"></div>
+                            <li><p style="height: 16px; display: block;" id="validator"></p></li>
+                            <li><hr></li>
+                            <li class="loginizq"><a href="#" id="face" ajax="{{ action('UsuarioController@login_con_fb') }}">Connect</a></li>
+                            <li class="loginder"><a href="{{ url('registro') }}" id="registro">Reg&iacute;strate Gratis</a></li>
+                            <li><a href="#" id="olvido">&iquest;Olvidaste tu contrase&ntilde;a?</a></li>
+                        </div>
+                    </ul>
+                    <div class="cleaner"></div>
+                    </div>
+                </nav>
+            <div class="cleaner"></div>
+            </div>
+        </div>
 
-<div id="menu" class="cbp-fbscroller" >
-<nav>
-<a href="#fbsection1"></a>
-<a href="#fbsection2" class="apretado">&iquest;Qu&eacute; es Trebol News?</a>
-<a href="#fbsection3">Servicios</a>
-<a href="#fbsection4">&iquest;Por qu&eacute; elegirnos?</a>
-<a href="#fbsection5">Planes</a>
-<a href="#fbsection6">Contacto</a>
-<div id="sublogin"><a href="#" id="login"><img src="{{ asset('home/imagenes/iconlogin.png') }}" width="12px" height="14px" alt="icono de login">Iniciar Sesi&oacute;n</a>
+        <div id="chat">
+            <button id="showRight">Chatee con un operador</button>
+                <div class="cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+                <h3>Consultas</h3><div id="formah3"></div>
+                <div class="cleaner"></div>
 
+                <form id="consultachat"  action="" method="post">
+                    <ul>
+                        <li class="izq_consultachat"><input name="nombre" type="text" placeholder="&nbsp;*Nombre:" /></li>
+                        <li class="der_consultachat"><input name="apellido" type="text" placeholder="&nbsp;*Apellido:" /></li>
+                        <div class="cleaner"></div>
+                        <li class="izq_consultachat"><input name="telefono" type="text" placeholder="Tel&eacute;fono:" /></li>
+                        <li class="der_consultachat"><input name="empresa" type="text" placeholder="Empresa:" /></li>
+                        <div class="cleaner"></div>
+                        <li class="email_chat"><input name="email" type="text" placeholder="&nbsp;*Email:" /></li>
+                        <li><textarea name="comentario" placeholder="&nbsp;*Comentario:"></textarea></li>
+                    </ul>
+                    <p>*&nbsp;Campos obligatorios </p>
 
-<ul>
-<span id="subflecha"></span>
-<div id="formasublogin">
-<form id="frm_login"  action="{{ action('UsuarioController@login') }}" method="post">
-<li class="loginizq"><input name="email" type="text"  id="loginemail" placeholder="Email:" /></li>
-<li class="loginder"><input name="password" type="password"  id="loginpass"  placeholder="Password:" /></li>
-<li class="loginizq"><input class="btn"  id="loginborrar" type="reset" value="BORRAR" name="Enviar2" /></li>
-<li class="loginder"><input type="button" value="ENTRAR" name="submit1" id="loginentrar" /></li>
-</form>
-<div class="cleaner"></div>
-<li><p style="height: 16px; display: block;" id="validator"></p></li>
-<li><hr></li>
-<li class="loginizq"><a href="#" id="face" ajax="{{ action('UsuarioController@login_con_fb') }}">Connect</a></li>
-<li class="loginder"><a href="{{ url('registro') }}" id="registro">Reg&iacute;strate Gratis</a></li>
-<li><a href="#" id="olvido">&iquest;Olvidaste tu contrase&ntilde;a?</a></li>
-</div>
-</ul>
-<div class="cleaner"></div>
-</div>
-</nav>
-
-
-<div class="cleaner"></div>
-</div>
-
-    </div>
-<div id="chat">
-    <button id="showRight">Chatee con un operador</button>
-
-    		<div class="cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<h3>Consultas</h3><div id="formah3"></div>
-	        <div class="cleaner"></div>
-
-       <form id="consultachat"  action="" method="post">
-
-      	<ul>
-		<li  class="izq_consultachat" ><input name="nombre" type="text" placeholder="&nbsp;*Nombre:" /></li>
-
-        <li class="der_consultachat" ><input name="apellido" type="text" placeholder="&nbsp;*Apellido:" /></li>
-
-        <div class="cleaner"></div>
-
-        <li class="izq_consultachat" ><input name="telefono" type="text" placeholder="Tel&eacute;fono:"  /></li>
-
-
-        <li class="der_consultachat" ><input name="empresa" type="text" placeholder="Empresa:" /></li>
-
-        <div class="cleaner"></div>
-
-        <li class="email_chat"><input name="email" type="text" placeholder="&nbsp;*Email:"  /></li>
-
-
-        <li><textarea name="comentario" placeholder="&nbsp;*Comentario:"></textarea></li>
-
-        </ul>
-
-		<p>*&nbsp;Campos obligatorios </p>
-
-	 	<div id="botones_consultachat">
-        <input class="btn"  id="borrar" type="reset" value="BORRAR" name="borrar" />
-        <input type="button" value="ENVIAR" name="enviar" onClick="enviar(this.form)" id="saveForm" />
-        <div class="cleaner"></div>
-	    </div><!--botones_consultachat-->
-		</form>
-
-		</div><!--cbp-spmenu-s2-->
-
-    </div><!--chat-->
+                    <div id="botones_consultachat">
+                    <input class="btn"  id="borrar" type="reset" value="BORRAR" name="borrar" />
+                    <input type="button" value="ENVIAR" name="enviar" onClick="enviar(this.form)" id="saveForm" />
+                    <div class="cleaner"></div>
+                    </div><!--botones_consultachat-->
+                </form>
+            </div><!--cbp-spmenu-s2-->
+        </div><!--chat-->
     </header>
       <div id="conteiner" class="cbp-fbscroller">
 
@@ -243,41 +232,41 @@
                 <p>&iexcl;Simple y efectivo!<br>
                 PROBAR GRATIS HASTA 500 ENV&Iacute;OS POR MES.</p>
                 <div class="da-img"><img src="{{ asset('home/imagenes/banner1.png') }}" width="1280" height="400" /></div>
-				</div>
+                </div>
 
 
                 <div class="da-slide">
                 <h2>Accede a un variado cat&aacute;logo de im&aacute;genes gratis.</h2>
                 <p>&iexcl;Aprov&eacute;chalo en todas tus campa&ntilde;as!</p>
                 <div class="da-img"><img src="{{ asset('home/imagenes/banner2.png') }}" width="1280" height="400" /></div>
-				</div>
+                </div>
 
 
-				<div class="da-slide">
+                <div class="da-slide">
                 <h2>Monitorea la evoluci&oacute;n de tu acci&oacute;n de email marketing.</h2>
                 <p>Realiza un seguimiento detallado de los env&iacute;os mediante nuestro s&oacute;lido sistemas de reportes y estad&iacute;sticas.<br>
 Analiza los resultados para planificar con eficacia tu pr&oacute;xima campa&ntilde;a.</p>
-					<div class="da-img"><img src="{{ asset('home/imagenes/banner3.png') }}" width="1280" height="400" /></div>
-				</div>
+                    <div class="da-img"><img src="{{ asset('home/imagenes/banner3.png') }}" width="1280" height="400" /></div>
+                </div>
 
 
-				<div class="da-slide">
+                <div class="da-slide">
                 <h2>Crea, optimiza y gestiona tu lista de suscriptores.</h2>
                 <p>Administra y segmenta f&aacute;cilmente tus listas de contactos.<br>
 Comunica un mensaje personalizado y contundente a tu p&uacute;blico objetivo.</p>
-					<div class="da-img"><img src="{{ asset('home/imagenes/banner4.png') }}" width="1280" height="400" /></div>
-				</div>
+                    <div class="da-img"><img src="{{ asset('home/imagenes/banner4.png') }}" width="1280" height="400" /></div>
+                </div>
 
-				<div class="da-slide">
+                <div class="da-slide">
                 <h2>Integra tu campa&ntilde;a de email marketing a las redes sociales.</h2>
                 <p>Potencia la viralidad de tus mensajes y alcanza a toda tu audiencia.</p>
-					<div class="da-img"><img src="{{ asset('home/imagenes/banner5.png') }}" width="1280" height="400" /></div>
-				</div>
-				<nav class="da-arrows">
-					<span class="da-arrows-prev"></span>
-					<span class="da-arrows-next"></span>
-				</nav>
-			</div>
+                    <div class="da-img"><img src="{{ asset('home/imagenes/banner5.png') }}" width="1280" height="400" /></div>
+                </div>
+                <nav class="da-arrows">
+                    <span class="da-arrows-prev"></span>
+                    <span class="da-arrows-next"></span>
+                </nav>
+            </div>
       <div class="cleaner"></div>
       </div><!--banner-->
 
@@ -404,7 +393,6 @@ La plataforma ofrece plantillas predise&ntilde;adas y un banco de im&aacute;gene
       </div><!--porque-->
       </section>
 
-
       <section id="fbsection5">
       <h2>Planes y Precios</h2>
       <div id="planes">
@@ -523,31 +511,31 @@ La plataforma ofrece plantillas predise&ntilde;adas y un banco de im&aacute;gene
       <div id="infocontacto">
       <form id="form_contacto"  action="" method="post">
 
-			<ul >
-		<li id="formizq"><ul>
-		<li  class="izq" >
-		<input name="nombre" type="text" class="element text medium" id="element_1" placeholder="&nbsp;*Nombre:" />
-		</li>
+            <ul >
+        <li id="formizq"><ul>
+        <li  class="izq" >
+        <input name="nombre" type="text" class="element text medium" id="element_1" placeholder="&nbsp;*Nombre:" />
+        </li>
 
         <li class="der" >
-		<input name="apellido" type="text" class="element text medium"  placeholder="&nbsp;*Apellido:" />
-		</li>
+        <input name="apellido" type="text" class="element text medium"  placeholder="&nbsp;*Apellido:" />
+        </li>
         <div class="cleaner"></div>
 
         <li class="izq" >
-		<input id="element_2" name="telefono" class="element text medium" type="text" placeholder="Tel&eacute;fono:"  />
-		</li>
+        <input id="element_2" name="telefono" class="element text medium" type="text" placeholder="Tel&eacute;fono:"  />
+        </li>
 
 
         <li class="der" >
-		<input id="element_5" name="empresa" class="element text medium" type="text" placeholder="Empresa:" />
-		</li>
+        <input id="element_5" name="empresa" class="element text medium" type="text" placeholder="Empresa:" />
+        </li>
 
 
         <div class="cleaner"></div>
         <li>
-		<input id="element_3" name="email" class="element text medium" type="text" placeholder="&nbsp;*Email:"  />
-		</li>
+        <input id="element_3" name="email" class="element text medium" type="text" placeholder="&nbsp;*Email:"  />
+        </li>
         <p style="margin-top:20px; font-size:14px; color:#FFF">*&nbsp;Campos obligatorios </p>
         </ul></li>
 
@@ -555,18 +543,18 @@ La plataforma ofrece plantillas predise&ntilde;adas y un banco de im&aacute;gene
         <li id="formder"><ul>
         <li id="li_6" >
 
-		<textarea id="element_6"  name="comentario" placeholder="&nbsp;*Comentario:" class="element textarea medium"></textarea>
-		</li>
+        <textarea id="element_6"  name="comentario" placeholder="&nbsp;*Comentario:" class="element textarea medium"></textarea>
+        </li>
 
         <li id="botonesform" class="buttons">
         <input type="button" value="ENVIAR" name="submit1" onClick="enviar(this.form)" id="saveForm" />
         <input class="btn"  id="borrar" type="reset" value="BORRAR" name="Enviar2" />
         <div class="cleaner"></div>
-		</li>
+        </li>
         </ul></li>
         <div class="cleaner"></div>
-			</ul>
-		</form>
+            </ul>
+        </form>
       </div><!--fin infocontacto-->
       </div><!--fin contacto-->
       <div class="cleaner"></div>
@@ -616,13 +604,13 @@ La plataforma ofrece plantillas predise&ntilde;adas y un banco de im&aacute;gene
 
         <!--banner-->
 
-        {{ HTML::script('home/js/js/jquery.cslider.js') }}
+
         <script type="text/javascript">
                     $(function() {
 
                         $('#da-slider').cslider({
-                            autoplay	: true,
-                            bgincrement	: 450
+                            autoplay    : true,
+                            bgincrement : 450
                         });
 
                     });
@@ -635,20 +623,16 @@ La plataforma ofrece plantillas predise&ntilde;adas y un banco de im&aacute;gene
 
         <!--scroll-->
 
-		<!-- jquery.easing by http://gsgd.co.uk/ : http://gsgd.co.uk/sandbox/jquery/easing/ -->
+        <!-- jquery.easing by http://gsgd.co.uk/ : http://gsgd.co.uk/sandbox/jquery/easing/ -->
 
-    {{ HTML::script('home/js/jquery.easing.min.js') }}
-		<!-- waypoints jQuery plugin by http://imakewebthings.com/ : http://imakewebthings.com/jquery-waypoints/ -->
-    {{ HTML::script('home/js/waypoints.min.js') }}
-		<!-- jquery-smartresize by @louis_remi : https://github.com/louisremi/jquery-smartresize -->
-    {{ HTML::script('home/js/jquery.debouncedresize.js') }}
-    {{ HTML::script('home/js/cbpFixedScrollLayout.min.js') }}
+        <!-- waypoints jQuery plugin by http://imakewebthings.com/ : http://imakewebthings.com/jquery-waypoints/ -->
+        <!-- jquery-smartresize by @louis_remi : https://github.com/louisremi/jquery-smartresize -->
 
-		<script>
-			$(function() {
-				cbpFixedScrollLayout.init();
-			});
-		</script>
+        <script>
+            $(function() {
+                cbpFixedScrollLayout.init();
+            });
+        </script>
         <!--scroll-->
 
 
@@ -661,25 +645,25 @@ La plataforma ofrece plantillas predise&ntilde;adas y un banco de im&aacute;gene
 
        <!--chat-->
       {{ HTML::script('home/js/chat.js') }}
-		<script>
-			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-				showRight = document.getElementById( 'showRight' ),
-				showTop = document.getElementById( 'showTop' ),
-				body = document.body;
+        <script>
+            var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+                showRight = document.getElementById( 'showRight' ),
+                showTop = document.getElementById( 'showTop' ),
+                body = document.body;
 
-			showRight.onclick = function() {
-				classie.toggle( this, 'active' );
-				classie.toggle( menuRight, 'cbp-spmenu-open' );
-				disableOther( 'showRight' );
-			};
+            showRight.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                disableOther( 'showRight' );
+            };
 
-			function disableOther( button ) {
+            function disableOther( button ) {
 
-				if( button !== 'showRight' ) {
-					classie.toggle( showRight, 'disabled' );
-				}
-			}
-		</script>
+                if( button !== 'showRight' ) {
+                    classie.toggle( showRight, 'disabled' );
+                }
+            }
+        </script>
        <!--chat-->
 
 
@@ -691,39 +675,39 @@ La plataforma ofrece plantillas predise&ntilde;adas y un banco de im&aacute;gene
         <script type="text/javascript">
 /* <![CDATA[ */
 $(function() {
-	var input = document.createElement("input");
+    var input = document.createElement("input");
     if(('placeholder' in input)==false) {
-		$('[placeholder]').focus(function() {
-			var i = $(this);
-			if(i.val() == i.attr('placeholder')) {
-				i.val('').removeClass('placeholder');
-				if(i.hasClass('password')) {
-					i.removeClass('password');
-					this.type='password';
-				}
-			}
-		}).blur(function() {
-			var i = $(this);
-			if(i.val() == '' || i.val() == i.attr('placeholder')) {
-				if(this.type=='password') {
-					i.addClass('password');
-					this.type='text';
-				}
-				i.addClass('placeholder').val(i.attr('placeholder'));
-			}
-		}).blur().parents('form').submit(function() {
-			$(this).find('[placeholder]').each(function() {
-				var i = $(this);
-				if(i.val() == i.attr('placeholder'))
-					i.val('');
-			})
-		});
-	}
+        $('[placeholder]').focus(function() {
+            var i = $(this);
+            if(i.val() == i.attr('placeholder')) {
+                i.val('').removeClass('placeholder');
+                if(i.hasClass('password')) {
+                    i.removeClass('password');
+                    this.type='password';
+                }
+            }
+        }).blur(function() {
+            var i = $(this);
+            if(i.val() == '' || i.val() == i.attr('placeholder')) {
+                if(this.type=='password') {
+                    i.addClass('password');
+                    this.type='text';
+                }
+                i.addClass('placeholder').val(i.attr('placeholder'));
+            }
+        }).blur().parents('form').submit(function() {
+            $(this).find('[placeholder]').each(function() {
+                var i = $(this);
+                if(i.val() == i.attr('placeholder'))
+                    i.val('');
+            })
+        });
+    }
 });
 /* ]]> */
 </script>
 
  <!--explorer placeholder-->
 
-	</body>
+    </body>
 </html>

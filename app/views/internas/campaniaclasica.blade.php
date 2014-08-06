@@ -118,7 +118,7 @@
                      <img src="{{ asset('internas/imagenes/epredi.png') }}" width="107" height="100" alt="email predise&ntilde;ados">
                      <p>Crea el email en base a una<br>plantilla pre-cargada.</p>
                      </a>
-                     <a id="eanteriores" href="{{ route('paso_4') }}">
+                     <a id="eanteriores" href="{{ route('campanias') }}">
                      <h4>Campa&ntilde;as enviadas</h4>
                      <img src="{{ asset('internas/imagenes/camanteriores.png') }}" width="107" height="100" alt="campa&ntilde;as enviadas">
                      <p>Crea el email en base a una<br>campa&ntilde;a anterior.</p>

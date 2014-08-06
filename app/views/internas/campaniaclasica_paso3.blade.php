@@ -14,6 +14,7 @@
         {{ HTML::script('js/jquery-1.11.0.min.js') }}
         {{ HTML::script('js/jquery.form.min.js') }}
         {{ HTML::script('js/jquery.noty.packaged.min.js') }}
+        {{ HTML::script('js/jquery.ui.timepicker.js') }}
         {{ HTML::script('js/trebolnews.js') }}
         <!--chat-->
 	    {{ HTML::script('home/js/modernizr.custom.js') }}
@@ -44,12 +45,13 @@ owurl7.style.display='none':owurl7.style.display='block';
 
         function guardar_handler(e) {
             e.preventDefault();
-
-            $(this).on('click', function(e) {
-                e.preventDefault();
-            });
+            e.stopImmediatePropagation();
 
             var boton = $(this);
+
+            boton.on('click', function(e) {
+                e.preventDefault();
+            });
 
             $('#frm_campania').ajaxSubmit({
                 data: {
@@ -68,59 +70,6 @@ owurl7.style.display='none':owurl7.style.display='block';
                 }
             });
         }
-
-        // $('#siguiente').one('click', crear_campania_handler);
-
-        // function crear_campania_handler(e) {
-        //     e.preventDefault();
-
-        //     var boton = $(this);
-
-        //     $('#siguiente').on('click', function(e) {
-        //         e.preventDefault();
-        //     });
-
-        //     $('#frm_campania').ajaxSubmit({
-        //         success: function(data) {
-        //             if(data.status == 'ok') {
-        //                 window.location = boton.attr('href');
-        //             } else {
-        //                 notys(data.validator);
-        //             }
-        //         },
-        //         complete: function() {
-        //             $('#siguiente').one('click', crear_campania_handler);
-        //         }
-        //     });
-        // }
-
-        // $('#guardarysalir').one('click', guardarysalir_handler);
-
-        // function guardarysalir_handler(e) {
-        //     e.preventDefault();
-
-        //     var boton = $(this);
-
-        //     $('#guardarysalir').on('click', function(e) {
-        //         e.preventDefault();
-        //     });
-
-        //     $('#frm_campania').ajaxSubmit({
-        //         data: {
-        //             guardar: 'borrador'
-        //         },
-        //         success: function(data) {
-        //             if(data.status == 'ok') {
-        //                 window.location = boton.attr('href');
-        //             } else {
-        //                 notys(data.validator);
-        //             }
-        //         },
-        //         complete: function() {
-        //             $('#guardarysalir').one('click', guardarysalir_handler);
-        //         }
-        //     });
-        // }
 
         $( "#datepicker" ).datepicker({
             prevText: '<',
@@ -141,6 +90,11 @@ owurl7.style.display='none':owurl7.style.display='block';
             } else {
                 $('#compartir').val('on');
             }
+        });
+
+        $('.timepicker').timepicker({
+            hourText: 'Hora',
+            minuteText: 'Minutos'
         });
     });
     </script>
@@ -173,7 +127,7 @@ owurl7.style.display='none':owurl7.style.display='block';
     <body>
        <header>
     <div id="conheader">
-    <h1>TrebolNEWS</h1>
+    <h1><a href="{{ url('/') }}">TrebolNEWS</a></h1>
 
 <div id="menu" class="cbp-fbscroller" >
     @include('menu')
@@ -358,7 +312,7 @@ owurl7.style.display='none':owurl7.style.display='block';
                 	<h3>Configurar Env&iacute;o</h3>
                     <div id="pestanias_envio">
                         <input type="hidden" id="envio" name="campania:envio" value="inmediato" />
-                        <input id="enviotab-1" type="radio" class="tab-selector-1" checked="checked" envio="inmediato" />
+                        <input id="enviotab-1" type="radio" name="radio-set" class="tab-selector-1" envio="inmediato" checked="checked" />
         		        <label for="enviotab-1" class="envio-label-1">
             				<img src="{{ asset('internas/imagenes/inmediato_clasico.png') }}" width="107" height="100" alt="envio inmediato">
                				<h4>Env&iacute;o Inmediato</h4>
@@ -366,7 +320,7 @@ owurl7.style.display='none':owurl7.style.display='block';
                             <div class="cleaner"></div>
                         </label>
 
-                        <input id="enviotab-2" type="radio" class="tab-selector-2" envio="programado" />
+                        <input id="enviotab-2" type="radio" name="radio-set" class="tab-selector-2" envio="programado" />
                         <label for="enviotab-2" class="envio-label-2">
                             <img src="{{ asset('internas/imagenes/programar_clasico.png') }}" width="107" height="100" alt="envio programado">
                             <h4>Entrega Programada</h4>
@@ -397,19 +351,19 @@ owurl7.style.display='none':owurl7.style.display='block';
                                     <div id="programar_fecha">
                                         <p class="titulo_envio">Fecha:</p>
                                         <div id="fecha-form">
-                                            <input type="text" id="datepicker" placeholder="FECHA" name="fecha" />
+                                            <input type="text" id="datepicker" placeholder="DD/MM/AAAA" name="fecha" />
                                         </div>
                                     </div><!--fin programar_fecha-->
                                     <div id="programar_horario">
                                         <p class="titulo_envio">Hora:</p>
                                         <div id="horarioforma">
-                                    		<input type="text" placeholder="12" />
-                                    		<input type="text" placeholder="00" />
+                                    		<input name="hora" type="text" placeholder="00:00" class="timepicker" style="width: 178px;" />
+                                    		<!-- <input type="text" placeholder="00" /> -->
                                         </div>
-                                        <select id="hora" SIZE="1">
+                                        <!-- <select id="hora" SIZE="1">
                                             <option value="am" selected="1">AM</option>
                                             <option value="pm">PM</option>
-                                        </select>
+                                        </select> -->
                                     </div><!--programar_horario-->
                                     <div id="zona_horaria-div">
                                         <p class="titulo_envio">Zona Horaria:</p>

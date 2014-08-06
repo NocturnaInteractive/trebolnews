@@ -28,10 +28,6 @@ class Campania extends Eloquent {
 		return $this->belongsTo('Usuario', 'id_usuario', 'id');
 	}
 
-	public function imagenes() {
-		return $this->hasOne('Lista', 'id', 'id_lista');
-	}
-
 	public function listas() {
 		return $this->belongsToMany('Lista', 'campanias_listas', 'id_campania', 'id_lista');
 	}

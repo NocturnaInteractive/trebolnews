@@ -6,12 +6,7 @@ class CarpetaSeeder extends Seeder {
 		Eloquent::unguard();
 
 		Carpeta::create(array(
-			'id_usuario' => 1,
-			'nombre' => 'imagenes'
-		));
-
-		Carpeta::create(array(
-			'id_usuario' => 2,
+			'id' => 1,
 			'nombre' => 'imagenes'
 		));
 

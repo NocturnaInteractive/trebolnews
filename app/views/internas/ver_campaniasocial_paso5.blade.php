@@ -32,7 +32,7 @@
     <body>
        <header>
     <div id="conheader">
-    <h1>TrebolNEWS</h1>
+    <h1><a href="{{ url('/') }}">TrebolNEWS</a></h1>
 
 <div id="menu" class="cbp-fbscroller" >
   @include('menu')

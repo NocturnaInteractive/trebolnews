@@ -49,7 +49,8 @@
                     type: 'post',
                     url: $(this).parents('[ajax]').attr('ajax'),
                     data: {
-                        y: boton.attr('y')
+                        y: boton.attr('y'),
+                        id_campania: boton.parents('[ajax]').attr('id_campania')
                     },
                     success: function(data) {
                         if(data.status == 'ok') {
@@ -73,7 +74,7 @@
     <body>
        <header>
     <div id="conheader">
-    <h1>TrebolNEWS</h1>
+    <h1><a href="{{ url('/') }}">TrebolNEWS</a></h1>
 
 <div id="menu" class="cbp-fbscroller" >
   @include('menu')
@@ -227,7 +228,7 @@
 
 <div id="resumen_envio">
     <p class="secciones">Env&iacute;o de la Campa&ntilde;a</p>
-    @if($campania->programacion)
+    @if($campania->envio == 'programado')
     <img src="{{ asset('internas/imagenes/programar_clasico.png') }}" width="107" height="100">
     <p id="horario_programado">Entrega Programada:<br>
     <?php
@@ -282,7 +283,7 @@
 
 
 
-<div id="opciones_pasos" ajax="{{ action('CampaniaController@guardar_campania') }}">
+<div id="opciones_pasos" ajax="{{ action('CampaniaController@guardar_campania') }}" id_campania="{{ $campania->id }}">
 <a id="guardarysalir" href="{{ route('campanias') }}" class="btn_guardar" y="salir">GUARDAR Y SALIR</a>
 <ul>
 <li><a href="{{ route('paso_4') }}" id="anterior">ANTERIOR</a></li>

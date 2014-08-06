@@ -33,6 +33,10 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->hasMany('Carpeta', 'id_usuario', 'id');
 	}
 
+	public function carpeta_basura() {
+		return $this->carpetas()->where('nombre', '=', 'basura')->first();
+	}
+
 	public function campanias() {
 		return $this->hasMany('Campania', 'id_usuario', 'id');
 	}

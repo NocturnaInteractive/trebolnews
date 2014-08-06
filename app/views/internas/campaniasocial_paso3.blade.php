@@ -40,10 +40,11 @@ owurl7.style.display='none':owurl7.style.display='block';
 <!--fecha-->
     <script>
     $(function() {
-        $('.btn_guardar').one('click', btn_guardar_handler);
+        $('.btn_guardar').one('click', guardar_handler);
 
-        function btn_guardar_handler(e) {
+        function guardar_handler(e) {
             e.preventDefault();
+            e.stopImmediatePropagation();
 
             var boton = $(this);
 
@@ -53,9 +54,8 @@ owurl7.style.display='none':owurl7.style.display='block';
 
             $('#frm_campania').ajaxSubmit({
                 data: {
-                    guardar: function() {
-
-                    }
+                    y: boton.attr('y'),
+                    paso: 3
                 },
                 success: function(data) {
                     if(data.status == 'ok') {
@@ -65,7 +65,7 @@ owurl7.style.display='none':owurl7.style.display='block';
                     }
                 },
                 complete: function() {
-                    $('.btn_guardar').one('click', btn_guardar_handler);
+                    $('.btn_guardar').one('click', guardar_handler);
                 }
             });
         }
@@ -121,7 +121,7 @@ owurl7.style.display='none':owurl7.style.display='block';
     <body>
        <header>
     <div id="conheader">
-    <h1>TrebolNEWS</h1>
+    <h1><a href="{{ url('/') }}">TrebolNEWS</a></h1>
 
 <div id="menu" class="cbp-fbscroller" >
     @include('menu')
@@ -394,7 +394,7 @@ owurl7.style.display='none':owurl7.style.display='block';
 
 <div id="pestanias_envio">
     <input type="hidden" id="envio" name="envio" value="inmediato" />
-              <input id="enviotab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" envio="inmediato" />
+              <input id="enviotab-1" type="radio" name="radio-set" class="tab-selector-1" envio="inmediato" checked="checked" />
 
 		        <label for="enviotab-1" class="envio-label-1">
 				<img src="{{ asset('internas/imagenes/inmediato_social.png') }}" width="107" height="100" alt="envio inmediato">
@@ -449,7 +449,7 @@ owurl7.style.display='none':owurl7.style.display='block';
 <div id="programar_fecha">
 <p class="titulo_envio">Fecha:</p>
 <div id="fecha-form" action="" method="post">
-    <input type="text" id="datepicker" value="FECHA" name="fecha" />
+    <input type="text" id="datepicker" value="FECHA" name="campania:programacion" />
 </div>
 </div><!--fin programar_fecha-->
 
@@ -578,10 +578,10 @@ owurl7.style.display='none':owurl7.style.display='block';
 
 
 <div id="opciones_pasos">
-<a id="guardarysalir" href="{{ route('campanias') }}" class="btn_guardar">GUARDAR Y SALIR</a>
+<a id="guardarysalir" href="{{ route('campanias') }}" class="btn_guardar" y="salir">GUARDAR Y SALIR</a>
 <ul>
 <li><a href="{{ route('paso_2') }}" id="anterior">ANTERIOR</a></li>
-<li><a href="{{ route('paso_4') }}" id="siguiente" class="btn_guardar">SIGUIENTE</a></li>
+<li><a href="{{ route('paso_4') }}" id="siguiente" class="btn_guardar" y="seguir">SIGUIENTE</a></li>
 </ul>
 <div class="cleaner"></div>
 </div><!--opciones_pasos-->

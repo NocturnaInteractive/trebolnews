@@ -36,7 +36,7 @@ $(function() {
 <div id="container_popup" class="popup_listasuscriptores">
 
 <div id="encabeezado">
-<h3>Crear lista de Suscriptores</h3>
+<h3>Editar lista de Suscriptores</h3>
 <a href="#" id="cerrar_popup"><img src="{{ asset('internas/imagenes/cerrar_popup.png') }}" alt="Cerrar Ventana" width="18" height="18"></a>
 <div class="cleaner"></div>
 </div><!--encabeezado-->

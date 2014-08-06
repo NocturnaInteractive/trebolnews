@@ -15,6 +15,7 @@
 				<th>Listas</th>
 				<th>Contenido</th>
 				<th>Redes</th>
+				<th>Envío</th>
 				<th>Status</th>
 				<th>Programación</th>
 				<th>Creada</th>
@@ -37,10 +38,13 @@
 				</td>
 				<td>{{ $campania->contenido }}</td>
 				<td>
-					@foreach(json_decode($campania->redes) as $red)
-					{{ $red }} <br>
-					@endforeach
+					@if($campania->redes)
+						@foreach(json_decode($campania->redes) as $red)
+						{{ $red }} <br>
+						@endforeach
+					@endif
 				</td>
+				<td>{{ $campania->envio }}</td>
 				<td>{{ $campania->status }}</td>
 				<td>{{ $campania->programacion }}</td>
 				<td>{{ $campania->created_at }}</td>

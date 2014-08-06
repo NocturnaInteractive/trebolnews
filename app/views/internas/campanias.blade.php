@@ -27,12 +27,31 @@
 
 			</style>
 		<![endif]-->
+    <script>
+    $(function(){
+    @if(Input::has('s'))
+      @if(Input::get('s') == 'nueva')
+        $('.tab-selector-1').trigger('click');
+      @elseif(Input::get('s') == 'borradores')
+        $('.tab-selector-2').trigger('click');
+      @elseif(Input::get('s') == 'programadas')
+        $('.tab-selector-3').trigger('click');
+      @elseif(Input::get('s') == 'enviadas')
+        $('.tab-selector-4').trigger('click');
+      @elseif(Input::get('s') == 'reporte')
+        $('.tab-selector-5').trigger('click');
+      @endif
+    @endif
+    });
+    </script>
     </head>
     <body>
       <input type="hidden" id="session_url" value="{{ url('session') }}" />
+      <?php $configtipos = Config::get('trebolnews.campania.tipo'); ?>
+      <?php $configstatus = Config::get('trebolnews.campania.status'); ?>
        <header>
     <div id="conheader">
-    <h1>TrebolNEWS</h1>
+    <h1><a href="{{ url('/') }}">TrebolNEWS</a></h1>
 
 <div id="menu" class="cbp-fbscroller" >
   @include('menu')
@@ -109,7 +128,7 @@
                      <div class="infocont">
                      <h3>Creaci&oacute;n de Campa&ntilde;as</h3>
                      <p>En s&oacute;lo unos pocos pasos ud comenzar&aacute; a crear su campa&ntilde;a, podr&aacute; optar por seleccionar campa&ntilde;as pre dise&ntilde;adas, de acuerdo a su categor&iacute;a y utilizar nuestro banco de im&aacute;genes, subir su logo y completar con sus datos para personalizar en env&iacute;o, podr&aacute; subir y utilizar su propia campa&ntilde;a con c&oacute;digo html o subir a nuestra plataforma, desde una direcci&oacute;n url hosteada en su servidor.</p>
-                     <a id="campana1" href="{{ route('nueva_campania') }}" session="flush">
+                     <a id="campana1" href="{{ route('nueva_campania') }}">
                      <h4>Crea una Campa&ntilde;a</h4>
                      <img src="{{ asset('internas/imagenes/nuevacampana.png') }}" width="180" height="155" alt="nueva campa&ntilde;a">
                      <p>Inicia el proceso, sigue el paso a paso y personaliza tu primer env&iacute;o.</p>
@@ -145,12 +164,16 @@
   </tr>
   @foreach(Auth::user()->campanias()->where('status', '=', 'borrador')->get() as $campania)
   <tr>
-    <td>{{ Str::title(Config::get('trebolnews.campania.tipo')[$campania->tipo]) }}</td>
+    <td>{{ Str::title($configtipos[$campania->tipo]) }}</td>
     <td>{{ $campania->nombre }}</td>
     <td>{{ $campania->asunto }}</td>
     <td>{{ $campania->created_at->format('d/m/Y') }}</td>
-    <td>{{ Str::title(Config::get('trebolnews.campania.status')[$campania->status]) }}</td>
-    <td><a class="editarcampam" href="{{ route('campania', $campania->id) }}"><img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a><a class="borrarcam" href="#"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a><div class="cleaner"></div></td>
+    <td>{{ Str::title($configstatus[$campania->status]) }}</td>
+    <td>
+      <a class="editarcampam" href="{{ route('campania', $campania->id) }}"><img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a>
+      <a class="borrarcam" href="{{ route('eliminar_campania', $campania->id) }}"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a>
+      <div class="cleaner"></div>
+    </td>
   </tr>
   @endforeach
 </table>
@@ -177,24 +200,18 @@
     <th scope="col" width="459px">Estado</th>
     <th scope="col" width="65px"></th>
   </tr>
+  @foreach(Auth::user()->campanias()->where('status', '=', 'programada')->get() as $campania)
   <tr>
-    <td >Clasica</td>
-    <td><a href="#">Newsletter de Noviembre 2013</a></td>
-    <td>Programada para el d&iacute;a el 04/06/2013, 18:45 PM (GMT-03:00)</td>
-    <td><a class="editarcampam" href="#"><img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a><a class="borrarcam" href="#"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a><div class="cleaner"></div></td>
+    <td>{{ Str::title($configtipos[$campania->tipo]) }}</td>
+    <td>{{ $campania->nombre }}</td>
+    <td>Programada para el d&iacute;a {{ $campania->programacion }}</td>
+    <td>
+      <a class="editarcampam" href="{{ route('campania', $campania->id) }}"><img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a>
+      <a class="borrarcam" href="{{ route('eliminar_campania', $campania->id) }}"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a>
+      <div class="cleaner"></div>
+    </td>
   </tr>
-  <tr>
-    <td>Social</td>
-    <td><a href="#">Newsletter de Octubre 2013</a></td>
-    <td>Programada para el d&iacute;a el 06/09/2013, 08:15 AM (GMT-03:00)</td>
-    <td><a class="editarcampam" href="#"><img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a><a class="borrarcam" href="#"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a><div class="cleaner"></div></td>
-  </tr>
-  <tr>
-    <td>Clasica</td>
-    <td><a href="#">Newsletter de Septiembre 2013</a></td>
-    <td>Programada para el d&iacute;a el 13/11/2013, 10:57 AM (GMT-03:00)</td>
-    <td><a class="editarcampam" href="#"><img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a><a class="borrarcam" href="#"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a><div class="cleaner"></div></td>
-  </tr>
+  @endforeach
 </table>
 
 
@@ -222,27 +239,19 @@
     <th scope="col" width="179px">Fecha de Envio</th>
     <th scope="col" width="65px"></th>
   </tr>
+  @foreach(Auth::user()->campanias()->where('status', '=', 'enviada')->get() as $campania)
   <tr>
-    <td >Clasica</td>
-    <td><a href="#">Newsletter de Noviembre 2013</a></td>
-    <td>Noticias de Noviembre</td>
-    <td>01 / 11 / 2013</td>
-    <td><a class="duplicamania" href="#"><img src="{{ asset('internas/imagenes/duplicamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a><a class="borrarcam" href="#"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a><div class="cleaner"></div></td>
+    <td>{{ Str::title($configtipos[$campania->tipo]) }}</td>
+    <td>{{ $campania->nombre }}</td>
+    <td>{{ $campania->asunto }}</td>
+    <td>{{ $campania->envio == 'inmediato' ? $campania->created_at : $campania->programacion }}</td>
+    <td>
+      <a class="duplicamania" href="#"><img src="{{ asset('internas/imagenes/duplicamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a>
+      <a class="borrarcam" href="{{ route('eliminar_campania', $campania->id) }}"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a>
+      <div class="cleaner"></div>
+    </td>
   </tr>
-  <tr>
-    <td>Social</td>
-    <td><a href="#">Newsletter de Octubre 2013</a></td>
-    <td>Noticias de Octubre  </td>
-    <td>01 / 10 / 2013</td>
-    <td><a class="duplicamania" href="#"><img src="{{ asset('internas/imagenes/duplicamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a><a class="borrarcam" href="#"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a><div class="cleaner"></div></td>
-  </tr>
-  <tr>
-    <td>Clasica</td>
-    <td><a href="#">Newsletter de Septiembre 2013</a></td>
-    <td>Noticias de Septiembre  </td>
-    <td>01 / 09 / 2013</td>
-    <td><a class="duplicamania" href="#"><img src="{{ asset('internas/imagenes/duplicamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a><a class="borrarcam" href="#"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a><div class="cleaner"></div></td>
-  </tr>
+  @endforeach
 </table>
 
 		</div> <!--infocont-->

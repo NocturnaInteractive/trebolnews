@@ -14,7 +14,7 @@ $(function() {
 				if(data.status == 'ok') {
 					location.reload();
 				} else {
-					console.log(data);
+					notys(data.validator);
 				}
 			},
 			complete: function() {

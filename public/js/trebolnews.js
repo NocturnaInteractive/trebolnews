@@ -7,12 +7,18 @@ $(function(){
 		});
 
 		$.ajax({
-			url: $('#popup_url').val() + '/' + $(this).attr('popup'),
+			url: $(this).attr('popup'),
 			type: 'get',
+			beforeSend: function() {
+				$('*').css('cursor', 'wait');
+			},
 			success: function(data) {
 				$('#popup').html('');
 				$('#popup').html(data.popup);
 				$('#popup').fadeIn(400);
+			},
+			complete: function() {
+				$('*').css('cursor', 'auto');
 			}
 		});
 	});
@@ -29,10 +35,16 @@ $(function(){
 			data: {
 				session_data: $(this).attr('session')
 			},
+			beforeSend: function() {
+				$('*').css('cursor', 'wait');
+			},
 			success: function(data) {
 				if(data.status == 'ok') {
 					window.location = boton.attr('href');
 				}
+			},
+			complete: function() {
+				$('*').css('cursor', 'auto');
 			}
 		});
 	});

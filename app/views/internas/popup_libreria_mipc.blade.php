@@ -1,3 +1,33 @@
+<script>
+$(function(){
+	$('#saveForm3').one('click', subir_imagen_handler);
+
+	function subir_imagen_handler(e) {
+		e.preventDefault();
+
+		$('#saveForm3').on('click', function(e) {
+			e.preventDefault();
+		});
+
+		$('#subirdesdepc').ajaxSubmit({
+			data: {
+				id_carpeta: $('#id_carpeta').val()
+			},
+			success: function(data) {
+				if(data.status == 'ok') {
+					location.reload();
+				} else {
+					notys(data.validator);
+				}
+			},
+			complete: function() {
+				$('#saveForm3').one('click', subir_imagen_handler);
+			}
+		});
+	}
+});
+</script>
+
 <div id="bg_popup">
 <div id="container_popup" class="popup_listasuscriptores">
 
@@ -8,8 +38,8 @@
 </div><!--encabeezado-->
 
 <div id="info_popup">
-<form id="subirdesdepc" action="" method="post">
-<input name="subiralibreria" type="file" id="file" />
+<form id="subirdesdepc" action="{{ action('ImagenController@guardar') }}" method="post">
+<input name="imagen" type="file" id="file" />
 
 <div id="botones_popup">
 <input type="button" value="SUBIR" name="submit" id="saveForm3" />

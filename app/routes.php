@@ -6,17 +6,18 @@ Route::get('resetdb', function() {
 	Artisan::call('db:seed');
 });
 
-Route::get('ver/{primero}/{segundo?}', function($primero, $segundo = null) {
-	if($segundo) {
-		return View::make("$primero/$segundo");
-	} else {
-		return View::make($primero);
-	}
+Route::get('ver/{carpeta}/{vista}', function($carpeta, $vista) {
+	if(Auth::guest()) { Auth::loginUsingId(2); }
+	return View::make("$carpeta/$vista");
+});
+
+Route::get('ver/{vista}', function($vista) {
+	if(Auth::guest()) { Auth::loginUsingId(2); }
+	return View::make($vista);
 });
 
 Route::get('aux', function() {
-	// Session::flush();
-	var_dump(Session::all());
+	var_dump(Session::all()); die;
 });
 
 // desde acá
@@ -42,27 +43,6 @@ Route::get('gracias', array(
 	'as' => 'post_registro',
 	function() {
 		return View::make('home/post_registro');
-	}
-));
-
-Route::get('campaña/{id}', array(
-	'as' => 'campania',
-	function($id) {
-		$campania = Campania::find($id);
-
-		switch($campania->tipo) {
-			case 'clasica':
-				return View::make('internas/ver_campaniaclasica_paso5', array(
-					'campania' => $campania
-				));
-				break;
-
-			case 'social':
-				return View::make('internas/ver_campaniasocial_paso5', array(
-					'campania' => $campania
-				));
-				break;
-		}
 	}
 ));
 
@@ -110,12 +90,22 @@ Route::group(array(
 		}
 	));
 
+	Route::get('campaña/{id}', array(
+		'as' => 'campania',
+		'uses' => 'CampaniaController@campania'
+	));
+
 	Route::get('campaña-nueva', array(
 		'as' => 'nueva_campania',
 		function() {
 			Session::forget('campania');
 			return View::make('internas/campaniasnueva');
 		}
+	));
+
+	Route::get('eliminar_campaña/{id}', array(
+		'as' => 'eliminar_campania',
+		'uses' => 'CampaniaController@eliminar_campania'
 	));
 
 	Route::get('paso-2', array(
@@ -159,8 +149,8 @@ Route::group(array(
 				case 'url':
 					return View::make('internas/campaniaurl_paso4');
 					break;
-				case 'enviadas':
-					return View::make('internas/campaniaenviadas_paso4');
+				case 'html':
+					return View::make('internas/campaniaenblanco_paso4');
 					break;
 			}
 		}
@@ -183,24 +173,60 @@ Route::group(array(
 	Route::get('suscriptores', array(
 		'as' => 'suscriptores',
 		function() {
-			return View::make('internas/listascontactos');
+			$listas = Auth::user()->listas()->paginate(5);
+
+			return View::make('internas/listascontactos', array(
+				'listas' => $listas
+			));
 		}
 	));
 
-	Route::get('suscriptores/{id_lista}', function($id_lista) {
-		$contactos = Contacto::where('id_lista', '=', $id_lista)->paginate(10);
-		$lista = Lista::where('id', '=', $id_lista)->first();
+	Route::get('lista/{id_lista}', array(
+		'as' => 'lista',
+		function($id_lista) {
+			$lista = Lista::find($id_lista);
+			$contactos = $lista->contactos()->paginate(5);
 
-		return View::make('internas/listascontactos2', array(
-			'lista' => $lista,
-			'contactos' => $contactos
-		));
-	});
+			return View::make('internas/listascontactos2', array(
+				'lista' => $lista,
+				'contactos' => $contactos
+			));
+		}
+	));
 
 	Route::get('librerías', array(
 		'as' => 'librerias',
 		function() {
-			return View::make('internas/libreria');
+			$carpeta_imagenes = Carpeta::find(1);
+			$carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first();
+			$carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
+			$imagenes = $carpeta_imagenes->imagenes()->paginate(5);
+
+			return View::make('internas/libreria', array(
+				'carpeta_imagenes' => $carpeta_imagenes,
+				'carpeta_basura' => $carpeta_basura,
+				'carpetas' => $carpetas,
+				'imagenes' => $imagenes
+			));
+		}
+	));
+
+	Route::get('carpeta/{id_carpeta}', array(
+		'as' => 'carpeta',
+		function($id_carpeta) {
+			$carpeta_seleccionada = Carpeta::find($id_carpeta);
+			$carpeta_imagenes = Carpeta::find(1);
+			$carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first();
+			$carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
+			$imagenes = $carpeta_seleccionada->imagenes()->paginate(5);
+
+			return View::make('internas/libreria', array(
+				'carpeta_seleccionada' => $carpeta_seleccionada,
+				'carpeta_imagenes' => $carpeta_imagenes,
+				'carpeta_basura' => $carpeta_basura,
+				'carpetas' => $carpetas,
+				'imagenes' => $imagenes
+			));
 		}
 	));
 
@@ -248,20 +274,15 @@ Route::group(array(
 	Route::post('guardar_contacto', 'ContactoController@guardar');
 	Route::post('eliminar_contacto', 'ContactoController@eliminar');
 
-	Route::post('guardar_info_basica', 'CampaniaController@guardar_info_basica');
-	Route::post('guardar_contenido', 'CampaniaController@guardar_contenido');
+	Route::post('guardar_carpeta', 'CarpetaController@guardar');
+	Route::post('eliminar_carpeta', 'CarpetaController@eliminar');
+
+	Route::post('guardar_imagen', 'ImagenController@guardar');
+	// Route::post('eliminar_carpeta', 'CarpetaController@eliminar');
+
 	Route::post('guardar_campania', 'CampaniaController@guardar_campania');
 
-	Route::any('confirmar_campania', 'CampaniaController@confirmar_campania');
-	Route::any('guardar_borrador', 'CampaniaController@guardar_borrador');
-
 	Route::post('editar_perfil', 'UsuarioController@editar_perfil');
-
-	Route::get('popup/{popup}', function($popup) {
-		return Response::json(array(
-			'popup' => View::make("internas/popup_$popup")->render()
-		));
-	});
 
 	Route::post('session', function() {
 		if(Input::get('session_data') == 'flush') {
@@ -280,66 +301,85 @@ Route::group(array(
 		));
 	});
 
-	Route::get('popup_editar_lista/{id_lista}', function($id_lista) {
-		$lista = Lista::where('id', '=', $id_lista)->first();
 
-		return Response::json(array(
-			'popup' => View::make('internas/popup_editarlista', array(
-				'lista' => $lista
-			))->render()
-		));
-	});
+	Route::group(array(
+		'prefix' => 'popup'
+	), function() {
 
-	Route::get('popup_eliminar_lista/{id_lista}', function($id_lista) {
-		$lista = Lista::where('id', '=', $id_lista)->first();
+		Route::get('editar_lista/{id_lista}', function($id_lista) {
+			$lista = Lista::find($id_lista);
 
-		return Response::json(array(
-			'popup' => View::make('internas/popup_eliminar_listasuscriptor', array(
-				'lista' => $lista
-			))->render()
-		));
-	});
+			return Response::json(array(
+				'popup' => View::make('internas/popup_editarlista', array(
+					'lista' => $lista
+				))->render()
+			));
+		});
 
-	Route::get('popup_crear_contacto/{id_lista}', function($id_lista) {
-		$lista = Lista::where('id', '=', $id_lista)->first();
+		Route::get('eliminar_lista/{id_lista}', function($id_lista) {
+			$lista = Lista::find($id_lista);
 
-		return Response::json(array(
-			'popup' => View::make('internas/popup_crearsuscriptor', array(
-				'lista' => $lista
-			))->render()
-		));
-	});
+			return Response::json(array(
+				'popup' => View::make('internas/popup_eliminar_listasuscriptor', array(
+					'lista' => $lista
+				))->render()
+			));
+		});
 
-	Route::get('popup_editar_contacto/{id_contacto}', function($id_contacto) {
-		$contacto = Contacto::where('id', '=', $id_contacto)->first();
+		Route::get('crear_contacto/{id_lista}', function($id_lista) {
+			$lista = Lista::find($id_lista);
 
-		return Response::json(array(
-			'popup' => View::make('internas/popup_editarsuscriptor', array(
-				'contacto' => $contacto
-			))->render()
-		));
-	});
+			return Response::json(array(
+				'popup' => View::make('internas/popup_crearsuscriptor', array(
+					'lista' => $lista
+				))->render()
+			));
+		});
 
-	Route::get('popup_eliminar_contacto/{id_contacto}', function($id_contacto) {
-		$contacto = Contacto::where('id', '=', $id_contacto)->first();
+		Route::get('editar_contacto/{id_contacto}', function($id_contacto) {
+			$contacto = Contacto::find($id_contacto);
 
-		return Response::json(array(
-			'popup' => View::make('internas/popup_eliminarsuscriptor_individual', array(
-				'contacto' => $contacto
-			))->render()
-		));
-	});
+			return Response::json(array(
+				'popup' => View::make('internas/popup_editarsuscriptor', array(
+					'contacto' => $contacto
+				))->render()
+			));
+		});
 
-	Route::get('popup_libreria_mipc', function() {
-		return Response::json(array(
-			'popup' => View::make('internas/popup_libreria_mipc')->render()
-		));
-	});
+		Route::get('eliminar_contacto/{id_contacto}', function($id_contacto) {
+			$contacto = Contacto::find($id_contacto);
 
-	Route::get('popup_libreria_redes', function() {
-		return Response::json(array(
-			'popup' => View::make('internas/popup_libreria_redes')->render()
-		));
+			return Response::json(array(
+				'popup' => View::make('internas/popup_eliminarsuscriptor_individual', array(
+					'contacto' => $contacto
+				))->render()
+			));
+		});
+
+		Route::get('libreria_mipc', function() {
+			return Response::json(array(
+				'popup' => View::make('internas/popup_libreria_mipc')->render()
+			));
+		});
+
+		Route::get('libreria_redes', function() {
+			return Response::json(array(
+				'popup' => View::make('internas/popup_libreria_redes')->render()
+			));
+		});
+
+		Route::get('crear_carpeta_libreria', function() {
+			return Response::json(array(
+				'popup' => View::make('internas/popup_crear_carpeta_libreria')->render()
+			));
+		});
+
+		Route::get('{popup}', function($popup) {
+			return Response::json(array(
+				'popup' => View::make("internas/popup_$popup")->render()
+			));
+		});
+
 	});
 
 });
@@ -348,9 +388,19 @@ Route::group(array(
 	'prefix' => 'admin'
 ), function() {
 
-	// Route::get('/', function() {
+	Route::get('/', array(
+		'as' => 'admin/home',
+		function() {
+			return 'Panel de administración';
+		}
+	));
 
-	// });
+	Route::get('usuarios', array(
+		'as' => 'admin/usuarios',
+		function() {
+			return View::make('admin/usuarios');
+		}
+	));
 
 	Route::get('campañas', array(
 		'as' => 'admin/campanias',
@@ -358,5 +408,25 @@ Route::group(array(
 			return View::make('admin/campanias');
 		}
 	));
+
+	Route::get('templates', array(
+		'as' => 'admin/templates',
+		function() {
+			$templates = Template::all();
+
+			return View::make('admin/templates', array(
+				'templates' => $templates
+			));
+		}
+	));
+
+	Route::get('agregar-template', array(
+		'as' => 'admin/agregar_template',
+		function() {
+			return View::make('admin/agregar_template');
+		}
+	));
+
+	Route::post('guardar_template', 'TemplateController@guardar');
 
 });
