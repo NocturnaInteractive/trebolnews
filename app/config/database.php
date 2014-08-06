@@ -54,7 +54,7 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => '104.131.143.16',
 			'database'  => 'trebolnews',
 			'username'  => 'forge',
 			'password'  => 'Q5t2gtXYpw25D52xQapW',
