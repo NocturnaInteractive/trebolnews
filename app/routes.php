@@ -16,8 +16,12 @@ Route::get('ver/{vista}', function($vista) {
 	return View::make($vista);
 });
 
-Route::get('aux', function() {
-	var_dump(App::environment());
+Route::get('aux', function(){
+
+});
+
+Route::get('session', function() {
+	var_dump(Session::all());
 });
 
 // desde acá
@@ -428,5 +432,12 @@ Route::group(array(
 	));
 
 	Route::post('guardar_template', 'TemplateController@guardar');
+
+	Route::get('subir-imagenes/{id}', array(
+		'as' => 'admin/subir_imagenes',
+		'uses' => 'TemplateController@form_subir_imagenes'
+	));
+
+	Route::post('subir_imagenes', 'TemplateController@subir_imagenes');
 
 });
