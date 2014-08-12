@@ -5,7 +5,7 @@ Event::listen('auth.login', function($user) {
 	$user->save();
 });
 
-Event::listen('nuevo_registro', function($user) {
+Event::listen('nuevo_registro', function($usuario) {
 	Mail::send('emails/emailregistro', array(
 		'usuario' => $usuario
 	), function($mail) use($usuario) {
