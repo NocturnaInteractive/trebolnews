@@ -21,7 +21,7 @@
        <header>
     <div id="conheader">
     <a href="{{ url('/') }}"><h1>TrebolNEWS</h1></a>
-    <a id="volver" href="{{ url('/') }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
+    <a id="volver" href="{{ URL::previous() }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
     <div class="cleaner"></div>
     </div>
     </header>

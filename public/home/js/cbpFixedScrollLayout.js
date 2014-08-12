@@ -4,7 +4,7 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2013, Codrops
  * http://www.codrops.com
  */
@@ -47,7 +47,7 @@ var cbpFixedScrollLayout = (function() {
 		$( window ).on( 'debouncedresize', function() {
 			scrollAnim( config.$sections.eq( config.currentLink ).offset().top );
 		} );
-		
+
 	}
 
 	// update the current navigation link
