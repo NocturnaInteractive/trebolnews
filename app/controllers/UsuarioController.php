@@ -12,29 +12,29 @@ class UsuarioController extends BaseController {
         );
 
         $messages = array(
-            'email.required'        => 'Falta completar el e-mail',
-            'email.unique'          => 'Ya hay un usuario registrado con esa dirección de e-mail',
-            'password.required'     => 'Falta completar la contraseña',
-            'password.confirmed'    => 'Las contraseñas no coinciden',
-            'tyc.accepted'          => 'Es necesario aceptar los términos y condiciones'
+            'email.required'     => 'Falta completar el e-mail',
+            'email.unique'       => 'Ya hay un usuario registrado con esa dirección de e-mail',
+            'password.required'  => 'Falta completar la contraseña',
+            'password.confirmed' => 'Las contraseñas no coinciden',
+            'tyc.accepted'       => 'Es necesario aceptar los términos y condiciones'
         );
 
         $validator = Validator::make($data, $rules, $messages);
 
         if($validator->passes()) {
             $usuario = Usuario::create(array(
-                'email'         => Input::get('email'),
-                'password'      => Hash::make(Input::get('password')),
-                'newsletter'    => Input::get('newsletter') ? true : false,
-                'confirmation'  => sha1(Input::get('email')),
-                'confirmed'     => true
+                'email'        => Input::get('email'),
+                'password'     => Hash::make(Input::get('password')),
+                'newsletter'   => Input::get('newsletter') ? true : false,
+                'confirmation' => sha1(Input::get('email')),
+                'confirmed'    => true
             ));
 
             Event::fire('nuevo_registro', array($usuario));
 
             return Response::json(array(
-                'status'    => 'ok',
-                'url'       => route('post_registro')
+                'status' => 'ok',
+                'url'    => route('post_registro')
             ));
         } else {
             return Response::json(array(
@@ -48,8 +48,8 @@ class UsuarioController extends BaseController {
         $data = Input::all();
 
         $rules = array(
-            'email'     => 'required|email',
-            'password'  => 'required'
+            'email'    => 'required|email',
+            'password' => 'required'
         );
 
         $messages = array(
