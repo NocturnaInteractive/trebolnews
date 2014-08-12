@@ -20,6 +20,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
 		'pais',
 		'fb_id',
 		'confirmation',
+		'confirmed',
 		'newsletter'
 	);
 

@@ -26,7 +26,7 @@ class UsuarioController extends BaseController {
                 'email'        => Input::get('email'),
                 'password'     => Hash::make(Input::get('password')),
                 'newsletter'   => Input::get('newsletter') ? true : false,
-                'confirmation' => sha1(Input::get('email')),
+                // 'confirmation' => sha1(Input::get('email')),
                 'confirmed'    => true
             ));
 
