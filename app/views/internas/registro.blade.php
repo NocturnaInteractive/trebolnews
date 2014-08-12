@@ -45,6 +45,9 @@
 					if(data.status == 'ok') {
 						window.location = data.url;
 					} else {
+						if(data.mensaje) {
+							console.log(data.mensaje);
+						}
 						$.each(data.validator, function(i, v) {
 							noty({
 								text: v,
