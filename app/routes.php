@@ -17,15 +17,7 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-    $usuario = Usuario::find(1);
 
-    Mail::send('emails/emailregistro', array(
-        'usuario' => $usuario
-    ), function($mail) {
-        $mail->from('info@trebolnews.com')
-            ->to('maimar@gmail.com')
-            ->subject('Bienvenido a TrebolNEWS');
-    });
 });
 
 Route::get('session', function() {
