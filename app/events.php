@@ -9,7 +9,7 @@ Event::listen('nuevo_registro', function(Usuario $usuario) {
     Mail::send('emails/emailregistro', array(
         'usuario' => $usuario
     ), function($mail) use($usuario) {
-        $mail->from('info@trebolnews.com')
+        $mail->from('info@trebolnews.com', 'TrebolNEWS')
             ->to($usuario->email)
             ->subject('Bienvenido a TrebolNEWS');
     });
