@@ -136,7 +136,7 @@ class CampaniaController extends BaseController {
                     ));
 
                     $listas = Auth::user()->listas()->has('contactos', '>', '0')->get();
-                    if($listas) {
+                    if(count($listas) > 0) {
                         foreach(Session::get('campania.listas') as $id_lista) {
                             $campania->listas()->attach($id_lista);
                         }
