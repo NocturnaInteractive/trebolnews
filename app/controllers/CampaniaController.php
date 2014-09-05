@@ -30,7 +30,7 @@ class CampaniaController extends BaseController {
                     'campania:email.email'          => 'El email debe ser válido',
                     'campania:respuesta.required'   => 'Falta completar la dirección de respuesta',
                     'campania:respuesta.email'      => 'La dirección de respuesta debe ser un email válido',
-                    'campania:listas.required_if'      => 'Es necesario elegir al menos una lista de contactos',
+                    'campania:listas.required_if'   => 'Es necesario elegir al menos una lista de contactos',
                     'campania:redes.required_if'    => 'Ha elegido compartir en redes sociales pero ninguna red',
                     'fecha.required_if'             => 'Es obligatorio ingresar la fecha para la programación del envío',
                     'hora.required_if'              => 'Es obligatorio ingresar la hora para la programación del envío'
@@ -135,8 +135,11 @@ class CampaniaController extends BaseController {
                         'notificacion'  => Session::get('campania.notificacion') == 'on' ? true : false
                     ));
 
-                    foreach(Session::get('campania.listas') as $id_lista) {
-                        $campania->listas()->attach($id_lista);
+                    $listas = Auth::user()->listas()->has('contactos', '>', '0')->get();
+                    if($listas) {
+                        foreach(Session::get('campania.listas') as $id_lista) {
+                            $campania->listas()->attach($id_lista);
+                        }
                     }
 
                     Session::forget('campania');
