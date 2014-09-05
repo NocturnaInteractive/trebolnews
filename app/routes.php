@@ -17,7 +17,7 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-
+    return View::make('trebolnews/campanias');
 });
 
 Route::get('session', function() {
@@ -53,6 +53,7 @@ Route::get('gracias', array(
 // back end
 
 Route::get('logout', function() {
+    Session::flush();
     Auth::logout();
     return Redirect::to('/');
 });
@@ -90,7 +91,7 @@ Route::group(array(
     Route::get('campañas', array(
         'as' => 'campanias',
         function() {
-            return View::make('internas/campanias');
+            return View::make('trebolnews/campanias');
         }
     ));
 
@@ -99,11 +100,11 @@ Route::group(array(
         'uses' => 'CampaniaController@campania'
     ));
 
-    Route::get('campaña-nueva', array(
+    Route::get('nueva-campaña', array(
         'as' => 'nueva_campania',
         function() {
             Session::forget('campania');
-            return View::make('internas/campaniasnueva');
+            return View::make('trebolnews/nueva-campania');
         }
     ));
 
@@ -112,35 +113,42 @@ Route::group(array(
         'uses' => 'CampaniaController@eliminar_campania'
     ));
 
-    Route::get('paso-2', array(
-        'as' => 'paso_2',
+    Route::get('campaña-clasica', array(
+        'as' => 'campania_clasica',
         function() {
-            switch(Session::get('campania.tipo')) {
-                case 'clasica':
-                    return View::make('internas/campaniaclasica');
-                    break;
-                case 'social':
-                    return View::make('internas/campaniasocial');
-                    break;
-            }
+            return View::make('trebolnews/campania-clasica');
         }
     ));
 
-    Route::get('paso-3', array(
+    Route::get('campaña-social', array(
+        'as' => 'campania_social',
+        function() {
+            return View::make('trebolnews/campania-social');
+        }
+    ));
+
+    Route::get('información-básica/{id?}', array(
         'as' => 'paso_3',
-        function() {
+        function($id = null) {
+            if($id) {
+                $campania = Campania::find($id);
+            }
             switch(Session::get('campania.tipo')) {
                 case 'clasica':
-                    return View::make('internas/campaniaclasica_paso3');
+                    return View::make('trebolnews/informacion-basica-clasica', array(
+                        'campania' => isset($campania) ? $campania : null
+                    ));
                     break;
                 case 'social':
-                    return View::make('internas/campaniasocial_paso3');
+                    return View::make('internas/informacion-basica-social', array(
+                        'campania' => isset($campania) ? $campania : null
+                    ));
                     break;
             }
         }
     ));
 
-    Route::get('paso-4', array(
+    Route::get('contenido', array(
         'as' => 'paso_4',
         function() {
             switch(Session::get('campania.subtipo')) {
@@ -160,7 +168,7 @@ Route::group(array(
         }
     ));
 
-    Route::get('paso-5', array(
+    Route::get('revisión', array(
         'as' => 'paso_5',
         function() {
             switch(Session::get('campania.tipo')) {
@@ -179,7 +187,7 @@ Route::group(array(
         function() {
             $listas = Auth::user()->listas()->paginate(5);
 
-            return View::make('internas/listascontactos', array(
+            return View::make('trebolnews/listas-suscriptores', array(
                 'listas' => $listas
             ));
         }
@@ -393,51 +401,76 @@ Route::group(array(
 ), function() {
 
     Route::get('/', array(
-        'as' => 'admin/home',
+        'as' => 'admin/login',
         function() {
-            return 'Panel de administración';
+            return View::make('admin/login');
         }
     ));
 
-    Route::get('usuarios', array(
-        'as' => 'admin/usuarios',
-        function() {
-            return View::make('admin/usuarios');
-        }
-    ));
+    Route::post('login', 'AdminController@login');
 
-    Route::get('campañas', array(
-        'as' => 'admin/campanias',
-        function() {
-            return View::make('admin/campanias');
-        }
-    ));
+    Route::group(array(
+        'before' => 'admin'
+    ), function() {
 
-    Route::get('templates', array(
-        'as' => 'admin/templates',
-        function() {
-            $templates = Template::all();
+        Route::get('home', array(
+            'as' => 'admin/home',
+            function() {
+                return View::make('admin/home');
+            }
+        ));
 
-            return View::make('admin/templates', array(
-                'templates' => $templates
-            ));
-        }
-    ));
+        Route::get('usuarios', array(
+            'as' => 'admin/usuarios',
+            function() {
+                $usuarios = Usuario::all();
 
-    Route::get('agregar-template', array(
-        'as' => 'admin/agregar_template',
-        function() {
-            return View::make('admin/agregar_template');
-        }
-    ));
+                return View::make('admin/usuarios', array(
+                    'usuarios' => $usuarios
+                ));
+            }
+        ));
 
-    Route::post('guardar_template', 'TemplateController@guardar');
+        Route::get('campañas', array(
+            'as' => 'admin/campanias',
+            function() {
+                $campanias = Campania::withTrashed()->get();
 
-    Route::get('subir-imagenes/{id}', array(
-        'as' => 'admin/subir_imagenes',
-        'uses' => 'TemplateController@form_subir_imagenes'
-    ));
+                return View::make('admin/campanias', array(
+                    'campanias' => $campanias
+                ));
+            }
+        ));
 
-    Route::post('subir_imagenes', 'TemplateController@subir_imagenes');
+        Route::get('reestablecer_campania/{id}', 'CampaniaController@reestablecer');
+
+        Route::get('templates', array(
+            'as' => 'admin/templates',
+            function() {
+                $templates = Template::all();
+
+                return View::make('admin/templates', array(
+                    'templates' => $templates
+                ));
+            }
+        ));
+
+        Route::get('agregar-template', array(
+            'as' => 'admin/agregar_template',
+            function() {
+                return View::make('admin/agregar_template');
+            }
+        ));
+
+        Route::post('guardar_template', 'TemplateController@guardar');
+
+        Route::get('subir-imagenes/{id}', array(
+            'as' => 'admin/subir_imagenes',
+            'uses' => 'TemplateController@form_subir_imagenes'
+        ));
+
+        Route::post('subir_imagenes', 'TemplateController@subir_imagenes');
+
+    });
 
 });

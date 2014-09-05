@@ -68,7 +68,9 @@ class UsuarioController extends BaseController {
                     'email'     => $usuario->email,
                     'password'  => Input::get('password'),
                     'confirmed' => true
-                ))) {
+                ), Input::get('recordar', 'no') == 'on' ? true : false)) {
+                    Session::put('id_logueado', $usuario->id);
+
                     return Response::json(array(
                         'status' => 'ok'
                     ));
@@ -106,16 +108,17 @@ class UsuarioController extends BaseController {
         $fb_id = Input::get('id');
         $usuario = Usuario::where('fb_id', '=', $fb_id)->first();
 
-        if($usuario) {
-            Auth::login($usuario);
-        } else {
+        if(!$usuario) {
             $usuario = Usuario::create(array(
                 'nombre'    => Input::get('first_name'),
                 'apellido'  => Input::get('last_name'),
                 'fb_id'     => $fb_id
             ));
-            Auth::login($usuario);
         }
+
+        Session::put('id_logueado', $usuario->id);
+
+        Auth::login($usuario);
 
         return Response::json(array(
             'status' => 'ok'

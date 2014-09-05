@@ -19,22 +19,15 @@
     <!--chat-->
     {{ HTML::script('home/js/modernizr.custom.js') }}
     <!--chat-->
+
     <script>
     $(function() {
-      // $('.editarcampam, .borrarcam').on('click', function(e) {
-      //   e.preventDefault();
-
-      //   $.ajax({
-      //     url: $(this).attr('ajax'),
-      //     success: function(data) {
-      //       $('#popup').html('');
-      //       $('#popup').html(data.popup);
-      //       $('#popup').fadeIn(400);
-      //     }
-      //   });
+      // $('#chk_todos').on('change', function(e){
+      //   debugger;
       // });
     });
     </script>
+
     </head>
     <body>
       <input type="hidden" id="popup_url" value="{{ url('popup') }}" />
@@ -116,7 +109,7 @@
 
      <div id="submenulibreria">
      <ul id="filtroselecionados">
-     <li><p>Seleccionados: 0 de {{ count($listas) }}</p></li>
+     <li><p>Seleccionados: <span id="txt_seleccionados">0</span> de {{ count($listas) }}</p></li>
      <li><a id="borrarselecionados" href="popup_eliminar_listasuscriptor_multi.html">Eliminar</a></li>
      </ul>
 
@@ -134,11 +127,11 @@
      <div class="cleaner"></div>
      </div><!--submenulibreria   -->
 
-     <table width="100%"  cellpadding="0" cellspacing="0" class="listacampanias">
+     <table width="100%" cellpadding="0" cellspacing="0" class="listacampanias" id="tabla_listas">
   <tr class="primeralinea">
     <th scope="col" width="40px">
      <form class="checkbox">
-     <input type="checkbox"  id="checkbox1" name="" onclick="marcar(this)" />
+     <input type="checkbox" id="chk_todos" />
      <label for="checkbox1"></label>
      </form>
     </th>
@@ -154,7 +147,7 @@
   <tr>
     <td>
      <form class="checkbox">
-     <input type="checkbox"  id="checkbox2" name="" value="valor1" />
+     <input type="checkbox" name="chk_lista[]" value="{{ $lista->id }}" />
      <label for="checkbox2"></label>
      </form>
 
@@ -165,13 +158,13 @@
     <td>{{ count($lista->contactos) }}</td>
     <td>
       <a class="descargarlista" href="#">
-        <img src="{{ asset('internas/imagenes/descargarlista.png') }}" alt="editar campa&ntilde;a" width="25" height="25">
+        <img src="{{ asset('internas/imagenes/descargarlista.png') }}" alt="descargar lista" width="25" height="25">
       </a>
       <a class="editarcampam" href="#" popup="{{ url('popup/editar_lista' . '/' . $lista->id) }}">
-        <img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25">
+        <img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="cambiar nombre" width="25" height="25">
       </a>
       <a class="borrarcam" href="#" popup="{{ url('popup/eliminar_lista' . '/' . $lista->id) }}">
-        <img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25">
+        <img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar lista" width="25" height="25">
       </a>
       <div class="cleaner"></div></td>
   </tr>

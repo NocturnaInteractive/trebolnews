@@ -16,7 +16,7 @@ class CampaniaController extends BaseController {
                     'campania:remitente'    => 'required',
                     'campania:email'        => 'required|email',
                     'campania:respuesta'    => 'required|email',
-                    'campania:listas'       => 'required',
+                    'campania:listas'       => 'required_if:con_listas,on',
                     'campania:redes'        => 'required_if:compartir,on',
                     'fecha'                 => 'required_if:campania:envio,programado',
                     'hora'                  => 'required_if:campania:envio,programado'
@@ -30,7 +30,7 @@ class CampaniaController extends BaseController {
                     'campania:email.email'          => 'El email debe ser válido',
                     'campania:respuesta.required'   => 'Falta completar la dirección de respuesta',
                     'campania:respuesta.email'      => 'La dirección de respuesta debe ser un email válido',
-                    'campania:listas.required'      => 'Es necesario elegir al menos una lista de contactos',
+                    'campania:listas.required_if'      => 'Es necesario elegir al menos una lista de contactos',
                     'campania:redes.required_if'    => 'Ha elegido compartir en redes sociales pero ninguna red',
                     'fecha.required_if'             => 'Es obligatorio ingresar la fecha para la programación del envío',
                     'hora.required_if'              => 'Es obligatorio ingresar la hora para la programación del envío'
@@ -257,10 +257,24 @@ class CampaniaController extends BaseController {
         if(Auth::user()->id == $campania->id_usuario) {
             Campania::destroy($id);
 
-            return Redirect::route('campanias');
+            return Response::json(array(
+                'status' => 'ok'
+            ));
         } else {
-            return App::abort(404);
+            return Response::json(array(
+                'status' => 'error'
+            ));
         }
+    }
+
+    public function reestablecer($id) {
+        $campania = Campania::withTrashed()->find($id);
+
+        if($campania->trashed()) {
+            $campania->restore();
+        }
+
+        return Redirect::to(URL::previous());
     }
 
 }

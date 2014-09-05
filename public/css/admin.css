@@ -28,3 +28,5 @@ td {
 	text-align: center;
 	padding: 5px;
 }
+
+html.wait, html.wait * { cursor: wait !important; }

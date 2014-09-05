@@ -1,6 +1,10 @@
 <?php
 
 return array(
+	'usuario_admin' => 'treboladmin',
+
+	'password_admin' => 'tre2014',
+
 	'dias' => array(
 		'Domingo',
 		'Lunes',

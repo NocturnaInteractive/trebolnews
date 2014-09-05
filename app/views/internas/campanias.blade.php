@@ -49,58 +49,7 @@
       <input type="hidden" id="session_url" value="{{ url('session') }}" />
       <?php $configtipos = Config::get('trebolnews.campania.tipo'); ?>
       <?php $configstatus = Config::get('trebolnews.campania.status'); ?>
-       <header>
-    <div id="conheader">
-    <h1><a href="{{ url('/') }}">TrebolNEWS</a></h1>
 
-<div id="menu" class="cbp-fbscroller" >
-  @include('menu')
-  <input type="hidden" id="menu_principal" value="campanias" />
-  <div class="cleaner"></div>
-</div>
-
-    </div><!-- #BeginLibraryItem "/Library/chat.lbi" --><div id="chat">
-    <button id="showRight">Chatee con un operador</button>
-
-    		<div class="cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<h3>Consultas</h3><div id="formah3"></div>
-	        <div class="cleaner"></div>
-
-       <form id="consultachat"  action="" method="post">
-
-      	<ul>
-		<li  class="izq_consultachat" ><input name="nombre" type="text" placeholder="&nbsp;*Nombre:" /></li>
-
-        <li class="der_consultachat" ><input name="apellido" type="text" placeholder="&nbsp;*Apellido:" /></li>
-
-        <div class="cleaner"></div>
-
-        <li class="izq_consultachat" ><input name="telefono" type="text" placeholder="Tel&eacute;fono:"  /></li>
-
-
-        <li class="der_consultachat" ><input name="empresa" type="text" placeholder="Empresa:" /></li>
-
-        <div class="cleaner"></div>
-
-        <li class="email_chat"><input name="email" type="text" placeholder="&nbsp;*Email:"  /></li>
-
-
-        <li><textarea name="comentario" placeholder="&nbsp;*Comentario:"></textarea></li>
-
-        </ul>
-
-		<p>*&nbsp;Campos obligatorios</p>
-
-	 	<div id="botones_consultachat">
-        <input class="btn" id="borrar2" type="reset" value="BORRAR" name="borrar" />
-        <input type="button" value="ENVIAR" name="enviar" id="saveForm2" />
-        <div class="cleaner"></div>
-	    </div><!--botones_consultachat-->
-		</form>
-
-		</div><!--cbp-spmenu-s2-->
-
-    </div><!--chat--><!-- #EndLibraryItem --></header>
 <div id="container">
 
 

@@ -21,6 +21,9 @@
         {{ HTML::script('js/jquery.form.min.js') }}
         {{ HTML::script('js/jquery.noty.packaged.min.js') }}
 
+        {{ HTML::script('js/trebolnews.js') }}
+        {{ HTML::style('css/trebolnews.css') }}
+
         <script>
         $(function() {
             $('#loginentrar').one('click', login_handler);
@@ -33,9 +36,6 @@
                 });
 
                 $('#frm_login').ajaxSubmit({
-                    beforeSubmit: function() {
-                        $('*').css('cursor', 'wait');
-                    },
                     success: function(data) {
                         if(data.status == 'ok') {
                             location.reload();
@@ -77,7 +77,6 @@
                     },
                     complete: function() {
                         $('#loginentrar').one('click', login_handler);
-                        $('*').css('cursor', 'auto');
                     }
                 });
             }
@@ -156,7 +155,7 @@
         <div id="conheader">
             <a href="{{ url('/') }}"><h1>TrebolNEWS</h1></a>
 
-            <div id="menu" class="cbp-fbscroller" >
+            <div id="menu" class="cbp-fbscroller">
                 <nav>
                     <a href="#fbsection1"></a>
                     <a href="#fbsection2" class="apretado">&iquest;Qu&eacute; es Trebol News?</a>
@@ -173,6 +172,7 @@
                                     <li class="loginder"><input name="password" type="password" id="loginpass"  placeholder="Password:" /></li>
                                     <li class="loginizq"><input class="btn"  id="loginborrar" type="reset" value="BORRAR" name="Enviar2" /></li>
                                     <li class="loginder"><input type="button" value="ENTRAR" name="submit1" id="loginentrar" /></li>
+                                    <input type="hidden" name="recordar" value="on" />
                                 </form>
                                 <div class="cleaner"></div>
                                 <li><p style="height: 16px; display: block;" id="validator"></p></li>

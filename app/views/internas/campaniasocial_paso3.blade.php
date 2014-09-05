@@ -178,7 +178,7 @@ owurl7.style.display='none':owurl7.style.display='block';
 
 	          <div class="content">
 			  <h2>Configuraci&oacute;n</h2>
-              <a id="volver" href="campaniasocial.html"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
+              <a id="volver" href="{{ URL::previous() }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
 
                     <div class="infocont">
 					<ul id="pasoscam">
@@ -580,7 +580,7 @@ owurl7.style.display='none':owurl7.style.display='block';
 <div id="opciones_pasos">
 <a id="guardarysalir" href="{{ route('campanias') }}" class="btn_guardar" y="salir">GUARDAR Y SALIR</a>
 <ul>
-<li><a href="{{ route('paso_2') }}" id="anterior">ANTERIOR</a></li>
+<li><a href="{{ URL::previous() }}" id="anterior">ANTERIOR</a></li>
 <li><a href="{{ route('paso_4') }}" id="siguiente" class="btn_guardar" y="seguir">SIGUIENTE</a></li>
 </ul>
 <div class="cleaner"></div>

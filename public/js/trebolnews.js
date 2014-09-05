@@ -1,71 +1,62 @@
 $(function(){
-	$('[popup]').on('click', function (e) {
-		e.preventDefault();
+    $(document).ajaxStart(function(){ $('html').addClass('wait'); });
+    $(document).ajaxStop(function(){ $('html').removeClass('wait'); });
 
-		$(this).on('click', function(e) {
-			e.preventDefault();
-		});
+    $('[popup]').on('click', function (e) {
+        e.preventDefault();
 
-		$.ajax({
-			url: $(this).attr('popup'),
-			type: 'get',
-			beforeSend: function() {
-				$('*').css('cursor', 'wait');
-			},
-			success: function(data) {
-				$('#popup').html('');
-				$('#popup').html(data.popup);
-				$('#popup').fadeIn(400);
-			},
-			complete: function() {
-				$('*').css('cursor', 'auto');
-			}
-		});
-	});
+        $(this).on('click', function(e) {
+            e.preventDefault();
+        });
 
-	$('[session]').on('click', function(e) {
-		e.preventDefault();
+        $.ajax({
+            url: $(this).attr('popup'),
+            type: 'get',
+            success: function(data) {
+                $('#popup').html('');
+                $('#popup').html(data.popup);
+                $('#popup').fadeIn(400);
+            }
+        });
+    });
 
-		var boton = $(this);
+    $('[session]').on('click', function(e) {
+        e.preventDefault();
 
-		$.ajax({
-			url: $('#session_url').val(),
-			type: 'post',
-			dataType: 'json',
-			data: {
-				session_data: $(this).attr('session')
-			},
-			beforeSend: function() {
-				$('*').css('cursor', 'wait');
-			},
-			success: function(data) {
-				if(data.status == 'ok') {
-					window.location = boton.attr('href');
-				}
-			},
-			complete: function() {
-				$('*').css('cursor', 'auto');
-			}
-		});
-	});
+        var boton = $(this);
 
-	$('body').on('click', '#cerrar_popup', function(e) {
-		e.preventDefault();
+        $.ajax({
+            url: $('#session_url').val(),
+            type: 'post',
+            dataType: 'json',
+            data: {
+                session_data: $(this).attr('session')
+            },
+            success: function(data) {
+                if(data.status == 'ok') {
+                    window.location = boton.attr('href');
+                }
+            }
+        });
+    });
 
-		$('#popup').fadeOut(400, function() {
-			$('#popup').html('');
-		});
-	});
+    $('body').on('click', '#cerrar_popup', function(e) {
+        e.preventDefault();
 
-	$(document).keyup(function(e) {
-		if(e.keyCode == 27) {
-			$('#cerrar_popup').trigger('click');
-		}
-	});
+        $('#popup').fadeOut(400, function() {
+            $('#popup').html('');
+        });
+    });
+
+    $(document).keyup(function(e) {
+        if(e.keyCode == 27) {
+            $('#cerrar_popup').trigger('click');
+        }
+    });
 });
 
 function notys(pack) {
-	$.each(pack, function(i, v) {
+    $.each(pack, function(i, v) {
         noty({
             text: v,
             layout: 'topCenter',

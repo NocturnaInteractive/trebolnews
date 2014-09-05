@@ -181,7 +181,7 @@ owurl7.style.display='none':owurl7.style.display='block';
 	<section class="tabs">
         <div class="content">
             <h2>Configuraci&oacute;n</h2>
-            <a id="volver" href="{{ route('paso_2') }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
+            <a id="volver" href="{{ URL::previous() }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
             <div class="infocont">
 				<ul id="pasoscam">
                     <li id="pasocam1">Paso 1<div class="linea"></div><div class="circulo"></div></li>
@@ -222,12 +222,12 @@ owurl7.style.display='none':owurl7.style.display='block';
                             </th>
                             <th scope="col" width="355px">Nombre de Lista</th>
                             <th scope="col" width="250px">Fecha de Creaci&oacute;n
-                                <a href="#" class="flechatabla"></a>
+                                <!-- <a href="#" class="flechatabla"></a> -->
                             </th>
                             <th scope="col" width="149px">Editado el</th>
                             <th scope="col" width="140px">Suscriptores</th>
                         </tr>
-                        @foreach(Auth::user()->listas()->has('contactos', '>', '0')->get() as $lista)
+                        @foreach($listas = Auth::user()->listas()->has('contactos', '>', '0')->get() as $lista)
                         <tr>
                             <td>
                                 <div class="checkbox">
@@ -241,6 +241,15 @@ owurl7.style.display='none':owurl7.style.display='block';
                             <td>{{ count($lista->contactos) }}</td>
                         </tr>
                         @endforeach
+                        @if(count($listas) > 0)
+                        <input type="hidden" name="con_listas" value="on" />
+                        @else
+                        <tr>
+                            <td colspan="5">
+                                Todavía no has creado contactos en una lista de suscriptores
+                            </td>
+                        </tr>
+                        @endif
                     </table>
                 </div><!--selecionar_suscriptores-->
 
@@ -453,7 +462,7 @@ owurl7.style.display='none':owurl7.style.display='block';
                                         <input id="checkbox6" type="checkbox" checked="checked">
                                         <label for="checkbox6"></label>
                                     </div>
-                                    <p>Deseo recibir una notificaci&oacute;n cuando la Campa&ntilde;a haya sido enviada.</p>
+                                    <p>Deseo recibir una notificaci&oacute;n cuando la campa&ntilde;a haya sido enviada.</p>
                                     <div class="cleaner"></div>
                                 </div><!--fin configuracionenvio_mensaje-->
                 			</div><!--fin content-2-->
@@ -463,7 +472,7 @@ owurl7.style.display='none':owurl7.style.display='block';
                 <div id="opciones_pasos">
                     <a id="guardarysalir" href="{{ route('campanias') }}" class="btn_guardar" y="salir">GUARDAR Y SALIR</a>
                     <ul>
-                        <li><a href="{{ route('paso_2') }}" id="anterior">ANTERIOR</a></li>
+                        <li><a href="{{ URL::previous() }}" id="anterior">ANTERIOR</a></li>
                         <li><a href="{{ route('paso_4') }}" id="siguiente" class="btn_guardar" y="seguir">SIGUIENTE</a></li>
                     </ul>
                     <div class="cleaner"></div>

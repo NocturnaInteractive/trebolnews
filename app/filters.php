@@ -4,6 +4,14 @@ Route::filter('ajax', function() {
 	if(!Request::ajax()) return App::abort(404);
 });
 
+Route::filter('admin', function() {
+	if(Session::get('admin', 'no') == 'yes') {
+		// return Redirect::route('admin/home');
+	} else {
+		return Redirect::route('admin/login');
+	}
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application & Route Filters
