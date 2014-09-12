@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => '104.132.13.16',
 			'database'  => 'trebolnews',
-			'username'  => 'root',
-			'password'  => 'xampp',
+			'username'  => 'forge',
+			'password'  => 'Q5t2gtXYpw25D52xQapW',
 			//'unix_socket'   => '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
