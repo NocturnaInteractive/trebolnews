@@ -4,6 +4,7 @@ Route::get('resetdb', function() {
     Artisan::call('dump-autoload');
     Artisan::call('migrate:refresh');
     Artisan::call('db:seed');
+    return 'DB Resetted';
 });
 
 Route::get('ver/{carpeta}/{vista}', function($carpeta, $vista) {
@@ -49,6 +50,9 @@ Route::get('gracias', array(
         return View::make('home/post_registro');
     }
 ));
+
+Route::get('/checkout','CheckoutController@index');
+Route::get('/checkout/success','CheckoutController@success');
 
 // back end
 
