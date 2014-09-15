@@ -1,11 +1,5 @@
 <?php
 
-Route::get('resetdb', function() {
-    Artisan::call('dump-autoload');
-    Artisan::call('migrate:refresh');
-    Artisan::call('db:seed');
-});
-
 Route::get('ver/{carpeta}/{vista}', function($carpeta, $vista) {
     if(Auth::guest()) { Auth::loginUsingId(2); }
     return View::make("$carpeta/$vista");
@@ -17,7 +11,10 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-    return View::make('trebolnews/campanias');
+    $template = Template::find(1);
+
+    echo('<img src="' . public_path("templates/{$template->archivo}/{$template->archivo}/img/bg_info.png") . '" />');
+
 });
 
 Route::get('session', function() {
@@ -28,11 +25,12 @@ Route::get('session', function() {
 
 // front end
 
+// home
 Route::get('/', function() {
     if(Auth::check()) {
         return Redirect::route('campanias');
     } else {
-        return View::make('home/index');
+        return View::make('trebolnews/home');
     }
 });
 
@@ -156,7 +154,15 @@ Route::group(array(
                     return View::make('internas/campaniaenblanco_paso4');
                     break;
                 case 'template':
-                    return View::make('internas/campaniatemplate_paso4');
+                    $templates = Template::paginate(12);
+
+                    $templates->each(function($template){
+
+                    });
+
+                    return View::make('trebolnews/subtipo-template', array(
+                        'templates' => $templates
+                    ));
                     break;
                 case 'url':
                     return View::make('internas/campaniaurl_paso4');
@@ -165,6 +171,15 @@ Route::group(array(
                     return View::make('internas/campaniaenblanco_paso4');
                     break;
             }
+        }
+    ));
+
+    Route::get('visualizar/{id}', array(
+        'as' => 'preview',
+        function($id) {
+            $template = Template::find(1);
+
+            return View::make('trebolnews.preview');
         }
     ));
 
@@ -317,6 +332,12 @@ Route::group(array(
     Route::group(array(
         'prefix' => 'popup'
     ), function() {
+
+        Route::get('recuperar_password', function(){
+            return Response::json(array(
+                'popup' => View::make('trebolnews/popups/recuperar_password')->render()
+            ));
+        });
 
         Route::get('editar_lista/{id_lista}', function($id_lista) {
             $lista = Lista::find($id_lista);
