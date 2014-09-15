@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-		"yangqi/htmldom": "dev-master"
+		"yangqi/htmldom": "dev-master",
+		"mercadopago/sdk": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

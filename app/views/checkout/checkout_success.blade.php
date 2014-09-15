@@ -1,0 +1,1 @@
+<h1>¡Gracias por adquirir nuestros productos!</h1>

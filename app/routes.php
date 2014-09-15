@@ -1,5 +1,12 @@
 <?php
 
+Route::get('resetdb', function() {
+    Artisan::call('dump-autoload');
+    Artisan::call('migrate:refresh');
+    Artisan::call('db:seed');
+    return 'DB Resetted';
+});
+
 Route::get('ver/{carpeta}/{vista}', function($carpeta, $vista) {
     if(Auth::guest()) { Auth::loginUsingId(2); }
     return View::make("$carpeta/$vista");
@@ -11,10 +18,7 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-    $template = Template::find(1);
-
-    echo('<img src="' . public_path("templates/{$template->archivo}/{$template->archivo}/img/bg_info.png") . '" />');
-
+    return View::make('trebolnews/campanias');
 });
 
 Route::get('session', function() {
@@ -47,6 +51,9 @@ Route::get('gracias', array(
         return View::make('home/post_registro');
     }
 ));
+
+Route::get('/checkout','CheckoutController@index');
+Route::get('/checkout/success','CheckoutController@success');
 
 // back end
 
