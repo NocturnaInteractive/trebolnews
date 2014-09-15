@@ -38,5 +38,8 @@
         @yield('contenido')
 
         @include('trebolnews/footer')
+        <div id="popup">
+
+        </div>
     </body>
 </html>
