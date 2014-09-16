@@ -13,6 +13,7 @@ $(function(){
             url: $(this).attr('popup'),
             type: 'get',
             success: function(data) {
+                // debugger;
                 $('#popup').html('');
                 $('#popup').html(data.popup);
                 $('#popup').fadeIn(400);
