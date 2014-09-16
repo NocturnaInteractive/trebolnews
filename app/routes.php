@@ -33,7 +33,8 @@ Route::get('/', function() {
     if(Auth::check()) {
         return Redirect::route('campanias');
     } else {
-        return View::make('home/index');
+        $action = 'index';
+        return App::make('HomeController')->$action();
     }
 });
 
@@ -51,8 +52,9 @@ Route::get('gracias', array(
     }
 ));
 
-Route::get('/checkout','CheckoutController@index');
-Route::get('/checkout/success','CheckoutController@success');
+Route::get('/checkout/{id}',            'CheckoutController@index');
+Route::get('/checkout-success',         'CheckoutController@success');
+Route::get('/notifications',            'CheckoutController@notifications');
 
 // back end
 

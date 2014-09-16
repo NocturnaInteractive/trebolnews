@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearPlan extends Migration {
+class CrearPago extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,11 @@ class CrearPlan extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('planes', function(Blueprint $table) {
+		Schema::create('pagos', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('nombre');
-			$table->decimal('precio',5,2);
-			$table->boolean('isConcurrent');
-			$table->boolean('isActive')->default(true);
+			$table->integer('id_usuario')->unsigned();
+			$table->integer('id_orden')->unsigned();
+			$table->decimal('monto',5,2);
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -30,7 +29,7 @@ class CrearPlan extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('planes');
+		Schema::drop('pagos');
 	}
 
 }

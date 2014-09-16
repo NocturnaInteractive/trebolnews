@@ -2,23 +2,28 @@
 
 class CheckoutController extends BaseController {
 
-    public function index() {
+    public function index($id) {
+
+        $foundPlan = Plan::find($id);
+        $plan  = array(
+            'title'       => $foundPlan['nombre'],
+            'unit_price'  => (float) $foundPlan['precio'],
+            'quantity'    => 1,
+            'currency_id' => 'ARS'
+        );
+
+        $order = Orden::create(array(
+            'id_plan'       => $foundPlan->id,
+            'monto'         => (float) $foundPlan['precio'],
+            'isSuscription' => true
+        ));
+
+        $external_reference = $order->id;
 
         /****************************
                 MAIN CONFIGS
         ****************************/
 
-        //reemplazar con el plan adquirido, almacenado en -posiblemente- sesion
-        $plan  = array(
-            'title'       => 'Plan Basico Mensual',
-            'unit_price'  => 24.95,
-            'quantity'    => 1,
-            'currency_id' => 'ARS'
-        );
-
-        /* IDs MercadoPago */
-        $mpClientId = "7444";
-        $mpSecretId = "tRJ1ATI3zhw2FMTaH1ncPGtGG162Uwei";
 
         //reemplazar con datos del cliente
         $payer = array(
@@ -29,10 +34,12 @@ class CheckoutController extends BaseController {
 
         //URL de retorno
         $back_urls = array(
-            "success"   => "http://localhost:8000/checkout/success",
+            "success"   => "http://localhost:8000/checkout-success",
             "failiure"  => "http://localhost:8000",
             "pending"   => "http://localhost:8000"
         );
+
+        
 
         /****************************
                END MAIN CONFIGS
@@ -41,9 +48,9 @@ class CheckoutController extends BaseController {
         $items = [];
         array_push($items, $plan);
 
-        
+        $mp = $this->mlAuth();
 
-        $mp = new MP($mpClientId,$mpSecretId);
+        //return $mp;
 
         $recurrent = false;
         if($recurrent === true){
@@ -51,7 +58,7 @@ class CheckoutController extends BaseController {
                 "payer_email"           => $payer['email'],
                 "back_url"              => $back_urls['success'],
                 "reason"                => $plan['title'],
-                "external_reference"    => "OP-1234",
+                "external_reference"    => $external_reference,
                 "auto_recurring"        => array(
                     "frequency"             => 1,
                     "frequency_type"        => "months",
@@ -72,9 +79,10 @@ class CheckoutController extends BaseController {
             
 
             $preference = array (
-                "items"     => $items,
-                "payer"     => $payer,
-                "back_urls" => $back_urls
+                "items"              => $items,
+                "payer"              => $payer,
+                "back_urls"          => $back_urls,
+                "external_reference" => (string) $external_reference
             );
 
             $preferenceResult = $mp->create_preference($preference);
@@ -83,7 +91,8 @@ class CheckoutController extends BaseController {
             
             $result = array(
                 'plan'     => $plan,
-                'mplink'   => $preferenceResult['response']
+                'mplink'   => $preferenceResult['response'],
+                'test'     => $mp
             );
         }
 
@@ -91,9 +100,58 @@ class CheckoutController extends BaseController {
         return View::make('checkout/checkout_review', $result );
     }
 
+    private function mlAuth(){
+        /* IDs MercadoPago */
+        $mpClientId = "7444";
+        $mpSecretId = "tRJ1ATI3zhw2FMTaH1ncPGtGG162Uwei";
+
+        return new MP($mpClientId,$mpSecretId);
+    }
+
 
     public function success() {
         return View::make('checkout/checkout_success' );
     }
 
+    public function notifications() {
+
+        $topic  = Input::get('topic');
+        $id     = Input::get('id',1234);
+        $mp     = $this->mlAuth();
+        
+        $url    = 'https://api.mercadolibre.com/sandbox/collections/notifications/'.$id.'?access_token='.$mp->get_access_token();
+        //'https://api.mercadolibre.com/collections/notifications/identificador-de-la-operación?access_token=tu_access_token'
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json'
+            )
+        );
+         
+        $result = json_decode(curl_exec($ch));
+        $message = 'Yay!';
+
+        if(isset($result->collection->external_reference)){
+            $this->confirmPayment($result);
+        }else{
+            $message = 'ID Not Found!';
+        }
+        return $message;
+    }
+
+    private function confirmPayment($result){
+
+        $external_reference = $result->collection->external_reference;
+        $orden = Orden::find( (int) $external_reference );
+
+        $order = Pago::create(array(
+            'id_orden'      => $orden->id,
+            'id_usuario'    => $orden->id_usuario,
+            'monto'         => (float) $foundPlan['precio'],
+            'isSuscription' => true
+        ));
+
+    }
 }

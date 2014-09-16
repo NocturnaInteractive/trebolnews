@@ -21,86 +21,103 @@
     <body>
        <header>
     <div id="conheader">
-    <h1><a href="{{ url('/') }}">TrebolNEWS</a></h1>
-
+    <h1>TrebolNEWS</h1>
+    
 <div id="menu" class="cbp-fbscroller" >
-  @include('menu')
-  <input type="hidden" id="menu_principal" value="planes" />
-  <div class="cleaner"></div>
+<nav>
+<ul>
+<li><a href="campanias.html">Campa&ntilde;as</a></li>
+<li><a href="listascontactos.html">Suscriptores</a></li>
+<li><a href="libreria.html">Librer&iacute;as</a></li>
+<li><a href="planes.html" class="apretado">Planes</a></li>
+<li><a href="soporte.html">Soporte</a></li>
+<li><a href="#" id="logout">mariano@nocturna.vg<img src="imagenes/engrane.png" width="20" height="20" alt="engranaje"><div class="cleaner"></div></a>
+<ul>
+<li><a href="perfil.html">Configuraci&oacute;n de cuenta</a></li>
+<li><a href="#">Cerrar cesi&oacute;n</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+<div class="cleaner"></div>
 </div>
 
     </div><!-- #BeginLibraryItem "/Library/chat.lbi" --><div id="chat">
     <button id="showRight">Chatee con un operador</button>
-
-    		<div class="cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<h3>Consultas</h3><div id="formah3"></div>
-	        <div class="cleaner"></div>
-
+    
+        <div class="cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+      <h3>Consultas</h3><div id="formah3"></div>
+          <div class="cleaner"></div>
+            
        <form id="consultachat"  action="" method="post">
-
-      	<ul>
-		<li  class="izq_consultachat" ><input name="nombre" type="text" placeholder="&nbsp;*Nombre:" /></li>
-
+              
+        <ul>  
+    <li  class="izq_consultachat" ><input name="nombre" type="text" placeholder="&nbsp;*Nombre:" /></li>    
+        
         <li class="der_consultachat" ><input name="apellido" type="text" placeholder="&nbsp;*Apellido:" /></li>
-
+        
         <div class="cleaner"></div>
-
+        
         <li class="izq_consultachat" ><input name="telefono" type="text" placeholder="Tel&eacute;fono:"  /></li>
-
-
+        
+        
         <li class="der_consultachat" ><input name="empresa" type="text" placeholder="Empresa:" /></li>
-
+        
         <div class="cleaner"></div>
-
+        
         <li class="email_chat"><input name="email" type="text" placeholder="&nbsp;*Email:"  /></li>
-
-
-        <li><textarea name="comentario" placeholder="&nbsp;*Comentario:"></textarea></li>
-
+        
+        
+        <li><textarea name="comentario" placeholder="&nbsp;*Comentario:"></textarea></li> 
+       
         </ul>
+        
+    <p>*&nbsp;Campos obligatorios</p> 
 
-		<p>*&nbsp;Campos obligatorios</p>
-
-	 	<div id="botones_consultachat">
+    <div id="botones_consultachat">
         <input class="btn"  id="borrar" type="reset" value="BORRAR" name="borrar" />
         <input type="button" value="ENVIAR" name="enviar" onClick="enviar(this.form)" id="saveForm" />
         <div class="cleaner"></div>
-	    </div><!--botones_consultachat-->
-		</form>
-
-		</div><!--cbp-spmenu-s2-->
-
-    </div><!--chat--><!-- #EndLibraryItem --></header>
+      </div><!--botones_consultachat-->
+    </form>
+            
+    </div><!--cbp-spmenu-s2-->
+        
+    </div><!--chat--><!-- #EndLibraryItem --></header> 
 <div id="container">
 
-
-			<section class="tabs">
-
-	          <div class="content">
-			  <h2>Precios y Planes</h2>
-			  <div class="infocont">
-
+  
+      <section class="tabs">
+        
+            <div class="content">
+        <h2>Precios y Planes</h2>
+        <div class="infocont"> 
+              
  <div id="planes">
-
+      
       <div id="pfree">
       <h3>Plan Gratuito</h3>
       <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os!</p>
       <div class="infoplanes">
       <div class="verdeinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">500<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;Gratis</span></h4>
+      <div class="radioplanes radioplanes_gratis">
+      <input type="radio"  id="radio1" name="opcion" />
+      <label for="radio1"></label>
       </div>
-      <div class="grisinfo"><img class="xicon" src="{{ asset('internas/imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
-      <div class="verdeinfo"><img class="xicon" src="{{ asset('internas/imagenes/cruziconverde.png') }}" width="38px" height="38px" alt="icono"></div>
-      <div class="grisinfo"><img class="xicon" src="{{ asset('internas/imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
-      <div class="verdeinfo"><img class="xicon" src="{{ asset('internas/imagenes/cruziconverde.png') }}" width="38px" height="38px" alt="icono"></div>
-      <div class="grisinfo"><img class="xicon" src="{{ asset('internas/imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
-      <div class="verdeinfo"><img class="xicon" src="{{ asset('internas/imagenes/cruziconverde.png') }}" width="38px" height="38px" alt="icono"></div>
-      <div class="grisinfo"><img class="xicon" src="{{ asset('internas/imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
-      </div><!--infoplanes-->
-      <div class="bot">
-      <a href="#" class="botondecompra">COMPRAR AHORA</a>
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">500</h4>
+      <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;Gratis</span></h4>
       <div class="cleaner"></div>
       </div>
+      <div class="grisinfo"><img class="xicon" src="imagenes/cruzicongris.png" width="38px" height="38px" alt="icono"></div>
+      <div class="verdeinfo"><img class="xicon" src="imagenes/cruziconverde.png" width="38px" height="38px" alt="icono"></div>
+      <div class="grisinfo"><img class="xicon" src="imagenes/cruzicongris.png" width="38px" height="38px" alt="icono"></div>
+      <div class="verdeinfo"><img class="xicon" src="imagenes/cruziconverde.png" width="38px" height="38px" alt="icono"></div>
+      <div class="grisinfo"><img class="xicon" src="imagenes/cruzicongris.png" width="38px" height="38px" alt="icono"></div>
+      <div class="verdeinfo"><img class="xicon" src="imagenes/cruziconverde.png" width="38px" height="38px" alt="icono"></div>
+      <div class="grisinfo"><img class="xicon" src="imagenes/cruzicongris.png" width="38px" height="38px" alt="icono"></div>
+      </div><!--infoplanes-->
       </div><!--pfree-->
 
 <div id="individual">
@@ -108,34 +125,86 @@
       <p>Ideal para env&iacute;os de emails con poca frecuencia, porque se abona s&oacute;lo la cantidad de env&iacute;os que necesita el usuario. Adem&aacute;s, no hay l&iacute;mite de tiempo para efectuarlos.<br> </p>
       <div class="infoplanes">
       <div class="verdeinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">2.500<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="grisinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">5.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="verdeinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">10.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="grisinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">20.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="verdeinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">25.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="grisinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">50.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="verdeinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="grisinfo">
-      <h4><span class="hastaplan">M&aacute;s</span><img src="{{ asset('internas/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      </div><!--infoplanes-->
-      <div class="bot">
-      <a href="#" class="botondecompra">COMPRAR AHORA</a>
+      <div class="radioplanes radioplanes_corto">
+      <input type="radio"  id="radio2" name="opcion" />
+      <label for="radio2"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">2.500</h4>
       <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>      
       </div>
+      <div class="grisinfo">
+      <div class="radioplanes radioplanes_corto">
+      <input type="radio"  id="radio3" name="opcion" />
+      <label for="radio3"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/planegris.png" width="18px" height="18px" alt="icono">5.000</h4>
+      <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>      
+      </div>
+      <div class="verdeinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio4" name="opcion" />
+      <label for="radio4"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">10.000</h4>
+      <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>      
+      </div>
+      <div class="grisinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio5" name="opcion" />
+      <label for="radio5"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/planegris.png" width="18px" height="18px" alt="icono">20.000</h4>
+      <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>      
+      </div>
+      <div class="verdeinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio6" name="opcion" />
+      <label for="radio6"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">25.000</h4>
+      <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>      
+      </div>
+      <div class="grisinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio7" name="opcion" />
+      <label for="radio7"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/planegris.png" width="18px" height="18px" alt="icono">50.000</h4>
+      <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>      
+      </div>
+      <div class="verdeinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio8" name="opcion" />
+      <label for="radio8"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">100.000</h4>
+      <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>      
+      </div>
+      <div class="grisinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio9" name="opcion" />
+      <label for="radio9"></label>
+      </div>      
+      <h4><span class="hastaplan">M&aacute;s</span><img src="imagenes/planegris.png" width="18px" height="18px" alt="icono">100.000</h4>
+      <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>      
+      </div>      
+      </div><!--infoplanes-->
       </div><!--individual-->
 
 
@@ -144,148 +213,203 @@
       <p>Exclusivo paquete preparado para realizar grandes env&iacute;os. Con una suscripci&oacute;n mensual se contrata una cantidad de env&iacute;os y no hay l&iacute;mite de tiempo para hacerlos.</p>
       <div class="infoplanes">
       <div class="verdeinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">2.500<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="grisinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">5.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="verdeinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">10.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="grisinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">20.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="verdeinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">50.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="grisinfo">
-      <h4><span class="hastaplan">Hasta</span><img src="{{ asset('internas/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="verdeinfo">
-      <h4><span class="hastaplan">M&aacute;s</span><img src="{{ asset('internas/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-      </div>
-      <div class="grisinfo"><img class="xicon" src="{{ asset('internas/imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
-      </div><!--infoplanes-->
-      <div class="bot">
-      <a href="#" class="botondecompra">COMPRAR AHORA</a>
+      <div class="radioplanes radioplanes_corto">
+      <input type="radio"  id="radio10" name="opcion" />
+      <label for="radio10"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">2.500</h4>
       <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>       
       </div>
+      <div class="grisinfo">
+      <div class="radioplanes radioplanes_corto">
+      <input type="radio"  id="radio11" name="opcion" />
+      <label for="radio11"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/planegris.png" width="18px" height="18px" alt="icono">5.000</h4>
+      <div class="cleaner"></div>
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>       
+      </div>
+      <div class="verdeinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio12" name="opcion" />
+      <label for="radio12"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">10.000</h4>
+      <div class="cleaner"></div> 
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>       
+      </div>
+      <div class="grisinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio13" name="opcion" />
+      <label for="radio13"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/planegris.png" width="18px" height="18px" alt="icono">20.000</h4>
+      <div class="cleaner"></div> 
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>       
+      </div>
+      <div class="verdeinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio14" name="opcion" />
+      <label for="radio14"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">50.000</h4>
+      <div class="cleaner"></div> 
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>       
+      </div>
+      <div class="grisinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio15" name="opcion" />
+      <label for="radio15"></label>
+      </div>      
+      <h4><span class="hastaplan">Hasta</span><img src="imagenes/planegris.png" width="18px" height="18px" alt="icono">100.000</h4>
+      <div class="cleaner"></div> 
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>       
+      </div>
+      <div class="verdeinfo">
+      <div class="radioplanes radioplanes_largo">
+      <input type="radio"  id="radio16" name="opcion" />
+      <label for="radio16"></label>
+      </div>      
+      <h4><span class="hastaplan">M&aacute;s</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">100.000</h4>
+    <div class="cleaner"></div> 
+      <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+      <div class="cleaner"></div>       
+      </div>
+      <div class="grisinfo"><img class="xicon" src="imagenes/cruzicongris.png" width="38px" height="38px" alt="icono"></div>
+      </div><!--infoplanes-->
       </div><!--mensuales-->
-
 
       <div class="cleaner"></div>
       </div><!--planes-->
-
-
+      
+      
+<div id="bto_planes">
+<a href="#" id="comprar">COMPRAR AHORA</a>
+<div class="cleaner"></div>
+</div><!--bto_planes--> 
+      
+               
       <div id="formasdepago">
       <h6>Medios de pagos online</h6>
-      <img src="{{ asset('internas/imagenes/formasdepago.png') }}" width="934" height="80" alt="formas de pago">
+      <img src="imagenes/formasdepago.png" width="934" height="80" alt="formas de pago">
       <div class="cleaner"></div>
-      </div><!--formasdepago-->
+      </div><!--formasdepago--> 
 
 
-
-		</div> <!--infocont-->
-        </div>
-
+    
+    </div> <!--infocont-->    
+        </div>     
+                    
         </section>
         </div><!--conteiner--><!-- #BeginLibraryItem "/Library/footer_internas.lbi" --><div id="foo">
       <div id="foo_text">
-
-		<div id="foo_izq">
+      
+    <div id="foo_izq">
         <h6>TrebolNEWS</h6>
         <p>www.trebolnews.com - Copyright 2013</p>
         </div>
-
-		<div id="foo_der">
+        
+    <div id="foo_der">
         <a href="#" class="twe">Seguinos por Tweter</a>
         <a href="#" class="face">Estamos en Facebook</a>
-
+        
         <form id="subanewsletter" method="post"  action=""> <!-- es necesario que coincida el nombre de este archivo php con el que aparece en el campo action -->
-	    <input type="text" name="email" class="compo-form" id="newsletter" placeholder="Suscr&iacute;bete a nuestro Newsletter"  style=" color:#FFF; font-size:12px;"  />
-	    <input type="submit" id="button" value="ENVIAR" />
+      <input type="text" name="email" class="compo-form" id="newsletter" placeholder="Suscr&iacute;bete a nuestro Newsletter"  style=" color:#FFF; font-size:12px;"  />
+      <input type="submit" id="button" value="ENVIAR" />
         </form>
-
+        
         <div class="cleaner"></div>
         </div>
-
+        
       <div class="cleaner"></div>
-
+      
        <div id="botones_footer">
        <ul>
        <li><a href="campanias.html">Campa&ntilde;as</a></li>
        <li><a href="listascontactos.html">Suscriptores</a></li>
        <li><a href="libreria.html">Libre&iacute;as</a></li>
        <li><a href="planes.html">Planes</a></li>
-       <li><a href="soporte.html">Soporte</a></li>
+       <li><a href="soporte.html">Soporte</a></li> 
        <li><a href="terminosycondiciones.html" class="ultimo_boton_footer" target="_blank">Terminos y Condiciones</a></li>
        </ul>
        <div class="cleaner"></div>
        </div><!--botones_footer-->
-
+      
       </div><!--fin de foo_text-->
       </div>
+    
+    <!--fin de footer--><!-- #EndLibraryItem --><!--chat-->
+      <script src="js/chat.js"></script>
+    <script>
+      var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+        showRight = document.getElementById( 'showRight' ),
+        showTop = document.getElementById( 'showTop' ),
+        body = document.body;
 
-	  <!--fin de footer--><!-- #EndLibraryItem --><!--chat-->
-  		<script src="js/chat.js"></script>
-		<script>
-			var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
-				showRight = document.getElementById( 'showRight' ),
-				showTop = document.getElementById( 'showTop' ),
-				body = document.body;
-
-			showRight.onclick = function() {
-				classie.toggle( this, 'active' );
-				classie.toggle( menuRight, 'cbp-spmenu-open' );
-				disableOther( 'showRight' );
-			};
-
-			function disableOther( button ) {
-
-				if( button !== 'showRight' ) {
-					classie.toggle( showRight, 'disabled' );
-				}
-			}
-		</script>
+      showRight.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( menuRight, 'cbp-spmenu-open' );
+        disableOther( 'showRight' );
+      };
+      
+      function disableOther( button ) {
+        
+        if( button !== 'showRight' ) {
+          classie.toggle( showRight, 'disabled' );
+        }
+      }
+    </script> 
        <!--chat-->
 
-      <!--explorer placeholder-->
 
+
+
+
+      <!--explorer placeholder-->    
+              <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  
         <script type="text/javascript">
 /* <![CDATA[ */
 $(function() {
-	var input = document.createElement("input");
-    if(('placeholder' in input)==false) {
-		$('[placeholder]').focus(function() {
-			var i = $(this);
-			if(i.val() == i.attr('placeholder')) {
-				i.val('').removeClass('placeholder');
-				if(i.hasClass('password')) {
-					i.removeClass('password');
-					this.type='password';
-				}
-			}
-		}).blur(function() {
-			var i = $(this);
-			if(i.val() == '' || i.val() == i.attr('placeholder')) {
-				if(this.type=='password') {
-					i.addClass('password');
-					this.type='text';
-				}
-				i.addClass('placeholder').val(i.attr('placeholder'));
-			}
-		}).blur().parents('form').submit(function() {
-			$(this).find('[placeholder]').each(function() {
-				var i = $(this);
-				if(i.val() == i.attr('placeholder'))
-					i.val('');
-			})
-		});
-	}
+  var input = document.createElement("input");
+    if(('placeholder' in input)==false) { 
+    $('[placeholder]').focus(function() {
+      var i = $(this);
+      if(i.val() == i.attr('placeholder')) {
+        i.val('').removeClass('placeholder');
+        if(i.hasClass('password')) {
+          i.removeClass('password');
+          this.type='password';
+        }     
+      }
+    }).blur(function() {
+      var i = $(this);  
+      if(i.val() == '' || i.val() == i.attr('placeholder')) {
+        if(this.type=='password') {
+          i.addClass('password');
+          this.type='text';
+        }
+        i.addClass('placeholder').val(i.attr('placeholder'));
+      }
+    }).blur().parents('form').submit(function() {
+      $(this).find('[placeholder]').each(function() {
+        var i = $(this);
+        if(i.val() == i.attr('placeholder'))
+          i.val('');
+      })
+    });
+  }
 });
 /* ]]> */
 </script>
-
- <!--explorer placeholder-->
+        
+ <!--explorer placeholder-->    
     </body>
 </html>

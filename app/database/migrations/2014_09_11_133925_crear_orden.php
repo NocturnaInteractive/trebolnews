@@ -14,8 +14,10 @@ class CrearOrden extends Migration {
 	{
 		Schema::create('ordenes', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('id_usuario')->unsigned()->nullable();
-			$table->string('nombre');
+			$table->integer('id_usuario')->unsigned();
+			$table->integer('id_plan')->unsigned();
+			$table->boolean('isSuscription');
+			$table->string('status')->default('pending'); //pending, paid, cancelled
 			$table->timestamps();
 			$table->softDeletes();
 		});

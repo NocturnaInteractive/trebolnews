@@ -2,6 +2,7 @@
 
 PLAN: {{$plan['title']}} | {{$plan['unit_price']}}
 
-<hr/>
 
+<?php var_dump($test) ?>
+<hr/>
 <a href="{{$mplink['sandbox_init_point']}}">¡Pagar!</a>

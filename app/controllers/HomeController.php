@@ -15,9 +15,13 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
+	public function index()
 	{
-		return View::make('hello');
+		$res = array(
+				'plans' => Plan::all()
+			);
+
+		return View::make('home/index',$res);
 	}
 
 }
