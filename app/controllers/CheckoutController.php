@@ -4,6 +4,8 @@ class CheckoutController extends BaseController {
 
     public function index($id) {
 
+        $user=Auth::user();
+
         $foundPlan = Plan::find($id);
         $plan  = array(
             'title'       => $foundPlan['nombre'],
@@ -12,11 +14,11 @@ class CheckoutController extends BaseController {
             'currency_id' => 'ARS'
         );
 
-        $order = Orden::create(array(
-            'id_plan'       => $foundPlan->id,
-            'monto'         => (float) $foundPlan['precio'],
-            'isSuscription' => true
-        ));
+        $order = new Orden;
+        $order->id_usuario    = $user->id;
+        $order->id_plan       = $foundPlan['id'];
+        $order->monto         = $foundPlan['precio'];
+        $order->isSuscription = true;
 
         $external_reference = $order->id;
 
@@ -27,9 +29,9 @@ class CheckoutController extends BaseController {
 
         //reemplazar con datos del cliente
         $payer = array(
-            "name"      => "Juan",
-            "surname"   => "Prueba",
-            "email"     => "cliente@cliente.com"
+            "name"      => $user->nombre,
+            "surname"   => $user->apellido,
+            "email"     => $user->email
         );
 
         //URL de retorno
@@ -96,7 +98,7 @@ class CheckoutController extends BaseController {
             );
         }
 
-
+        $order->save();
         return View::make('checkout/checkout_review', $result );
     }
 
@@ -146,12 +148,12 @@ class CheckoutController extends BaseController {
         $external_reference = $result->collection->external_reference;
         $orden = Orden::find( (int) $external_reference );
 
-        $order = Pago::create(array(
-            'id_orden'      => $orden->id,
-            'id_usuario'    => $orden->id_usuario,
-            'monto'         => (float) $foundPlan['precio'],
-            'isSuscription' => true
-        ));
+        $pago = new Pago;
+        $pago->id_orden      = $orden->id;
+        $pago->id_usuario    = $orden->id_usuario;
+        $pago->monto         = (float) $orden->$foundPlan['precio'];
+        $pago->isSuscription = true;
+        $pago->save();
 
     }
 }
