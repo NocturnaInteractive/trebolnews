@@ -48,9 +48,17 @@ Route::get('gracias', array(
         return View::make('home/post_registro');
     }
 ));
-Route::get('/checkout/{id}',            'CheckoutController@index');
-Route::get('/checkout-success',         'CheckoutController@success');
-Route::get('/notifications',            'CheckoutController@notifications');
+
+Route::get('/checkout/{id}',function($id){
+    $action = 'index';
+    if(Auth::check()) {
+        return App::make('CheckoutController')->$action($id);
+    } else {
+        return Redirect::to('/');   
+    }
+});
+Route::get('/checkout-success', 'CheckoutController@success');
+Route::get('/notifications',    'CheckoutController@notifications');
 
 
 // back end
