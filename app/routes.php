@@ -11,7 +11,7 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-    var_dump(gethostname());
+    var_dump(App::environment());
 });
 
 Route::get('session', function() {
