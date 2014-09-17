@@ -14,7 +14,7 @@
 <table align="center" width="600px" border="0" cellspacing="20" cellpadding="0" style="background-color:#FFF; margin:80px auto 80px auto; color:#737F80; font-family:Helvetica, sans-serif, sans-serif; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;">
 <tr><td></td></tr>
 <tr height="33px" >
-    <td><a href="#" style="display:block; height:33px; width:202px"><img src="{{ asset('internas/imagenes/logograndeemail.png') }}" width="202" height="33"></a></td>
+    <td><a href="{{ url('/') }}" style="display:block; height:33px; width:202px"><img src="{{ asset('internas/imagenes/logograndeemail.png') }}" width="202" height="33"></a></td>
 </tr>
 
 
@@ -54,13 +54,13 @@ Abra un explorador y pegue el mismo en la barra de direcciones. Presione "Entrar
   <tr>
   	<td>
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr><td><a href="#" style="display:block; height:22px; width:130px"><img src="{{ asset('internas/imagenes/logochiquitoemail.png') }}" width="130" height="22"></a></td></tr>
-    <tr><td><p style="margin:2px 0 0 0; font-size:12px;"><a href="#" style="text-decoration:none; color:#737F80">www trebolnews.com</a> - Copyright 2013</p></td></tr>
+    <tr><td><a href="{{ url('/') }}" style="display:block; height:22px; width:130px"><img src="{{ asset('internas/imagenes/logochiquitoemail.png') }}" width="130" height="22"></a></td></tr>
+    <tr><td><p style="margin:2px 0 0 0; font-size:12px;"><a href="{{ url('/') }}" style="text-decoration:none; color:#737F80">www.trebolnews.com</a> - Copyright 2013</p></td></tr>
     </table>
     </td>
 
-    <td width="44px"><a href="#" style="display:block; height:42px; width:42px"><img src="{{ asset('internas/imagenes/iconface.png') }}" width="42" height="42"></a></td>
-	<td width="44px"><a href="#" style="display:block; height:42px; width:42px"><img src="{{ asset('internas/imagenes/icontw.png') }}" width="42" height="42"></a></td>
+    <td width="44px"><a target="_blank" href="{{ Config::get('trebolnews.social.pages.facebook') }}" style="display:block; height:42px; width:42px"><img src="{{ asset('internas/imagenes/iconface.png') }}" width="42" height="42"></a></td>
+	<td width="44px"><a target="_blank" href="{{ Config::get('trebolnews.social.pages.twitter') }}" style="display:block; height:42px; width:42px"><img src="{{ asset('internas/imagenes/icontw.png') }}" width="42" height="42"></a></td>
   </tr>
   </table></td></tr>
 

@@ -1,6 +1,13 @@
 <?php
 
 return array(
+	'social' => array(
+		'pages' => array(
+			'facebook' => '',
+			'twitter' => ''
+		)
+	),
+
 	'usuario_admin' => 'treboladmin',
 
 	'password_admin' => 'tre2014',
