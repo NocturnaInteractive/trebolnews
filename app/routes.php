@@ -11,10 +11,7 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-    $template = Template::find(1);
-
-    echo('<img src="' . public_path("templates/{$template->archivo}/{$template->archivo}/img/bg_info.png") . '" />');
-
+    var_dump(gethostname());
 });
 
 Route::get('session', function() {
@@ -54,7 +51,7 @@ Route::get('/checkout/{id}',function($id){
     if(Auth::check()) {
         return App::make('CheckoutController')->$action($id);
     } else {
-        return Redirect::to('/');   
+        return Redirect::to('/');
     }
 });
 Route::get('/checkout-success', 'CheckoutController@success');
