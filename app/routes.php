@@ -56,6 +56,7 @@ Route::get('/checkout/{id}',function($id){
 });
 Route::get('/checkout-success', 'CheckoutController@success');
 Route::get('/notifications',    'CheckoutController@notifications');
+Route::post('/notifications',    'CheckoutController@notifications');
 
 
 // back end

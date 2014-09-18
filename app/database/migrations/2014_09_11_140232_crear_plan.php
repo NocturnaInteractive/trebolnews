@@ -16,6 +16,7 @@ class CrearPlan extends Migration {
 			$table->increments('id');
 			$table->string('nombre');
 			$table->decimal('precio',5,2);
+			$table->integer('envios');
 			$table->boolean('isConcurrent');
 			$table->boolean('isActive')->default(true);
 			$table->timestamps();

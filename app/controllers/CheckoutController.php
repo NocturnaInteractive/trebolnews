@@ -19,6 +19,7 @@ class CheckoutController extends BaseController {
         $order->id_plan       = $foundPlan['id'];
         $order->monto         = $foundPlan['precio'];
         $order->isSuscription = true;
+        $order->save();
 
         $external_reference = $order->id;
 
@@ -60,7 +61,7 @@ class CheckoutController extends BaseController {
                 "payer_email"           => $payer['email'],
                 "back_url"              => $back_urls['success'],
                 "reason"                => $plan['title'],
-                "external_reference"    => $external_reference,
+                "external_reference"    => (string) $external_reference,
                 "auto_recurring"        => array(
                     "frequency"             => 1,
                     "frequency_type"        => "months",
@@ -116,44 +117,110 @@ class CheckoutController extends BaseController {
     }
 
     public function notifications() {
-
-        $topic  = Input::get('topic');
-        $id     = Input::get('id',1234);
+        $topic  = (string) Input::get('topic','Forced Topic');
+        $id     = (string) Input::get('id',1411068489);
         $mp     = $this->mlAuth();
-        
-        $url    = 'https://api.mercadolibre.com/sandbox/collections/notifications/'.$id.'?access_token='.$mp->get_access_token();
-        //'https://api.mercadolibre.com/collections/notifications/identificador-de-la-operación?access_token=tu_access_token'
+        $access_token= (string) $mp->get_access_token();
 
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json'
-            )
-        );
-         
-        $result = json_decode(curl_exec($ch));
-        $message = 'Yay!';
-
-        if(isset($result->collection->external_reference)){
-            $this->confirmPayment($result);
+        if(!$id){
+            return 'no id';
         }else{
-            $message = 'ID Not Found!';
+            Log::info('\nIPN was received! ID: '.$id.' because a '.$topic);
+            try{
+                //'https://api.mercadolibre.com/collections/notifications/identificador-de-la-operación?access_token=tu_access_token'
+                $url    = 'https://api.mercadolibre.com/sandbox/collections/notifications/'.$id.'?access_token='.$access_token;
+                Log::info($url);
+            }catch(Exception $e){
+                Log::info('A problem getting token...'.$e->getMessage());
+                return 'problem getting token';
+            }
+            
+            try{
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);     
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); 
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                curl_setopt($ch, CURLOPT_SSLVERSION, 3);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                        'Content-Type: application/json'
+                    )
+                );
+
+                $json = curl_exec($ch);
+                curl_close($ch);
+
+                if($json){
+                    Log::info('Notification Fetched! '.gettype($json));
+                    
+                    $payment_info = json_decode($json);
+                    Log::info('JSON Decoded');
+
+                    $message = 'nothing found';
+                }else{
+
+                    return curl_error($ch);
+                }
+                
+                
+
+                Log::info('Let´s check the payment status...');
+            }catch(Exception $e){
+                Log::info('error on curl...'.$e->getMessage());
+                return 'problem on curl';
+            }
+
+            
+            try{
+                if ($payment_info->collection->status == "approved") {
+                    Log::info('The payment was approved!');
+                    $message = $this->confirmNotification($payment_info);
+                }
+            }catch(Exception $e){
+                $message = 'error happened: '.$e->getMessage();
+                Log::info($message);
+            }
+            
+
+            return $message;
+
         }
-        return $message;
     }
 
-    private function confirmPayment($result){
+    private function confirmNotification($payment_info){
+        Log::info('Let´s check the external reference...');
+        if (isset($payment_info->collection->external_reference)) {
+            $external_reference = $payment_info->collection->external_reference;
+            Log::info('External reference found! - '.$external_reference);
 
-        $external_reference = $result->collection->external_reference;
-        $orden = Orden::find( (int) $external_reference );
+            Log::info('Let´s check for an existing order...');
+            $orden = Orden::find( (int) $external_reference );
 
+            if($orden){
+                Log::info('Order found! Generating Payment...');
+                $this->generatePayment($orden);
+                $orden->status = 'paid';
+                $this->updatePurchase($orden);
+                return 'everything ok!';
+            }
+
+            return 'non order found';
+        }else{
+            return 'non external reference received';
+        }
+
+    }
+
+    private function generatePayment($orden){
         $pago = new Pago;
-        $pago->id_orden      = $orden->id;
-        $pago->id_usuario    = $orden->id_usuario;
-        $pago->monto         = (float) $orden->$foundPlan['precio'];
-        $pago->isSuscription = true;
+        $pago->id_orden      = $orden['id'];
+        $pago->id_usuario    = $orden['id_usuario'];
+        $pago->monto         = (float) $orden['monto'];
         $pago->save();
+    }
 
+    private function updatePurchase($orden){
+        //incrementar la cantidad de envios del usuario por el numero que adquirio
     }
 }
