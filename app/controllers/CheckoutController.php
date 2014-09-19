@@ -18,7 +18,7 @@ class CheckoutController extends BaseController {
         $order->id_usuario    = $user->id;
         $order->id_plan       = $foundPlan['id'];
         $order->monto         = $foundPlan['precio'];
-        $order->isSuscription = true;
+        $order->isSuscription = $foundPlan['isSuscription'];
         $order->save();
 
         $external_reference = $order->id;
@@ -27,8 +27,6 @@ class CheckoutController extends BaseController {
                 MAIN CONFIGS
         ****************************/
 
-
-        //reemplazar con datos del cliente
         $payer = array(
             "name"      => $user->nombre,
             "surname"   => $user->apellido,
@@ -37,9 +35,9 @@ class CheckoutController extends BaseController {
 
         //URL de retorno
         $back_urls = array(
-            "success"   => "http://localhost:8000/checkout-success",
-            "failiure"  => "http://localhost:8000",
-            "pending"   => "http://localhost:8000"
+            "success"   => "http://http://104.131.143.16/checkout-success",
+            "failiure"  => "http://http://104.131.143.16/",
+            "pending"   => "http://http://104.131.143.16/"
         );
 
         
@@ -67,8 +65,8 @@ class CheckoutController extends BaseController {
                     "frequency_type"        => "months",
                     "transaction_amount"    => $plan['unit_price'],
                     "currency_id"           => "ARS",
-                    "start_date"            => "2014-12-10T14:58:11.778-03:00",
-                    "end_date"              => "2015-06-10T14:58:11.778-03:00"
+                    "start_date"            => date('c'),
+                    "end_date"              => date('c',mktime(0, 0, 0, date("m")  , date("d"), date("Y")+10))
                 )
             );
 
@@ -116,24 +114,21 @@ class CheckoutController extends BaseController {
         return View::make('checkout/checkout_success' );
     }
 
+
+
+
     public function notifications() {
-        $topic  = (string) Input::get('topic','Forced Topic');
-        $id     = (string) Input::get('id',1411068489);
-        $mp     = $this->mlAuth();
-        $access_token= (string) $mp->get_access_token();
+        $topic          = (string) Input::get('topic','Forced Topic');
+        $id             = (string) Input::get('id',null);
+        $mp             = $this->mlAuth();
+        $access_token   = (string) $mp->get_access_token();
 
         if(!$id){
-            return 'no id';
+            $message = 'No ID found';
         }else{
-            Log::info('\nIPN was received! ID: '.$id.' because a '.$topic);
-            try{
-                //'https://api.mercadolibre.com/collections/notifications/identificador-de-la-operación?access_token=tu_access_token'
-                $url    = 'https://api.mercadolibre.com/sandbox/collections/notifications/'.$id.'?access_token='.$access_token;
-                Log::info($url);
-            }catch(Exception $e){
-                Log::info('A problem getting token...'.$e->getMessage());
-                return 'problem getting token';
-            }
+            
+            //'https://api.mercadolibre.com/collections/notifications/identificador-de-la-operación?access_token=tu_access_token'
+            $url    = 'https://api.mercadolibre.com/sandbox/collections/notifications/'.$id.'?access_token='.$access_token;        
             
             try{
                 $ch = curl_init($url);
@@ -151,21 +146,13 @@ class CheckoutController extends BaseController {
                 $json = curl_exec($ch);
                 curl_close($ch);
 
-                if($json){
-                    Log::info('Notification Fetched! '.gettype($json));
-                    
+                if($json){                    
                     $payment_info = json_decode($json);
-                    Log::info('JSON Decoded');
-
                     $message = 'nothing found';
                 }else{
-
                     return curl_error($ch);
                 }
-                
-                
-
-                Log::info('Let´s check the payment status...');
+            
             }catch(Exception $e){
                 Log::info('error on curl...'.$e->getMessage());
                 return 'problem on curl';
@@ -173,50 +160,72 @@ class CheckoutController extends BaseController {
 
             
             try{
-                if ($payment_info->collection->status == "approved") {
-                    Log::info('The payment was approved!');
-                    $message = $this->confirmNotification($payment_info);
+                $payment_status = $payment_info->collection->status;
+
+                switch ($payment_status) {
+                    case 'approved':
+                        $message = $this->approvePayment($payment_info);
+                        break;
+                    case 'pending':
+                        break;
+                    case 'in_process':
+                        break;
+                    case 'rejected':
+                        break;
+                    case 'refunded':
+                        break;
+                    case 'cancelled':
+                        break;
+                    case 'in_mediation':
+                        break;
+                    case 'charged_back':
+                        break;
                 }
+                
             }catch(Exception $e){
                 $message = 'error happened: '.$e->getMessage();
                 Log::info($message);
             }
-            
-
-            return $message;
-
         }
+
+        return $message;
     }
 
-    private function confirmNotification($payment_info){
-        Log::info('Let´s check the external reference...');
+    private function approvePayment ($payment_info){
+        $message = '';
+
+        //checks for external reference / order id
         if (isset($payment_info->collection->external_reference)) {
             $external_reference = $payment_info->collection->external_reference;
-            Log::info('External reference found! - '.$external_reference);
-
-            Log::info('Let´s check for an existing order...');
             $orden = Orden::find( (int) $external_reference );
 
             if($orden){
-                Log::info('Order found! Generating Payment...');
-                $this->generatePayment($orden);
-                $orden->status = 'paid';
+                //creates payment
+                $this->createPayment($orden,'approved');
+
+                //gives to the user the purchased product
                 $this->updatePurchase($orden);
-                return 'everything ok!';
+
+                $message = 'OK!';
+            }else{
+                $message = 'non order found';
             }
-
-            return 'non order found';
         }else{
-            return 'non external reference received';
+            $message = 'non external reference received';
         }
-
+        return $message;
     }
 
-    private function generatePayment($orden){
-        $pago = new Pago;
-        $pago->id_orden      = $orden['id'];
-        $pago->id_usuario    = $orden['id_usuario'];
-        $pago->monto         = (float) $orden['monto'];
+    private function createPayment($orden,$status){
+        $pago = Pago::where('id_orden', $orden['id']);
+
+        if(!$pago){
+            $pago = new Pago;
+            $pago->id_orden      = $orden['id'];
+            $pago->id_usuario    = $orden['id_usuario'];
+            $pago->monto         = (float) $orden['monto'];
+        }
+        $pago->status = $status;
         $pago->save();
     }
 

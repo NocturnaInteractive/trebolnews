@@ -17,6 +17,7 @@ class CrearPago extends Migration {
 			$table->integer('id_usuario')->unsigned();
 			$table->integer('id_orden')->unsigned();
 			$table->decimal('monto',5,2);
+			$table->string('status')->default('pending');
 			$table->timestamps();
 			$table->softDeletes();
 		});
