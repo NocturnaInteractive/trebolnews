@@ -217,14 +217,14 @@ class CheckoutController extends BaseController {
     }
 
     private function createPayment($orden,$status){
-        $pago = Pago::where('id_orden', $orden['id']);
+        //$pago = Pago::where('id_orden', $orden['id']);
 
-        if(!$pago){
+        //if(!$pago){
             $pago = new Pago;
             $pago->id_orden      = $orden['id'];
             $pago->id_usuario    = $orden['id_usuario'];
             $pago->monto         = (float) $orden['monto'];
-        }
+        //}
         $pago->status = $status;
         $pago->save();
     }
