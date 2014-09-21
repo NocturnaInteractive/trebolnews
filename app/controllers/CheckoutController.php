@@ -23,9 +23,7 @@ class CheckoutController extends BaseController {
 
         $external_reference = $order->id;
 
-        /****************************
-                MAIN CONFIGS
-        ****************************/
+       
 
         $payer = array(
             "name"      => $user->nombre,
@@ -35,26 +33,22 @@ class CheckoutController extends BaseController {
 
         //URL de retorno
         $back_urls = array(
-            "success"   => "http://http://104.131.143.16/checkout-success",
-            "failiure"  => "http://http://104.131.143.16/",
-            "pending"   => "http://http://104.131.143.16/"
+            "success"   => "http://104.131.143.16/checkout-success",
+            "failiure"  => "http://104.131.143.16/",
+            "pending"   => "http://104.131.143.16/"
         );
-
-        
-
-        /****************************
-               END MAIN CONFIGS
-        ****************************/
 
         $items = [];
         array_push($items, $plan);
 
         $mp = $this->mlAuth();
 
-        //return $mp;
+        $recurrent = $foundPlan['isSuscription'];
 
-        $recurrent = false;
-        if($recurrent === true){
+        if($recurrent){
+            /****************************
+                  RECURRENT PAYMENTS
+            ****************************/
             $preapproval_data = array(
                 "payer_email"           => $payer['email'],
                 "back_url"              => $back_urls['success'],
@@ -64,9 +58,7 @@ class CheckoutController extends BaseController {
                     "frequency"             => 1,
                     "frequency_type"        => "months",
                     "transaction_amount"    => $plan['unit_price'],
-                    "currency_id"           => "ARS",
-                    "start_date"            => date('c'),
-                    "end_date"              => date('c',mktime(0, 0, 0, date("m")  , date("d"), date("Y")+10))
+                    "currency_id"           => "ARS"
                 )
             );
 
@@ -77,7 +69,9 @@ class CheckoutController extends BaseController {
                 'mplink'   => $preapproval['response']
             );
         }else{
-            
+            /****************************
+                   SINGLE PAYMENT
+            ****************************/   
 
             $preference = array (
                 "items"              => $items,
@@ -97,7 +91,6 @@ class CheckoutController extends BaseController {
             );
         }
 
-        $order->save();
         return View::make('checkout/checkout_review', $result );
     }
 
@@ -130,6 +123,7 @@ class CheckoutController extends BaseController {
             //'https://api.mercadolibre.com/collections/notifications/identificador-de-la-operación?access_token=tu_access_token'
             $url    = 'https://api.mercadolibre.com/sandbox/collections/notifications/'.$id.'?access_token='.$access_token;        
             
+            //try to get payment info from MP
             try{
                 $ch = curl_init($url);
                 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
@@ -146,7 +140,8 @@ class CheckoutController extends BaseController {
                 $json = curl_exec($ch);
                 curl_close($ch);
 
-                if($json){                    
+                if($json){
+                    Log::info($json);     
                     $payment_info = json_decode($json);
                     $message = 'nothing found';
                 }else{
@@ -162,25 +157,21 @@ class CheckoutController extends BaseController {
             try{
                 $payment_status = $payment_info->collection->status;
 
-                switch ($payment_status) {
-                    case 'approved':
-                        $message = $this->approvePayment($payment_info);
-                        break;
-                    case 'pending':
-                        break;
-                    case 'in_process':
-                        break;
-                    case 'rejected':
-                        break;
-                    case 'refunded':
-                        break;
-                    case 'cancelled':
-                        break;
-                    case 'in_mediation':
-                        break;
-                    case 'charged_back':
-                        break;
+                //checks for external reference / order id
+                if (isset($payment_info->collection->external_reference)) {
+                    $external_reference = $payment_info->collection->external_reference;
+                    $orden = Orden::find( (int) $external_reference );
+
+                    if($orden){
+                        $message = $this->managePayment($orden,$payment_status);
+                    }else{
+                        $message = 'non order found';
+                    }
+
+                }else{
+                    $message = 'non external reference received';
                 }
+                
                 
             }catch(Exception $e){
                 $message = 'error happened: '.$e->getMessage();
@@ -191,45 +182,72 @@ class CheckoutController extends BaseController {
         return $message;
     }
 
-    private function approvePayment ($payment_info){
-        $message = '';
-
-        //checks for external reference / order id
-        if (isset($payment_info->collection->external_reference)) {
-            $external_reference = $payment_info->collection->external_reference;
-            $orden = Orden::find( (int) $external_reference );
-
-            if($orden){
-                //creates payment
-                $this->createPayment($orden,'approved');
-
+    private function managePayment ($orden,$payment_status){
+        switch ($payment_status) {
+            case 'approved':
+                $message = $this->setPayment($orden,$payment_status);
                 //gives to the user the purchased product
                 $this->updatePurchase($orden);
+                break;
+            case 'pending':
+                $message = $this->setPayment($orden,$payment_status);
+                break;
+            case 'in_process':
+                $message = $this->setPayment($orden,$payment_status);
+                break;
+            case 'rejected':
+                $message = $this->setPayment($orden,$payment_status);
+                break;
+            case 'refunded':
+                $message = $this->setPayment($orden,$payment_status);
+                break;
+            case 'cancelled':
+                $message = $this->setPayment($orden,$payment_status);
+                break;
+            case 'in_mediation':
+                $message = $this->setPayment($orden,$payment_status);
+                break;
+            case 'charged_back':
+                $message = $this->setPayment($orden,$payment_status);
+                break;
+            default:
+                $message = $this->setPayment($orden,$payment_status);
+                break;
 
-                $message = 'OK!';
-            }else{
-                $message = 'non order found';
-            }
-        }else{
-            $message = 'non external reference received';
         }
-        return $message;
     }
 
-    private function createPayment($orden,$status){
-        //$pago = Pago::where('id_orden', $orden['id']);
-
-        //if(!$pago){
-            $pago = new Pago;
-            $pago->id_orden      = $orden['id'];
-            $pago->id_usuario    = $orden['id_usuario'];
-            $pago->monto         = (float) $orden['monto'];
-        //}
+    private function setPayment($orden,$status){
+        //$pago = Pago::where('id_orden', $orden['id'])->first();
+        $pago = new Pago;
+        $pago->id_orden      = $orden['id'];
+        $pago->id_usuario    = $orden['id_usuario'];
+        $pago->monto         = (float) $orden['monto'];
         $pago->status = $status;
         $pago->save();
     }
 
     private function updatePurchase($orden){
         //incrementar la cantidad de envios del usuario por el numero que adquirio
+    }
+
+    public function payments(){
+        $user = Auth::user();
+        $pagos = Pago::where('id_usuario','=',$user['id'])->get();
+        $result= array(
+            'pagos' => $pagos
+        );
+        
+
+        return View::make('checkout/payments', $result );
+    }
+
+    public function test(){
+        $pago = Pago::all()->last();
+
+        if($pago)
+            return ($pago);
+        else
+            return 'cachai';
     }
 }

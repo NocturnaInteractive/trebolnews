@@ -57,7 +57,16 @@ Route::get('/checkout/{id}',function($id){
 Route::get('/checkout-success', 'CheckoutController@success');
 Route::get('/notifications',    'CheckoutController@notifications');
 Route::post('/notifications',    'CheckoutController@notifications');
+Route::get('/test',    'CheckoutController@test');
 
+Route::get('/payments',function(){
+    $action = 'payments';
+    if(Auth::check()) {
+        return App::make('CheckoutController')->$action();
+    } else {
+        return Redirect::to('/');
+    }
+});
 
 // back end
 
