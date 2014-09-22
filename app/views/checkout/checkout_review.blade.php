@@ -1,8 +1,8 @@
-<h1>Checkout Page</h1>
+<h1>Gracias por su Compra!</h1>
 
+<strong>Ordenaste:</strong>
 PLAN: {{$plan['title']}} | {{$plan['unit_price']}}
 
 <hr/>
-<div></div>
 
 <a href="{{$mplink['sandbox_init_point']}}">¡Pagar!</a>

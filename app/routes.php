@@ -280,7 +280,8 @@ Route::group(array(
     Route::get('planes', array(
         'as' => 'planes',
         function() {
-            return View::make('internas/planes');
+            $action = 'planes';
+            return App::make('InternasController')->$action();
         }
     ));
 

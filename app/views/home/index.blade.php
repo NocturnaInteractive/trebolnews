@@ -436,9 +436,21 @@ function login_con_fb(response) {
                                     <h3>Plan Individual</h3>
                                     <p>Ideal para env&iacute;os de emails con poca frecuencia, porque se abona s&oacute;lo la cantidad de env&iacute;os que necesita el usuario. Adem&aacute;s, no hay l&iacute;mite de tiempo para efectuarlos.<br> </p>
                                     <div class="infoplanes">
-                                        <div class="verdeinfo">
-                                        <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">2.500<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
-                                        </div>
+                                        <?php
+                                            foreach ($plans as $plan) {
+                                                if ($class === 'verde') {
+                                                    $class = 'gris';
+                                                }else{
+                                                    $class = 'verde';
+                                                }
+                                        ?>
+                                            <div class="{{$class.'info'}}">
+                                                <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">2.500<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            </div>
+                                        <?php
+                                            }
+                                        ?>
+                                        
                                         <div class="grisinfo">
                                             <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">5.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
                                         </div>
