@@ -126,6 +126,7 @@
 								<?php
                                     $class = 'verde';
                                     $icon = '';
+                                    $i = 0;
                                     foreach ($plans as $plan) {
 
                                         if (!$plan->isSuscription) {
@@ -145,14 +146,15 @@
                                 <?php
                                         $class = ($class==='verde')? 'gris' : 'verde';
                                         $icon = ($icon==='')? 'gris' : '';
+                                        $i++;
                                         }
                                     }
                                 ?>
 									
 								<div class="{{$class}}info">
 									<div class="radioplanes radioplanes_largo">
-										<input type="radio"  id="radio9" name="opcion" />
-										<label for="radio9"></label>
+										<input type="radio"  id="radio{{$i}}" name="opcion" />
+										<label for="radio{{$i}}"></label>
 									</div>      
 									<h4><span class="hastaplan">M&aacute;s</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">100.000</h4>
 									<div class="cleaner"></div>
@@ -170,6 +172,7 @@
 								<?php
                                     $class = 'verde';
                                     $icon = '';
+                                    $i = 0;
                                     foreach ($plans as $plan) {
 
                                         if ($plan->isSuscription) {
@@ -178,8 +181,8 @@
 
                                 	<div class="{{$class}}info suscription plan">
 										<div class="radioplanes radioplanes_largo">
-											<input type="radio"  id="radio4" name="opcion"  data-plan="{{$plan->id}}" data-plan-name="{{$plan->nombre}}" />
-											<label for="radio4"></label>
+											<input type="radio"  id="radio{{$i}}" name="opcion"  data-plan="{{$plan->id}}" data-plan-name="{{$plan->nombre}}" />
+											<label for="radio{{$i}}"></label>
 										</div>      
 										<h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
 										<div class="cleaner"></div>
@@ -189,6 +192,7 @@
                                 <?php
                                         $class = ($class==='verde')? 'gris' : 'verde';
                                         $icon = ($icon==='')? 'gris' : '';
+                                        $i++;
                                         }
                                     }
                                 ?>
@@ -327,9 +331,16 @@
 			});
 		}
 
-		$('.plan').click(function(){
+		$('.plan').click(function(e){
+			e.preventDefault();
+			$('.plan').find('input').attr('checked','');
 			var $this    = $(this);
-			var input    = $this.find('input').attr('checked','checked');
+			var input;
+			if($this.data('plan'))
+				input 	 = $this;
+			else
+				input    = $this.find('input');
+			input.attr('checked','checked');
 			var planId   = input.data('plan');
 			var planName = input.data('plan-name');
 			$('#comprar').attr('href','/checkout/'+planId);
