@@ -332,6 +332,8 @@ Route::group(array(
 
     Route::post('editar_perfil', 'UsuarioController@editar_perfil');
 
+    Route::post('guardar_comentario', 'ExtraController@guardar_comentario');
+
     Route::post('session', function() {
         if(Input::get('session_data') == 'flush') {
             Session::forget('campania');

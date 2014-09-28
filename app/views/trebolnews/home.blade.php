@@ -18,6 +18,7 @@
     <script type="text/javascript" src="{{ asset('js/modernizr.custom.28468.js') }}"></script>
     {{ HTML::script('js/jquery-1.11.1.min.js') }}
     {{ HTML::script('js/jquery.form.min.js') }}
+    {{ HTML::script('js/jquery.noty.packaged.min.js') }}
     {{ HTML::script('js/trebolnews.js') }}
     {{ HTML::style('css/trebolnews.css') }}
     <script>
@@ -435,7 +436,7 @@ function login_con_fb(response) {
                                             foreach ($plans as $plan) {
 
                                                 if (!$plan->isSuscription) {
-                                                    
+
                                         ?>
                                             <div class="{{$class.'info'}}">
                                                 <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;${{$plan->precio}}</span></h4>
@@ -467,7 +468,7 @@ function login_con_fb(response) {
                                             foreach ($plans as $plan) {
 
                                                 if ($plan->isSuscription) {
-                                                    
+
                                         ?>
                                             <div class="{{$class.'info'}}">
                                                 <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;${{$plan->precio}}</span></h4>
@@ -506,9 +507,40 @@ function login_con_fb(response) {
                             <div id="contacto">
                                 <h2>Contacto</h2>
                                 <div id="infocontacto">
-                                    <form id="form_contacto"  action="" method="post">
+                                    <script>
+                                    $(function(){
+                                        $('#form_contacto #saveForm').one('click', form_contacto_handler);
 
-                                        <ul >
+                                        function form_contacto_handler(e) {
+                                            e.preventDefault();
+
+                                            $('#form_contacto #saveForm').on('click', function(e){
+                                                e.preventDefault();
+                                            });
+
+                                            $('#form_contacto').ajaxSubmit({
+                                                success: function(data) {
+                                                    if(data.status == 'ok') {
+                                                        noty({
+                                                            type: 'success',
+                                                            text: data.mensaje,
+                                                            layout: 'topCenter',
+                                                            timeout: 5000,
+                                                            maxVisible: 10
+                                                        });
+                                                    } else {
+                                                        notys(data.validator);
+                                                    }
+                                                },
+                                                complete: function() {
+                                                    $('#form_contacto #saveForm').one('click', form_contacto_handler);
+                                                }
+                                            });
+                                        }
+                                    });
+                                    </script>
+                                    <form id="form_contacto" action="{{ action('ExtraController@guardar_comentario') }}" method="post">
+                                        <ul>
                                             <li id="formizq"><ul>
                                                 <li  class="izq" >
                                                     <input name="nombre" type="text" class="element text medium" id="element_1" placeholder="&nbsp;*Nombre:" />
@@ -539,12 +571,11 @@ function login_con_fb(response) {
 
                                             <li id="formder"><ul>
                                                 <li id="li_6" >
-
-                                                    <textarea id="element_6"  name="comentario" placeholder="&nbsp;*Comentario:" class="element textarea medium"></textarea>
+                                                    <textarea id="element_6" name="comentario" placeholder="&nbsp;*Comentario:" class="element textarea medium"></textarea>
                                                 </li>
 
                                                 <li id="botonesform" class="buttons">
-                                                    <input type="button" value="ENVIAR" name="submit1" onClick="enviar(this.form)" id="saveForm" />
+                                                    <input type="button" value="ENVIAR" name="submit1" id="saveForm" />
                                                     <input class="btn"  id="borrar" type="reset" value="BORRAR" name="Enviar2" />
                                                     <div class="cleaner"></div>
                                                 </li>
