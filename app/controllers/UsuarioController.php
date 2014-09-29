@@ -176,7 +176,7 @@ class UsuarioController extends BaseController {
             $existe_fb = Usuario::where('fb_id', '=', $result['id'])->first();
             $existe_email = Usuario::where('email', '=', $result['email'])->first();
 
-            if(!$existe_fb && !$existe_email) {
+            if(!$existe_fb && !$existe_email) { // no existe ninguno
                 $usuario = Usuario::create(array(
                     'email'     => $result['email'],
                     'fb_id'     => $result['id'],
@@ -187,17 +187,18 @@ class UsuarioController extends BaseController {
 
                 Event::fire('nuevo_registro', array($usuario));
             } else {
-                if($existe_fb && !$existe_email) {
+                if($existe_fb && !$existe_email) { // existe el de facebook
                     $usuario = $existe_fb;
                     $usuario->email = $result['email'];
                     $usuario->confirmed = true;
                     $usuario->save();
-                }
-                if(!$existe_fb && $existe_email) {
+                } else if(!$existe_fb && $existe_email) { // existe el email
                     $usuario = $existe_email;
                     $usuario->fb_id = $result['id'];
                     $usuario->confirmed = true;
                     $usuario->save();
+                } else { // existen los dos
+                    $usuario = $existe_fb;
                 }
             }
 
