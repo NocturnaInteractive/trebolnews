@@ -69,85 +69,36 @@
                                 //     layout: 'topCenter',
                                 //     timeout: 5000
                                 // });
-}
-}
-},
-complete: function() {
-    $('#loginentrar').one('click', login_handler);
-}
-});
-}
-
-$('#frm_login input').on('keypress', function(e) {
-    if(e.which == 13) {
-        $('#loginentrar').trigger('click');
-    }
-});
-
-$('#login').on('click', function(e) {
-    e.preventDefault();
-});
-
-$('#face').on('click', function(e) {
-    e.preventDefault();
-
-    FB.getLoginStatus(function(response) {
-        if(response.status === 'connected') {
-            FB.api('/me', function(response) {
-                login_con_fb(response);
-            });
-        } else if(response.status == 'not_authorized') {
-            FB.login(function(response) {
-                if(response.status === 'connected') {
-                    FB.api('/me', function(response) {
-                        login_con_fb(response);
-                    });
-                }
-            });
-        } else {
-            FB.login(function(response) {
-                if(response.status === 'connected') {
-                    login_con_fb(response);
-                }
-            });
-        }
-    });
-});
-
-});
-
-function login_con_fb(response) {
-    $.ajax({
-        url: $('#face').attr('ajax'),
-        type: 'post',
-        data: response,
-        success: function(data) {
-            if(data.status == 'ok') {
-                location.reload();
+                            }
+                        }
+                    },
+                    complete: function() {
+                        $('#loginentrar').one('click', login_handler);
+                    }
+                });
             }
-        }
-    });
-}
+
+            $('#frm_login input').on('keypress', function(e) {
+                if(e.which == 13) {
+                    $('#loginentrar').trigger('click');
+                }
+            });
+
+            $('#login').on('click', function(e) {
+                e.preventDefault();
+            });
+
+            $('#face').on('click', function(e) {
+                e.preventDefault();
+
+                popupWindow($('#face').attr('href'), '', 575, 417);
+            });
+
+        });
+
 </script>
 </head>
 <body>
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '594990277275305',
-                xfbml: true,
-                version: 'v2.0'
-            });
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/es_LA/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
     <header>
         <div id="conheader">
             <a href="{{ url('/') }}"><h1>TrebolNEWS</h1></a>
@@ -175,7 +126,7 @@ function login_con_fb(response) {
                                 <div class="cleaner"></div>
                                 <li><p id="validator"></p></li>
                                 <li><hr></li>
-                                <li class="loginizq"><a href="#" id="face" ajax="{{ action('UsuarioController@login_con_fb') }}">Connect</a></li>
+                                <li class="loginizq"><a href="{{ route('facebook') }}" id="face">Connect</a></li>
                                 <li class="loginder"><a href="{{ route('registro') }}" id="registro">Reg&iacute;strate Gratis</a></li>
                                 <li><a href="#" id="olvido" popup="{{ url('popup/recuperar_password') }}">&iquest;Olvidaste tu contrase&ntilde;a?</a></li>
                             </div>

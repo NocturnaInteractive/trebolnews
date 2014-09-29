@@ -518,3 +518,10 @@ Route::group(array(
     });
 
 });
+
+// Rutas para operaciones con el usuario
+
+Route::get('facebook', array(
+    'as'   => 'facebook',
+    'uses' => 'UsuarioController@facebook_login'
+));

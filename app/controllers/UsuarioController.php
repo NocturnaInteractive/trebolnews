@@ -104,26 +104,26 @@ class UsuarioController extends BaseController {
         }
     }
 
-    public function login_con_fb() {
-        $fb_id = Input::get('id');
-        $usuario = Usuario::where('fb_id', '=', $fb_id)->first();
+    // public function login_con_fb() {
+    //     $fb_id = Input::get('id');
+    //     $usuario = Usuario::where('fb_id', '=', $fb_id)->first();
 
-        if(!$usuario) {
-            $usuario = Usuario::create(array(
-                'nombre'    => Input::get('first_name'),
-                'apellido'  => Input::get('last_name'),
-                'fb_id'     => $fb_id
-            ));
-        }
+    //     if(!$usuario) {
+    //         $usuario = Usuario::create(array(
+    //             'nombre'    => Input::get('first_name'),
+    //             'apellido'  => Input::get('last_name'),
+    //             'fb_id'     => $fb_id
+    //         ));
+    //     }
 
-        Session::put('id_logueado', $usuario->id);
+    //     Session::put('id_logueado', $usuario->id);
 
-        Auth::login($usuario);
+    //     Auth::login($usuario);
 
-        return Response::json(array(
-            'status' => 'ok'
-        ));
-    }
+    //     return Response::json(array(
+    //         'status' => 'ok'
+    //     ));
+    // }
 
     public function editar_perfil() {
         $data = Input::all();
@@ -160,6 +160,45 @@ class UsuarioController extends BaseController {
                 'status'    => 'error',
                 'validator' => $validator->messages()->toArray()
             ));
+        }
+    }
+
+    public function facebook_login() {
+        $code = Input::get('code');
+
+        $fb = OAuth::consumer('Facebook');
+
+        if(!empty($code)) {
+            $token = $fb->requestAccessToken($code);
+
+            $result = json_decode($fb->request('/me'), true);
+
+            $usuario = Usuario::where(array(
+                'fb_id' => $result['id']
+            ))->first();
+
+            if(!$usuario) {
+                $usuario = Usuario::create(array(
+                    'email'     => $result['email'],
+                    'fb_id'     => $result['id'],
+                    'nombre'    => $result['first_name'],
+                    'apellido'  => $result['last_name'],
+                    'confirmed' => true
+                ));
+
+                Event::fire('nuevo_registro', array($usuario));
+            }
+
+            Auth::login($usuario);
+            Session::put('fb_user', $usuario->id);
+
+            $view = View::make('tfios/closer');
+
+            return Response::make($view);
+        } else {
+            $url = $fb->getAuthorizationUri();
+
+            return Redirect::to((string) $url . '&display=popup');
         }
     }
 
