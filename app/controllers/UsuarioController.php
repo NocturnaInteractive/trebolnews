@@ -173,11 +173,9 @@ class UsuarioController extends BaseController {
 
             $result = json_decode($fb->request('/me'), true);
 
-            $usuario = Usuario::where(array(
-                'fb_id' => $result['id']
-            ))->first();
+            $usuario = Usuario::where('fb_id', '=', $result['id'])->first();
 
-            var_dump($usuario); die;
+            // var_dump($usuario); die;
 
             if(!$usuario) {
                 $usuario = Usuario::create(array(
