@@ -172,10 +172,12 @@ class UsuarioController extends BaseController {
             $token = $fb->requestAccessToken($code);
 
             $result = json_decode($fb->request('/me'), true);
-            var_dump($result); die;
+
             $usuario = Usuario::where(array(
                 'fb_id' => $result['id']
             ))->first();
+
+            var_dump($usuario); die;
 
             if(!$usuario) {
                 $usuario = Usuario::create(array(
