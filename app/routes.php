@@ -474,7 +474,7 @@ Route::group(array(
     });
 
     // form recuperar contraseña
-    Route::get('recuperar-contraseña/{hash}', array(
+    Route::get('recuperar/{hash}', array(
         'as' => 'mostrar_form_recuperar_password',
         'uses' => 'UsuarioController@mostrar_form_recuperar_password'
     ));
