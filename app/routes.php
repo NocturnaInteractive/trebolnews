@@ -14,8 +14,12 @@ Route::get('aux', function(){
     var_dump(App::environment());
 });
 
-Route::get('session', function() {
+Route::get('session', function(){
     var_dump(Session::all());
+});
+
+Route::get('auth', function(){
+    var_dump(Auth::user());
 });
 
 // desde acá
