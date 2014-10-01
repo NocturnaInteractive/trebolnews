@@ -126,7 +126,7 @@
                                 <div class="cleaner"></div>
                                 <li><p id="validator"></p></li>
                                 <li><hr></li>
-                                <li class="loginizq"><a href="{{ route('facebook') }}" id="face">Connect</a></li>
+                                <li class="loginizq"><a href="{{ action('UsuarioController@facebook_login') }}" id="face">Connect</a></li>
                                 <li class="loginder"><a href="{{ route('registro') }}" id="registro">Reg&iacute;strate Gratis</a></li>
                                 <li><a href="#" id="olvido" popup="{{ url('popup/recuperar_password') }}">&iquest;Olvidaste tu contrase&ntilde;a?</a></li>
                             </div>
@@ -236,7 +236,7 @@
 
                         <div id="registrateg">
                             <h2>Es simple, r&aacute;pido &iexcl;y gratis hasta 500 env&iacute;os!</h2>
-                            <div id="botgra"><a href="../internas/registro.html">REG&Iacute;STRATE GRATIS</a></div>
+                            <div id="botgra"><a href="{{ route('registro') }}">REG&Iacute;STRATE GRATIS</a></div>
                         </div>
 
                     </section>
