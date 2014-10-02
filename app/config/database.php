@@ -53,15 +53,15 @@ return array(
         ),
 
         'mysql' => array(
-			'driver'    => 'mysql',
-			'host'      => '',
-			'database'  => '',
-			'username'  => '',
-			'password'  => '',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-		),
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'trebolnews',
+            'username'  => 'root',
+            'password'  => 'xampp',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ),
 
         'pgsql' => array(
             'driver'   => 'pgsql',

@@ -131,7 +131,7 @@
 
             <div class="content">
         <h2>Campaña: {{ $campania->nombre }}</h2>
-              <a id="volver" href="{{ route('paso_4') }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
+              <a id="volver" href="{{ route('step4') }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
 
                     <div class="infocont">
                     <!-- <ul id="pasoscam">
@@ -286,7 +286,7 @@
 <div id="opciones_pasos" ajax="{{ action('CampaniaController@guardar_campania') }}" id_campania="{{ $campania->id }}">
 <a id="guardarysalir" href="{{ route('campanias') }}" class="btn_guardar" y="salir">GUARDAR Y SALIR</a>
 <ul>
-<li><a href="{{ route('paso_4') }}" id="anterior">ANTERIOR</a></li>
+<li><a href="{{ route('step4') }}" id="anterior">ANTERIOR</a></li>
 <li><a href="{{ route('campanias') }}" id="siguiente" class="btn_guardar" y="confirmar">
   @if($campania->envio == 'inmediato')
   ENVIAR

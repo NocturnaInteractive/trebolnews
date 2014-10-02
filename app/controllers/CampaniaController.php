@@ -63,6 +63,7 @@ class CampaniaController extends BaseController {
                 break;
 
             case '4':
+                /*
                 $rules = array_merge($rules, array(
 
                 ));
@@ -70,7 +71,8 @@ class CampaniaController extends BaseController {
                 $messages = array_merge($messages, array(
 
                 ));
-
+                */
+                
                 switch(Session::get('campania.subtipo')) {
                     case 'blanco':
                         $rules = array_merge($rules, array(
@@ -111,6 +113,10 @@ class CampaniaController extends BaseController {
 
         $validator = Validator::make($data, $rules, $messages);
 
+
+        /******************
+            IF VALID OK
+        *******************/
         if($validator->passes()) {
             foreach(Input::all() as $key => $value) {
                 Session::put(str_replace(':', '.', $key), $value);
@@ -162,29 +168,7 @@ class CampaniaController extends BaseController {
                 case 'confirmar':
                     // envía los mails o asigna status 'programada'
 
-                    if(Input::has('id_campania')) {
-                        $campania = Campania::find(Input::get('id_campania'));
-                    } else {
-                        $campania = Campania::create(array(
-                            'id_usuario'    => Auth::user()->id,
-                            'tipo'          => Session::get('campania.tipo'),
-                            'subtipo'       => Session::get('campania.subtipo'),
-                            'nombre'        => Session::get('campania.nombre'),
-                            'asunto'        => Session::get('campania.asunto'),
-                            'remitente'     => Session::get('campania.remitente'),
-                            'email'         => Session::get('campania.email'),
-                            'respuesta'     => Session::get('campania.respuesta'),
-                            'contenido'     => Session::get('campania.contenido'),
-                            'redes'         => Session::get('campania.redes') ? json_encode(Session::get('campania.redes')) : null,
-                            'envio'         => Session::get('campania.envio'),
-                            'programacion'  => Session::get('campania.envio') == 'programado' ? Carbon::createFromFormat('d/m/Y H:i', Session::get('fecha') . ' ' . Session::get('hora')) : null,
-                            'notificacion'  => Session::get('campania.notificacion') == 'on' ? true : false
-                        ));
-
-                        foreach(Session::get('campania.listas') as $id_lista) {
-                            $campania->listas()->attach($id_lista);
-                        }
-                    }
+                    $campania = $this->getCampaignCreated();
 
                     switch($campania->envio) {
                         case 'inmediato':
@@ -232,13 +216,55 @@ class CampaniaController extends BaseController {
         }
     }
 
+    private function getCampaignCreated() {
+        if(Input::has('id_campania')) {
+            $campania = Campania::find(Input::get('id_campania'));
+        } else {
+            $campania = Campania::create(array(
+                'id_usuario'    => Auth::user()->id,
+                'tipo'          => Session::get('campania.tipo'),
+                'subtipo'       => Session::get('campania.subtipo'),
+                'nombre'        => Session::get('campania.nombre'),
+                'asunto'        => Session::get('campania.asunto'),
+                'remitente'     => Session::get('campania.remitente'),
+                'email'         => Session::get('campania.email'),
+                'respuesta'     => Session::get('campania.respuesta'),
+                'contenido'     => Session::get('campania.contenido'),
+                'redes'         => Session::get('campania.redes') ? json_encode(Session::get('campania.redes')) : null,
+                'envio'         => Session::get('campania.envio'),
+                'programacion'  => Session::get('campania.envio') == 'programado' ? Carbon::createFromFormat('d/m/Y H:i', Session::get('fecha') . ' ' . Session::get('hora')) : null,
+                'notificacion'  => Session::get('campania.notificacion') == 'on' ? true : false
+            ));
+
+            foreach(Session::get('campania.listas') as $id_lista) {
+                $campania->listas()->attach($id_lista);
+            }
+        }
+        return $campania;
+    }
+
     public function campania($id) {
         $campania = Campania::find($id);
+
+        if(isset($campania)){
+            Session::put('campania.id', $campania->id );
+            Session::put('campania.tipo', $campania->tipo );
+            Session::put('campania.subtipo', $campania->subtipo);
+            Session::put('campania.nombre', $campania->nombre);
+            Session::put('campania.asunto', $campania->asunto);
+            Session::put('campania.remitente', $campania->remitente);
+            Session::put('campania.email', $campania->email);
+            Session::put('campania.respuesta', $campania->respuesta);
+            Session::put('campania.contenido', $campania->contenido);
+            Session::put('campania.redes', $campania->redes);
+            Session::put('campania.envio', $campania->envio);
+            Session::put('campania.notificacion', $campania->notificacion);
+        }
 
         if(Auth::user()->id == $campania->id_usuario) {
             switch($campania->tipo) {
                 case 'clasica':
-                    return View::make('internas/ver_campaniaclasica_paso5', array(
+                    return View::make('campaigns/new_campaign_step5', array(
                         'campania' => $campania
                     ));
                     break;

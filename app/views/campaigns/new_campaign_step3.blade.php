@@ -7,69 +7,11 @@
 @stop
 
 @section('script')
-    <script>
-        $(function() {
-            $('.btn_guardar').one('click', guardar_handler);
-
-            function guardar_handler(e) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-
-                var boton = $(this);
-
-                boton.on('click', function(e) {
-                    e.preventDefault();
-                });
-
-                $('#frm_campania').ajaxSubmit({
-                    data: {
-                        y: boton.attr('y'),
-                        paso: 3
-                    },
-                    success: function(data) {
-                        if(data.status == 'ok') {
-                            window.location = boton.attr('href');
-                        } else {
-                            notys(data.validator);
-                        }
-                    },
-                    complete: function() {
-                        $('.btn_guardar').one('click', guardar_handler);
-                    }
-                });
-            }
-
-            $( "#datepicker" ).datepicker({
-                prevText: '<',
-                nextText: '>',
-                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sá"],
-                monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-                monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-                dateFormat: 'dd/mm/yy'
-            });
-
-            $('[envio]').on('click', function(e) {
-                $('#envio').val($(this).attr('envio'));
-            });
-
-            $('.activarydesactivar').on('click', function(e) {
-                if($('#compartir').val() == 'on') {
-                    $('#compartir').val('');
-                } else {
-                    $('#compartir').val('on');
-                }
-            });
-
-            $('.timepicker').timepicker({
-                hourText: 'Hora',
-                minuteText: 'Minutos'
-            });
-        });
-    </script>
+    {{ HTML::script('js/sections/campaigns.js') }}
 @stop
 
 @section('contenido')
-    <div id="container">
+    <div id="container" class="step3">
         <section class="tabs">
             <div class="content">
                 <h2>Configuraci&oacute;n</h2>
@@ -87,7 +29,7 @@
                         <li id="pasocam5">Paso 5<div class="linea"></div><div class="circulo"></div></li>
                         <div class="cleaner"></div>
                     </ul><!--pasoscam-->
-                    <form action="{{ action('CampaniaController@guardar_campania') }}" method="post" id="frm_campania">
+                    <form action="{{ action('CampaniaController@guardar_campania') }}" method="post" id="frm_campania" data-step="3">
                         <div id="info_basica">
                             <h3>Informaci&oacute;n B&aacute;sica</h3>
                             <input type="text" class="text nomcam"  name="campania:nombre"      placeholder="Nombre de la Campa&ntilde;a"   value="{{Session::get('campania.nombre')}}"       />
@@ -118,11 +60,21 @@
                                     <th scope="col" width="149px">Editado el</th>
                                     <th scope="col" width="140px">Suscriptores</th>
                                 </tr>
+                                
+                                <?php $s_list = Session::get('campania.listas'); $i = 0; ?>
                                 @foreach($listas = Auth::user()->listas()->has('contactos', '>', '0')->get() as $lista)
+                                <?php 
+                                    if(isset($s_list) && isset($s_list[$i]) && $s_list[$i] == $lista->id){
+
+                                        $checked = 'checked="checked"';
+                                    }else{
+                                        $checked = '';
+                                    }
+                                ?>
                                     <tr>
                                         <td>
                                             <div class="checkbox">
-                                                <input type="checkbox" id="{{ 'listas['.$lista->id.']' }}" name="campania:listas[]" value="{{ $lista->id }}" />
+                                                <input type="checkbox" id="{{ 'listas['.$lista->id.']' }}" name="campania:listas[]" value="{{ $lista->id }}" {{$checked}} />
                                                 <label for="{{ 'listas['.$lista->id.']' }}"></label>
                                             </div>
                                         </td>
@@ -358,7 +310,7 @@
                             <a id="guardarysalir" href="{{ route('campanias') }}" class="btn_guardar" y="salir">GUARDAR Y SALIR</a>
                             <ul>
                                 <li><a href="{{ URL::previous() }}" id="anterior">ANTERIOR</a></li>
-                                <li><a href="{{ route('paso_4') }}" id="siguiente" class="btn_guardar" y="seguir">SIGUIENTE</a></li>
+                                <li><a href="{{ route('step4') }}" id="siguiente" class="btn_guardar" y="seguir">SIGUIENTE</a></li>
                             </ul>
                             <div class="cleaner"></div>
                         </div><!--opciones_pasos-->
