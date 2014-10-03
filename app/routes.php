@@ -26,6 +26,15 @@ Route::get('auth', function(){
 
 // front end
 
+// home
+Route::get('/', function() {
+    if(Auth::check()) {
+        return Redirect::route('campanias');
+    } else {
+        $action = 'index';
+        return App::make('HomeController')->$action();
+    }
+});
 
 
 
@@ -100,7 +109,7 @@ Route::group(array(
     Route::get('campañas', array(
         'as' => 'campanias',
         function() {
-            return View::make('trebolnews/campanias');
+            return View::make('campaigns/campaign_main');
         }
     ));
 
@@ -109,11 +118,11 @@ Route::group(array(
         'uses' => 'CampaniaController@campania'
     ));
 
-    Route::get('nueva-campaña', array(
+    Route::get('campaign/step1', array(
         'as' => 'nueva_campania',
         function() {
             Session::forget('campania');
-            return View::make('trebolnews/nueva-campania');
+            return View::make('campaigns/new_campaign_step1');
         }
     ));
 
@@ -122,34 +131,34 @@ Route::group(array(
         'uses' => 'CampaniaController@eliminar_campania'
     ));
 
-    Route::get('campaña-clasica', array(
-        'as' => 'campania_clasica',
+    Route::get('campaign/step2', array(
+        'as' => 'step2',
         function() {
-            return View::make('trebolnews/campania-clasica');
+            return View::make('campaigns/new_campaign_step2');
         }
     ));
 
     Route::get('campaña-social', array(
         'as' => 'campania_social',
         function() {
-            return View::make('trebolnews/campania-social');
+            return View::make('trebolnews/campania-social-obsolete');
         }
     ));
 
-    Route::get('información-básica/{id?}', array(
-        'as' => 'paso_3',
+    Route::get('campaign/step3/{id?}', array(
+        'as' => 'step3',
         function($id = null) {
             if($id) {
                 $campania = Campania::find($id);
             }
             switch(Session::get('campania.tipo')) {
                 case 'clasica':
-                    return View::make('trebolnews/informacion-basica-clasica', array(
+                    return View::make('campaigns/new_campaign_step3', array(
                         'campania' => isset($campania) ? $campania : null
                     ));
                     break;
                 case 'social':
-                    return View::make('internas/informacion-basica-social', array(
+                    return View::make('internas/informacion-basica-social-obsolete', array(
                         'campania' => isset($campania) ? $campania : null
                     ));
                     break;
@@ -157,12 +166,12 @@ Route::group(array(
         }
     ));
 
-    Route::get('contenido', array(
-        'as' => 'paso_4',
+    Route::get('campaign/step4', array(
+        'as' => 'step4',
         function() {
             switch(Session::get('campania.subtipo')) {
                 case 'blanco':
-                    return View::make('internas/campaniaenblanco_paso4');
+                    return View::make('campaigns/new_campaign_step4_editor');
                     break;
                 case 'template':
                     $templates = Template::paginate(12);
@@ -194,12 +203,12 @@ Route::group(array(
         }
     ));
 
-    Route::get('revisión', array(
-        'as' => 'paso_5',
+    Route::get('campaign/review', array(
+        'as' => 'step5',
         function() {
             switch(Session::get('campania.tipo')) {
                 case 'clasica':
-                    return View::make('internas/campaniaclasica_paso5');
+                    return View::make('campaigns/new_campaign_step5');
                     break;
                 case 'social':
                     return View::make('internas/campaniasocial_paso5');
@@ -304,8 +313,8 @@ Route::group(array(
 
     Route::post('registrar', 'UsuarioController@registrar');
 
-
-    // Route::post('login_con_fb', 'UsuarioController@login_con_fb');
+    Route::post('login', 'UsuarioController@login');
+    Route::post('login_con_fb', 'UsuarioController@login_con_fb');
 
     Route::post('guardar_lista', 'ListaController@guardar');
     Route::post('eliminar_lista', 'ListaController@eliminar');

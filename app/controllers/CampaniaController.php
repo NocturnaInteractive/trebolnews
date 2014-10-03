@@ -125,21 +125,7 @@ class CampaniaController extends BaseController {
             switch(Input::get('y')) {
                 case 'salir':
                     // se guarda como borrador
-                    $campania = Campania::create(array(
-                        'id_usuario'    => Auth::user()->id,
-                        'tipo'          => Session::get('campania.tipo'),
-                        'subtipo'       => Session::get('campania.subtipo'),
-                        'nombre'        => Session::get('campania.nombre'),
-                        'asunto'        => Session::get('campania.asunto'),
-                        'remitente'     => Session::get('campania.remitente'),
-                        'email'         => Session::get('campania.email'),
-                        'respuesta'     => Session::get('campania.respuesta'),
-                        'redes'         => Session::get('campania.redes') ? json_encode(Session::get('campania.redes')) : null,
-                        'status'        => 'borrador',
-                        'envio'         => Session::get('campania.envio'),
-                        'programacion'  => Session::get('campania.envio') == 'programado' ? Carbon::createFromFormat('d/m/Y H:i', Session::get('fecha') . ' ' . Session::get('hora')) : null,
-                        'notificacion'  => Session::get('campania.notificacion') == 'on' ? true : false
-                    ));
+                    $campania = $this->getCampaignCreated();
 
                     $listas = Auth::user()->listas()->has('contactos', '>', '0')->get();
                     if(count($listas) > 0) {
@@ -231,14 +217,19 @@ class CampaniaController extends BaseController {
                 'respuesta'     => Session::get('campania.respuesta'),
                 'contenido'     => Session::get('campania.contenido'),
                 'redes'         => Session::get('campania.redes') ? json_encode(Session::get('campania.redes')) : null,
+                'status'        => 'borrador',
                 'envio'         => Session::get('campania.envio'),
                 'programacion'  => Session::get('campania.envio') == 'programado' ? Carbon::createFromFormat('d/m/Y H:i', Session::get('fecha') . ' ' . Session::get('hora')) : null,
                 'notificacion'  => Session::get('campania.notificacion') == 'on' ? true : false
             ));
-
-            foreach(Session::get('campania.listas') as $id_lista) {
-                $campania->listas()->attach($id_lista);
+            
+            $listas = Session::get('campania.listas');
+            if(isset($listas)){
+                foreach($listas as $id_lista) {
+                    $campania->listas()->attach($id_lista);
+                }    
             }
+            
         }
         return $campania;
     }
