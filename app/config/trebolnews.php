@@ -1,49 +1,58 @@
 <?php
 
 return array(
-	'usuario_admin' => 'treboladmin',
+    'social' => array(
+        'pages' => array(
+            'facebook' => '',
+            'twitter' => ''
+        )
+    ),
 
-	'password_admin' => 'tre2014',
+    'usuario_admin' => 'treboladmin',
 
-	'dias' => array(
-		'Domingo',
-		'Lunes',
-		'Martes',
-		'Miércoles',
-		'Jueves',
-		'Viernes',
-		'Sábado'
-	),
+    'password_admin' => 'tre2014',
 
-	'meses' => array(
-		'Enero',
-		'Febrero',
-		'Marzo',
-		'Abril',
-		'Mayo',
-		'Junio',
-		'Julio',
-		'Agosto',
-		'Septiembre',
-		'Octubre',
-		'Noviembre',
-		'Diciembre'
-	),
+    'email_comentarios' => 'maimar@gmail.com',
 
-	'campania' => array(
+    'dias' => array(
+        'Domingo',
+        'Lunes',
+        'Martes',
+        'Miércoles',
+        'Jueves',
+        'Viernes',
+        'Sábado'
+    ),
 
-		'tipo' => array(
-			'clasica' => 'clásica',
-			'social' => 'social'
-		),
+    'meses' => array(
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre'
+    ),
 
-		'subtipo' => array(
-			'blanco' => 'email en blanco',
-			'template' => 'emails prediseñados'
-		),
+    'campania' => array(
 
-		'status' => array(
-			'borrador' => 'borrador'
-		)
-	)
+        'tipo' => array(
+            'clasica' => 'clásica',
+            'social' => 'social'
+        ),
+
+        'subtipo' => array(
+            'blanco' => 'email en blanco',
+            'template' => 'emails prediseñados'
+        ),
+
+        'status' => array(
+            'borrador' => 'borrador'
+        )
+    )
 );

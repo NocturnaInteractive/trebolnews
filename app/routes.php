@@ -11,36 +11,24 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-    $template = Template::find(1);
-
-    echo('<img src="' . public_path("templates/{$template->archivo}/{$template->archivo}/img/bg_info.png") . '" />');
-
+    var_dump(App::environment());
 });
 
-Route::get('session', function() {
+Route::get('session', function(){
     var_dump(Session::all());
+});
+
+Route::get('auth', function(){
+    var_dump(Auth::user());
 });
 
 // desde acá
 
 // front end
 
-// home
-Route::get('/', function() {
-    if(Auth::check()) {
-        return Redirect::route('campanias');
-    } else {
-        $action = 'index';
-        return App::make('HomeController')->$action();
-    }
-});
 
-Route::get('registro', array(
-    'as' => 'registro',
-    function() {
-        return View::make('internas/registro');
-    }
-));
+
+
 
 Route::get('gracias', array(
     'as' => 'post_registro',
@@ -54,12 +42,22 @@ Route::get('/checkout/{id}',function($id){
     if(Auth::check()) {
         return App::make('CheckoutController')->$action($id);
     } else {
-        return Redirect::to('/');   
+        return Redirect::to('/');
     }
 });
 Route::get('/checkout-success', 'CheckoutController@success');
 Route::get('/notifications',    'CheckoutController@notifications');
+Route::post('/notifications',    'CheckoutController@notifications');
+Route::get('/test',    'CheckoutController@test');
 
+Route::get('/payments',function(){
+    $action = 'payments';
+    if(Auth::check()) {
+        return App::make('CheckoutController')->$action();
+    } else {
+        return Redirect::to('/');
+    }
+});
 
 // back end
 
@@ -273,7 +271,8 @@ Route::group(array(
     Route::get('planes', array(
         'as' => 'planes',
         function() {
-            return View::make('internas/planes');
+            $action = 'planes';
+            return App::make('InternasController')->$action();
         }
     ));
 
@@ -305,8 +304,8 @@ Route::group(array(
 
     Route::post('registrar', 'UsuarioController@registrar');
 
-    Route::post('login', 'UsuarioController@login');
-    Route::post('login_con_fb', 'UsuarioController@login_con_fb');
+
+    // Route::post('login_con_fb', 'UsuarioController@login_con_fb');
 
     Route::post('guardar_lista', 'ListaController@guardar');
     Route::post('eliminar_lista', 'ListaController@eliminar');
@@ -323,6 +322,8 @@ Route::group(array(
     Route::post('guardar_campania', 'CampaniaController@guardar_campania');
 
     Route::post('editar_perfil', 'UsuarioController@editar_perfil');
+
+    Route::post('guardar_comentario', 'ExtraController@guardar_comentario');
 
     Route::post('session', function() {
         if(Input::get('session_data') == 'flush') {
@@ -342,91 +343,7 @@ Route::group(array(
     });
 
 
-    Route::group(array(
-        'prefix' => 'popup'
-    ), function() {
 
-        Route::get('recuperar_password', function(){
-            return Response::json(array(
-                'popup' => View::make('trebolnews/popups/recuperar_password')->render()
-            ));
-        });
-
-        Route::get('editar_lista/{id_lista}', function($id_lista) {
-            $lista = Lista::find($id_lista);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_editarlista', array(
-                    'lista' => $lista
-                ))->render()
-            ));
-        });
-
-        Route::get('eliminar_lista/{id_lista}', function($id_lista) {
-            $lista = Lista::find($id_lista);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_eliminar_listasuscriptor', array(
-                    'lista' => $lista
-                ))->render()
-            ));
-        });
-
-        Route::get('crear_contacto/{id_lista}', function($id_lista) {
-            $lista = Lista::find($id_lista);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_crearsuscriptor', array(
-                    'lista' => $lista
-                ))->render()
-            ));
-        });
-
-        Route::get('editar_contacto/{id_contacto}', function($id_contacto) {
-            $contacto = Contacto::find($id_contacto);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_editarsuscriptor', array(
-                    'contacto' => $contacto
-                ))->render()
-            ));
-        });
-
-        Route::get('eliminar_contacto/{id_contacto}', function($id_contacto) {
-            $contacto = Contacto::find($id_contacto);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_eliminarsuscriptor_individual', array(
-                    'contacto' => $contacto
-                ))->render()
-            ));
-        });
-
-        Route::get('libreria_mipc', function() {
-            return Response::json(array(
-                'popup' => View::make('internas/popup_libreria_mipc')->render()
-            ));
-        });
-
-        Route::get('libreria_redes', function() {
-            return Response::json(array(
-                'popup' => View::make('internas/popup_libreria_redes')->render()
-            ));
-        });
-
-        Route::get('crear_carpeta_libreria', function() {
-            return Response::json(array(
-                'popup' => View::make('internas/popup_crear_carpeta_libreria')->render()
-            ));
-        });
-
-        Route::get('{popup}', function($popup) {
-            return Response::json(array(
-                'popup' => View::make("internas/popup_$popup")->render()
-            ));
-        });
-
-    });
 
 });
 
@@ -508,3 +425,158 @@ Route::group(array(
     });
 
 });
+
+// acciones con el usuario
+
+    Route::get('facebook', 'UsuarioController@facebook_login');
+
+    Route::post('login', 'UsuarioController@login');
+
+    Route::post('recuperar_password_enviar_mail', 'UsuarioController@pre_recuperar_password');
+
+    Route::post('cambiar_password', 'UsuarioController@cambiar_password');
+
+// fin acciones con el usuario
+
+// páginas del sitio
+
+    // home
+    Route::get('/', array(
+        'as' => 'home',
+        function() {
+            if(Auth::check()) {
+                return Redirect::route('campanias');
+            } else {
+                $action = 'index';
+                return App::make('HomeController')->$action();
+            }
+        }
+    ));
+
+    // registro de cuenta nueva
+    Route::get('registro', array(
+        'as' => 'registro',
+        function() {
+            return View::make('internas/registro');
+        }
+    ));
+
+    // pre recuperar contraseña
+    Route::get('mail-enviado', array(
+        'as' => 'recuperar_password_mail_enviado',
+        function() {
+            return View::make('trebolnews.pre_recuperar_password');
+        }
+    ));
+
+    Route::get('recupero', function(){
+        return View::make('trebolnews.form_recuperar_password');
+    });
+
+    // form recuperar contraseña
+    Route::get('recuperar/{hash}', array(
+        'as' => 'mostrar_form_recuperar_password',
+        'uses' => 'UsuarioController@mostrar_form_recuperar_password'
+    ));
+
+    // confirmaión contraseña modificada
+    Route::get('contraseña-modificada', array(
+        'as' => 'password_cambiado',
+        function() {
+            return View::make('trebolnews.confirmacion_password_cambiado');
+        }
+    ));
+
+// fin páginas del sitio
+
+// popups
+
+    Route::group(array(
+        'prefix' => 'popup'
+    ), function() {
+
+        // curados
+        Route::get('recuperar_password', function(){
+            return Response::json(array(
+                'popup' => View::make('trebolnews/popups/recuperar_password')->render()
+            ));
+        });
+        // fin curados
+
+        Route::get('editar_lista/{id_lista}', function($id_lista) {
+            $lista = Lista::find($id_lista);
+
+            return Response::json(array(
+                'popup' => View::make('internas/popup_editarlista', array(
+                    'lista' => $lista
+                ))->render()
+            ));
+        });
+
+        Route::get('eliminar_lista/{id_lista}', function($id_lista) {
+            $lista = Lista::find($id_lista);
+
+            return Response::json(array(
+                'popup' => View::make('internas/popup_eliminar_listasuscriptor', array(
+                    'lista' => $lista
+                ))->render()
+            ));
+        });
+
+        Route::get('crear_contacto/{id_lista}', function($id_lista) {
+            $lista = Lista::find($id_lista);
+
+            return Response::json(array(
+                'popup' => View::make('internas/popup_crearsuscriptor', array(
+                    'lista' => $lista
+                ))->render()
+            ));
+        });
+
+        Route::get('editar_contacto/{id_contacto}', function($id_contacto) {
+            $contacto = Contacto::find($id_contacto);
+
+            return Response::json(array(
+                'popup' => View::make('internas/popup_editarsuscriptor', array(
+                    'contacto' => $contacto
+                ))->render()
+            ));
+        });
+
+        Route::get('eliminar_contacto/{id_contacto}', function($id_contacto) {
+            $contacto = Contacto::find($id_contacto);
+
+            return Response::json(array(
+                'popup' => View::make('internas/popup_eliminarsuscriptor_individual', array(
+                    'contacto' => $contacto
+                ))->render()
+            ));
+        });
+
+        Route::get('libreria_mipc', function() {
+            return Response::json(array(
+                'popup' => View::make('internas/popup_libreria_mipc')->render()
+            ));
+        });
+
+        Route::get('libreria_redes', function() {
+            return Response::json(array(
+                'popup' => View::make('internas/popup_libreria_redes')->render()
+            ));
+        });
+
+        Route::get('crear_carpeta_libreria', function() {
+            return Response::json(array(
+                'popup' => View::make('internas/popup_crear_carpeta_libreria')->render()
+            ));
+        });
+
+        Route::get('{popup}', function($popup) {
+            return Response::json(array(
+                'popup' => View::make("internas/popup_$popup")->render()
+            ));
+        });
+
+    });
+
+// fin popups

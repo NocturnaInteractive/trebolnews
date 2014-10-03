@@ -29,15 +29,15 @@
 }
 
 
-html, body,
+html, body, 
 #container,
 .cbp-fbscroller,
-.cbp-fbscroller section {
-	height: 100%
+.cbp-fbscroller section { 
+    height: 100%
 }
 
 ::selection {background:#10705D; color:#fff;}
-::-moz-selection {background:#10705D; color:#fff;}
+::-moz-selection {background:#10705D; color:#fff;}      
 ::-webkit-selection {background:#10705D; color:#fff;}
 ::-o-selection {background:#10705D; color:#fff;}
 
@@ -75,8 +75,8 @@ h1 {text-indent:-9999px; background-image:url(../imagenes/logo.png); height:32px
 #menu nav a:hover { border-bottom: 6px solid #3e4463}
 
 .cbp-fbscroller > nav a.apretado {border-bottom: 6px solid #3e4463;}
-
-
+    
+    
 #menu nav #login {display:block; width:140px; background-image:url(../imagenes/botlogin.jpg); background-repeat:repeat-x; font-size:14px; height:24px; padding-top:6px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow:  0px 2px 2px 0px #0e6655; box-shadow:  0px 2px 2px 0px #0e6655; border:0!important; margin-left:0 !important }
 
 #menu nav #login:hover {margin-top:2px; -webkit-box-shadow:none; box-shadow:none;  padding-top:7px; height:23px;}
@@ -109,7 +109,7 @@ h1 {text-indent:-9999px; background-image:url(../imagenes/logo.png); height:32px
 
 
 #menu nav ul #formasublogin #face { background-color:#324a80; background-image:url(../imagenes/facelogin.png); background-repeat:no-repeat; background-position:left center; text-align:left !important; padding-left:45px; width:95px !important}
-#menu nav ul #formasublogin #face:hover {background-color:#1e2c4c}
+#menu nav ul #formasublogin #face:hover {background-color:#1e2c4c} 
 #menu nav ul #formasublogin #registro { background-color:#C84D64}
 #menu nav ul #formasublogin #registro:hover {background-color:#943849}
 #menu nav ul #formasublogin #olvido { width:100% !important; text-align:left !important; color:#6f7373 !important; font-size:12px !important; margin-top:5px; height:20px !important}
@@ -125,8 +125,8 @@ h1 {text-indent:-9999px; background-image:url(../imagenes/logo.png); height:32px
 #chat #showRight {width:60px; height:60px; text-indent:-9999px; background-image:url(../imagenes/chat.png); background-color:transparent; border:none !important; padding:0; cursor:pointer; position:fixed; top:122px; right:0; z-index:9998}
 
 #chat .cbp-spmenu-vertical {width:430px; background: #3a3f4a; position: fixed; top: 122px; z-index:9997; right: -240px; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; transition: all 0.3s ease; -webkit-border-radius:4px 0 0 4px; -moz-border-radius:4px 0 0 4px; -o-border-radius:4px 0 0 4px; border-radius:4px 0 0 4px;}
-#chat .cbp-spmenu-right {	right:-430px;}
-#chat .cbp-spmenu-right.cbp-spmenu-open {	right: 0px;}
+#chat .cbp-spmenu-right {   right:-430px;}
+#chat .cbp-spmenu-right.cbp-spmenu-open {   right: 0px;}
 
 #chat .cbp-spmenu-vertical h3 {-moz-border-radius:4px 0 0 0; -o-border-radius:4px 0 0 0; border-radius:4px 0 0 0; background-color:#535979; margin:0; font-weight:normal; font-size:25px; color:#FFF; height:45px; padding:15px 0 0 20px; width:350px; float:left}
 #chat .cbp-spmenu-vertical #formah3 { float:right; width:60px; height:60px; background-color:#3d4361}
@@ -144,7 +144,7 @@ h1 {text-indent:-9999px; background-image:url(../imagenes/logo.png); height:32px
 #chat #consultachat input {height:30px; border:1px solid #FFF; background-color:#FFF; color:#737f80; margin-bottom:15px; font-size:14px; font-family:'ralewayregular',  'Raleway', sans-serif; padding-left:5px;}
 #chat #consultachat input:focus {border:1px solid #535979; background-color:#535979; color:#ecf0f1}
 
-#chat #consultachat textarea {border:1px solid #FFF; color:#737f80; margin-bottom:10px; font-size:14px;	background-color:#FFF; height:100px; max-height:100px; width:98%; max-width:98%; font-family:'ralewayregular',  'Raleway', sans-serif; padding:10px 0 0 5px; overflow:hidden;}
+#chat #consultachat textarea {border:1px solid #FFF; color:#737f80; margin-bottom:10px; font-size:14px; background-color:#FFF; height:100px; max-height:100px; width:98%; max-width:98%; font-family:'ralewayregular',  'Raleway', sans-serif; padding:10px 0 0 5px; overflow:hidden;}  
 #chat #consultachat textarea:focus {border:1px solid #535979; background-color:#535979; color:#ecf0f1}
 
 
@@ -172,14 +172,14 @@ h2 {font-size:30px; color:#FFF; font-weight:normal !important; margin:0; font-fa
 
 /* background-attachment does the trick */
 .cbp-fbscroller section {
-	position: relative;
-	background-position: top center;
-	background-repeat: no-repeat;
-	background-size:cover;
+    position: relative;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size:cover;
 }
 
 .no-touch .cbp-fbscroller section {
-	background-attachment: fixed;
+    background-attachment: fixed;
 }
 
 /*demo*/
@@ -197,7 +197,7 @@ h2 {font-size:30px; color:#FFF; font-weight:normal !important; margin:0; font-fa
 #fbsection2 {background-color:#17a387; height:2090px; padding-top:80px; }
 #fonquees {background-image:url(../imagenes/fondo-de-que.jpg); background-size:cover}
 #fbsection2 h2 {text-shadow:  1px 1px #32364F; text-align:center; background-color:#535979; height:60px; padding-top:20px; border-bottom:4px solid #0e6655; position:relative;}
-#tri {width: 0;	 height: 0;	 border-left: 30px solid transparent;	 border-right: 30px solid transparent; border-top: 30px solid #535979; margin:18px auto 0 auto; position:relative}
+#tri {width: 0;  height: 0;  border-left: 30px solid transparent;    border-right: 30px solid transparent; border-top: 30px solid #535979; margin:18px auto 0 auto; position:relative}
 #tri img { position:absolute; top:-30px; left:-13.5px}
 #quees { background-image:url(../imagenes/tiza.png); width:1280px; height:2010px; margin:0 auto;}
 #queinfo { width:1024px; margin:0 auto; position:relative}
@@ -335,11 +335,11 @@ h2 {font-size:30px; color:#FFF; font-weight:normal !important; margin:0; font-fa
 /*---------------------------------------confirma-----------------------------------------------------*/
 
 
-#conteinerco { width:1024px; margin:0 auto;}
+#conteinerco { width:1024px; margin:0 auto;} 
 #conteinerco h1 {text-indent:-9999px; background-image:url(../imagenes/logo.png); height:32px; width:200px; float:none; margin:250px auto 40px auto}
 #conteinerco h2{text-shadow:1px 1px #0e6655; text-align:center; }
 #conteinerco p { color:#FFF; text-align:center; font-size:18px; text-shadow:1px 1px #0e6655; }
-
+     
 #conteinerco #bothome { height:65px; width:235px; margin:40px auto 0 auto}
 #conteinerco #bothome a{width:235px; height:36px; padding-top:15px;  display:block; float:right; font-size:18px; text-align:center; background-color:#c84d64; color:#FFF;  -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 0px 4px 0px 0px #943849; box-shadow:  0px 4px 0px 0px #943849; text-decoration:none}
 #conteinerco #bothome a:hover {background-color:#c84d64; -webkit-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;}
@@ -350,10 +350,15 @@ h2 {font-size:30px; color:#FFF; font-weight:normal !important; margin:0; font-fa
 
 
 /*---------------------------------------recuperar contraseña-----------------------------------------------------*/
-#bg_popup { width:100%; height:100%; }
+#bg_popup { width:100%; height:100%; background-color:#333}
 
 #container_popup {-webkit-border-radius:4px 4px 2px 2px; -moz-border-radius:4px 4px 2px 2px; -o-border-radius:4px 4px 2px 2px; border-radius:4px 4px 2px 2px; background-color:#FFF; -webkit-box-shadow:2px 2px 2px 0px #1a1a1a; -moz-box-shadow:2px 2px 2px 0px #1a1a1a; -o-box-shadow:2px 2px 2px 0px #1a1a1a; box-shadow:2px 2px 2px 0px #1a1a1a; position:absolute; top:45%; left:50%;}
-#bg_popup .popup_recuperar_cont {margin-left:-300px; margin-top:-116px; width:600px; height:232px}
+#bg_popup .popup_recuperar_cont {
+    margin-left: -300px;
+    margin-top: -116px;
+    width: 600px;
+    height: 295px
+}
 
 #bg_popup .popup_suscriptor {margin-left:-300px; margin-top:-197px; width:600px; height:394px}
 
@@ -377,28 +382,36 @@ h2 {font-size:30px; color:#FFF; font-weight:normal !important; margin:0; font-fa
 
 #formpopup .unico {width:552px}
 
-#botones_popup { width:100%; margin-top:30px; clear:both; display:block; height:42px}
+#botones_popup {
+    width: 100%;
+    clear: both;
+    display: block;
+    height: 42px
+}
 
-#botones_popup #saveForm { width:160px !important; height:36px; padding: 0; background-color:#17A387; color:#FFF;  border:0; letter-spacing:1px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; font-size:14px; -webkit-box-shadow: 0px 3px 0px 0px #10705D; -moz-box-shadow: 0px 0px 0px 0px #10705D; -o-box-shadow: 0px 0px 0px 0px #10705D; box-shadow:  0px 3px 0px 0px #10705D; opacity:1 !important; float:right}
+#botones_popup #saveForm {
+    width: 160px !important;
+    height: 36px;
+    padding: 0;
+    background-color: #17A387;
+    color: #FFF;
+    border: 0;
+    letter-spacing: 1px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 14px;
+    -webkit-box-shadow: 0px 3px 0px 0px #10705D;
+    -moz-box-shadow: 0px 0px 0px 0px #10705D;
+    -o-box-shadow: 0px 0px 0px 0px #10705D;
+    box-shadow: 0px 3px 0px 0px #10705D;
+    opacity: 1 !important;
+    float: right
+}
 #botones_popup #saveForm:hover {background-color:#17A387; -webkit-box-shadow: 0px 0px 0px 0px #10705D; -moz-box-shadow: 0px 0px 0px 0px #10705D; -o-box-shadow: 0px 0px 0px 0px #10705D; box-shadow:  0px 0px 0px 0px #10705D; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
 
 #botones_popup #borrar { width:160px !important; height:36px; padding:0; background-color:#A31717; color:#FFF;  border:0; letter-spacing:1px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; font-size:14px; -webkit-box-shadow: 0px 3px 0px 0px #701010; -moz-box-shadow: 0px 0px 0px 0px #701010; -o-box-shadow: 0px 0px 0px 0px #701010; box-shadow:  0px 3px 0px 0px #701010; opacity:1 !important; float:left}
 #botones_popup #borrar:hover {background-color:#A31717; -webkit-box-shadow: 0px 0px 0px 0px #10705D; -moz-box-shadow: 0px 0px 0px 0px #10705D; -o-box-shadow: 0px 0px 0px 0px #10705D; box-shadow:  0px 0px 0px 0px #10705D; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
 
 /*---------------------------------------recuperar contraseña-----------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

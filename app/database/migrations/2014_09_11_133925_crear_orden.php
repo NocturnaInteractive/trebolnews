@@ -18,7 +18,6 @@ class CrearOrden extends Migration {
 			$table->integer('id_plan')->unsigned();
 			$table->boolean('isSuscription');
 			$table->decimal('monto',5,2);
-			$table->string('status')->default('pending'); //pending, paid, cancelled
 			$table->timestamps();
 			$table->softDeletes();
 		});

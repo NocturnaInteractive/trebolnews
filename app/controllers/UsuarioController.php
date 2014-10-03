@@ -104,25 +104,129 @@ class UsuarioController extends BaseController {
         }
     }
 
-    public function login_con_fb() {
-        $fb_id = Input::get('id');
-        $usuario = Usuario::where('fb_id', '=', $fb_id)->first();
+    public function facebook_login() {
+        $code = Input::get('code');
 
-        if(!$usuario) {
-            $usuario = Usuario::create(array(
-                'nombre'    => Input::get('first_name'),
-                'apellido'  => Input::get('last_name'),
-                'fb_id'     => $fb_id
+        $fb = OAuth::consumer('Facebook');
+
+        if(!empty($code)) {
+            $token = $fb->requestAccessToken($code);
+
+            $result = json_decode($fb->request('/me'), true);
+
+            $existe_fb = Usuario::where('fb_id', '=', $result['id'])->first();
+            $existe_email = Usuario::where('email', '=', $result['email'])->first();
+
+            if(!$existe_fb && !$existe_email) { // no existe ninguno
+                $usuario = Usuario::create(array(
+                    'email'     => $result['email'],
+                    'fb_id'     => $result['id'],
+                    'nombre'    => $result['first_name'],
+                    'apellido'  => $result['last_name'],
+                    'confirmed' => true
+                ));
+
+                Event::fire('nuevo_registro', array($usuario));
+            } else {
+                if($existe_fb && !$existe_email) { // existe el de facebook
+                    $usuario = $existe_fb;
+                    $usuario->email = $result['email'];
+                    $usuario->confirmed = true;
+                    $usuario->save();
+                } else if(!$existe_fb && $existe_email) { // existe el email
+                    $usuario = $existe_email;
+                    $usuario->fb_id = $result['id'];
+                    $usuario->confirmed = true;
+                    $usuario->save();
+                } else { // existen los dos
+                    $usuario = $existe_fb;
+                }
+            }
+
+            Auth::login($usuario, true);
+
+            $view = View::make('trebolnews/closer');
+
+            return Response::make($view);
+        } else {
+            $url = $fb->getAuthorizationUri();
+
+            return Redirect::to((string) $url . '&display=popup');
+        }
+    }
+
+    public function pre_recuperar_password() {
+        $email = Input::get('email');
+
+        $usuario = Usuario::where('email', $email)->first();
+
+        if($usuario) {
+            $usuario->recuperar = Str::random();
+            $usuario->save();
+
+            Mail::send('emails.pre_recuperar_password', array(
+                'usuario' => $usuario
+            ), function($mail) use($email) {
+                $mail->to($email);
+                $mail->subject('Información para recuperar la contraseña de TrebolNEWS');
+                $mail->from('no-responder@trebolnews.com', 'TrebolNEWS');
+            });
+
+            return Response::json(array(
+                'status' => 'ok',
+                'url' => route('recuperar_password_mail_enviado')
+            ));
+        } else {
+            return Response::json(array(
+                'status' => 'error',
+                'mensaje' => 'No existe un usuario registrado con esa dirección'
             ));
         }
+    }
 
-        Session::put('id_logueado', $usuario->id);
+    public function mostrar_form_recuperar_password($hash) {
+        $usuario = Usuario::where('recuperar', $hash)->first();
 
-        Auth::login($usuario);
+        if($usuario) {
+            return View::make('trebolnews.form_recuperar_password', array(
+                'usuario' => $usuario
+            ));
+        } else {
+            return Redirect::route('home');
+        }
+    }
 
-        return Response::json(array(
-            'status' => 'ok'
-        ));
+    public function cambiar_password() {
+        $data = Input::all();
+
+        $rules = array(
+            'password' => 'required|confirmed'
+        );
+
+        $messages = array(
+            'password.required' => 'Escriba una contraseña',
+            'password.confirmed' => 'Las contraseñas deben coincidir'
+        );
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        if($validator->passes()) {
+            $usuario = Usuario::find(Input::get('usuario_id'));
+
+            $usuario->password = Hash::make(Input::get('password'));
+            $usuario->recuperar = null;
+            $usuario->save();
+
+            return Response::json(array(
+                'status' => 'ok',
+                'url' => route('password_cambiado')
+            ));
+        } else {
+            return Response::json(array(
+                'status' => 'error',
+                'validator' => $validator->messages()->toArray()
+            ));
+        }
     }
 
     public function editar_perfil() {

@@ -16,6 +16,8 @@
         {{ HTML::script('js/jquery-1.11.0.min.js') }}
         {{ HTML::script('js/jquery.form.min.js') }}
         {{ HTML::script('js/jquery.noty.packaged.min.js') }}
+        {{ HTML::script('js/trebolnews.js') }}
+        {{ HTML::style('css/trebolnews.css') }}
     </head>
     <body style="background-color:#17A387; background-image:url(internas/imagenes/registro.png); background-repeat:no-repeat; background-position: bottom center; background-size:auto">
        <header>

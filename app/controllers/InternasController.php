@@ -1,6 +1,6 @@
 <?php
 
-class HomeController extends BaseController {
+class InternasController extends BaseController {
 
     /*
     |--------------------------------------------------------------------------
@@ -15,12 +15,12 @@ class HomeController extends BaseController {
     |
     */
 
-    public function index() {
+    public function planes() {
         $res = array(
             'plans' => Plan::all()
         );
 
-        return View::make('trebolnews/home', $res);
+        return View::make('internas/planes', $res);
     }
 
 }
