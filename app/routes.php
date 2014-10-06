@@ -95,14 +95,11 @@ Route::group(array(
     Route::get('perfil', array(
         'as' => 'perfil',
         function() {
-            return View::make('internas/perfil');
-        }
-    ));
+            $empresa = json_decode(Auth::user()->empresa);
 
-    Route::get('editar-perfil', array(
-        'as' => 'editar_perfil',
-        function() {
-            return View::make('internas/editarperfil');
+            return View::make('trebolnews/perfil', array(
+                'empresa' => $empresa
+            ));
         }
     ));
 

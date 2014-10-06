@@ -37,6 +37,7 @@
 
                 function guardar_perfil_handler(e) {
                     e.preventDefault();
+                    e.stopImmediatePropagation();
 
                     $('#frm_perfil').ajaxSubmit({
                         success: function(data) {
@@ -53,11 +54,10 @@
                                 });
                             } else {
                                 notys(data.validator);
-                                $('.btn_guardar').one('click', guardar_perfil_handler);
                             }
                         },
                         complete: function() {
-
+                            $('.btn_guardar').one('click', guardar_perfil_handler);
                         }
                     });
                 }

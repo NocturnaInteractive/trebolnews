@@ -255,9 +255,22 @@ class UsuarioController extends BaseController {
             $usuario->nombre    = Input::get('nombre');
             $usuario->apellido  = Input::get('apellido');
             $usuario->telefono  = Input::get('telefono');
-            $usuario->empresa   = Input::get('empresa');
             $usuario->ciudad    = Input::get('ciudad');
             $usuario->pais      = Input::get('pais');
+
+            $empresa = array();
+
+            $empresa['nombre'] = Input::get('empresa_nombre');
+            $empresa['cuit'] = Input::get('empresa_cuit');
+            $empresa['factura'] = Input::get('empresa_factura');
+            $empresa['telefono'] = Input::get('empresa_telefono');
+            $empresa['direccion'] = Input::get('empresa_direccion');
+            $empresa['cp'] = Input::get('empresa_cp');
+            $empresa['ciudad'] = Input::get('empresa_ciudad');
+            $empresa['responsable'] = Input::get('empresa_responsable');
+            $empresa['email'] = Input::get('empresa_email');
+
+            $usuario->empresa = json_encode($empresa);
 
             $usuario->save();
 

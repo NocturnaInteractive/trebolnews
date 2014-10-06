@@ -14,7 +14,7 @@ class CrearUsuarios extends Migration {
             $table->string('nombre');
             $table->string('apellido');
             $table->string('telefono')->nullable();
-            $table->string('empresa')->nullable();
+            $table->text('empresa')->nullable();
             $table->string('ciudad')->nullable();
             $table->string('pais')->nullable();
             $table->bigInteger('fb_id')->unsigned()->nullable();

@@ -16,6 +16,7 @@
         {{ HTML::style('css/trebolnews.css') }}
 
         {{ HTML::script('js/jquery-1.11.0.min.js') }}
+        {{ HTML::script('js/jquery-ui-1.10.4.min.js') }}
         {{ HTML::script('js/jquery.form.min.js') }}
         {{ HTML::script('js/jquery.noty.packaged.min.js') }}
         {{ HTML::script('js/trebolnews.js') }}
