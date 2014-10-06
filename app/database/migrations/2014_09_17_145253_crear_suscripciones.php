@@ -11,6 +11,7 @@ class CrearSuscripciones extends Migration {
             $table->string('nombre');
             $table->string('email');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

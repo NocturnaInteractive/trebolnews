@@ -330,6 +330,7 @@ Route::group(array(
     Route::post('editar_perfil', 'UsuarioController@editar_perfil');
 
     Route::post('guardar_comentario', 'ExtraController@guardar_comentario');
+    Route::post('guardar_suscripcion', 'ExtraController@guardar_suscripcion');
 
     Route::post('session', function() {
         if(Input::get('session_data') == 'flush') {
@@ -347,9 +348,6 @@ Route::group(array(
             'session_data' => Session::all()
         ));
     });
-
-
-
 
 });
 
