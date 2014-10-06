@@ -11,7 +11,7 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-    var_dump(App::environment());
+
 });
 
 Route::get('session', function(){
@@ -73,18 +73,6 @@ Route::get('/payments',function(){
 Route::get('logout', function() {
     Session::flush();
     Auth::logout();
-    return Redirect::to('/');
-});
-
-Route::get('confirmar/{hash}', function($hash) {
-    $usuario = Usuario::where('confirmation', '=', $hash)->first();
-
-    if($usuario) {
-        $usuario->confirmed = true;
-        $usuario->confirmation = null;
-        $usuario->save();
-    }
-
     return Redirect::to('/');
 });
 
@@ -439,6 +427,18 @@ Route::group(array(
     Route::post('recuperar_password_enviar_mail', 'UsuarioController@pre_recuperar_password');
 
     Route::post('cambiar_password', 'UsuarioController@cambiar_password');
+
+    Route::get('confirmar/{hash}', function($hash) {
+        $usuario = Usuario::where('confirmation', '=', $hash)->first();
+
+        if($usuario) {
+            $usuario->confirmed = true;
+            $usuario->confirmation = null;
+            $usuario->save();
+        }
+
+        return View::make('trebolnews/cuenta-activa');
+    });
 
 // fin acciones con el usuario
 
