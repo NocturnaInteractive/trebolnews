@@ -94,6 +94,12 @@
                 popupWindow($('#face').attr('href'), '', 575, 417);
             });
 
+            $('[btn_menu]').on('click', function(e){
+                e.preventDefault();
+
+                $('a[href="' + $(this).attr('btn_menu') + '"]').trigger('click');
+            });
+
         });
 
 </script>
@@ -431,7 +437,7 @@
 
                             <div id="planesexclusivos">
                                 <h5>&iquest;Necesitas alg&uacute;n plan a medida? &iexcl;Cont&aacute;ctanos!</h5>
-                                <div id="botex"><a href="#fbsection6">CONTACTO</a></div>
+                                <div id="botex"><a href="#" btn_menu="#fbsection6">CONTACTO</a></div>
                             </div><!--planesexclusivos-->
 
                             <div id="formasdepago">
@@ -548,12 +554,12 @@
                                 <div class="cleaner"></div>
                                 <div id="botones_footer">
                                     <ul>
-                                        <li><a href="#fbsection2">Nosotros</a></li>
-                                        <li><a href="#">Trabaj&aacute; con Nosotros</a></li>
-                                        <li><a href="#fbsection4">&iquest;Por qu&eacute; Elegirnos?</a></li>
-                                        <li><a href="#fbsection5">Planes y Precios</a></li>
-                                        <li><a href="#fbsection6">Contacto</a></li>
-                                        <li><a href="../internas/terminosycondiciones.html" class="ultimo_boton_footer" target="_blank">Terminos y Condiciones</a></li>
+                                        <li><a href="#" btn_menu="#fbsection2">Nosotros</a></li>
+                                        <!-- <li><a href="#">Trabaj&aacute; con Nosotros</a></li> -->
+                                        <li><a href="#" btn_menu="#fbsection4">&iquest;Por qu&eacute; Elegirnos?</a></li>
+                                        <li><a href="#" btn_menu="#fbsection5">Planes y Precios</a></li>
+                                        <li><a href="#" btn_menu="#fbsection6">Contacto</a></li>
+                                        <li><a href="{{ route('tyc') }}" class="ultimo_boton_footer" target="_blank">Terminos y Condiciones</a></li>
                                     </ul>
                                     <div class="cleaner"></div>
                                 </div>
