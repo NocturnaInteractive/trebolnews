@@ -12,6 +12,38 @@
             classie.toggle( menuRight, 'cbp-spmenu-open' );
             disableOther( 'showRight' );
         };
+
+        $('#consultachat input[type="submit"]').one('click', consultachat_handler);
+
+        function consultachat_handler(e) {
+            e.preventDefault();
+
+            $('#consultachat input[type="submit"]').on('click', function(e){
+                e.preventDefault();
+            });
+
+            $('#consultachat').ajaxSubmit({
+                success: function(data) {
+                    if(data.status == 'ok') {
+                        noty({
+                            type: 'success',
+                            text: data.mensaje,
+                            layout: 'topCenter',
+                            timeout: 5000,
+                            maxVisible: 10
+                        });
+                        $('#showRight').trigger('click');
+                        $('#consultachat')[0].reset();
+                    } else {
+                        notys(data.validator);
+                    }
+                },
+                complete: function() {
+                    $('#consultachat input[type="submit"]').one('click', consultachat_handler);
+                }
+            });
+        }
+
     });
 
     function disableOther( button ) {
@@ -27,7 +59,7 @@
         <h3>Consultas</h3>
         <div id="formah3"></div>
         <div class="cleaner"></div>
-        <form id="consultachat" action="" method="post">
+        <form id="consultachat" action="{{ action('ExtraController@guardar_comentario') }}" method="post">
             <ul>
                 <li class="izq_consultachat" ><input name="nombre" type="text" placeholder="&nbsp;*Nombre:" /></li>
                 <li class="der_consultachat" ><input name="apellido" type="text" placeholder="&nbsp;*Apellido:" /></li>
@@ -40,8 +72,8 @@
             </ul>
             <p>*&nbsp;Campos obligatorios</p>
             <div id="botones_consultachat">
-                <input class="btn" id="borrar2" type="reset" value="BORRAR" name="borrar" />
-                <input type="button" value="ENVIAR" name="enviar" id="saveForm2" />
+                <input class="btn" id="borrar" type="reset" value="BORRAR" name="borrar" />
+                <input type="submit" value="ENVIAR" name="enviar" id="saveForm" />
                 <div class="cleaner"></div>
             </div><!--botones_consultachat-->
         </form>
