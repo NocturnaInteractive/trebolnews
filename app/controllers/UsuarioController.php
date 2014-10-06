@@ -25,10 +25,16 @@ class UsuarioController extends BaseController {
             $usuario = Usuario::create(array(
                 'email'        => Input::get('email'),
                 'password'     => Hash::make(Input::get('password')),
-                'newsletter'   => Input::get('newsletter') ? true : false,
+                // 'newsletter'   => Input::get('newsletter') ? true : false,
                 'confirmation' => sha1(Input::get('email')),
                 // 'confirmed'    => true
             ));
+
+            if(Input::get('newsletter')) {
+                Suscripcion::create(array(
+                    'email' => $usuario->email
+                ));
+            }
 
             Event::fire('nuevo_registro', array($usuario));
 
