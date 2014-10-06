@@ -165,12 +165,12 @@
                         <input class="btn" id="borrar" type="reset" value="BORRAR" name="borrar" />
                         <input type="button" value="ENVIAR" name="enviar" id="saveForm" />
                         <div class="cleaner"></div>
-                    </div><!--botones_consultachat-->
+                    </div>
                 </form>
 
-            </div><!--cbp-spmenu-s2-->
+            </div>
 
-        </div> --><!--chat-->
+        </div> -->
     </header>
     <div id="conteiner" class="cbp-fbscroller">
 
