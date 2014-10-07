@@ -48,7 +48,7 @@
 				<div id="opciones_pasos" class="opciones_paso4">
 					<a id="guardarysalir" href="{{ route('campanias') }}" class="btn_guardar" y="salir">GUARDAR Y SALIR</a>
 					<ul>
-						<li><a href="{{ route('step3') }}" id="anterior"  class="btn_guardar" >ANTERIOR</a></li>
+						<li><a href="{{ route('step3') }}" id="anterior"  class="btn_guardar" y="seguir" >ANTERIOR</a></li>
 						<li><a href="{{ route('step5') }}" id="siguiente" class="btn_guardar" y="seguir">VISUALIZAR</a></li>
 					</ul>
 					<div class="cleaner"></div>

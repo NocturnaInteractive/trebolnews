@@ -78,17 +78,28 @@
 										<th scope="col" width="149px">Editado el</th>
 										<th scope="col" width="180px">Suscriptores</th>
 									</tr>
-									@if(Session::has('campania.listas'))
-									@foreach(Session::get('campania.listas') as $id_lista)
-									<?php $lista = Lista::find($id_lista) ?>
-									<tr>
-										<td>{{ $lista->nombre }}</td>
-										<td>{{ $lista->created_at->format('d/m/Y') }}</td>
-										<td>{{ $lista->updated_at->format('d/m/Y') }}</td>
-										<td>{{ count($lista->contactos) }}</td>
-									</tr>
-									@endforeach
-									@endif
+
+									<?php $s_list = Session::get('campania.listas'); $i = 0; ?>
+	                                @foreach($listas = Auth::user()->listas()->has('contactos', '>', '0')->get() as $lista)
+	                                    
+	                                    	@if(isset($s_list[$i]) && $s_list[$i] == $lista->id)
+		                                    	<tr>
+													<td>{{ $lista->nombre }}</td>
+			                                        <td>{{ $lista->created_at->format('d/m/Y') }}</td>
+			                                        <td>{{ $lista->updated_at->format('d/m/Y') }}</td>
+			                                        <td>{{ count($lista->contactos) }}</td>
+			                                    </tr>
+	                                    	@endif
+			                                
+	                                @endforeach
+	                                @if(count($listas) == 0)
+		                                <tr>
+		                                    <td colspan="4">
+		                                        Todavía no has creado contactos en una lista de suscriptores
+		                                    </td>
+		                                </tr>
+	                                @endif
+
 								</table>
 							</div><!--resumen_destinatarios-->
 

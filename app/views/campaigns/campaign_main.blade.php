@@ -51,9 +51,14 @@
     @parent
     <input type="hidden" id="menu_principal" value="campanias" />
 
+
 @stop
 
 @section('contenido')
+
+    <input type="hidden" id="session_url" value="{{ url('session') }}" />
+    <?php $configtipos = Config::get('trebolnews.campania.tipo'); ?>
+    <?php $configstatus = Config::get('trebolnews.campania.status'); ?>
 
     <div id="container">
         <section class="tabs">

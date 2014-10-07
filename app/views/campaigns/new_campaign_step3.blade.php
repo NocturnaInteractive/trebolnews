@@ -15,6 +15,7 @@
         <section class="tabs">
             <div class="content">
                 <h2>Configuraci&oacute;n</h2>
+
                 <a id="volver" href="{{ URL::previous() }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
                 <div class="infocont">
                     <ul id="pasoscam">
@@ -62,36 +63,34 @@
                                 </tr>
                                 
                                 <?php $s_list = Session::get('campania.listas'); $i = 0; ?>
-                                @foreach($listas = Auth::user()->listas()->has('contactos', '>', '0')->get() as $lista)
-                                <?php 
-                                    if(isset($s_list) && isset($s_list[$i]) && $s_list[$i] == $lista->id){
-
-                                        $checked = 'checked="checked"';
-                                    }else{
+                                    @foreach($listas = Auth::user()->listas()->has('contactos', '>', '0')->get() as $lista)
+                                    <?php 
                                         $checked = '';
-                                    }
-                                ?>
-                                    <tr>
-                                        <td>
-                                            <div class="checkbox">
-                                                <input type="checkbox" id="{{ 'listas['.$lista->id.']' }}" name="campania:listas[]" value="{{ $lista->id }}" {{$checked}} />
-                                                <label for="{{ 'listas['.$lista->id.']' }}"></label>
-                                            </div>
-                                        </td>
-                                        <td>{{ $lista->nombre }}</td>
-                                        <td>{{ $lista->created_at->format('d/m/Y') }}</td>
-                                        <td>{{ $lista->updated_at->format('d/m/Y') }}</td>
-                                        <td>{{ count($lista->contactos) }}</td>
-                                    </tr>
-                                @endforeach
+                                        if(isset($s_list[$i]) && $s_list[$i] == $lista->id){
+                                            $checked = 'checked="checked"';
+                                        }
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="{{ 'listas['.$lista->id.']' }}" name="campania:listas[]" value="{{ $lista->id }}" {{$checked}} />
+                                                    <label for="{{ 'listas['.$lista->id.']' }}"></label>
+                                                </div>
+                                            </td>
+                                            <td>{{ $lista->nombre }}</td>
+                                            <td>{{ $lista->created_at->format('d/m/Y') }}</td>
+                                            <td>{{ $lista->updated_at->format('d/m/Y') }}</td>
+                                            <td>{{ count($lista->contactos) }}</td>
+                                        </tr>
+                                    @endforeach
                                 @if(count($listas) > 0)
-                                <input type="hidden" name="con_listas" value="on" />
+                                    <input type="hidden" name="con_listas" value="on" />
                                 @else
-                                <tr>
-                                    <td colspan="5">
-                                        Todavía no has creado contactos en una lista de suscriptores
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            Todavía no has creado contactos en una lista de suscriptores
+                                        </td>
+                                    </tr>   
                                 @endif
                             </table>
                         </div><!--selecionar_suscriptores-->
