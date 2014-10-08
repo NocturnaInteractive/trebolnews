@@ -202,17 +202,6 @@ Route::group(array(
         }
     ));
 
-    Route::get('suscriptores', array(
-        'as' => 'suscriptores',
-        function() {
-            $listas = Auth::user()->listas()->paginate(5);
-
-            return View::make('trebolnews/listas-suscriptores', array(
-                'listas' => $listas
-            ));
-        }
-    ));
-
     Route::get('lista/{id_lista}', array(
         'as' => 'lista',
         function($id_lista) {
@@ -483,13 +472,54 @@ Route::group(array(
         'uses' => 'UsuarioController@mostrar_form_recuperar_password'
     ));
 
-    // confirmaión contraseña modificada
+    // confirmación contraseña modificada
     Route::get('contraseña-modificada', array(
         'as' => 'password_cambiado',
         function() {
             return View::make('trebolnews.confirmacion_password_cambiado');
         }
     ));
+
+    // base listas de suscriptores
+    Route::get('suscriptores', array(
+        'as' => 'suscriptores',
+        function() {
+            $listas = Auth::user()->listas()->paginate(5);
+            $listas->setBaseUrl('lista-suscriptores');
+
+            $html = View::make('trebolnews/listas/suscriptores', array(
+                'listas' => $listas
+            ))->render();
+
+            return View::make('trebolnews/listas-suscriptores', array(
+                'listas' => $listas,
+                'html'   => $html
+            ));
+        }
+    ));
+
+    // tabla listas de suscriptores
+    Route::get('lista-suscriptores', array(
+        'as' => 'lista-suscriptores',
+        function() {
+            if(Session::has('search-term')) {
+                $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Input::get('search-term') . '%')->paginate(5);
+            } else {
+                $listas = Auth::user()->listas()->paginate(5);
+            }
+            $listas->setBaseUrl('lista-suscriptores');
+
+            return Response::json(array(
+                'html' => View::make('trebolnews/listas/suscriptores', array(
+                    'listas' => $listas
+                ))->render(),
+                'paginador' => $listas->links('trebolnews/paginador-ajax')->render(),
+                'total' => $listas->count()
+            ));
+        }
+    ));
+
+    Route::any('list-search', 'ListaController@search');
 
 // fin páginas del sitio
 
@@ -500,11 +530,26 @@ Route::group(array(
     ), function() {
 
         // curados
+
         Route::get('recuperar_password', function(){
             return Response::json(array(
                 'popup' => View::make('trebolnews/popups/recuperar_password')->render()
             ));
         });
+
+        Route::get('crear_lista', function(){
+            return Response::json(array(
+                'popup' => View::make('trebolnews/popups/crear_lista')->render()
+            ));
+        });
+
+        // llamado para usar cuando el popup no requiere data adicional
+        Route::get('{popup}', function($popup) {
+            return Response::json(array(
+                'popup' => View::make("internas/popup_$popup")->render()
+            ));
+        });
+
         // fin curados
 
         Route::get('editar_lista/{id_lista}', function($id_lista) {
@@ -572,12 +617,6 @@ Route::group(array(
         Route::get('crear_carpeta_libreria', function() {
             return Response::json(array(
                 'popup' => View::make('internas/popup_crear_carpeta_libreria')->render()
-            ));
-        });
-
-        Route::get('{popup}', function($popup) {
-            return Response::json(array(
-                'popup' => View::make("internas/popup_$popup")->render()
             ));
         });
 
