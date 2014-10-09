@@ -25,6 +25,24 @@
             }
 
         });
+
+        $('[name="search-term"]').on('keypress', function(e){
+            if(e.which == 13) {
+                e.preventDefault();
+
+                $('#frm-search').ajaxSubmit({
+                    success: function(data) {
+                        if(data.status == 'ok') {
+                            $('#table-content').html(data.html);
+                            $('#paginador').html(data.paginador);
+                            $('#txt-total').text(data.total);
+                        } else {
+                            notys(data.validator);
+                        }
+                    }
+                });
+            }
+        });
     });
     </script>
 @stop
@@ -34,11 +52,11 @@
     <div id="container">
         <section class="tabs">
             <div class="content">
-                <h2>Listas de Suscriptores</h2>
+                <h2>Listas de suscriptores</h2>
                 <div class="infocont">
                     <div class="submenu">
-                        <form>
-                            <input class="search" type="text" placeholder="BUSCAR" name="Search" />
+                        <form id="frm-search" action="{{ action('ListaController@search') }}" method="post">
+                            <input class="search" type="text" placeholder="BUSCAR" name="search-term" />
                         </form>
                         <ul class="opciones">
                             <li>
@@ -49,14 +67,14 @@
                                 </ul>
                             </li>
                             <li>
-                                <a class="crearlista" href="#" popup="{{ url('popup/crearlista') }}">CREAR LISTA</a>
+                                <a class="crearlista" href="#" popup="{{ url('popup/crear_lista') }}">CREAR LISTA</a>
                             </li>
                         </ul>
                         <div class="cleaner"></div>
                     </div><!--submenu-->
                     <div id="submenulibreria">
                         <ul id="filtroselecionados">
-                            <li><p>Seleccionados: <span id="txt_seleccionados">0</span> de {{ count($listas) }}</p></li>
+                            <li><p>Seleccionados: <span id="txt_seleccionados">0</span> de <span id="txt-total">{{ count($listas) }}</span></p></li>
                             <li><a id="borrarselecionados" href="popup_eliminar_listasuscriptor_multi.html">Eliminar</a></li>
                         </ul>
                         <ul id="cantidad" class="btosuscriptores">
@@ -79,44 +97,21 @@
                                     <label></label>
                                 </div>
                             </th>
-                            <th scope="col" width="305px">Nombre de Lista</th>
-                            <th scope="col" width="200px">Fecha de Creaci&oacute;n
+                            <th scope="col" width="305px">Nombre de lista</th>
+                            <th scope="col" width="200px">Creada
                                 <!-- <a href="#" class="flechatabla"></a> -->
                             </th>
-                            <th scope="col" width="149px">Editado el</th>
+                            <th scope="col" width="149px">Editada</th>
                             <th scope="col" width="140px">Suscriptores</th>
                             <th scope="col" width="100px"></th>
                         </tr>
-                        @foreach($listas as $lista)
-                            <tr>
-                                <td>
-                                    <div class="checkbox">
-                                        <input type="checkbox" name="chk_lista[]" value="{{ $lista->id }}" />
-                                        <label></label>
-                                    </div>
-                                </td>
-                                <td><a href="{{ route('lista', $lista->id) }}">{{ $lista->nombre }}</a></td>
-                                <td>{{ $lista->created_at->format('d/m/Y') }}</td>
-                                <td>{{ $lista->updated_at->format('d/m/Y') }}</td>
-                                <td>{{ count($lista->contactos) }}</td>
-                                <td>
-                                    <a class="descargarlista" href="#">
-                                        <img src="{{ asset('internas/imagenes/descargarlista.png') }}" alt="descargar lista" width="25" height="25">
-                                    </a>
-                                    <a class="editarcampam" href="#" popup="{{ url('popup/editar_lista' . '/' . $lista->id) }}">
-                                        <img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="cambiar nombre" width="25" height="25">
-                                    </a>
-                                    <a class="borrarcam" href="#" popup="{{ url('popup/eliminar_lista' . '/' . $lista->id) }}">
-                                        <img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar lista" width="25" height="25">
-                                    </a>
-                                    <div class="cleaner"></div>
-                                </td>
-                            </tr>
-                        @endforeach
+                        <tbody id="table-content">
+                        {{ $html }}
+                        </tbody>
                     </table>
                     <div id="paginador">
                         @if(count($listas) > 0)
-                            {{ $listas->links('paginador') }}
+                            {{ $listas->links('trebolnews/paginador-ajax') }}
                         @endif
                     </div><!--paginador-->
                     <div class="cleaner"></div>
