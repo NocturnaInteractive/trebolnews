@@ -163,7 +163,7 @@ Route::group(array(
                     break;
                 case 'url':
                     return View::make('internas/campaniaurl_paso4');
-                    break;
+                    break;  
                 case 'html':
                     return View::make('internas/campaniaenblanco_paso4');
                     break;
@@ -194,16 +194,6 @@ Route::group(array(
         }
     ));
 
-<<<<<<< HEAD
-    /*
-    Route::get('campaign/view/{campaignId}', array(
-        function($campaignId) {
-            $campaign = Campania::find($campaignId);
-            $items = array('campaign' => $campaign );
-            return View::make('emails/prueba', $items);
-        }
-    ));
-    */
 
     Route::get('campaign/view/{campaignId}/{contactId?}', 'MailController@renderMail');
 
@@ -218,8 +208,6 @@ Route::group(array(
         }
     ));
 
-=======
->>>>>>> FETCH_HEAD
     Route::get('lista/{id_lista}', array(
         'as' => 'lista',
         function($id_lista) {
