@@ -5,6 +5,16 @@
 	<title>TrebolNEWS - Mail</title>
 </head>
 <body>
-	{{ $campaign->contenido }}
+	<?php
+		$generated = $campaign->template;
+		
+		if($campaign->suscriptor){
+			$generated = str_replace("%%suscriptor.name%%",  $campaign->suscriptor->name, $generated);
+			$generated = str_replace("%%suscriptor.last%%",  $campaign->suscriptor->last, $generated);
+			$generated = str_replace("%%suscriptor.email%%", $campaign->suscriptor->email, $generated);
+		}
+	?>
+
+	{{$generated}}
 </body>
 </html>

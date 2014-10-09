@@ -155,19 +155,11 @@ Route::group(array(
         'as' => 'step4',
         function() {
             switch(Session::get('campania.subtipo')) {
-                case 'blanco':
+                case 'editor':
                     return View::make('campaigns/new_campaign_step4_editor');
                     break;
-                case 'template':
-                    $templates = Template::paginate(12);
-
-                    $templates->each(function($template){
-
-                    });
-
-                    return View::make('trebolnews/subtipo-template', array(
-                        'templates' => $templates
-                    ));
+                case 'gallery':
+                    return View::make('campaigns/new_campaign_step4_gallery');
                     break;
                 case 'url':
                     return View::make('internas/campaniaurl_paso4');
@@ -201,6 +193,18 @@ Route::group(array(
             }
         }
     ));
+
+    /*
+    Route::get('campaign/view/{campaignId}', array(
+        function($campaignId) {
+            $campaign = Campania::find($campaignId);
+            $items = array('campaign' => $campaign );
+            return View::make('emails/prueba', $items);
+        }
+    ));
+    */
+
+    Route::get('campaign/view/{campaignId}/{contactId?}', 'MailController@renderMail');
 
     Route::get('suscriptores', array(
         'as' => 'suscriptores',

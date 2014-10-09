@@ -75,7 +75,7 @@ class CampaniaController extends BaseController {
 				*/
 								
 				switch(Session::get('campania.subtipo')) {
-					case 'blanco':
+					case 'editor':
 						$rules = array_merge($rules, array(
 							'campania:contenido' => 'required'
 						));
@@ -86,7 +86,7 @@ class CampaniaController extends BaseController {
 
 						break;
 
-					case 'template':
+					case 'gallery':
 						$rules = array_merge($rules, array(
 
 						));
@@ -97,7 +97,7 @@ class CampaniaController extends BaseController {
 
 						break;
 
-					case 'html':
+					case 'fetch':
 						$rules = array_merge($rules, array(
 							'campania:contenido' => 'required'
 						));
@@ -144,23 +144,29 @@ class CampaniaController extends BaseController {
 
 				case 'confirmar':
 					$campania = $this->getCampaignCreated();
-
+					$success = false;
 					switch($campania->envio) {
 						
-						case 'inmediato':
-							return MailController::send($campania);;
-							$campania->status = 'enviada';
-							$campania->save();
+						case 'direct':
+							if(MailController::send($campania)){
+								$campania->status = 'sent';
+								$campania->save();
+								$success = true;
+							}
 							break;
 
-						case 'programado':
-							$campania->status = 'programada';
+						case 'programmed':
+							$campania->status = 'programmed';
 							$campania->save();
+							$success = true;
 							break;
 					}
 
 					Session::forget('campania');
-					$response = Response::json(array('status' => 'ok' ));
+					if($success)
+						$response = Response::json(array('status' => 'ok' ));
+					else
+						$response = Response::json(array('status' => 'error' ));
 					break;
 
 			}
@@ -179,6 +185,21 @@ class CampaniaController extends BaseController {
 		$id = Session::get('campania.id');
 		if($id) {
 			$campania = Campania::find($id);
+			$campania->id  = Session::get('campania.id');
+			$campania->tipo  = Session::get('campania.tipo');
+			$campania->subtipo = Session::get('campania.subtipo');
+			$campania->nombre = Session::get('campania.nombre');
+			$campania->asunto = Session::get('campania.asunto');
+			$campania->remitente = Session::get('campania.remitente');
+			$campania->email = Session::get('campania.email');
+			$campania->respuesta = Session::get('campania.respuesta');
+			$campania->contenido = Session::get('campania.contenido');
+			$campania->redes = Session::get('campania.redes');
+			$campania->status = Session::get('campania.status');
+			$campania->envio = Session::get('campania.envio');
+			$campania->notificacion = Session::get('campania.notificacion');
+
+			$campania->save();
 		} else {
 			$campania = Campania::create(array(
 				'id_usuario'    => Auth::user()->id,
@@ -191,7 +212,7 @@ class CampaniaController extends BaseController {
 				'respuesta'     => Session::get('campania.respuesta'),
 				'contenido'     => Session::get('campania.contenido'),
 				'redes'         => Session::get('campania.redes') ? json_encode(Session::get('campania.redes')) : null,
-				'status'        => 'borrador',
+				'status'        => 'draft',
 				'envio'         => Session::get('campania.envio'),
 				'programacion'  => Session::get('campania.envio') == 'programado' ? Carbon::createFromFormat('d/m/Y H:i', Session::get('fecha') . ' ' . Session::get('hora')) : null,
 				'notificacion'  => Session::get('campania.notificacion') == 'on' ? true : false

@@ -159,14 +159,14 @@
                             <h3>Configurar Env&iacute;o</h3>
                             <div id="pestanias_envio">
                                 <input type="hidden" id="envio" name="campania:envio" value="inmediato" />
-                                <input id="enviotab-1" type="radio" name="radio-set" class="tab-selector-1" envio="inmediato" checked="checked" />
+                                <input id="enviotab-1" type="radio" name="radio-set" class="tab-selector-1" envio="direct" checked="checked" />
                                 <label for="enviotab-1" class="envio-label-1">
                                     <img src="{{ asset('internas/imagenes/inmediato_clasico.png') }}" width="107" height="100" alt="envio inmediato">
                                     <h4>Env&iacute;o Inmediato</h4>
                                     <p>La Campa&ntilde;a se enviar&aacute; al momento en el que hagas  click en enviar.</p>
                                     <div class="cleaner"></div>
                                 </label>
-                                <input id="enviotab-2" type="radio" name="radio-set" class="tab-selector-2" envio="programado" />
+                                <input id="enviotab-2" type="radio" name="radio-set" class="tab-selector-2" envio="programmed" />
                                 <label for="enviotab-2" class="envio-label-2">
                                     <img src="{{ asset('internas/imagenes/programar_clasico.png') }}" width="107" height="100" alt="envio programado">
                                     <h4>Entrega Programada</h4>
@@ -309,7 +309,9 @@
                             <a id="guardarysalir" href="{{ route('campanias') }}" class="btn_guardar" y="salir">GUARDAR Y SALIR</a>
                             <ul>
                                 <li><a href="{{ URL::previous() }}" id="anterior">ANTERIOR</a></li>
-                                <li><a href="{{ route('step4') }}" id="siguiente" class="btn_guardar" y="seguir">SIGUIENTE</a></li>
+                                @if(Session::get('campania') != 'asdf' )
+                                    <li><a href="{{ route('step4') }}" id="siguiente" class="btn_guardar" y="seguir">SIGUIENTE</a></li>
+                                @endif
                             </ul>
                             <div class="cleaner"></div>
                         </div><!--opciones_pasos-->

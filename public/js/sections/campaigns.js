@@ -18,7 +18,10 @@ $(function() {
 			            if(data.status == 'ok') {
 			                window.location = $this.attr('href');
 			            } else {
-			                notys(data.validator);
+			            	if(typeof(data.validator) !== "undefined")
+			                	notys(data.validator);
+			                else
+			                	notys(data.status);
 			            }
 			        }
 			    });
@@ -34,7 +37,10 @@ $(function() {
 						if(data.status == 'ok') {
 							window.location = $this.attr('href');
 						} else {
-							notys(data.validator);
+							if(typeof(data.validator) !== "undefined")
+			                	notys(data.validator);
+			                else
+			                	console.log("Error sending email");
 						}
 					}
 				});

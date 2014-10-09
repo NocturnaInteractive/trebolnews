@@ -10,7 +10,7 @@ class CrearTemplates extends Migration {
 			$table->increments('id');
 			$table->string('categoria');
 			$table->string('nombre');
-			$table->string('archivo')->unique();
+			$table->text('contenido');
 			$table->timestamps();
 			$table->softDeletes();
 		});

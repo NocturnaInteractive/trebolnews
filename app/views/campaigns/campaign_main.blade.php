@@ -104,19 +104,17 @@
                         <table width="100%"  cellpadding="0" cellspacing="0" class="listacampanias">
                             <tr class="primeralinea">
                                 <th scope="col" width="100px" >Tipo</th>
-                                <th scope="col" width="300px">Nombre de Campa&ntilde;a</th>
+                                <th scope="col" >Nombre de Campa&ntilde;a</th>
                                 <th scope="col" width="190px">Asunto</th>
                                 <th scope="col" width="179px">Fecha de Creaci&oacute;n</th>
-                                <th scope="col" width="100px">Estado</th>
                                 <th scope="col" width="65px"></th>
                             </tr>
-                            @foreach(Auth::user()->campanias()->where('status', '=', 'borrador')->get() as $campania)
+                            @foreach(Auth::user()->campanias()->where('status', '=', 'draft')->get() as $campania)
                                 <tr>
                                     <td>{{ Str::title(Config::get('trebolnews.campania.tipo')[$campania->tipo]) }}</td>
                                     <td>{{ $campania->nombre }}</td>
                                     <td>{{ $campania->asunto }}</td>
                                     <td>{{ $campania->created_at->format('d/m/Y') }}</td>
-                                    <td>{{ Str::title(Config::get('trebolnews.campania.status')[$campania->status]) }}</td>
                                     <td>
                                         <a class="editarcampam" href="{{ route('campania', $campania->id) }}"><img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a>
                                         <a class="borrarcam" href="{{ route('campanias') . '?' . http_build_query(array( 's' => 'borradores' )) }}" ajax="{{ route('eliminar_campania', $campania->id) }}"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a>
@@ -143,7 +141,7 @@
                                 <th scope="col" width="459px">Estado</th>
                                 <th scope="col" width="65px"></th>
                             </tr>
-                            @foreach(Auth::user()->campanias()->where('status', '=', 'programada')->get() as $campania)
+                            @foreach(Auth::user()->campanias()->where('status', '=', 'programmed')->get() as $campania)
                                 <tr>
                                     <td>{{ Str::title($configtipos[$campania->tipo]) }}</td>
                                     <td>{{ $campania->nombre }}</td>
@@ -175,15 +173,15 @@
                                 <th scope="col" width="179px">Fecha de Envio</th>
                                 <th scope="col" width="65px"></th>
                             </tr>
-                            @foreach(Auth::user()->campanias()->where('status', '=', 'enviada')->get() as $campania)
+                            @foreach(Auth::user()->campanias()->where('status', '=', 'sent')->get() as $campania)
                                 <tr>
                                     <td>{{ Str::title($configtipos[$campania->tipo]) }}</td>
                                     <td>{{ $campania->nombre }}</td>
                                     <td>{{ $campania->asunto }}</td>
                                     <td>{{ $campania->envio == 'inmediato' ? $campania->created_at : $campania->programacion }}</td>
                                     <td>
-                                        <a class="duplicamania" href="#"><img src="{{ asset('internas/imagenes/duplicamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a>
-                                        <a class="borrarcam" href="{{ route('eliminar_campania', $campania->id) }}"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a>
+                                        <a class="duplicamania" href="#"><img src="{{ asset('internas/imagenes/duplicamania.png') }}" alt="Ver Reporte" width="25" height="25"></a>
+                                        <a class="utilizarcam" href="#"><img src="{{ asset('internas/imagenes/spinner.png') }}" alt="Utilizar Campa&ntilde;a" width="25" height="25"></a>
                                         <div class="cleaner"></div>
                                     </td>
                                 </tr>

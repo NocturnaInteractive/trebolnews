@@ -39,14 +39,14 @@
                     </ul><!--pasoscam-->
                     <h3>&iquest;C&oacute;mo deseas armar tu campa&ntilde;a?</h3>
                     <div id="armarcam">
-                        <a id="eblanco" href="{{ route('step3') }}" session="campania.subtipo:blanco">
+                        <a id="eblanco" href="{{ route('step3') }}" session="campania.subtipo:editor">
                             <h4>Email en blanco</h4>
-                            <img src="{{ asset('internas/imagenes/eblanco.png') }}" width="107" height="100" alt="email blanco">
+                            <img src="{{ asset('internas/imagenes/eblanco.png') }}" width="107" height="100" alt="Editor de HTML">
                             <p>Crea el email, copiando y pegando el contenido en una plantilla en blanco.</p>
                         </a>
-                        <a id="epredi" href="{{ route('step3') }}" session="campania.subtipo:template">
+                        <a id="epredi" href="{{ route('step3') }}" session="campania.subtipo:gallery">
                             <h4>Emails predise&ntilde;ados</h4>
-                            <img src="{{ asset('internas/imagenes/epredi.png') }}" width="107" height="100" alt="email predise&ntilde;ados">
+                            <img src="{{ asset('internas/imagenes/epredi.png') }}" width="107" height="100" alt="Galeria de Templates">
                             <p>Crea el email en base a una<br>plantilla pre-cargada.</p>
                         </a>
                         <a id="eanteriores" href="{{ route('campanias') }}">
