@@ -158,7 +158,7 @@
                         <div id="configurar_envio">
                             <h3>Configurar Env&iacute;o</h3>
                             <div id="pestanias_envio">
-                                <input type="hidden" id="envio" name="campania:envio" value="inmediato" />
+                                <input type="hidden" id="envio" name="campania:envio" value="direct" />
                                 <input id="enviotab-1" type="radio" name="radio-set" class="tab-selector-1" envio="direct" checked="checked" />
                                 <label for="enviotab-1" class="envio-label-1">
                                     <img src="{{ asset('internas/imagenes/inmediato_clasico.png') }}" width="107" height="100" alt="envio inmediato">

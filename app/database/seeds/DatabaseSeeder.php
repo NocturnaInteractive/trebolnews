@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('ListaSeeder');
         $this->call('ContactoSeeder');
         $this->call('PlanSeeder');
+        $this->call('TemplateSeeder');
     }
 
 }

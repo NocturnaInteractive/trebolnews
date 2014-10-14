@@ -190,9 +190,9 @@
 							<ul>
 								<li><a href="{{ route('step4') }}" id="anterior">ANTERIOR</a></li>
 								<li><a href="{{ route('campanias') }}" id="siguiente" class="btn_guardar" y="confirmar">
-									@if(Session::get('campania.envio') == 'inmediato')
+									@if(Session::get('campania.envio') == 'direct')
 									ENVIAR
-									@elseif(Session::get('campania.envio') == 'programado')
+									@elseif(Session::get('campania.envio') == 'programmed')
 									PROGRAMAR
 									@endif
 								</a></li>

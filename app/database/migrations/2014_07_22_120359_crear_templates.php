@@ -8,9 +8,10 @@ class CrearTemplates extends Migration {
 	public function up() {
 		Schema::create('templates', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('categoria');
-			$table->string('nombre');
-			$table->text('contenido');
+			$table->string('category');
+			$table->string('name');
+			$table->text('content');
+			$table->text('thumbnail');
 			$table->timestamps();
 			$table->softDeletes();
 		});

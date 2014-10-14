@@ -178,7 +178,7 @@
                                     <td>{{ Str::title($configtipos[$campania->tipo]) }}</td>
                                     <td>{{ $campania->nombre }}</td>
                                     <td>{{ $campania->asunto }}</td>
-                                    <td>{{ $campania->envio == 'inmediato' ? $campania->created_at : $campania->programacion }}</td>
+                                    <td>{{ $campania->envio == 'direct' ? $campania->created_at : $campania->programacion }}</td>
                                     <td>
                                         <a class="duplicamania" href="#"><img src="{{ asset('internas/imagenes/duplicamania.png') }}" alt="Ver Reporte" width="25" height="25"></a>
                                         <a class="utilizarcam" href="#"><img src="{{ asset('internas/imagenes/spinner.png') }}" alt="Utilizar Campa&ntilde;a" width="25" height="25"></a>

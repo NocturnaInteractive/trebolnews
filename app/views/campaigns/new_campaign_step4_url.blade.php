@@ -13,7 +13,7 @@
 @stop
 
 @section('contenido')
-    <div id="container" class="step4 gallery">
+    <div id="container" class="step4 url">
 
 
 	<section class="tabs">
@@ -39,16 +39,9 @@
 
 
 
-				<div style="border:1px solid #D4D8D9;">
-				
-					<div id="template-gallery">
-						@foreach (Template::all() as $template)
-						<a href="#" data-template="{{$template->id}}" class="template" style="display:inline-block">
-							<img style="width:100px; height:100px;" src="http://images.sharefaith.com/images/3/1283540378534_180/page-02.jpg">
-							<div><input type="radio" name="template" />{{$template->name}}</div>
-						</a>
-						@endforeach
-					</div>
+				<div style="border:1px solid #D4D8D9;" id="fetch-url-container">
+					<div>Inserte la URL en donde se encuentre alojado el código HTML</div>
+					<label for="fetch-url-input">URL</label><input type="text" id="fetch-url-input" name="fetch-url-input" /><input type="button" value="Obtener Codigo" id="fetch-url-button" />
 				</div>
 
 				<div style="border:1px solid #D4D8D9; height:400px;">

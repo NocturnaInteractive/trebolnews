@@ -91,6 +91,14 @@ Route::group(array(
         }
     ));
 
+    Route::get('templates/{id}', array(
+        'uses' => 'CampaniaController@getTemplate'
+    ));
+
+    Route::post('templates/fetch/', array(
+        'uses' => 'CampaniaController@fetchUrl'
+    ));
+
     Route::get('campañas', array(
         'as' => 'campanias',
         function() {
@@ -101,6 +109,10 @@ Route::group(array(
     Route::get('campaña/{id}', array(
         'as' => 'campania',
         'uses' => 'CampaniaController@campania'
+    ));
+
+    Route::get('mail/test', array(
+        'uses' => 'MailController@test'
     ));
 
     Route::get('campaign/step1', array(
@@ -162,7 +174,7 @@ Route::group(array(
                     return View::make('campaigns/new_campaign_step4_gallery');
                     break;
                 case 'url':
-                    return View::make('internas/campaniaurl_paso4');
+                    return View::make('campaigns/new_campaign_step4_url');
                     break;  
                 case 'html':
                     return View::make('internas/campaniaenblanco_paso4');
@@ -195,7 +207,7 @@ Route::group(array(
     ));
 
 
-    Route::get('campaign/view/{campaignId}/{contactId?}', 'MailController@renderMail');
+    Route::get('campaign/view/{campaignId}/{contactId}/{verification}', 'MailController@renderMail');
 
     Route::get('suscriptores', array(
         'as' => 'suscriptores',

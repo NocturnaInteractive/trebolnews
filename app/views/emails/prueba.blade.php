@@ -16,5 +16,12 @@
 	?>
 
 	{{$generated}}
+
+
+	@if( $campaign->owner->suscriptionType === 'free' )
+	<footer>
+		<?php echo View::make('emails/non_suscriptor_footer'); ?>
+	</footer>
+	@endif
 </body>
 </html>

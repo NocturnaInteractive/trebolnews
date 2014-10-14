@@ -91,6 +91,35 @@ $(function() {
 		});
 
 		$('.btn_guardar').on('click', _events.saveHandler);
+
+		$('#template-gallery').on('click','.template',function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			var $this=$(this);
+			var templateId = $this.data('template');
+
+			$this.find('input').prop("checked", true );
+
+			$.ajax({
+				type: 'get',
+				url:  '/templates/' + $this.data('template'),
+				success: function(data) {
+					CKEDITOR.instances.txt_campania.setData(data.content);
+				}
+			});
+
+		});
+
+		$('#fetch-url-container').on('click','#fetch-url-button',function(e){
+			$.ajax({
+				type: 'post',
+				data: {url: $('#fetch-url-container #fetch-url-input').val()},
+				url:  '/templates/fetch/',
+				success: function(data) {
+					CKEDITOR.instances.txt_campania.setData(data);
+				}
+			});
+		});
 	}
 
 	

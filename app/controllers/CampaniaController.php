@@ -97,7 +97,7 @@ class CampaniaController extends BaseController {
 
 						break;
 
-					case 'fetch':
+					case 'url':
 						$rules = array_merge($rules, array(
 							'campania:contenido' => 'required'
 						));
@@ -127,6 +127,7 @@ class CampaniaController extends BaseController {
 				Session::put(str_replace(':', '.', $key), $value);
 			}
 
+			
 			//Determine an action
 			switch(Input::get('y')) {
 
@@ -148,10 +149,13 @@ class CampaniaController extends BaseController {
 					switch($campania->envio) {
 						
 						case 'direct':
-							if(MailController::send($campania)){
+							$mail = new MailController();
+							if($mail->sendCampaign($campania)){
 								$campania->status = 'sent';
 								$campania->save();
 								$success = true;
+								Session::forget('campania');
+
 							}
 							break;
 
@@ -159,10 +163,11 @@ class CampaniaController extends BaseController {
 							$campania->status = 'programmed';
 							$campania->save();
 							$success = true;
+							Session::forget('campania');
 							break;
 					}
 
-					Session::forget('campania');
+					
 					if($success)
 						$response = Response::json(array('status' => 'ok' ));
 					else
@@ -291,6 +296,35 @@ class CampaniaController extends BaseController {
 		}
 
 		return Redirect::to(URL::previous());
+	}
+
+	public function getTemplate($id) {
+		$template = Template::find($id);
+
+		return $template;
+	}
+
+	public function fetchUrl() {
+		$url = Input::get('url');
+
+		$ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);     
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); 
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_SSLVERSION, 3);
+
+        $html = curl_exec($ch);
+        curl_close($ch);
+
+        if($html){
+            $res = $html;
+        }else{
+            $res = curl_error($ch);
+        }
+
+        return utf8_encode($res);
 	}
 
 }
