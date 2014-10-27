@@ -737,8 +737,7 @@ function login_con_fb(response) {
                             }
                         });
 /* ]]> */
-</script>
-<script>
+
                                     var moneda = 'pesos';
                                     function precio(moneda){
                                         switch(moneda){
