@@ -602,7 +602,33 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 .editarperfil { height:40px; margin-top:30px; }
 .editarperfil a { width:160px; height:25px; padding-top:9px;  display:block; float:right; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; -moz-box-shadow: 0px 3px 0px 0px #10705d; -o-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; color:#FFF !important }
 .editarperfil a:hover {background-color:#17a387; -webkit-box-shadow: 0px 0px 0px 0px #943849; -moz-box-shadow: 0px 0px 0px 0px #943849; -o-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
-
+/*-------- information-header ------------------------------------------------------------------------------------*/
+.information-header{
+    position: relative;
+    float: left;
+    background-color: #384363;
+    width: 100%;
+}
+.information-header p{
+    color:#fff;
+    position: relative;
+    float: right;
+    padding: 0;
+    margin: 6px 6px;
+    font-size: 14px;
+}
+.information-header .yellow{
+    color:#f8fd0b;
+}
+.information-header .center{
+    width: 1024px;
+    margin: 0 auto;
+}
+/*-------- Historial de compras ------------------------------------------------------------------------------------*/
+.centerTable{
+    padding: 0;
+    text-align: center !important;
+}
 /*--------edita de envios------------------------------------------------------------------------------------*/
 
 #configurar_piecam {position:relative; margin-top:50px}
