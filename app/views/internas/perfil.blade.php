@@ -166,7 +166,8 @@ owurl7.style.display='none':owurl7.style.display='block';
 
                <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3" />
               <label for="tab-3" class="tab-label-3">Edici&oacute;n de env&iacute;os </label>
-
+              <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4" />
+                <label for="tab-4" class="tab-label-4">Historial de compras </label>
 
                 <div class="clear-shadow"></div>
 
@@ -347,7 +348,53 @@ owurl7.style.display='none':owurl7.style.display='block';
 
         </div><!--infocont-->
         </div> <!--content-3-->
-
+<div class="content-4">
+                        <h2>Historial de compras</h2>
+                        <div class="infocont">
+                            <table width="100%"  cellpadding="0" cellspacing="0" class="perfiltabla">
+                                <tr class="primeraperfil">
+                                    <th scope="col" width="150px" class="datoperfil">Envíos</th>
+                                    <th scope="col" width="150px" class="datoperfil">Suscriptores</th>
+                                    <th scope="col" width="200px" class="datoperfil">Cantidades</th>
+                                    <th scope="col" width="200px" class="datoperfil">Costo U$S</th>
+                                    <th scope="col" width="200px" class="datoperfil">Fecha</th>
+                                    <th scope="col" width="200px" class="datoperfil">Ver detalle recibo</th>
+                                </tr>
+                                <tr class="primeraperfil">
+                                    <td class="datoperfil centerTable">x</td>
+                                    <td class="datoperfil centerTable"></td>
+                                    <td class="datoperfil">1500</td>
+                                    <td class="datoperfil">10</td>
+                                    <td class="datoperfil">2/9/2014</td>
+                                    <td class="datoperfil"><a href="#">Ver PDF</a></td>
+                                </tr>
+                                <tr class="primeraperfil">
+                                    <td class="datoperfil centerTable"></td>
+                                    <td class="datoperfil centerTable">x</td>
+                                    <td class="datoperfil">20000</td>
+                                    <td class="datoperfil">200</td>
+                                    <td class="datoperfil">4/9/2014</td>
+                                    <td class="datoperfil"><a href="#">Ver PDF</a></td>
+                                </tr>
+                                <tr class="primeraperfil">
+                                    <td class="datoperfil centerTable">x</td>
+                                    <td class="datoperfil centerTable"></td>
+                                    <td class="datoperfil">20000</td>
+                                    <td class="datoperfil">200</td>
+                                    <td class="datoperfil">4/9/2014</td>
+                                    <td class="datoperfil"><a href="#">Ver PDF</a></td>
+                                </tr>
+                                <tr class="primeraperfil">
+                                    <td class="datoperfil centerTable">x</td>
+                                    <td class="datoperfil centerTable"></td>
+                                    <td class="datoperfil">1500</td>
+                                    <td class="datoperfil">10</td>
+                                    <td class="datoperfil">2/9/2014</td>
+                                    <td class="datoperfil"><a href="#">Ver PDF</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
 
 
         </div>
