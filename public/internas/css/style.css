@@ -52,7 +52,7 @@ ul, li { margin:0; padding:0; list-style:none}
 body, html {padding: 0; margin: 0; height:100%}
 body {font-family:'ralewayregular',  'Raleway', sans-serif; font-size:16px; background-color:#ecf0f1; min-width:1024px; overflow-x:hidden;}
 
-header {height:80px; background-color:#12806a; border-bottom:2px solid #3e4463;}
+header {height:80px; background-color:#12806a; border-bottom:2px solid #3e4463;position: relative;display: inline-block;width: 100%;}
 header a { display:block}
 #conheader { width:1024px; padding:30px 0 20px 0; margin:0 auto}
 h1 {text-indent:-9999px; background-image:url(../imagenes/logo.png); height:32px; width:200px; margin:0; float:left}
