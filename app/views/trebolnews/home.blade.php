@@ -21,6 +21,7 @@
     {{ HTML::script('js/jquery.noty.packaged.min.js') }}
     {{ HTML::script('js/trebolnews.js') }}
     {{ HTML::style('css/trebolnews.css') }}
+    {{ HTML::style('css/general.css') }}
     <script>
         $(function() {
             $('#loginentrar').one('click', login_handler);
@@ -355,7 +356,10 @@
                         <section id="fbsection5">
                             <h2>Planes y Precios</h2>
                             <div id="planes">
-
+                                <select class="select-precios" id='planes-home'>
+                                    <option value='pesos'>Pesos Argentinos</option>
+                                    <option value='dolares'>Dolares estadounidenses</option>
+                                </select>    
                                 <div id="pfree">
                                     <h3>Plan Gratuito</h3>
                                     <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os!</p>
