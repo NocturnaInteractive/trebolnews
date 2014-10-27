@@ -23,11 +23,7 @@
 
     {{ HTML::script('js/trebolnews.js') }}
     {{ HTML::style('css/trebolnews.css') }}
-    {{ HTML::style('css/general.css') }}
 
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-        
     <script>
         $(function() {
             $('#loginentrar').one('click', login_handler);
@@ -415,10 +411,10 @@ function login_con_fb(response) {
                             <h2>Planes y Precios</h2>
                             <div id="planes">
                                 <select class="select-precios" id='planes-home'>
-          <option value='pesos'>Pesos Argentinos</option>
-          <option value='dolares'>Dolares estadounidenses</option>
-      </select>
-      <script>
+                                    <option value='pesos'>Pesos Argentinos</option>
+                                    <option value='dolares'>Dolares estadounidenses</option>
+                                </select>
+                                <script>
                                     var moneda = 'pesos';
                                     function precio(moneda){
                                         switch(moneda){
