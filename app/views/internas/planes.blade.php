@@ -11,12 +11,14 @@
 	<link href='http://fonts.googleapis.com/css?family=Raleway:400,800,900,700,600,500,300,200,100' rel='stylesheet' type='text/css'>
 
 	{{ HTML::style('internas/css/style.css') }}
+	{{ HTML::style('internas/css/general.css') }}
 
 	{{ HTML::script('js/jquery-1.11.0.min.js') }}
 	<!--chat-->
 	{{ HTML::script('home/js/modernizr.custom.js') }}
 	<!--chat-->
-
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 </head>
 <body>
 	<header>
@@ -92,6 +94,30 @@
 
 			<div class="content">
 				<h2>Precios y Planes</h2>
+                                <select class="select-precios">
+                                    <option value='pesos'>Pesos Argentinos</option>
+                                    <option value='dolares'>Dolares estadounidenses</option>
+                                </select>
+                                <script>
+                                    var moneda = 'pesos';                        
+                                    function precio(moneda){
+                                        switch(moneda){
+                                            case 'pesos':
+                                                $('.moneda').html('$');
+                                                break;
+                                            case 'dolares':
+                                                $('.moneda').html('U$S');
+                                                break;
+                                        }
+                                    }
+
+                                    $( ".select-precios" ).change(function() {
+                                        precio( $(this).val() );
+                                    });
+                                    $(document).ready(function(){
+                                        precio('pesos');
+                                    });
+                                </script>
 				<div class="infocont"> 
 
 					<div id="planes">
@@ -140,7 +166,7 @@
 										</div>      
 										<h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
 										<div class="cleaner"></div>
-										<h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;${{$plan->precio}}</span></h4>
+										<h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{$plan->precio}}</span></h4>
 										<div class="cleaner"></div>      
 									</div>
                                 <?php
@@ -158,7 +184,7 @@
 									</div>      
 									<h4><span class="hastaplan">M&aacute;s</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">100.000</h4>
 									<div class="cleaner"></div>
-									<h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+									<h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>0</span></h4>
 									<div class="cleaner"></div>      
 								</div>      
 							</div><!--infoplanes-->
@@ -186,7 +212,7 @@
 										</div>      
 										<h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
 										<div class="cleaner"></div>
-										<h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;${{$plan->precio}}</span></h4>
+                                                                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{$plan->precio}}</span></h4>
 										<div class="cleaner"></div>      
 									</div>
                                 <?php
@@ -204,7 +230,7 @@
 									</div>      
 									<h4><span class="hastaplan">M&aacute;s</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">100.000</h4>
 									<div class="cleaner"></div>
-									<h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+									<h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>0</span></h4>
 									<div class="cleaner"></div>      
 								</div> 
 							</div><!--infoplanes-->
