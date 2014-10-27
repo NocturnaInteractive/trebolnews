@@ -263,10 +263,10 @@ h2 {font-size:30px; color:#FFF; font-weight:normal !important; margin:0; font-fa
 #planes p {color:#737f80; font-size:14px; height:110px; margin-bottom:0 !important }
 #planes .infoplanes {width:308px; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 1px 1px 1px 0px #a7a9ab; box-shadow:  1px 1px 1px 0px #a7a9ab; background-color:#FFF; margin:15px 0 45px 0}
 
-#planes .verdeinfo { width:100%; height:60px}
-#planes .grisinfo { width:100%; background-color:#f2f0f0; height:60px}
-#planes .verdeinfo h4 { text-align:center; color:#17a387; font-size:22px; padding-top:17px; margin:0;}
-#planes .grisinfo h4 { text-align:center; color:#737f80; font-size:22px; padding-top:17px; margin:0;}
+#planes .verdeinfo { width:100%; height:auto}
+#planes .grisinfo { width:100%; background-color:#f2f0f0; height:auto}
+#planes .verdeinfo h4 { text-align:center; color:#17a387; font-size:22px; padding:17px 0; margin:0;}
+#planes .grisinfo h4 { text-align:center; color:#737f80; font-size:22px; padding:17px 0; margin:0;}
 #planes .hastaplan { font-weight:normal; font-size:18px;}
 #planes .hastaenv { font-weight:normal; font-size:18px}
 #planes .precioplan { font-size:20px;}
