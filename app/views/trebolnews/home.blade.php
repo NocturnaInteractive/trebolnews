@@ -357,8 +357,8 @@
                             <h2>Planes y Precios</h2>
                             <div id="planes">
                                 <select class="select-precios" id="planes-home">
-                                    <option value='pesos'>Pesos Argentinos</option>
-                                    <option value='dolares'>Dolares estadounidenses</option>
+                                    <option value="pesos">Pesos Argentinos</option>
+                                    <option value="dolares">Dolares estadounidenses</option>
                                 </select>    
                                 <div id="pfree">
                                     <h3>Plan Gratuito</h3>
