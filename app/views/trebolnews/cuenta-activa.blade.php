@@ -8,10 +8,10 @@
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <link rel="shortcut icon" href="favicon.ico">
-        <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+        {{ HTML::style('css/estilo.css') }}
         <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,900,700,600,500,300,200,100' rel='stylesheet' type='text/css'>
     </head>
-    <body style="background-color:#17A387; background-image:url(imagenes/confirma_bg.png); background-repeat:no-repeat; background-position: bottom center; background-size:auto; height:auto">
+    <body style="background-color:#17A387; background-image:url(../imagenes/confirma_bg.png); background-repeat:no-repeat; background-position: bottom center; background-size:auto; height:auto">
         <div id="conteinerco">
             <a href="index.html"><h1>TrebolNEWS</h1></a><br>
             <h2>¡Su cuenta ya est&aacute; activa!</h2>
