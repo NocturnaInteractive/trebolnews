@@ -410,7 +410,66 @@ function login_con_fb(response) {
                         <section id="fbsection5">
                             <h2>Planes y Precios</h2>
                             <div id="planes">
-
+                                <select class="select-precios" id='planes-home'>
+          <option value='pesos'>Pesos Argentinos</option>
+          <option value='dolares'>Dolares estadounidenses</option>
+      </select>
+      <script>
+                                    var moneda = 'pesos';
+                                    function precio(moneda){
+                                        switch(moneda){
+                                            case 'pesos':
+                                                $('#precio-02').html(' $10');
+                                                $('#precio-03').html(' $15');
+                                                $('#precio-04').html(' $30');
+                                                $('#precio-05').html(' $50');
+                                                $('#precio-06').html(' $85');
+                                                $('#precio-07').html(' $150');
+                                                $('#precio-08').html(' $335');
+                                                $('#precio-09').html(' $440');
+                                                $('#precio-10').html(' $15');
+                                                $('#precio-11').html(' $30');
+                                                $('#precio-12').html(' $50');
+                                                $('#precio-13').html(' $85');
+                                                $('#precio-14').html(' $150');
+                                                $('#precio-15').html(' $335');
+                                                $('#precio-16').html(' $440');
+                                                $('#precio-17').html(' $600');
+                                                $('#precio-18').html(' $780');
+                                                $('#precio-19').html(' $880');
+                                                $('#precio-20').html(' $950');
+                                                break;
+                                            case 'dolares':
+                                                $('#precio-02').html(' U$S1');
+                                                $('#precio-03').html(' U$S1,5');
+                                                $('#precio-04').html(' U$S3');
+                                                $('#precio-05').html(' U$S5');
+                                                $('#precio-06').html(' U$S8,5');
+                                                $('#precio-07').html(' U$S15');
+                                                $('#precio-08').html(' U$S33,5');
+                                                $('#precio-09').html(' U$S44');
+                                                $('#precio-10').html(' U$S1,5');
+                                                $('#precio-11').html(' U$S3');
+                                                $('#precio-12').html(' U$S5');
+                                                $('#precio-13').html(' U$S8,5');
+                                                $('#precio-14').html(' U$S15');
+                                                $('#precio-15').html(' U$S35');
+                                                $('#precio-16').html(' U$S44');
+                                                $('#precio-17').html(' U$S60');
+                                                $('#precio-18').html(' U$S78');
+                                                $('#precio-19').html(' U$S88');
+                                                $('#precio-20').html(' U$S95');
+                                                break;
+                                        }
+                                    }
+                                    
+                                    $( ".select-precios" ).change(function() {
+                                        precio( $(this).val() );
+                                    });
+                                    $(document).ready(function(){
+                                        precio('pesos');
+                                    });
+                                </script>
                                 <div id="pfree">
                                     <h3>Plan Gratuito</h3>
                                     <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os!</p>
@@ -445,32 +504,32 @@ function login_con_fb(response) {
                                                 }
                                         ?>
                                             <div class="{{$class.'info'}}">
-                                                <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">2.500<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                                <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">2.500<span class="hastaenv"> Envios</span><span class="precioplan"  id='precio-02'>&nbsp;$0</span></h4>
                                             </div>
                                         <?php
                                             }
                                         ?>
                                         
                                         <div class="grisinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">5.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">5.000<span class="hastaenv"> Envios</span><span class="precioplan"  id='precio-03'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="verdeinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">10.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">10.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-04'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="grisinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">20.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">20.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-05'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="verdeinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">25.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">25.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-06'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="grisinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">50.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">50.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-07'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="verdeinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-08'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="grisinfo">
-                                            <h4><span class="hastaplan">M&aacute;s</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">M&aacute;s</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-09'>&nbsp;$0</span></h4>
                                         </div>
                                     </div><!--infoplanes-->
                                     <div class="bot">
@@ -485,25 +544,25 @@ function login_con_fb(response) {
                                     <p>Exclusivo paquete preparado para realizar grandes env&iacute;os. Con una suscripci&oacute;n mensual se contrata una cantidad de env&iacute;os y no hay l&iacute;mite de tiempo para hacerlos.</p>
                                     <div class="infoplanes">
                                         <div class="verdeinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">2.500<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">2.500<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-10'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="grisinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">5.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">5.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-11'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="verdeinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">10.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">10.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-12'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="grisinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">20.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">20.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-13'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="verdeinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">50.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">50.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-14'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="grisinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/planegris.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-15'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="verdeinfo">
-                                            <h4><span class="hastaplan">M&aacute;s</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;$0</span></h4>
+                                            <h4><span class="hastaplan">M&aacute;s</span><img src="{{ asset('home/imagenes/plane.png') }}" width="18px" height="18px" alt="icono">100.000<span class="hastaenv"> Envios</span><span class="precioplan" id='precio-16'>&nbsp;$0</span></h4>
                                         </div>
                                         <div class="grisinfo"><img class="xicon" src="{{ asset('home/imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
                                     </div><!--infoplanes-->
