@@ -414,62 +414,7 @@ function login_con_fb(response) {
                                     <option value='pesos'>Pesos Argentinos</option>
                                     <option value='dolares'>Dolares estadounidenses</option>
                                 </select>
-                                <script>
-                                    var moneda = 'pesos';
-                                    function precio(moneda){
-                                        switch(moneda){
-                                            case 'pesos':
-                                                $('#precio-02').html(' $10');
-                                                $('#precio-03').html(' $15');
-                                                $('#precio-04').html(' $30');
-                                                $('#precio-05').html(' $50');
-                                                $('#precio-06').html(' $85');
-                                                $('#precio-07').html(' $150');
-                                                $('#precio-08').html(' $335');
-                                                $('#precio-09').html(' $440');
-                                                $('#precio-10').html(' $15');
-                                                $('#precio-11').html(' $30');
-                                                $('#precio-12').html(' $50');
-                                                $('#precio-13').html(' $85');
-                                                $('#precio-14').html(' $150');
-                                                $('#precio-15').html(' $335');
-                                                $('#precio-16').html(' $440');
-                                                $('#precio-17').html(' $600');
-                                                $('#precio-18').html(' $780');
-                                                $('#precio-19').html(' $880');
-                                                $('#precio-20').html(' $950');
-                                                break;
-                                            case 'dolares':
-                                                $('#precio-02').html(' U$S1');
-                                                $('#precio-03').html(' U$S1,5');
-                                                $('#precio-04').html(' U$S3');
-                                                $('#precio-05').html(' U$S5');
-                                                $('#precio-06').html(' U$S8,5');
-                                                $('#precio-07').html(' U$S15');
-                                                $('#precio-08').html(' U$S33,5');
-                                                $('#precio-09').html(' U$S44');
-                                                $('#precio-10').html(' U$S1,5');
-                                                $('#precio-11').html(' U$S3');
-                                                $('#precio-12').html(' U$S5');
-                                                $('#precio-13').html(' U$S8,5');
-                                                $('#precio-14').html(' U$S15');
-                                                $('#precio-15').html(' U$S35');
-                                                $('#precio-16').html(' U$S44');
-                                                $('#precio-17').html(' U$S60');
-                                                $('#precio-18').html(' U$S78');
-                                                $('#precio-19').html(' U$S88');
-                                                $('#precio-20').html(' U$S95');
-                                                break;
-                                        }
-                                    }
-                                    
-                                    $( ".select-precios" ).change(function() {
-                                        precio( $(this).val() );
-                                    });
-                                    $(document).ready(function(){
-                                        precio('pesos');
-                                    });
-                                </script>
+                                
                                 <div id="pfree">
                                     <h3>Plan Gratuito</h3>
                                     <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os!</p>
@@ -793,7 +738,62 @@ function login_con_fb(response) {
                         });
 /* ]]> */
 </script>
-
+<script>
+                                    var moneda = 'pesos';
+                                    function precio(moneda){
+                                        switch(moneda){
+                                            case 'pesos':
+                                                $('#precio-02').html(' $10');
+                                                $('#precio-03').html(' $15');
+                                                $('#precio-04').html(' $30');
+                                                $('#precio-05').html(' $50');
+                                                $('#precio-06').html(' $85');
+                                                $('#precio-07').html(' $150');
+                                                $('#precio-08').html(' $335');
+                                                $('#precio-09').html(' $440');
+                                                $('#precio-10').html(' $15');
+                                                $('#precio-11').html(' $30');
+                                                $('#precio-12').html(' $50');
+                                                $('#precio-13').html(' $85');
+                                                $('#precio-14').html(' $150');
+                                                $('#precio-15').html(' $335');
+                                                $('#precio-16').html(' $440');
+                                                $('#precio-17').html(' $600');
+                                                $('#precio-18').html(' $780');
+                                                $('#precio-19').html(' $880');
+                                                $('#precio-20').html(' $950');
+                                                break;
+                                            case 'dolares':
+                                                $('#precio-02').html(' U$S1');
+                                                $('#precio-03').html(' U$S1,5');
+                                                $('#precio-04').html(' U$S3');
+                                                $('#precio-05').html(' U$S5');
+                                                $('#precio-06').html(' U$S8,5');
+                                                $('#precio-07').html(' U$S15');
+                                                $('#precio-08').html(' U$S33,5');
+                                                $('#precio-09').html(' U$S44');
+                                                $('#precio-10').html(' U$S1,5');
+                                                $('#precio-11').html(' U$S3');
+                                                $('#precio-12').html(' U$S5');
+                                                $('#precio-13').html(' U$S8,5');
+                                                $('#precio-14').html(' U$S15');
+                                                $('#precio-15').html(' U$S35');
+                                                $('#precio-16').html(' U$S44');
+                                                $('#precio-17').html(' U$S60');
+                                                $('#precio-18').html(' U$S78');
+                                                $('#precio-19').html(' U$S88');
+                                                $('#precio-20').html(' U$S95');
+                                                break;
+                                        }
+                                    }
+                                    
+                                    $( ".select-precios" ).change(function() {
+                                        precio( $(this).val() );
+                                    });
+                                    $(document).ready(function(){
+                                        precio('pesos');
+                                    });
+                                </script>
 <!--explorer placeholder-->
 
 </body>
