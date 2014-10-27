@@ -1,0 +1,28 @@
+/*--------Planes------------------------------------------------------------------------------------*/
+.select-precios{
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    font-family: 'ralewayregular', 'Raleway', sans-serif;
+
+    color: #737f80;
+    height: 34px;
+    font-size: 14px;
+    padding-left: 10px;
+    background-color: #FFF;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 1px 0.5px 0px 0px #d4d8d9;
+    -moz-box-shadow: 1px 0.5px 0px 0px #d4d8d9;
+    -o-box-shadow: 1px 0.5px 0px 0px #d4d8d9;
+    box-shadow: 1px 0.5px 0px 0px #d4d8d9;
+    border: 1px solid #d4d8d9;
+    opacity: 1;
+}
+#planes-home{
+    position: absolute;
+    top: -53px;
+    right: 0;  
+}

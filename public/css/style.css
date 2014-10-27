@@ -52,7 +52,7 @@ ul, li { margin:0; padding:0; list-style:none}
 body, html {padding: 0; margin: 0; height:100%}
 body {font-family:'ralewayregular',  'Raleway', sans-serif; font-size:16px; background-color:#ecf0f1; min-width:1024px; overflow-x:hidden;}
 
-header {height:80px; background-color:#12806a; border-bottom:2px solid #3e4463;}
+header {height:80px; background-color:#12806a; border-bottom:2px solid #3e4463;position: relative;display: inline-block;width: 100%;}
 header a { display:block}
 #conheader { width:1024px; padding:30px 0 20px 0; margin:0 auto}
 h1 {text-indent:-9999px; background-image:url(../imagenes/logo.png); height:32px; width:200px; margin:0; float:left}
@@ -119,7 +119,7 @@ h1 {text-indent:-9999px; background-image:url(../imagenes/logo.png); height:32px
   
 #menu nav li:hover > ul li { overflow: visible; float:none; padding: 0;}
 
-#menu nav li ul li a {font-size:14px; background-color:#17a387; width:164px; padding:8px 20px 0 16px; height:24px;  -webkit-box-shadow:  0px 2px 2px 0px #0e6655; -moz-box-shadow:  0px 2px 2px 0px #0e6655; -o-box-shadow:  0px 2px 2px 0px #0e6655; box-shadow:  0px 2px 2px 0px #0e6655; text-align:left; letter-spacing:normal;border-bottom: 3px solid #17a387; }
+#menu nav li ul li a {font-size:14px; background-information-header:#17a387; width:164px; padding:8px 20px 0 16px; height:24px;  -webkit-box-shadow:  0px 2px 2px 0px #0e6655; -moz-box-shadow:  0px 2px 2px 0px #0e6655; -o-box-shadow:  0px 2px 2px 0px #0e6655; box-shadow:  0px 2px 2px 0px #0e6655; text-align:left; letter-spacing:normal;border-bottom: 3px solid #17a387; }
 
 #menu nav li ul li a:hover { background-color:#12806a; background-image:none; border-bottom: 3px solid #3e4463;}
 #menu nav li ul li:first-child a {}
@@ -603,6 +603,34 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 .editarperfil a { width:160px; height:25px; padding-top:9px;  display:block; float:right; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; -moz-box-shadow: 0px 3px 0px 0px #10705d; -o-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; color:#FFF !important }
 .editarperfil a:hover {background-color:#17a387; -webkit-box-shadow: 0px 0px 0px 0px #943849; -moz-box-shadow: 0px 0px 0px 0px #943849; -o-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
 
+/*-------- information-header ------------------------------------------------------------------------------------*/
+.information-header{
+    position: relative;
+    float: left;
+    background-color: #384363;
+    width: 100%;
+}
+.information-header p{
+    color:#fff;
+    position: relative;
+    float: right;
+    padding: 0;
+    margin: 6px 6px;
+    font-size: 14px;
+}
+.information-header .yellow{
+    color:#f8fd0b;
+}
+.information-header .center{
+    width: 1024px;
+    margin: 0 auto;
+}
+/*-------- Historial de compras ------------------------------------------------------------------------------------*/
+.centerTable{
+    padding: 0;
+    text-align: center !important;
+}
+
 /*--------edita de envios------------------------------------------------------------------------------------*/
 
 #configurar_piecam {position:relative; margin-top:50px}
@@ -737,7 +765,6 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 #planes .radioplanes label:after { background-color:transparent}
 
 
-/*--------Planes------------------------------------------------------------------------------------*/
 
 
 
@@ -1096,7 +1123,9 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 #content_tyc{position: relative;  width:934px; background-color:#FFF; /*border:1px solid #FFF;*/  text-align:left;    font-size:14px;    color:#737f80; -webkit-box-shadow: 5px 5px 0px 0px #3E4463; -moz-box-shadow: 5px 5px 0px 0px #3E4463; -o-box-shadow: 5px 5px 0px 0px #3E4463; box-shadow:  5px 5px 0px 0px #3E4463; padding:45px; margin:auto auto 80px auto; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
 #content_tyc h2 {font-size:30px; color:#17A387; font-weight:normal; margin:0; font-family:'ralewayregular',  'Raleway', sans-serif;}
 #content_tyc h3 {font-size:18px; font-weight:normal; margin:30px 0 0 0; font-family:'ralewayregular',  'Raleway', sans-serif;}
-#content_tyc p { text-align:justify}
+#content_tyc p {
+	text-align: justify
+}
 #content_tyc a {color:#17A387}
 #content_tyc a:hover {color:#10705D}
 /*--------terminoycondiciones------------------------------------------------------------------------------------*/
@@ -1685,26 +1714,3 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 @media screen and (min-width:0\0) {.customfile-upload {height:25px; width: 120px; padding:11px 0 0 0}}
 
 /*-----------------------subir archivo generales------------------------------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
