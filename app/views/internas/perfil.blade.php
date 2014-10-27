@@ -102,6 +102,13 @@ owurl7.style.display='none':owurl7.style.display='block';
         <![endif]-->
     </head>
     <body>
+        <div class="information-header">
+                <div class="center">
+                    <p>SUSCRIPTORES: <span class="yellow">00.000</span> comprados.</p>
+                    <p>ENVIOS: <span class="yellow">00.000</span> comprados.</p>
+                </div>
+                
+            </div>
        <header>
     <div id="conheader">
     <h1>TrebolNEWS</h1>
