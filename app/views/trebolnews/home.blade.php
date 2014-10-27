@@ -362,6 +362,26 @@
                                     <option value="pesos">Pesos Argentinos</option>
                                     <option value="dolares">Dolares estadounidenses</option>
                                 </select>    
+                                <script>
+                                    var moneda = 'pesos';                        
+                                    function precio(moneda){
+                                        switch(moneda){
+                                            case 'pesos':
+                                                $('.moneda').html('$');
+                                                break;
+                                            case 'dolares':
+                                                $('.moneda').html('U$S');
+                                                break;
+                                        }
+                                    }
+
+                                    $( ".select-precios" ).change(function() {
+                                        precio( $(this).val() );
+                                    });
+                                    $(document).ready(function(){
+                                        precio('pesos');
+                                    });
+                                </script>
                                 <div id="pfree">
                                     <h3>Plan Gratuito</h3>
                                     <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os!</p>
@@ -686,25 +706,7 @@
                             }
                         });
                         
-                        var moneda = 'pesos';
                         
-                        function precio(moneda){
-                                        switch(moneda){
-                                            case 'pesos':
-                                                $('.moneda').html('$');
-                                                break;
-                                            case 'dolares':
-                                                $('.moneda').html('U$S');
-                                                break;
-                                        }
-                                    }
-                                    
-                                    $( ".select-precios" ).change(function() {
-                                        precio( $(this).val() );
-                                    });
-                                    $(document).ready(function(){
-                                        precio('pesos');
-                                    });
 </script>
 
 <!--explorer placeholder-->
