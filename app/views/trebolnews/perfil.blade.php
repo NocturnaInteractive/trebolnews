@@ -248,7 +248,7 @@
                         <div class="infocont">
                             <table width="100%"  cellpadding="0" cellspacing="0" class="perfiltabla">
                                 <tr class="primeraperfil">
-                                    <th scope="col" width="150px" class="datoperfil">Envíos</th>
+                                    <th scope="col" width="150px" class="datoperfil">Env&iacute;os</th>
                                     <th scope="col" width="150px" class="datoperfil">Suscriptores</th>
                                     <th scope="col" width="200px" class="datoperfil">Cantidades</th>
                                     <th scope="col" width="200px" class="datoperfil">Costo U$S</th>
