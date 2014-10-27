@@ -46,4 +46,55 @@ class ImagenController extends BaseController {
         Imagen::destroy(Input::get('id'));
     }
 
+    public function guardar_interna() {
+        $data = Input::all();
+
+        $rules = array(
+            'nombre'  => 'required',
+            'archivo' => 'required_without:id'
+        );
+
+        $messages = array(
+            'nombre.required'  => 'Falta ingresar el nombre',
+            'archivo.required_without' => 'Faltar elegir un archivo'
+        );
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        if($validator->passes()) {
+            if(Input::has('id')) {
+                $imagen = Imagen::find(Input::get('id'));
+            } else {
+                $imagen = Imagen::create(array(
+                    'id_carpeta' => 1
+                ));
+            }
+
+            $imagen->nombre = Input::get('nombre');
+
+            if(Input::hasFile('archivo')) {
+                $nombre = 'libreriaimg' . $imagen->id . '.' . Input::file('archivo')->getClientOriginalExtension();
+                Input::file('archivo')->move(public_path() . '/img/libreria', $nombre);
+                $imagen->archivo = $nombre;
+            }
+
+            $imagen->save();
+
+            return Response::json(array(
+                'status' => 'ok',
+                'route'  => route('admin/libreria')
+            ));
+        } else {
+            return Response::json(array(
+                'status'    => 'error',
+                'validator' => $validator->messages()->toArray()
+            ));
+        }
+    }
+
+    public function eliminar_interna($id) {
+        Imagen::destroy($id);
+
+        return Redirect::back();
+    }
 }

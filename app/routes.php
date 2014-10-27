@@ -11,7 +11,7 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-
+    return View::make('trebolnews/cuenta-activa');
 });
 
 Route::get('session', function(){
@@ -175,7 +175,7 @@ Route::group(array(
                     break;
                 case 'url':
                     return View::make('campaigns/new_campaign_step4_url');
-                    break;  
+                    break;
                 case 'html':
                     return View::make('internas/campaniaenblanco_paso4');
                     break;
@@ -236,8 +236,8 @@ Route::group(array(
     Route::get('librerías', array(
         'as' => 'librerias',
         function() {
-            $carpeta_imagenes = Carpeta::find(1);
-            $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first();
+            $carpeta_imagenes = Carpeta::find(1); // esta es la carpeta de imágenes de trebolnews (ver seeder)
+            $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first(); // los usuarios tienen una carpeta 'basura' (ver eventos)
             $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
             $imagenes = $carpeta_imagenes->imagenes()->paginate(5);
 
@@ -250,6 +250,7 @@ Route::group(array(
         }
     ));
 
+    // dry
     Route::get('carpeta/{id_carpeta}', array(
         'as' => 'carpeta',
         function($id_carpeta) {
@@ -420,6 +421,40 @@ Route::group(array(
         ));
 
         Route::post('subir_imagenes', 'TemplateController@subir_imagenes');
+
+        Route::get('libreria', array(
+            'as' => 'admin/libreria',
+            function() {
+                $carpeta_imagenes = Carpeta::find(1);
+
+                return View::make('admin/libreria', array(
+                    'carpeta_imagenes' => $carpeta_imagenes
+                ));
+            }
+        ));
+
+        Route::get('imagen/{id?}', array(
+            'as' => 'admin/imagen',
+            function($id = null) {
+                if($id) {
+                    $imagen = Imagen::find($id);
+                }
+
+                return View::make('admin/imagen', array(
+                    'imagen' => isset($imagen) ? $imagen : null
+                ));
+            }
+        ));
+
+        Route::post('imagen', array(
+            'as'   => 'admin/guardar_imagen',
+            'uses' => 'ImagenController@guardar_interna'
+        ));
+
+        Route::get('eliminar_imagen/{id}', array(
+            'as'   => 'admin/eliminar_imagen',
+            'uses' => 'ImagenController@eliminar_interna'
+        ));
 
     });
 
