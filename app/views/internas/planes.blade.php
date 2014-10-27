@@ -11,7 +11,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Raleway:400,800,900,700,600,500,300,200,100' rel='stylesheet' type='text/css'>
 
 	{{ HTML::style('internas/css/style.css') }}
-	{{ HTML::style('internas/css/general.css') }}
+	{{ HTML::style('css/general.css') }}
 
 	{{ HTML::script('js/jquery-1.11.0.min.js') }}
 	<!--chat-->
