@@ -356,7 +356,7 @@
                         <section id="fbsection5">
                             <h2>Planes y Precios</h2>
                             <div id="planes">
-                                <select class="select-precios" id='planes-home'>
+                                <select class="select-precios" id="planes-home">
                                     <option value='pesos'>Pesos Argentinos</option>
                                     <option value='dolares'>Dolares estadounidenses</option>
                                 </select>    
