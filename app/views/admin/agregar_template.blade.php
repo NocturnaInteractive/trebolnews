@@ -32,7 +32,6 @@
                                     timeout: 5000,
                                 });
                             }
-
                         }
                     },
                     complete: function() {

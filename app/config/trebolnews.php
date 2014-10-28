@@ -9,10 +9,12 @@ return array(
     ),
 
     'usuario_admin' => 'treboladmin',
-
     'password_admin' => 'tre2014',
 
-    'email_comentarios' => 'maimar@gmail.com',
+    'facebook_page' => 'https://www.facebook.com/pages/Trebolnews/281083095385088',
+    'twitter_page' => 'https://twitter.com/trebolnews',
+
+    // 'email_comentarios' => 'maimar@gmail.com',
 
     'dias' => array(
         'Domingo',

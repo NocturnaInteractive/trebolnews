@@ -1,15 +1,15 @@
 <?php
 
 Route::filter('ajax', function() {
-	if(!Request::ajax()) return App::abort(404);
+    if(!Request::ajax()) return App::abort(404);
 });
 
 Route::filter('admin', function() {
-	if(Session::get('admin', 'no') == 'yes') {
-		// return Redirect::route('admin/home');
-	} else {
-		return Redirect::route('admin/login');
-	}
+    if(Session::get('admin', 'no') == 'yes') {
+        // return Redirect::route('admin/home');
+    } else {
+        return Redirect::route('admin/login');
+    }
 });
 
 /*
@@ -25,13 +25,13 @@ Route::filter('admin', function() {
 
 App::before(function($request)
 {
-	//
+    //
 });
 
 
 App::after(function($request, $response)
 {
-	//
+    //
 });
 
 /*
@@ -47,16 +47,16 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	// if (Auth::guest()) return Redirect::guest('login');
-	if(Auth::guest()) {
-		return Redirect::to('/');
-	}
+    // if (Auth::guest()) return Redirect::guest('login');
+    if(Auth::guest()) {
+        return Redirect::to('/');
+    }
 });
 
 
 Route::filter('auth.basic', function()
 {
-	return Auth::basic();
+    return Auth::basic();
 });
 
 /*
@@ -72,7 +72,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+    if (Auth::check()) return Redirect::to('/');
 });
 
 /*
@@ -88,8 +88,8 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+    if (Session::token() != Input::get('_token'))
+    {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
 });

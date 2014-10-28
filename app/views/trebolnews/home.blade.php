@@ -560,18 +560,46 @@
                             <div class="cleaner"></div>
                         </section>
 
-
-
-
                         <div id="foo">
                             <div id="foo_text">
                                 <div id="foo_izq">
                                     <h6>TrebolNEWS</h6>
                                     <p>www.trebolnews.com - Copyright 2013</p>
                                 </div>
-                                <div id="foo_der"> <a href="#" class="twe">Seguinos por Tweter</a> <a href="#" class="face">Estamos en Facebook</a>
-                                    <form id="subanewsletter" method="post"  action="">
-                                        <!-- es necesario que coincida el nombre de este archivo php con el que aparece en el campo action -->
+                                <div id="foo_der"> <a href="{{ Config::get('trebolnews.twitter_page') }}" class="twe">Seguinos por Tweter</a> <a href="{{ Config::get('trebolnews.facebook_page') }}" class="face">Estamos en Facebook</a>
+                                    <script>
+                                    $(function(){
+                                        $('#frm_suscripcion #button').one('click', suscripcion_handler);
+
+                                        function suscripcion_handler(e) {
+                                            e.preventDefault();
+
+                                            $('#frm_suscripcion #button').on('click', function(e){
+                                                e.preventDefault();
+                                            });
+
+                                            $('#frm_suscripcion').ajaxSubmit({
+                                                success: function(data) {
+                                                    if(data.status == 'ok') {
+                                                        noty({
+                                                            type: 'success',
+                                                            text: data.mensaje,
+                                                            layout: 'topCenter',
+                                                            timeout: 5000,
+                                                            maxVisible: 10
+                                                        });
+                                                    } else {
+                                                        notys(data.validator);
+                                                    }
+                                                },
+                                                complete: function() {
+                                                    $('#frm_suscripcion #button').one('click', suscripcion_handler);
+                                                }
+                                            });
+                                        }
+                                    });
+                                    </script>
+                                    <form id="frm_suscripcion" method="post" action="{{ action('ExtraController@guardar_suscripcion') }}">
                                         <input type="text" name="email" class="compo-form" id="newsletter" placeholder="Suscr&iacute;bete a nuestro Newsletter"  style=" color:#FFF; font-size:12px;"  />
                                         <input type="submit" id="button" value="ENVIAR" />
                                     </form>
