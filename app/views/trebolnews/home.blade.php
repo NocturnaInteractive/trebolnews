@@ -410,10 +410,18 @@
                                                 if (!$plan->isSuscription) {
 
                                         ?>
-                                            <div class="{{$class.'info'}}">
-                                                <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}
-                                                    <div class="cleaner"></div>
-                                                    <span class="segundalinea_plan"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{$plan->precio}}</span></h4>
+                                            <div class="{{$class.'info'}}">                                               
+                                                <h4>
+                                                    <span class="hastaplan">Hasta</span>
+                                                    <img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}
+                                                </h4>
+                                                <div class="cleaner"></div>
+                                                <h4>
+                                                    <span class="segundalinea_plan"> Envios</span>
+                                                    <span class="precioplan">&nbsp;
+                                                        <span class="moneda"></span>{{$plan->precio}}
+                                                    </span>
+                                                </h4>
                                             </div>
                                         <?php
                                                 $class = ($class==='verde')? 'gris' : 'verde';
@@ -421,7 +429,7 @@
                                                 }
                                             }
                                         ?>
-                                        <div class="verdeinfo">
+                                        <div class="verdeinfo">                                            
                                             <h4><span class="hastaplan">M&aacute;s</span><img src="{{ asset('imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">100.000
                                                 <div class="cleaner"></div>
                                                 <span class="segundalinea_plan"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>0</span></h4>
