@@ -22,7 +22,7 @@
     {{ HTML::script('js/trebolnews.js') }}
     {{ HTML::style('css/trebolnews.css') }}
     {{ HTML::style('css/general.css') }}
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script>
         $(function() {
@@ -361,9 +361,9 @@
                                 <select class="select-precios" id="planes-home">
                                     <option value="pesos">Pesos Argentinos</option>
                                     <option value="dolares">Dolares estadounidenses</option>
-                                </select>    
+                                </select>
                                 <script>
-                                    var moneda = 'pesos';                        
+                                    var moneda = 'pesos';
                                     function precio(moneda){
                                         switch(moneda){
                                             case 'pesos':
@@ -705,8 +705,8 @@
                                 });
                             }
                         });
-                        
-                        
+
+
 </script>
 
 <!--explorer placeholder-->
