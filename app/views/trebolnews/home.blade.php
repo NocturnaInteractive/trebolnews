@@ -411,7 +411,9 @@
 
                                         ?>
                                             <div class="{{$class.'info'}}">
-                                                <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{$plan->precio}}</span></h4>
+                                                <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}
+                                                    <div class="cleaner"></div>
+                                                    <span class="segundalinea_plan"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{$plan->precio}}</span></h4>
                                             </div>
                                         <?php
                                                 $class = ($class==='verde')? 'gris' : 'verde';
