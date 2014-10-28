@@ -206,8 +206,8 @@
                         </tr>
                     </table>
                     <div class="editarperfil">
-                        <a href="#" class="btn_editar">EDITAR PERFIL</a>
-                        <a href="#" class="btn_guardar">GUARDAR PERFIL</a>
+                        <a href="#" class="btn_editar">EDITAR DATOS</a>
+                        <a href="#" class="btn_guardar">GUARDAR DATOS</a>
                     </div>
                 </div><!--infocont-->
             </div> <!--content-2-->
