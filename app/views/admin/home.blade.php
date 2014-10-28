@@ -10,5 +10,6 @@
         <li><a href="{{ route('admin/campanias') }}">Campañas</a></li>
         <li><a href="{{ route('admin/templates') }}">Templates</a></li>
         <li><a href="{{ route('admin/libreria') }}">Librería</a></li>
+        <li><a href="{{ route('admin/contactos') }}">Contactos</a></li>
     </ul>
 @stop

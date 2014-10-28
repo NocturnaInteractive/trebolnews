@@ -6,9 +6,9 @@ class UsuarioController extends BaseController {
         $data = Input::all();
 
         $rules = array(
-            'email'     => 'required|unique:usuarios',
-            'password'  => 'required|confirmed',
-            'tyc'       => 'accepted'
+            'email'    => 'required|unique:usuarios',
+            'password' => 'required|confirmed',
+            'tyc'      => 'accepted'
         );
 
         $messages = array(

@@ -82,6 +82,7 @@
                 <input type="hidden" name="telefono" value="{{ Auth::user()->telefono }}" />
                 <!-- <input type="hidden" name="empresa" value="{{ Auth::user()->empresa }}" /> -->
                 <input type="hidden" name="ciudad" value="{{ Auth::user()->ciudad }}" />
+                <input type="hidden" name="pais" value="{{ Auth::user()->pais }}" />
                 <input type="hidden" name="empresa_nombre" value="{{ $empresa->nombre or '' }}" />
                 <input type="hidden" name="empresa_cuit" value="{{ $empresa->cuit or '' }}" />
                 <input type="hidden" name="empresa_factura" value="{{ $empresa->factura or '' }}" />
@@ -205,8 +206,8 @@
                         </tr>
                     </table>
                     <div class="editarperfil">
-                        <a href="#" class="btn_editar">EDITAR PERFIL</a>
-                        <a href="#" class="btn_guardar">GUARDAR PERFIL</a>
+                        <a href="#" class="btn_editar">EDITAR DATOS</a>
+                        <a href="#" class="btn_guardar">GUARDAR DATOS</a>
                     </div>
                 </div><!--infocont-->
             </div> <!--content-2-->

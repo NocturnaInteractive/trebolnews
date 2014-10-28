@@ -164,7 +164,7 @@
                         </div><!--submenu-->
                         <table width="100%"  cellpadding="0" cellspacing="0" class="listacampanias">
                             <tr class="primeralinea">
-                                <th scope="col" width="100px" >Tipo</th>
+                                <th scope="col" width="100px">Tipo</th>
                                 <th scope="col" width="315px">Nombre de Campa&ntilde;a</th>
                                 <th scope="col" width="275px">Asunto</th>
                                 <th scope="col" width="179px">Fecha de Envio</th>

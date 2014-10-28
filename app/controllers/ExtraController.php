@@ -35,7 +35,7 @@ class ExtraController extends Controller {
             Mail::send('emails.comentario', array(
                 'comentario' => $comentario
             ), function($mail) use($comentario){
-                $mail->to(Config::get('trebolnews.email_comentarios'));
+                $mail->to(Conf::where('clave', 'email_comentarios')->first()->valor);
                 $mail->from($comentario->email, "{$comentario->nombre} {$comentario->apellido}");
                 $mail->subject('Nuevo comentario en TrebolNEWS');
             });

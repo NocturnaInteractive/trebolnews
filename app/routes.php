@@ -11,7 +11,7 @@ Route::get('ver/{vista}', function($vista) {
 });
 
 Route::get('aux', function(){
-    return View::make('trebolnews/cuenta-activa');
+
 });
 
 Route::get('session', function(){
@@ -454,6 +454,17 @@ Route::group(array(
         Route::get('eliminar_imagen/{id}', array(
             'as'   => 'admin/eliminar_imagen',
             'uses' => 'ImagenController@eliminar_interna'
+        ));
+
+        Route::get('contactos', array(
+            'as' => 'admin/contactos',
+            function() {
+                $comentarios = Comentario::orderBy('created_at', 'desc')->get();
+
+                return View::make('admin/comentarios', array(
+                    'comentarios' => $comentarios
+                ));
+            }
         ));
 
     });
