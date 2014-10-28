@@ -405,7 +405,7 @@
 
                                 <div id="individual">
                                     <h3>Plan Individual</h3>
-                                    <p>Ideal para env&iacute;os de emails con poca frecuencia, porque se abona s&oacute;lo la cantidad de env&iacute;os que necesita el usuario. Adem&aacute;s, no hay l&iacute;mite de tiempo para efectuarlos.<br> </p>
+                                    <p>Ideal para envíos de emails con poca frecuencia, porque se abona sólo la cantidad de envíos que necesita el usuario. Además, no hay límite de tiempo para efectuarlos y son ilimitados los envíos. (Se habilitan hasta agotar los tanto suscriptores contratados, aca los suscriptores que rebotan o se dieron de baja el usuario puede reemplazar ese suscriptor ó mail por otro hasta completar el paquete que sacó).<br> </p>
                                     <div class="infoplanes">
                                         <?php
                                             $class = 'verde';
