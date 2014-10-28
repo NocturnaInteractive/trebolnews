@@ -387,7 +387,12 @@
                                     <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os!</p>
                                     <div class="infoplanes">
                                         <div class="verdeinfo">
-                                            <h4><span class="hastaplan">Hasta</span><img src="{{ asset('imagenes/plane.png') }}" width="18px" height="18px" alt="icono">500<span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;Gratis</span></h4>
+                                            <h4>
+                                                <span class="hastaplan">Hasta</span>
+                                                <img src="{{ asset('imagenes/plane.png') }}" width="18px" height="18px" alt="icono">500
+                                                <div class="cleaner"></div>
+                                                <span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;Gratis</span>
+                                            </h4>
                                         </div>
                                         <div class="grisinfo"><img class="xicon" src="{{ asset('imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
                                         <div class="verdeinfo"><img class="xicon" src="{{ asset('imagenes/cruziconverde.png') }}" width="38px" height="38px" alt="icono"></div>
