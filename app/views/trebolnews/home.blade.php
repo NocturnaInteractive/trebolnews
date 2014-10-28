@@ -451,8 +451,8 @@
 
 
                                 <div id="mensuales">
-                                    <h3>Planes Mensuales</h3>
-                                    <p>Exclusivo paquete preparado para realizar grandes env&iacute;os. Con una suscripci&oacute;n mensual se contrata una cantidad de env&iacute;os y no hay l&iacute;mite de tiempo para hacerlos.</p>
+                                    <h3>Planes Pro</h3>
+                                    <p>Exclusivo paquete preparado para realizar grandes envíos. Con una suscripción mensual se contrata una cantidad de envíos y no hay límite de tiempo para hacerlos. (Se contrata por envíos, no hay límites en los suscriptores, y caduca al terminar los 30 días de haber sacado el paquete. Dentro de ese período podés enviar 5000 mails de campaña a distintas listas de suscriptores, hasta agotar los envíos. Un usuario puede contratar 20000 envíos y enviar 10000 a una lista y 10000 a otra lista o a las lista que quiera armar hasta agotar los 20000 o el vencimiento del mes).</p>
                                     <div class="infoplanes">
                                         <?php
                                             $class = 'verde';
@@ -465,7 +465,7 @@
                                             <div class="{{$class.'info'}}">
                                                 <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}
                                                     <div class="cleaner"></div>
-                                                    <span class="segundalinea_plan"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{$plan->precio}}</span></h4>
+                                                    <span class="segundalinea_plan"> Suscriptores</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{$plan->precio}}</span></h4>
                                             </div>
                                         <?php
                                                 $class = ($class==='verde')? 'gris' : 'verde';
