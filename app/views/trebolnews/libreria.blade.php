@@ -6,6 +6,36 @@
 
 @stop
 
+@section('script')
+
+    <script>
+    $(function(){
+
+        $('.checkbox').on('click', function(e){
+            e.preventDefault();
+
+            var clicked = $(this).find('input');
+
+            if(clicked.hasClass('todos')) {
+                if(clicked.prop('checked') == true) {
+                    $('.checkbox').find('input').prop('checked', false);
+                } else {
+                    $('.checkbox').find('input').prop('checked', true);
+                }
+            } else {
+                if(clicked.prop('checked') == true) {
+                    clicked.prop('checked', false);
+                } else {
+                    clicked.prop('checked', true);
+                }
+            }
+        });
+
+    });
+    </script>
+
+@stop
+
 @section('contenido')
 
     <div id="container">
@@ -70,10 +100,10 @@
                         <table width="100%"  cellpadding="0" cellspacing="0" class="libret">
                             <tr class="primeralibre">
                                 <th scope="col" width="40px">
-                                    <form class="checkbox">
-                                        <input type="checkbox"  id="checkbox1" name="" onclick="marcar(this)" />
-                                        <label for="checkbox1"></label>
-                                    </form>
+                                    <div class="checkbox">
+                                        <input type="checkbox" class="todos" />
+                                        <label></label>
+                                    </div>
                                 </th>
                                 <th scope="col" width="170px">Visualizaci&oacute;n</th>
                                 <th scope="col" width="200px">Nombre</th>
@@ -85,10 +115,10 @@
                             <?php if(isset($carpeta_seleccionada) && $carpeta_seleccionada->id != 1) { $ruta = 'uploads/imagenes/'; } else { $ruta = 'img/libreria/'; } ?>
                             <tr>
                                 <td>
-                                    <form class="checkbox">
-                                        <input type="checkbox"  id="checkbox2" name="" value="valor1" />
-                                        <label for="checkbox2"></label>
-                                    </form>
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="chk_imagen[]" value="{{ $imagen->id }}" />
+                                        <label></label>
+                                    </div>
                                 </td>
                                 <td class="libre_img"><a href="#"><label for="checkbox2"><img src="{{ asset($ruta . $imagen->archivo) }}" height="75"></label></a></td>
                                 <td class="nombrelibreria">{{ $imagen->nombre }}</td>

@@ -17,7 +17,11 @@
             var clicked = $(this).find('input');
 
             if(clicked.hasClass('todos')) {
-
+                if(clicked.prop('checked') == true) {
+                    $('.checkbox').find('input').prop('checked', false);
+                } else {
+                    $('.checkbox').find('input').prop('checked', true);
+                }
             } else {
                 if(clicked.prop('checked') == true) {
                     clicked.prop('checked', false);

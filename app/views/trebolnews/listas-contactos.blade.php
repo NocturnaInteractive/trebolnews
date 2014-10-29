@@ -17,7 +17,11 @@
             var clicked = $(this).find('input');
 
             if(clicked.hasClass('todos')) {
-
+                if(clicked.prop('checked') == true) {
+                    $('.checkbox').find('input').prop('checked', false);
+                } else {
+                    $('.checkbox').find('input').prop('checked', true);
+                }
             } else {
                 if(clicked.prop('checked') == true) {
                     clicked.prop('checked', false);
@@ -94,10 +98,10 @@
                     <table width="100%"  cellpadding="0" cellspacing="0" class="listadecontactos">
                         <tr class="primeralinea">
                             <th scope="col" width="40px">
-                                <form class="checkbox">
-                                    <input type="checkbox"  id="checkbox1" name="" onclick="marcar(this)" />
-                                    <label for="checkbox1"></label>
-                                </form>
+                                <div class="checkbox">
+                                    <input type="checkbox" class="todos" />
+                                    <label></label>
+                                </div>
                             </th>
                             <th scope="col" width="190px">Nombre y Apellido
                                 <!-- <a href="#" class="flechatabla"></a> -->

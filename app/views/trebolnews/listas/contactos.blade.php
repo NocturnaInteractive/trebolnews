@@ -1,10 +1,10 @@
 @foreach($contactos as $contacto)
 <tr>
     <td>
-        <form class="checkbox">
-            <input type="checkbox"  id="checkbox3" name="" value="valor2" />
-            <label for="checkbox3"></label>
-        </form>
+        <div class="checkbox">
+            <input type="checkbox" name="chk_contacto[]" value="{{ $contacto->id }}" />
+            <label></label>
+        </div>
     </td>
     <td>{{ $contacto->nombre . ' ' . $contacto->apellido }}</td>
     <td>{{ $contacto->email }}</td>
