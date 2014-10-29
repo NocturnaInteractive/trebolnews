@@ -415,13 +415,13 @@
                                                 if (!$plan->isSuscription) {
 
                                         ?>
-                                            <div class="{{$class.'info'}}">                                               
+                                            <div class="{{$class.'info'}}">
                                                 <h4>
                                                     <span class="hastaplan">Hasta</span>
                                                     <img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}
-                                                
+
                                                     <div class="cleaner"></div>
-                                            
+
                                                     <span class="segundalinea_plan"> Envios</span>
                                                     <span class="precioplan">&nbsp;
                                                         <span class="moneda"></span>{{$plan->precio}}
@@ -434,7 +434,7 @@
                                                 }
                                             }
                                         ?>
-                                        <div class="verdeinfo">                                            
+                                        <div class="verdeinfo">
                                             <h4>
                                                 <span class="hastaplan">M&aacute;s</span><img src="{{ asset('imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">100.000
                                                 <div class="cleaner"></div>
@@ -444,7 +444,7 @@
                                         </div>
                                     </div><!--infoplanes-->
                                     <div class="bot">
-                                        <a href="#" class="botondecompra">COMPRAR AHORA</a>
+                                        <a href="{{ route('registro') }}" class="botondecompra">COMPRAR AHORA</a>
                                         <div class="cleaner"></div>
                                     </div>
                                 </div><!--individual-->
