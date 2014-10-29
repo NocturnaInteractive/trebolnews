@@ -208,43 +208,6 @@ Route::group(array(
 
     Route::get('campaign/view/{campaignId}/{contactId}/{verification}', 'MailController@renderMail');
 
-    Route::get('librerías', array(
-        'as' => 'librerias',
-        function() {
-            $carpeta_imagenes = Carpeta::find(1); // esta es la carpeta de imágenes de trebolnews (ver seeder)
-            $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first(); // los usuarios tienen una carpeta 'basura' (ver eventos)
-            $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
-            $imagenes = $carpeta_imagenes->imagenes()->paginate(5);
-
-            return View::make('internas/libreria', array(
-                'carpeta_imagenes' => $carpeta_imagenes,
-                'carpeta_basura' => $carpeta_basura,
-                'carpetas' => $carpetas,
-                'imagenes' => $imagenes
-            ));
-        }
-    ));
-
-    // dry
-    Route::get('carpeta/{id_carpeta}', array(
-        'as' => 'carpeta',
-        function($id_carpeta) {
-            $carpeta_seleccionada = Carpeta::find($id_carpeta);
-            $carpeta_imagenes = Carpeta::find(1);
-            $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first();
-            $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
-            $imagenes = $carpeta_seleccionada->imagenes()->paginate(5);
-
-            return View::make('internas/libreria', array(
-                'carpeta_seleccionada' => $carpeta_seleccionada,
-                'carpeta_imagenes' => $carpeta_imagenes,
-                'carpeta_basura' => $carpeta_basura,
-                'carpetas' => $carpetas,
-                'imagenes' => $imagenes
-            ));
-        }
-    ));
-
     Route::get('planes', array(
         'as' => 'planes',
         function() {
@@ -601,6 +564,43 @@ Route::group(array(
     ));
 
     Route::any('contact-search', 'ContactoController@search');
+
+    Route::get('librerías', array(
+        'as' => 'librerias',
+        function() {
+            $carpeta_imagenes = Carpeta::find(1); // esta es la carpeta de imágenes de trebolnews (ver seeder)
+            $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first(); // los usuarios tienen una carpeta 'basura' (ver eventos)
+            $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
+            $imagenes = $carpeta_imagenes->imagenes()->paginate(5);
+
+            return View::make('trebolnews/libreria', array(
+                'carpeta_imagenes' => $carpeta_imagenes,
+                'carpeta_basura' => $carpeta_basura,
+                'carpetas' => $carpetas,
+                'imagenes' => $imagenes
+            ));
+        }
+    ));
+
+    // dry
+    Route::get('carpeta/{id_carpeta}', array(
+        'as' => 'carpeta',
+        function($id_carpeta) {
+            $carpeta_seleccionada = Carpeta::find($id_carpeta);
+            $carpeta_imagenes = Carpeta::find(1);
+            $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first();
+            $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
+            $imagenes = $carpeta_seleccionada->imagenes()->paginate(5);
+
+            return View::make('trebolnews/libreria', array(
+                'carpeta_seleccionada' => $carpeta_seleccionada,
+                'carpeta_imagenes' => $carpeta_imagenes,
+                'carpeta_basura' => $carpeta_basura,
+                'carpetas' => $carpetas,
+                'imagenes' => $imagenes
+            ));
+        }
+    ));
 
 // fin páginas del sitio
 

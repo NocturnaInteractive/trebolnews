@@ -18,4 +18,9 @@ Event::listen('nuevo_registro', function(Usuario $usuario) {
         'id_usuario' => $usuario->id,
         'nombre' => 'basura'
     ));
+
+    Carpeta::create(array(
+        'id_usuario' => $usuario->id,
+        'nombre' => 'mis imágenes'
+    ));
 });

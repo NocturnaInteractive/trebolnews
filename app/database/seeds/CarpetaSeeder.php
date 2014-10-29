@@ -7,7 +7,7 @@ class CarpetaSeeder extends Seeder {
 
 		Carpeta::create(array(
 			'id' => 1,
-			'nombre' => 'imagenes'
+			'nombre' => 'imágenes'
 		));
 
 		Carpeta::create(array(
