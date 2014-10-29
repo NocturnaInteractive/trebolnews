@@ -2,7 +2,7 @@
 
 @section('title')
 
-    TrebolNEWS / Listas de suscriptores
+    TrebolNEWS / Contactos
 
 @stop
 
@@ -55,30 +55,29 @@
     <div id="container">
         <section class="tabs">
             <div class="content">
-                <h2>Listas de suscriptores</h2>
+                <h2>Lista: {{ $lista->nombre }}</h2>
+                <a id="volver" href="{{ route('suscriptores') }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
                 <div class="infocont">
                     <div class="submenu">
-                        <form id="frm-search" action="{{ action('ListaController@search') }}" method="post">
+                        <form id="frm-search" action="{{ action('ContactoController@search') }}" method="post">
+                            <input type="hidden" name="id_lista" value="{{ $lista->id }}" />
                             <input class="search" type="text" placeholder="BUSCAR" name="search-term" />
                         </form>
                         <ul class="opciones">
-                            <li>
-                                <a class="importarlista" href="#">OPCIONES</a>
-                                <ul>
-                                    <li><a href="#">Importar lista</a></li>
-                                    <li><a href="#">Exportar listas</a></li>
-                                </ul>
+                            <li><a class="importarlista" href="#">OPCIONES</a>
+                            <ul>
+                                <li><a href="#">Importar lista</a></li>
+                                <li><a href="#">Exportar listas</a></li>
+                            </ul>
                             </li>
-                            <li>
-                                <a class="crearlista" href="#" popup="{{ url('popup/crear_lista') }}">CREAR LISTA</a>
-                            </li>
+                            <li><a class="crearlista" href="#" popup="{{ url('popup/crear_contacto', $lista->id) }}">CREAR SUSCRIPTOR</a></li>
                         </ul>
                         <div class="cleaner"></div>
                     </div><!--submenu-->
                     <div id="submenulibreria">
                         <ul id="filtroselecionados">
-                            <li><p>Seleccionados: <span id="txt_seleccionados">0</span> de <span id="txt-total">{{ count($listas) }}</span></p></li>
-                            <li><a id="borrarselecionados" href="popup_eliminar_listasuscriptor_multi.html">Eliminar</a></li>
+                            <li><p>Seleccionados: 0 de {{ count($contactos) }}</p></li>
+                            <li><a id="borrarselecionados" href="popup_eliminarsuscriptor_multi.html">Eliminar</a></li>
                         </ul>
                         <ul id="cantidad" class="btosuscriptores">
                             <li><a href="#" class="boton">VER</a>
@@ -91,30 +90,31 @@
                             </li>
                         </ul>
                         <div class="cleaner"></div>
-                    </div><!--submenulibreria   -->
-                    <table width="100%" cellpadding="0" cellspacing="0" class="listacampanias" id="tabla_listas">
+                    </div><!-- submenulibreria -->
+                    <table width="100%"  cellpadding="0" cellspacing="0" class="listadecontactos">
                         <tr class="primeralinea">
                             <th scope="col" width="40px">
-                                <div class="checkbox">
-                                    <input type="checkbox" class="todos" />
-                                    <label></label>
-                                </div>
+                                <form class="checkbox">
+                                    <input type="checkbox"  id="checkbox1" name="" onclick="marcar(this)" />
+                                    <label for="checkbox1"></label>
+                                </form>
                             </th>
-                            <th scope="col" width="305px">Nombre de lista</th>
-                            <th scope="col" width="200px">Creada
+                            <th scope="col" width="190px">Nombre y Apellido
                                 <!-- <a href="#" class="flechatabla"></a> -->
                             </th>
-                            <th scope="col" width="149px">Editada</th>
-                            <th scope="col" width="140px">Suscriptores</th>
-                            <th scope="col" width="100px"></th>
+                            <th scope="col" width="189px">Email</th>
+                            <th scope="col" width="180px">Puesto / Cargo</th>
+                            <th scope="col" width="180px">Empresa</th>
+                            <th scope="col" width="90px">Pa&iacute;s</th>
+                            <th scope="col" width="65px"></th>
                         </tr>
                         <tbody id="table-content">
                         {{ $html }}
                         </tbody>
                     </table>
                     <div id="paginador">
-                        @if(count($listas) > 0)
-                            {{ $listas->links('trebolnews/paginador-ajax') }}
+                        @if(count($contactos) > 0)
+                            {{ $contactos->links('trebolnews/paginador-ajax') }}
                         @endif
                     </div><!--paginador-->
                     <div class="cleaner"></div>

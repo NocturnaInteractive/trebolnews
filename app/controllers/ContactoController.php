@@ -64,4 +64,47 @@ class ContactoController extends BaseController {
         Contacto::destroy(Input::get('id'));
     }
 
+    public function search() {
+        $data = Input::all();
+
+        $rules = array(
+            'search-term' => 'required'
+        );
+
+        $messages = array(
+            'search-term.required' => 'Ingrese un término para la búsqueda'
+        );
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        if($validator->passes() || Session::has('search-term')) {
+            if(Input::has('search-term')) {
+                Session::put('search-term', Input::get('search-term'));
+            }
+
+            $lista = Lista::find(Input::get('id_lista'));
+            $contactos = $lista->contactos()->where('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
+                ->orWhere('apellido', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
+                ->orWhere('email', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
+                ->paginate(5);
+
+            $contactos->appends(array('lista' => $lista->id));
+            $contactos->setBaseUrl('../lista-contactos');
+
+            return Response::json(array(
+                'status' => 'ok',
+                'html'   => View::make('trebolnews/listas/contactos', array(
+                    'contactos' => $contactos
+                ))->render(),
+                'paginador' => $contactos->links('trebolnews/paginador-ajax')->render(),
+                'total' => $contactos->count()
+            ));
+        } else {
+            return Response::json(array(
+                'status'    => 'error',
+                'validator' => $validator->messages()->toArray()
+            ));
+        }
+    }
+
 }

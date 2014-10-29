@@ -206,32 +206,7 @@ Route::group(array(
         }
     ));
 
-
     Route::get('campaign/view/{campaignId}/{contactId}/{verification}', 'MailController@renderMail');
-
-    Route::get('suscriptores', array(
-        'as' => 'suscriptores',
-        function() {
-            $listas = Auth::user()->listas()->paginate(5);
-
-            return View::make('trebolnews/listas-suscriptores', array(
-                'listas' => $listas
-            ));
-        }
-    ));
-
-    Route::get('lista/{id_lista}', array(
-        'as' => 'lista',
-        function($id_lista) {
-            $lista = Lista::find($id_lista);
-            $contactos = $lista->contactos()->paginate(5);
-
-            return View::make('internas/listascontactos2', array(
-                'lista' => $lista,
-                'contactos' => $contactos
-            ));
-        }
-    ));
 
     Route::get('librerías', array(
         'as' => 'librerias',
@@ -551,11 +526,11 @@ Route::group(array(
             $listas = Auth::user()->listas()->paginate(5);
             $listas->setBaseUrl('lista-suscriptores');
 
-            $html = View::make('trebolnews/listas/suscriptores', array(
+            $html = View::make('trebolnews.listas.suscriptores', array(
                 'listas' => $listas
             ))->render();
 
-            return View::make('trebolnews/listas-suscriptores', array(
+            return View::make('trebolnews.listas-suscriptores', array(
                 'listas' => $listas,
                 'html'   => $html
             ));
@@ -574,16 +549,58 @@ Route::group(array(
             $listas->setBaseUrl('lista-suscriptores');
 
             return Response::json(array(
-                'html' => View::make('trebolnews/listas/suscriptores', array(
+                'html'      => View::make('trebolnews/listas/suscriptores', array(
                     'listas' => $listas
                 ))->render(),
                 'paginador' => $listas->links('trebolnews/paginador-ajax')->render(),
-                'total' => $listas->count()
+                'total'     => $listas->count()
             ));
         }
     ));
 
     Route::any('list-search', 'ListaController@search');
+
+    // base listas de contactos
+    Route::get('lista/{id_lista}', array(
+        'as' => 'lista',
+        function($id_lista) {
+            $lista = Lista::find($id_lista);
+            $contactos = $lista->contactos()->paginate(5);
+            $contactos->appends(array('lista' => $id_lista));
+            $contactos->setBaseUrl('../lista-contactos');
+
+            $html = View::make('trebolnews.listas.contactos', array(
+                'contactos' => $contactos
+            ))->render();
+
+            return View::make('trebolnews/listas-contactos', array(
+                'lista'     => $lista,
+                'contactos' => $contactos,
+                'html'      => $html
+            ));
+        }
+    ));
+
+    // tabla listas de contactos
+    Route::get('lista-contactos', array(
+        'as' => 'lista-contactos',
+        function() {
+            $lista = Lista::find(Input::get('lista'));
+            $contactos = $lista->contactos()->paginate(5);
+            $contactos->appends(array('lista' => $lista->id));
+            $contactos->setBaseUrl('../lista-contactos');
+
+            return Response::json(array(
+                'html'      => View::make('trebolnews/listas/contactos', array(
+                    'contactos' => $contactos
+                ))->render(),
+                'paginador' => $contactos->links('trebolnews/paginador-ajax')->render(),
+                'total'     => $contactos->count()
+            ));
+        }
+    ));
+
+    Route::any('contact-search', 'ContactoController@search');
 
 // fin páginas del sitio
 

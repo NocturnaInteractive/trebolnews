@@ -62,6 +62,8 @@ class ListaController extends BaseController {
 
             $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')->paginate(5);
 
+            $listas->setBaseUrl('lista-suscriptores');
+
             return Response::json(array(
                 'status' => 'ok',
                 'html'   => View::make('trebolnews/listas/suscriptores', array(
