@@ -1,5 +1,7 @@
 <?php
 
+use SoapBox\Formatter\Formatter;
+
 class ListaController extends BaseController {
 
     public function guardar() {
@@ -78,6 +80,13 @@ class ListaController extends BaseController {
                 'validator' => $validator->messages()->toArray()
             ));
         }
+    }
+
+    public function export($id) {
+        $lista = Lista::find($id);
+        $formatter = Formatter::make($lista->contactos->toArray(), Formatter::ARR);
+        File::put(storage_path() . '/tmp/' . $lista->nombre . '.csv', $formatter->toCsv());
+        return Response::download(storage_path() . '/tmp/' . $lista->nombre . '.csv');
     }
 
 }

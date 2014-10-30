@@ -49,6 +49,14 @@
             }
         });
 
+        $('#btn_exportar').on('click', function(e){
+            e.preventDefault();
+            var url = $(this).attr('href');
+            $('.checkbox input:checked').each(function(i,e){
+                var tab = window.open(url + '/' + $(e).val());
+            });
+        });
+
     });
     </script>
 
@@ -70,7 +78,7 @@
                                 <a class="importarlista" href="#">OPCIONES</a>
                                 <ul>
                                     <li><a href="#">Importar lista</a></li>
-                                    <li><a href="#">Exportar listas</a></li>
+                                    <li><a id="btn_exportar" href="{{ action('ListaController@export') }}">Exportar listas</a></li>
                                 </ul>
                             </li>
                             <li>

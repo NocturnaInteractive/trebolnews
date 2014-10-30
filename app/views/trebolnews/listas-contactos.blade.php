@@ -29,6 +29,8 @@
                     clicked.prop('checked', true);
                 }
             }
+
+            $('#span_seleccionados').text($('.checkbox input:checked').not('.todos').length);
         });
 
         $('[name="search-term"]').on('keypress', function(e){
@@ -71,7 +73,7 @@
                             <li><a class="importarlista" href="#">OPCIONES</a>
                             <ul>
                                 <li><a href="#">Importar lista</a></li>
-                                <li><a href="#">Exportar listas</a></li>
+                                <li><a id="btn_exportar" href="{{ action('ListaController@export', $lista->id) }}" target="_blank">Exportar lista</a></li>
                             </ul>
                             </li>
                             <li><a class="crearlista" href="#" popup="{{ url('popup/crear_contacto', $lista->id) }}">CREAR SUSCRIPTOR</a></li>
@@ -80,7 +82,7 @@
                     </div><!--submenu-->
                     <div id="submenulibreria">
                         <ul id="filtroselecionados">
-                            <li><p>Seleccionados: 0 de {{ count($contactos) }}</p></li>
+                            <li><p>Seleccionados: <span id="span_seleccionados">0</span> de {{ count($contactos) }}</p></li>
                             <li><a id="borrarselecionados" href="popup_eliminarsuscriptor_multi.html">Eliminar</a></li>
                         </ul>
                         <ul id="cantidad" class="btosuscriptores">
