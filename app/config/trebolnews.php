@@ -3,16 +3,13 @@
 return array(
     'social' => array(
         'pages' => array(
-            'facebook' => '',
-            'twitter' => ''
+            'facebook' => 'https://www.facebook.com/pages/Trebolnews/281083095385088',
+            'twitter' => 'https://twitter.com/trebolnews'
         )
     ),
 
     'usuario_admin' => 'treboladmin',
     'password_admin' => 'tre2014',
-
-    'facebook_page' => 'https://www.facebook.com/pages/Trebolnews/281083095385088',
-    'twitter_page' => 'https://twitter.com/trebolnews',
 
     // 'email_comentarios' => 'maimar@gmail.com',
 
