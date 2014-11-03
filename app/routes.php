@@ -195,14 +195,6 @@ Route::group(array(
 
     Route::get('campaign/view/{campaignId}/{contactId}/{verification}', 'MailController@renderMail');
 
-    Route::get('planes', array(
-        'as' => 'planes',
-        function() {
-            $action = 'planes';
-            return App::make('InternasController')->$action();
-        }
-    ));
-
     Route::get('soporte', array(
         'as' => 'soporte',
         function() {
@@ -522,6 +514,7 @@ Route::group(array(
 
     Route::any('list-search', 'ListaController@search');
     Route::get('exportar/{id?}', 'ListaController@export');
+    Route::post('importar', 'ListaController@import');
 
     // base listas de contactos
     Route::get('lista/{id_lista}', array(
@@ -602,6 +595,17 @@ Route::group(array(
         }
     ));
 
+    Route::get('planes', array(
+        'as' => 'planes',
+        function() {
+            $res = array(
+                'plans' => Plan::all()
+            );
+
+            return View::make('trebolnews/planes', $res);
+        }
+    ));
+
     // paginas que requieren estar logueado
     Route::group(array(
         'before' => 'auth'
@@ -630,6 +634,12 @@ Route::group(array(
         Route::get('crear_lista', function(){
             return Response::json(array(
                 'popup' => View::make('trebolnews/popups/crear_lista')->render()
+            ));
+        });
+
+        Route::get('importar_lista', function() {
+            return Response::json(array(
+                'popup' => View::make('trebolnews/popups/importar_lista')->render()
             ));
         });
 
