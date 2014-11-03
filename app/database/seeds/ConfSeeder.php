@@ -8,7 +8,7 @@ class ConfSeeder extends Seeder {
         Conf::create(array(
             'nombre' => 'E-mail a donde llegan los comentarios',
             'clave'  => 'email_comentarios',
-            'valor'  => 'maimar@gmail.com'
+            'valor'  => 'consultas@trebolnews.com'
         ));
     }
 
