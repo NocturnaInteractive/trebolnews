@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('ContactoSeeder');
         $this->call('PlanSeeder');
         $this->call('TemplateSeeder');
+        $this->call('ConfSeeder');
     }
 
 }
