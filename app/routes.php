@@ -195,13 +195,6 @@ Route::group(array(
 
     Route::get('campaign/view/{campaignId}/{contactId}/{verification}', 'MailController@renderMail');
 
-    Route::get('soporte', array(
-        'as' => 'soporte',
-        function() {
-            return View::make('internas/soporte');
-        }
-    ));
-
     Route::get('banco', array(
         'as' => 'banco',
         function() {
@@ -558,6 +551,7 @@ Route::group(array(
 
     Route::any('contact-search', 'ContactoController@search');
 
+    // banco de imágenes
     Route::get('librerías', array(
         'as' => 'librerias',
         function() {
@@ -595,6 +589,7 @@ Route::group(array(
         }
     ));
 
+    // planes
     Route::get('planes', array(
         'as' => 'planes',
         function() {
@@ -603,6 +598,14 @@ Route::group(array(
             );
 
             return View::make('trebolnews/planes', $res);
+        }
+    ));
+
+    // soporte
+    Route::get('soporte', array(
+        'as' => 'soporte',
+        function() {
+            return View::make('trebolnews/soporte');
         }
     ));
 
