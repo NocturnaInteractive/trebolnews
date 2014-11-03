@@ -612,6 +612,7 @@
                                                             timeout: 5000,
                                                             maxVisible: 10
                                                         });
+                                                        $('#frm_suscripcion')[0].reset();
                                                     } else {
                                                         notys(data.validator);
                                                     }
