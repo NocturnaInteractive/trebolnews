@@ -405,7 +405,7 @@
 
                                 <div id="individual">
                                     <h3>Plan Individual</h3>
-                                    <p>Ideal para envíos de emails con poca frecuencia, porque se abona sólo la cantidad de envíos que necesita el usuario. Además, no hay límite de tiempo para efectuarlos y son ilimitados los envíos. (Se habilitan hasta agotar los tanto suscriptores contratados, aca los suscriptores que rebotan o se dieron de baja el usuario puede reemplazar ese suscriptor ó mail por otro hasta completar el paquete que sacó).<br> </p>
+                                    <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. S contrata la cantidad de envíos que necesite. No hay límite de tiempo ni vencimientos de la compra.<br> </p>
                                     <div class="infoplanes">
                                         <?php
                                             $class = 'verde';
@@ -452,7 +452,7 @@
 
                                 <div id="mensuales">
                                     <h3>Planes Pro</h3>
-                                    <p>Exclusivo paquete preparado para realizar grandes envíos. Con una suscripción mensual se contrata una cantidad de envíos y no hay límite de tiempo para hacerlos. (Se contrata por envíos, no hay límites en los suscriptores, y caduca al terminar los 30 días de haber sacado el paquete. Dentro de ese período podés enviar 5000 mails de campaña a distintas listas de suscriptores, hasta agotar los envíos. Un usuario puede contratar 20000 envíos y enviar 10000 a una lista y 10000 a otra lista o a las lista que quiera armar hasta agotar los 20000 o el vencimiento del mes).</p>
+                                    <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos.</p>
                                     <div class="infoplanes">
                                         <?php
                                             $class = 'verde';
