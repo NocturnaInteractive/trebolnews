@@ -107,7 +107,7 @@
                     </div><!--pfree-->
                     <div id="individual">
                         <h3>Plan Individual</h3>
-                        <p>Ideal para env&iacute;os de emails con poca frecuencia, porque se abona s&oacute;lo la cantidad de env&iacute;os que necesita el usuario. Adem&aacute;s, no hay l&iacute;mite de tiempo para efectuarlos.<br> </p>
+                        <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. S contrata la cantidad de envíos que necesite. No hay límite de tiempo ni vencimientos de la compra.<br> </p>
                         <div class="infoplanes">
                             <?php
                             $class = 'verde';
@@ -147,7 +147,7 @@
                     </div><!--individual-->
                     <div id="mensuales">
                         <h3>Planes Mensuales</h3>
-                        <p>Exclusivo paquete preparado para realizar grandes env&iacute;os. Con una suscripci&oacute;n mensual se contrata una cantidad de env&iacute;os y no hay l&iacute;mite de tiempo para hacerlos.</p>
+                        <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos. Estos planes tienen una validez de 30 día para ser consumidos.</p>
                         <div class="infoplanes">
                             <?php
                             $class = 'verde';
