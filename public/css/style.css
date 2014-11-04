@@ -720,7 +720,7 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 /*--------Planes------------------------------------------------------------------------------------*/
 
 #planes { margin-bottom:20px}
-#planes p {color:#737f80; font-size:14px; height:120px; margin-bottom:0 !important }
+#planes p {color:#737f80; font-size:14px; height:105px; margin-bottom:0 !important }
 #planes .infoplanes {width:280px; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 1px 1px 1px 0px #a7a9ab; box-shadow:  1px 1px 1px 0px #a7a9ab; background-color:#FFF; margin:15px 0 25px 0}
 
 #planes .verdeinfo {padding:20px}
