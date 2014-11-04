@@ -415,13 +415,13 @@
                                                 if (!$plan->isSuscription) {
 
                                         ?>
-                                            <div class="{{$class.'info'}}">                                               
+                                            <div class="{{$class.'info'}}">
                                                 <h4>
                                                     <span class="hastaplan">Hasta</span>
                                                     <img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}
-                                                
+
                                                     <div class="cleaner"></div>
-                                            
+
                                                     <span class="segundalinea_plan"> Envios</span>
                                                     <span class="precioplan">&nbsp;
                                                         <span class="moneda"></span>{{$plan->precio}}
@@ -434,7 +434,7 @@
                                                 }
                                             }
                                         ?>
-                                        <div class="verdeinfo">                                            
+                                        <div class="verdeinfo">
                                             <h4>
                                                 <span class="hastaplan">M&aacute;s</span><img src="{{ asset('imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">100.000
                                                 <div class="cleaner"></div>
@@ -444,7 +444,7 @@
                                         </div>
                                     </div><!--infoplanes-->
                                     <div class="bot">
-                                        <a href="#" class="botondecompra">COMPRAR AHORA</a>
+                                        <a href="{{ route('registro') }}" class="botondecompra">COMPRAR AHORA</a>
                                         <div class="cleaner"></div>
                                     </div>
                                 </div><!--individual-->
@@ -590,7 +590,7 @@
                                     <h6>TrebolNEWS</h6>
                                     <p>www.trebolnews.com - Copyright 2013</p>
                                 </div>
-                                <div id="foo_der"> <a href="{{ Config::get('trebolnews.twitter_page') }}" class="twe">Seguinos por Tweter</a> <a href="{{ Config::get('trebolnews.facebook_page') }}" class="face">Estamos en Facebook</a>
+                                <div id="foo_der"> <a href="{{ Config::get('trebolnews.social.pages.twitter') }}" class="twe">Seguinos por Tweter</a> <a href="{{ Config::get('trebolnews.social.pages.facebook') }}" class="face">Estamos en Facebook</a>
                                     <script>
                                     $(function(){
                                         $('#frm_suscripcion #button').one('click', suscripcion_handler);
@@ -612,6 +612,7 @@
                                                             timeout: 5000,
                                                             maxVisible: 10
                                                         });
+                                                        $('#frm_suscripcion')[0].reset();
                                                     } else {
                                                         notys(data.validator);
                                                     }

@@ -22,8 +22,7 @@
         {{ HTML::script('js/trebolnews.js') }}
         {{ HTML::script('home/js/modernizr.custom.js') }}
 
-        @section('script')
-        @show
+        @yield('script')
     </head>
     <body>
         <div style="display: none;">

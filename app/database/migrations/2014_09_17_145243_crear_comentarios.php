@@ -10,8 +10,8 @@ class CrearComentarios extends Migration {
             $table->increments('id');
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('telefono');
-            $table->string('empresa');
+            $table->string('telefono')->nullable();
+            $table->string('empresa')->nullable();
             $table->string('email');
             $table->text('comentario');
             $table->timestamps();

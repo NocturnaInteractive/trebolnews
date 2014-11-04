@@ -18,6 +18,7 @@ $(function(){
                         layout: 'topCenter',
                         timeout: 1000
                     });
+                    $('#subanewsletter')[0].reset();
                 } else {
                     notys(data.validator);
                 }
@@ -37,8 +38,8 @@ $(function(){
             <p>www.trebolnews.com - Copyright 2013</p>
         </div>
         <div id="foo_der">
-            <a href="#" class="twe">Seguinos por Tweeter</a>
-            <a href="#" class="face">Estamos en Facebook</a>
+            <a href="{{ Config::get('trebolnews.social.pages.twitter') }}" class="twe">Seguinos por Tweeter</a>
+            <a href="{{ Config::get('trebolnews.social.pages.facebook') }}" class="face">Estamos en Facebook</a>
             <form id="subanewsletter" method="post" action="{{ action('ExtraController@guardar_suscripcion') }}">
                 <input type="text" name="email" class="compo-form" id="newsletter" placeholder="Suscr&iacute;bete a nuestro Newsletter"  style=" color:#FFF; font-size:12px;"  />
                 <input type="submit" id="button" value="ENVIAR" />

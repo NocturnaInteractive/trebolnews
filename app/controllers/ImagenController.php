@@ -25,7 +25,7 @@ class ImagenController extends BaseController {
                 $imagen = Input::file('imagen')->move(public_path() . '/uploads/imagenes', $nombre);
 
                 $imagen = Imagen::create(array(
-                    'id_carpeta'    => Input::get('id_carpeta'),
+                    'id_carpeta'    => Input::get('id_carpeta') ?: Auth::user()->carpeta_mis_imagenes()->id,
                     'nombre'        => 'Nombre default',
                     'archivo'       => $nombre
                 ));
