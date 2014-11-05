@@ -83,9 +83,12 @@ class ContactoController extends BaseController {
             }
 
             $lista = Lista::find(Input::get('id_lista'));
-            $contactos = $lista->contactos()->where('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
-                ->orWhere('apellido', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
-                ->orWhere('email', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
+            $contactos = $lista->contactos()
+                ->where(function($q) {
+                    $q->orWhere('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
+                      ->orWhere('apellido', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
+                      ->orWhere('email', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%');
+                })
                 ->paginate(5);
 
             $contactos->appends(array('lista' => $lista->id));
