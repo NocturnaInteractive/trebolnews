@@ -29,6 +29,14 @@
                     clicked.prop('checked', true);
                 }
             }
+
+            $('#span_seleccionados').text($('.checkbox input:checked').not('.todos').length);
+
+            if($('.checkbox input:checked').not('.todos').length == $('.checkbox input').not('.todos').length) {
+                $('.checkbox .todos').prop('checked', true);
+            } else {
+                $('.checkbox .todos').prop('checked', false);
+            }
         });
 
         $('[name="search-term"]').on('keypress', function(e){
@@ -77,7 +85,7 @@
                             <li>
                                 <a class="importarlista" href="#">OPCIONES</a>
                                 <ul>
-                                    <li><a href="#">Importar lista</a></li>
+                                    <li><a href="#" popup="{{ url('popup/importar_lista') }}">Importar lista</a></li>
                                     <li><a id="btn_exportar" href="{{ action('ListaController@export') }}">Exportar listas</a></li>
                                 </ul>
                             </li>
@@ -89,7 +97,7 @@
                     </div><!--submenu-->
                     <div id="submenulibreria">
                         <ul id="filtroselecionados">
-                            <li><p>Seleccionados: <span id="txt_seleccionados">0</span> de <span id="txt-total">{{ count($listas) }}</span></p></li>
+                            <li><p>Seleccionados: <span id="span_seleccionados">0</span> de <span id="txt-total">{{ count($listas) }}</span></p></li>
                             <li><a id="borrarselecionados" href="popup_eliminar_listasuscriptor_multi.html">Eliminar</a></li>
                         </ul>
                         <ul id="cantidad" class="btosuscriptores">

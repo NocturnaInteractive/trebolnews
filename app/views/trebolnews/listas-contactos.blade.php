@@ -31,6 +31,12 @@
             }
 
             $('#span_seleccionados').text($('.checkbox input:checked').not('.todos').length);
+
+            if($('.checkbox input:checked').not('.todos').length == $('.checkbox input').not('.todos').length) {
+                $('.checkbox .todos').prop('checked', true);
+            } else {
+                $('.checkbox .todos').prop('checked', false);
+            }
         });
 
         $('[name="search-term"]').on('keypress', function(e){

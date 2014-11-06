@@ -6,6 +6,13 @@
 
 @stop
 
+@section('data')
+
+    @parent
+    <input type="hidden" id="id_carpeta" value="{{ isset($carpeta_seleccionada) ? $carpeta_seleccionada->id : '' }}" />
+
+@stop
+
 @section('script')
 
     <script>
@@ -28,6 +35,14 @@
                 } else {
                     clicked.prop('checked', true);
                 }
+            }
+
+            $('#span_seleccionados').text($('.checkbox input:checked').not('.todos').length);
+
+            if($('.checkbox input:checked').not('.todos').length == $('.checkbox input').not('.todos').length) {
+                $('.checkbox .todos').prop('checked', true);
+            } else {
+                $('.checkbox .todos').prop('checked', false);
             }
         });
 
@@ -76,7 +91,7 @@
                     <div id="tablalibreria">
                         <div id="submenulibreria">
                             <ul id="filtroselecionados">
-                                <li><p>Seleccionados: 0 de 5 </p></li>
+                                <li><p>Seleccionados: <span id="span_seleccionados">0</span> de 5 </p></li>
                                 <li><a id="agregarcapeta" href="#">Mover a</a></li>
                                 <li><a id="borrarselecionados" href="#">Eliminar</a></li>
                             </ul>
