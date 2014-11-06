@@ -23,6 +23,7 @@
         {{ HTML::script('home/js/modernizr.custom.js') }}
 
         @yield('script')
+        @yield('head')
     </head>
     <body>
         <div style="display: none;">

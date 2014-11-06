@@ -13,10 +13,42 @@
 
 @stop
 
-@section('script')
+@section('head')
 
+    {{ HTML::style('trebolnews/fancybox/jquery.fancybox.css') }}
+    <style>
+    .fancybox-nav {
+        width: 60px;
+    }
+
+    .fancybox-nav span {
+        visibility: visible;
+        opacity: 0.5;
+    }
+
+    .fancybox-next {
+        right: -60px;
+    }
+
+    .fancybox-prev {
+        left: -60px;
+    }
+    </style>
+
+    {{ HTML::script('trebolnews/fancybox/jquery.fancybox.pack.js') }}
     <script>
     $(function(){
+
+        $('[rel="gallery"]').fancybox({
+            padding     : 5,
+            margin      : [20, 60, 20, 60] // Increase left/right margin
+        });
+
+        $('.ver_libreria').on('click', function(e){
+            e.preventDefault();
+
+            $(this).parents('tr').find('[rel="gallery"]').trigger('click');
+        });
 
         $('.checkbox').on('click', function(e){
             e.preventDefault();
@@ -91,7 +123,7 @@
                     <div id="tablalibreria">
                         <div id="submenulibreria">
                             <ul id="filtroselecionados">
-                                <li><p>Seleccionados: <span id="span_seleccionados">0</span> de 5 </p></li>
+                                <li><p>Seleccionados: <span id="span_seleccionados">0</span> de {{ count($imagenes) }} </p></li>
                                 <li><a id="agregarcapeta" href="#">Mover a</a></li>
                                 <li><a id="borrarselecionados" href="#">Eliminar</a></li>
                             </ul>
@@ -135,12 +167,27 @@
                                         <label></label>
                                     </div>
                                 </td>
-                                <td class="libre_img"><a href="#"><label for="checkbox2"><img src="{{ asset($ruta . $imagen->archivo) }}" height="75"></label></a></td>
+                                <td class="libre_img">
+                                    <a href="{{ asset($ruta . $imagen->archivo) }}" rel="gallery">
+                                        <label for="checkbox2"><img src="{{ asset($ruta . $imagen->archivo) }}" height="75" /></label>
+                                    </a>
+                                </td>
                                 <td class="nombrelibreria">{{ $imagen->nombre }}</td>
                                 <?php $dim = getimagesize(public_path() . '/' . $ruta . $imagen->archivo); ?>
                                 <td>{{ $dim[0] . ' x ' . $dim[1] }}</td>
                                 <td>{{ round(filesize(public_path() . '/' . $ruta . $imagen->archivo) / 1024, 2, PHP_ROUND_HALF_DOWN) . ' Kb' }}</td>
-                                <td><a class="ver_libreria" href="#"><img src="{{ asset('internas/imagenes/ojoicono.png') }}" width="28" height="25"></a><a class="editarcampam" href="#"><img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25"></a><a class="borrarcam" href="#"><img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25"></a><div class="cleaner"></div></td>
+                                <td>
+                                    <a class="ver_libreria" href="#">
+                                        <img src="{{ asset('internas/imagenes/ojoicono.png') }}" width="28" height="25">
+                                    </a>
+                                    <a class="editarcampam" href="#">
+                                        <img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25">
+                                    </a>
+                                    <a class="borrarcam" href="#">
+                                        <img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25">
+                                    </a>
+                                    <div class="cleaner"></div>
+                                </td>
                             </tr>
                             @endforeach
                         </table>
