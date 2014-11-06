@@ -6,7 +6,7 @@
 
 @stop
 
-@section('script')
+@section('head')
 
     <script>
     $(function(){
@@ -86,7 +86,9 @@
                                 <a class="importarlista" href="#">OPCIONES</a>
                                 <ul>
                                     <li><a href="#" popup="{{ url('popup/importar_lista') }}">Importar lista</a></li>
+                                    @if(count(Auth::user()->listas) > 0)
                                     <li><a id="btn_exportar" href="{{ action('ListaController@export') }}">Exportar listas</a></li>
+                                    @endif
                                 </ul>
                             </li>
                             <li>
