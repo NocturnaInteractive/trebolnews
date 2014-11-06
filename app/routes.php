@@ -383,14 +383,13 @@ Route::group(array(
 
 // acciones con el usuario
 
+    // login con facebook
     Route::get('facebook', 'UsuarioController@facebook_login');
 
+    // login normal
     Route::post('login', 'UsuarioController@login');
 
-    Route::post('recuperar_password_enviar_mail', 'UsuarioController@pre_recuperar_password');
-
-    Route::post('cambiar_password', 'UsuarioController@cambiar_password');
-
+    // link para activar la cuenta
     Route::get('confirmar/{hash}', function($hash) {
         $usuario = Usuario::where('confirmation', '=', $hash)->first();
 
@@ -402,6 +401,13 @@ Route::group(array(
 
         return View::make('trebolnews/cuenta-activa');
     });
+
+    // envío de mail con código para recuperar la contraseña
+    Route::post('recuperar_password_enviar_mail', 'UsuarioController@pre_recuperar_password');
+
+    // post para modificar la contraseña
+    Route::post('cambiar_password', 'UsuarioController@cambiar_password');
+
 
 // fin acciones con el usuario
 
@@ -428,7 +434,7 @@ Route::group(array(
         }
     ));
 
-    // pre recuperar contraseña
+    // aviso de que se envío el mail para recuperar contraseña
     Route::get('mail-enviado', array(
         'as' => 'recuperar_password_mail_enviado',
         function() {
@@ -436,9 +442,9 @@ Route::group(array(
         }
     ));
 
-    Route::get('recupero', function(){
-        return View::make('trebolnews.form_recuperar_password');
-    });
+    // Route::get('recupero', function(){
+    //     return View::make('trebolnews.form_recuperar_password');
+    // });
 
     // form recuperar contraseña
     Route::get('recuperar/{hash}', array(
@@ -454,167 +460,165 @@ Route::group(array(
         }
     ));
 
-    // perfil e información del usuario
-    Route::get('perfil', array(
-        'as' => 'perfil',
-        function() {
-            $empresa = json_decode(Auth::user()->empresa);
-
-            return View::make('trebolnews/perfil', array(
-                'empresa' => $empresa
-            ));
-        }
-    ));
-
-    // base listas de suscriptores
-    Route::get('suscriptores', array(
-        'as' => 'suscriptores',
-        function() {
-            $listas = Auth::user()->listas()->paginate(5);
-            $listas->setBaseUrl('lista-suscriptores');
-
-            $html = View::make('trebolnews.listas.suscriptores', array(
-                'listas' => $listas
-            ))->render();
-
-            return View::make('trebolnews.listas-suscriptores', array(
-                'listas' => $listas,
-                'html'   => $html
-            ));
-        }
-    ));
-
-    // tabla listas de suscriptores
-    Route::get('lista-suscriptores', array(
-        'as' => 'lista-suscriptores',
-        function() {
-            if(Session::has('search-term')) {
-                $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Input::get('search-term') . '%')->paginate(5);
-            } else {
-                $listas = Auth::user()->listas()->paginate(5);
-            }
-            $listas->setBaseUrl('lista-suscriptores');
-
-            return Response::json(array(
-                'html'      => View::make('trebolnews.listas.suscriptores', array(
-                    'listas' => $listas
-                ))->render(),
-                'paginador' => $listas->links('trebolnews.paginador-ajax')->render(),
-                'total'     => $listas->count()
-            ));
-        }
-    ));
-
-    Route::any('list-search', 'ListaController@search');
-    Route::get('exportar/{id?}', 'ListaController@export');
-    Route::post('importar', 'ListaController@import');
-
-    // base listas de contactos
-    Route::get('lista/{id_lista}', array(
-        'as' => 'lista',
-        function($id_lista) {
-            $lista = Lista::find($id_lista);
-            $contactos = $lista->contactos()->paginate(5);
-            $contactos->appends(array('lista' => $id_lista));
-            $contactos->setBaseUrl('../lista-contactos');
-
-            $html = View::make('trebolnews.listas.contactos', array(
-                'contactos' => $contactos
-            ))->render();
-
-            return View::make('trebolnews.listas-contactos', array(
-                'lista'     => $lista,
-                'contactos' => $contactos,
-                'html'      => $html
-            ));
-        }
-    ));
-
-    // tabla listas de contactos
-    Route::get('lista-contactos', array(
-        'as' => 'lista-contactos',
-        function() {
-            $lista = Lista::find(Input::get('lista'));
-            $contactos = $lista->contactos()->paginate(5);
-            $contactos->appends(array('lista' => $lista->id));
-            $contactos->setBaseUrl('../lista-contactos');
-
-            return Response::json(array(
-                'html'      => View::make('trebolnews.listas.contactos', array(
-                    'contactos' => $contactos
-                ))->render(),
-                'paginador' => $contactos->links('trebolnews.paginador-ajax')->render(),
-                'total'     => $contactos->count()
-            ));
-        }
-    ));
-
-    Route::any('contact-search', 'ContactoController@search');
-
-    // banco de imágenes
-    Route::get('librerías', array(
-        'as' => 'librerias',
-        function() {
-            $carpeta_imagenes = Carpeta::find(1); // esta es la carpeta de imágenes de trebolnews (ver seeder)
-            $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first(); // los usuarios tienen una carpeta 'basura' (ver eventos)
-            $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
-            $imagenes = $carpeta_imagenes->imagenes()->paginate(5);
-
-            return View::make('trebolnews/libreria', array(
-                'carpeta_imagenes' => $carpeta_imagenes,
-                'carpeta_basura' => $carpeta_basura,
-                'carpetas' => $carpetas,
-                'imagenes' => $imagenes
-            ));
-        }
-    ));
-
-    // dry
-    Route::get('carpeta/{id_carpeta}', array(
-        'as' => 'carpeta',
-        function($id_carpeta) {
-            $carpeta_seleccionada = Carpeta::find($id_carpeta);
-            $carpeta_imagenes = Carpeta::find(1);
-            $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first();
-            $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
-            $imagenes = $carpeta_seleccionada->imagenes()->paginate(5);
-
-            return View::make('trebolnews/libreria', array(
-                'carpeta_seleccionada' => $carpeta_seleccionada,
-                'carpeta_imagenes' => $carpeta_imagenes,
-                'carpeta_basura' => $carpeta_basura,
-                'carpetas' => $carpetas,
-                'imagenes' => $imagenes
-            ));
-        }
-    ));
-
-    // planes
-    Route::get('planes', array(
-        'as' => 'planes',
-        function() {
-            $res = array(
-                'plans' => Plan::all()
-            );
-
-            return View::make('trebolnews/planes', $res);
-        }
-    ));
-
-    // soporte
-    Route::get('soporte', array(
-        'as' => 'soporte',
-        function() {
-            return View::make('trebolnews/soporte');
-        }
-    ));
-
     // paginas que requieren estar logueado
     Route::group(array(
         'before' => 'auth'
-    ), function(){
+    ), function() {
 
+        // perfil e información del usuario
+        Route::get('perfil', array(
+            'as' => 'perfil',
+            function() {
+                $empresa = json_decode(Auth::user()->empresa);
 
+                return View::make('trebolnews/perfil', array(
+                    'empresa' => $empresa
+                ));
+            }
+        ));
+
+        // base listas de suscriptores
+        Route::get('suscriptores', array(
+            'as' => 'suscriptores',
+            function() {
+                $listas = Auth::user()->listas()->paginate(5);
+                $listas->setBaseUrl('lista-suscriptores');
+
+                $html = View::make('trebolnews.listas.suscriptores', array(
+                    'listas' => $listas
+                ))->render();
+
+                return View::make('trebolnews.listas-suscriptores', array(
+                    'listas' => $listas,
+                    'html'   => $html
+                ));
+            }
+        ));
+
+        // tabla listas de suscriptores
+        Route::get('lista-suscriptores', array(
+            'as' => 'lista-suscriptores',
+            function() {
+                if(Session::has('search-term')) {
+                    $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Input::get('search-term') . '%')->paginate(5);
+                } else {
+                    $listas = Auth::user()->listas()->paginate(5);
+                }
+                $listas->setBaseUrl('lista-suscriptores');
+
+                return Response::json(array(
+                    'html'      => View::make('trebolnews.listas.suscriptores', array(
+                        'listas' => $listas
+                    ))->render(),
+                    'paginador' => $listas->links('trebolnews.paginador-ajax')->render(),
+                    'total'     => $listas->count()
+                ));
+            }
+        ));
+
+        Route::any('list-search', 'ListaController@search');
+        Route::get('exportar/{id?}', 'ListaController@export');
+        Route::post('importar', 'ListaController@import');
+
+        // base listas de contactos
+        Route::get('lista/{id_lista}', array(
+            'as' => 'lista',
+            function($id_lista) {
+                $lista = Lista::find($id_lista);
+                $contactos = $lista->contactos()->paginate(5);
+                $contactos->appends(array('lista' => $id_lista));
+                $contactos->setBaseUrl('../lista-contactos');
+
+                $html = View::make('trebolnews.listas.contactos', array(
+                    'contactos' => $contactos
+                ))->render();
+
+                return View::make('trebolnews.listas-contactos', array(
+                    'lista'     => $lista,
+                    'contactos' => $contactos,
+                    'html'      => $html
+                ));
+            }
+        ));
+
+        // tabla listas de contactos
+        Route::get('lista-contactos', array(
+            'as' => 'lista-contactos',
+            function() {
+                $lista = Lista::find(Input::get('lista'));
+                $contactos = $lista->contactos()->paginate(5);
+                $contactos->appends(array('lista' => $lista->id));
+                $contactos->setBaseUrl('../lista-contactos');
+
+                return Response::json(array(
+                    'html'      => View::make('trebolnews.listas.contactos', array(
+                        'contactos' => $contactos
+                    ))->render(),
+                    'paginador' => $contactos->links('trebolnews.paginador-ajax')->render(),
+                    'total'     => $contactos->count()
+                ));
+            }
+        ));
+
+        Route::any('contact-search', 'ContactoController@search');
+
+        // banco de imágenes
+        Route::get('librerías', array(
+            'as' => 'librerias',
+            function() {
+                $carpeta_imagenes = Carpeta::find(1); // esta es la carpeta de imágenes de trebolnews (ver seeder)
+                $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first(); // los usuarios tienen una carpeta 'basura' (ver eventos)
+                $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
+                $imagenes = $carpeta_imagenes->imagenes()->paginate(5);
+
+                return View::make('trebolnews/libreria', array(
+                    'carpeta_imagenes' => $carpeta_imagenes,
+                    'carpeta_basura' => $carpeta_basura,
+                    'carpetas' => $carpetas,
+                    'imagenes' => $imagenes
+                ));
+            }
+        ));
+
+        // dry
+        Route::get('carpeta/{id_carpeta}', array(
+            'as' => 'carpeta',
+            function($id_carpeta) {
+                $carpeta_seleccionada = Carpeta::find($id_carpeta);
+                $carpeta_imagenes = Carpeta::find(1);
+                $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first();
+                $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
+                $imagenes = $carpeta_seleccionada->imagenes()->paginate(5);
+
+                return View::make('trebolnews/libreria', array(
+                    'carpeta_seleccionada' => $carpeta_seleccionada,
+                    'carpeta_imagenes' => $carpeta_imagenes,
+                    'carpeta_basura' => $carpeta_basura,
+                    'carpetas' => $carpetas,
+                    'imagenes' => $imagenes
+                ));
+            }
+        ));
+
+        // planes
+        Route::get('planes', array(
+            'as' => 'planes',
+            function() {
+                $res = array(
+                    'plans' => Plan::all()
+                );
+
+                return View::make('trebolnews/planes', $res);
+            }
+        ));
+
+        // soporte
+        Route::get('soporte', array(
+            'as' => 'soporte',
+            function() {
+                return View::make('trebolnews/soporte');
+            }
+        ));
 
     });
 
