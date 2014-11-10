@@ -17,12 +17,12 @@
         {{ HTML::style('css/trebolnews.css') }}
         <script>
         $(function(){
-            $('#saveForm').one('click', registro_handler);
+            $('#formulariregistro #saveForm').one('click', registro_handler);
 
             function registro_handler(e) {
                 e.preventDefault();
 
-                $('#saveForm').on('click', function(e) {
+                $('#formulariregistro #saveForm').on('click', function(e) {
                     e.preventDefault();
                 });
 
@@ -44,7 +44,7 @@
                         }
                     },
                     complete: function() {
-                        $('#saveForm').one('click', registro_handler);
+                        $('#formulariregistro #saveForm').one('click', registro_handler);
                     }
                 });
             }
