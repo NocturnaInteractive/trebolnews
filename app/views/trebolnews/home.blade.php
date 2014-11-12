@@ -452,7 +452,7 @@
 
                                 <div id="mensuales">
                                     <h3>Planes Pro</h3>
-                                    <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos.</p>
+                                    <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos. Estos planes tienen una validez de 30 día para ser consumidos.</p>
                                     <div class="infoplanes">
                                         <?php
                                             $class = 'verde';
