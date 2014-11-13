@@ -62,37 +62,55 @@
             </select>
             <script>
             var moneda = 'USD';
+            var ARS_rate = 0;
             function precio(moneda){
                 switch (moneda) {
                 case 'ARS':
-                    $('.moneda').html('$');
+                    $('.moneda').html('AR$');
                     break;
                 case 'USD':
-                    $('.moneda').html('U$S');
+                    $('.moneda').html('US$');
                     break;
                 }
             }
 
-            $(".select-precios").change(function() {
-                precio($(this).val());
+            $(".select-precios").change(function(e) {
+                if(moneda != 'ARS' && $(".select-precios").val() == 'ARS' && ARS_rate != 0){
+                    $('.price').each(function(n,o){
+                        var new_price = (parseFloat( $(this).data('price') ) * ARS_rate);
+                        $(this).html( new_price.toFixed(2) );
+                    });
+
+                    precio($(this).val());
+                    moneda = 'ARS';
+                }else if(moneda != 'USD' && $(".select-precios").val() == 'USD' && ARS_rate != 0){
+                    $('.price').each(function(n,o){
+                        $(this).html( parseFloat( $(this).data('price') ));
+                    });
+
+                    precio($(this).val());
+                    moneda = 'USD';
+                }else{
+                    $(".select-precios").val('USD');
+                    e.preventDefault();
+                }
+                
             });
 
             $(document).ready(function(){
                 precio('USD');
 
-                /*$.ajax({
-                    url: 'http://www.geoplugin.net/currency_converter.gp?from=USD&to=ARS&amount=1',
-                    method: 'get',
+                $.ajax({
+                    url: 'http://www.freecurrencyconverterapi.com/api/v2/convert',
+                    method: 'post',
                     dataType: "jsonp",
                     data:{
-                        from: 'USD',
-                        to:   'ARS', 
-                        amount: 1
+                        q: 'USD_ARS',
                     },
                     success: function(data){
-                        console.log(data);
+                        ARS_rate = data.results.USD_ARS.val;
                     }
-                });*/
+                });
             });
             </script>
             <div class="infocont">
@@ -137,7 +155,7 @@
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{ $icon }}.png" width="18px" height="18px" alt="icono">{{ $plan->envios }}</h4>
                                 <div class="cleaner"></div>
-                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{ $plan->precio }}</span></h4>
+                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
                             </div>
                             <?php
@@ -147,16 +165,6 @@
                                 }
                             }
                             ?>
-                            <div class="{{ $class }}info">
-                                <div class="radioplanes radioplanes_largo">
-                                    <input type="radio"  id="radio{{ $i }}" name="opcion" />
-                                    <label for="radio{{$i}}"></label>
-                                </div>
-                                <h4><span class="hastaplan">M&aacute;s</span><img src="imagenes/plane{{ $icon }}.png" width="18px" height="18px" alt="icono">100.000</h4>
-                                <div class="cleaner"></div>
-                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>0</span></h4>
-                                <div class="cleaner"></div>
-                            </div>
                         </div><!--infoplanes-->
                     </div><!--individual-->
                     <div id="mensuales">
@@ -177,7 +185,7 @@
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
                                 <div class="cleaner"></div>
-                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{$plan->precio}}</span></h4>
+                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
                             </div>
                             <?php
@@ -187,16 +195,7 @@
                                 }
                             }
                             ?>
-                            <div class="{{ $class }}info">
-                                <div class="radioplanes radioplanes_largo">
-                                    <input type="radio"  id="radio9" name="opcion" />
-                                    <label for="radio9"></label>
-                                </div>
-                                <h4><span class="hastaplan">M&aacute;s</span><img src="imagenes/plane{{ $icon }}.png" width="18px" height="18px" alt="icono">100.000</h4>
-                                <div class="cleaner"></div>
-                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>0</span></h4>
-                                <div class="cleaner"></div>
-                            </div>
+                            
                         </div><!--infoplanes-->
                     </div><!--mensuales-->
                     <div class="cleaner"></div>
