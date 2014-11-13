@@ -33,9 +33,9 @@ class CheckoutController extends BaseController {
 
         //URL de retorno
         $back_urls = array(
-            "success"   => "http://104.131.143.16/checkout-success",
-            "failiure"  => "http://104.131.143.16/",
-            "pending"   => "http://104.131.143.16/"
+            "success"   => "http://104.131.97.126/checkout-success",
+            "failiure"  => "http://104.131.97.126/",
+            "pending"   => "http://104.131.97.126/"
         );
 
         $items = [];

@@ -57,17 +57,17 @@
         <div class="content">
             <h2>Precios y Planes</h2>
             <select class="select-precios">
-                <option value='pesos'>Pesos Argentinos</option>
-                <option value='dolares'>Dolares estadounidenses</option>
+                <option value='USD'>Dolares estadounidenses</option>
+                <option value='ARS'>Pesos Argentinos</option>
             </select>
             <script>
-            var moneda = 'pesos';
+            var moneda = 'USD';
             function precio(moneda){
                 switch (moneda) {
-                case 'pesos':
+                case 'ARS':
                     $('.moneda').html('$');
                     break;
-                case 'dolares':
+                case 'USD':
                     $('.moneda').html('U$S');
                     break;
                 }
@@ -78,7 +78,21 @@
             });
 
             $(document).ready(function(){
-                precio('pesos');
+                precio('USD');
+
+                /*$.ajax({
+                    url: 'http://www.geoplugin.net/currency_converter.gp?from=USD&to=ARS&amount=1',
+                    method: 'get',
+                    dataType: "jsonp",
+                    data:{
+                        from: 'USD',
+                        to:   'ARS', 
+                        amount: 1
+                    },
+                    success: function(data){
+                        console.log(data);
+                    }
+                });*/
             });
             </script>
             <div class="infocont">
