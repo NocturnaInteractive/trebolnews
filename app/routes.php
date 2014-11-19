@@ -483,6 +483,7 @@ Route::group(array(
         Route::get('suscriptores', array(
             'as' => 'suscriptores',
             function() {
+                Session::forget('search-term');
                 $listas = Auth::user()->listas()->paginate(5);
                 $listas->setBaseUrl('lista-suscriptores');
 
@@ -502,7 +503,7 @@ Route::group(array(
             'as' => 'lista-suscriptores',
             function() {
                 if(Session::has('search-term')) {
-                    $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Input::get('search-term') . '%')->paginate(5);
+                    $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Session::get('search-term') . '%')->paginate(5);
                 } else {
                     $listas = Auth::user()->listas()->paginate(5);
                 }
@@ -526,6 +527,7 @@ Route::group(array(
         Route::get('lista/{id_lista}', array(
             'as' => 'lista',
             function($id_lista) {
+                Session::forget('search-term');
                 $lista = Lista::find($id_lista);
                 $contactos = $lista->contactos()->paginate(5);
                 $contactos->appends(array('lista' => $id_lista));
@@ -548,7 +550,19 @@ Route::group(array(
             'as' => 'lista-contactos',
             function() {
                 $lista = Lista::find(Input::get('lista'));
-                $contactos = $lista->contactos()->paginate(5);
+
+                if(Session::has('search-term')) {
+                    $contactos = $lista->contactos()
+                        ->where(function($q) {
+                            $q->orWhere('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
+                              ->orWhere('apellido', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
+                              ->orWhere('email', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%');
+                        })
+                        ->paginate(5);
+                } else {
+                    $contactos = $lista->contactos()->paginate(5);
+                }
+
                 $contactos->appends(array('lista' => $lista->id));
                 $contactos->setBaseUrl('../lista-contactos');
 

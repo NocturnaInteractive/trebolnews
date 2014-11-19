@@ -27,6 +27,7 @@ $(function(){
     $actual = $paginator->getCurrentPage();
 ?>
 
+@if($paginator->count() > 0)
 <ul>
     @if($actual != 1)
     <li><a href="{{ $paginator->getUrl(1) }}" pagination >Primera</a></li>
@@ -48,3 +49,4 @@ $(function(){
     <li><a href="{{ $paginator->getUrl($ultima) }}" pagination >&Uacute;ltima</a></li>
     @endif
 </ul>
+@endif

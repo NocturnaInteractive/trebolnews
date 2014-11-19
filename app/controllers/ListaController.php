@@ -64,10 +64,8 @@ class ListaController extends BaseController {
 
         $validator = Validator::make($data, $rules, $messages);
 
-        if($validator->passes() || Session::has('search-term')) {
-            if(Input::has('search-term')) {
-                Session::put('search-term', Input::get('search-term'));
-            }
+        if($validator->passes()) {
+            Session::put('search-term', Input::get('search-term'));
 
             $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')->paginate(5);
 

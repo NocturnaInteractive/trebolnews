@@ -84,10 +84,8 @@ class ContactoController extends BaseController {
 
         $validator = Validator::make($data, $rules, $messages);
 
-        if($validator->passes() || Session::has('search-term')) {
-            if(Input::has('search-term')) {
-                Session::put('search-term', Input::get('search-term'));
-            }
+        if($validator->passes()) {
+            Session::put('search-term', Input::get('search-term'));
 
             $lista = Lista::find(Input::get('id_lista'));
             $contactos = $lista->contactos()
