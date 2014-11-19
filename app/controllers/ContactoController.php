@@ -64,6 +64,13 @@ class ContactoController extends BaseController {
         Contacto::destroy(Input::get('id'));
     }
 
+    public function eliminar_multi() {
+        $ids = Input::get('ids');
+        foreach($ids as $id) {
+            Contacto::destroy($id);
+        }
+    }
+
     public function search() {
         $data = Input::all();
 

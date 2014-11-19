@@ -221,9 +221,11 @@ Route::group(array(
 
     Route::post('guardar_lista', 'ListaController@guardar');
     Route::post('eliminar_lista', 'ListaController@eliminar');
+    Route::post('eliminar_lista_multi', 'ListaController@eliminar_multi');
 
     Route::post('guardar_contacto', 'ContactoController@guardar');
     Route::post('eliminar_contacto', 'ContactoController@eliminar');
+    Route::post('eliminar_contacto_multi', 'ContactoController@eliminar_multi');
 
     Route::post('guardar_carpeta', 'CarpetaController@guardar');
     Route::post('eliminar_carpeta', 'CarpetaController@eliminar');
@@ -632,13 +634,13 @@ Route::group(array(
 
         // curados
 
-        Route::get('recuperar_password', function(){
+        Route::get('recuperar_password', function() {
             return Response::json(array(
                 'popup' => View::make('trebolnews/popups/recuperar_password')->render()
             ));
         });
 
-        Route::get('crear_lista', function(){
+        Route::get('crear_lista', function() {
             return Response::json(array(
                 'popup' => View::make('trebolnews/popups/crear_lista')->render()
             ));
@@ -647,6 +649,18 @@ Route::group(array(
         Route::get('importar_lista', function() {
             return Response::json(array(
                 'popup' => View::make('trebolnews/popups/importar_lista')->render()
+            ));
+        });
+
+        Route::get('eliminar_lista_multi', function() {
+            return Response::json(array(
+                'popup' => View::make('trebolnews/popups/eliminar_lista_multi')->render()
+            ));
+        });
+
+        Route::get('eliminar_suscriptor_multi', function() {
+            return Response::json(array(
+                'popup' => View::make('trebolnews/popups/eliminar_suscriptor_multi')->render()
             ));
         });
 

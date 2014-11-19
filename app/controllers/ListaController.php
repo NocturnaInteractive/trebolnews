@@ -44,6 +44,13 @@ class ListaController extends BaseController {
         Lista::destroy(Input::get('id'));
     }
 
+    public function eliminar_multi() {
+        $ids = Input::get('ids');
+        foreach($ids as $id) {
+            Lista::destroy($id);
+        }
+    }
+
     public function search() {
         $data = Input::all();
 
@@ -87,6 +94,35 @@ class ListaController extends BaseController {
         $formatter = Formatter::make($lista->contactos->toArray(), Formatter::ARR);
         File::put(storage_path() . '/tmp/' . $lista->nombre . '.csv', $formatter->toCsv());
         return Response::download(storage_path() . '/tmp/' . $lista->nombre . '.csv');
+    }
+
+    public function import() {
+        $data = Input::all();
+
+        $rules = array(
+            'archivo' => 'required'
+        );
+
+        $messages = array(
+            'archivo.required' => 'Debe elegir un archivo',
+            'archivo.mimes' => 'El archivo debe ser .csv'
+        );
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        if($validator->passes()) {
+            $filename = Input::file('archivo')->getClientOriginalName();
+            $path = storage_path() . '/tmp/';
+            Input::file('archivo')->move($path, $filename);
+            $data = File::get($path . '/' . $filename);
+            $formatter = Formatter::make($data, Formatter::CSV);
+            var_dump($formatter->toArray());
+        } else {
+            return Response::json(array(
+                'status' => 'error',
+                'validator' => $validator->messages()->toArray()
+            ));
+        }
     }
 
 }

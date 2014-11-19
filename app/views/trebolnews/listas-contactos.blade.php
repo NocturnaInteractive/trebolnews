@@ -11,6 +11,8 @@
     <script>
     $(function(){
 
+        $('#borrarselecionados').hide();
+
         $('.checkbox').on('click', function(e){
             e.preventDefault();
 
@@ -36,6 +38,12 @@
                 $('.checkbox .todos').prop('checked', true);
             } else {
                 $('.checkbox .todos').prop('checked', false);
+            }
+
+            if($('.checkbox input:checked').not('.todos').length > 0) {
+                $('#borrarselecionados').show();
+            } else {
+                $('#borrarselecionados').hide();
             }
         });
 
@@ -91,7 +99,7 @@
                     <div id="submenulibreria">
                         <ul id="filtroselecionados">
                             <li><p>Seleccionados: <span id="span_seleccionados">0</span> de {{ count($contactos) }}</p></li>
-                            <li><a id="borrarselecionados" href="popup_eliminarsuscriptor_multi.html">Eliminar</a></li>
+                            <li><a id="borrarselecionados" href="#" popup="{{ url('popup/eliminar_suscriptor_multi') }}">Eliminar</a></li>
                         </ul>
                         <ul id="cantidad" class="btosuscriptores">
                             <li><a href="#" class="boton">VER</a>
