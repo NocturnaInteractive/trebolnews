@@ -22,7 +22,7 @@
         <section class="tabs">
             <div class="content">
                 <h2>Crear campa&ntilde;a nueva</h2>
-                <a id="volver" href="campanias.html"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
+                <a id="volver" href="{{ URL::previous() }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
                 <div class="infocont">
                     <ul id="pasoscam">
                         <li id="pasocam1">Paso 1<div class="linea"></div><div class="circulo pasosactivado"></div></li>
