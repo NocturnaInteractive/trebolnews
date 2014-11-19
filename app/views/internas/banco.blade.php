@@ -77,7 +77,7 @@
 
 	          <div class="content">
 			  <h2>Banco de Im&aacute;genes</h2>
-              <a id="volver" href="libreria.html"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
+              <a id="volver" href="{{ URL::previous() }}"><img src="{{ asset('internas/imagenes/iconovolver.png') }}" alt="volver" width="26" height="26"></a>
 
 			  <div class="infocont">
 
