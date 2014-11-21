@@ -1133,8 +1133,8 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 
 /*--------campa&ntilde;a paso 3------------------------------------------------------------------------------------*/
 
-.infocont #info_basica {margin-bottom:50px; padding-bottom:35px; border-bottom:1px solid #D4D8D9}
-.infocont #info_basica h3{ margin-bottom:30px}
+.infocont .info_basica {margin-bottom:50px; padding-bottom:35px; border-bottom:1px solid #D4D8D9}
+.infocont .info_basica h3{ margin-bottom:30px}
 .form_info_basica .text {border:1px solid #17a387; height:35px; color:#737f80; margin-bottom:15px; font-size:18px; font-family:'ralewayregular',  'Raleway', sans-serif; padding-left:1%; width:48%}
 .form_info_basica .text:focus {border:1px solid #0e6655; background-color:#17a387; color:#ecf0f1; -webkit-box-shadow:  2px 2px 0px 0px #0e6655; -moz-box-shadow:  2px 2px 0px 0px #0e6655; -o-box-shadow:  2px 2px 0px 0px #0e6655; box-shadow:  2px 2px 0px 0px #0e6655 }
 .form_info_basica .nomcam { width:99% !important}

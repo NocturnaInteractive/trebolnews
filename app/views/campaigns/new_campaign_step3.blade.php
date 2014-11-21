@@ -31,7 +31,7 @@
                         <div class="cleaner"></div>
                     </ul><!--pasoscam-->
                     <form action="{{ action('CampaniaController@guardar_campania') }}" method="post" id="frm_campania" class="form_info_basica" data-step="3">
-                        <div id="info_basica">
+                        <div class="info_basica">
                             <h3>Informaci&oacute;n B&aacute;sica</h3>
                             <input type="text" class="text nomcam"  name="campania:nombre"      placeholder="Nombre de la Campa&ntilde;a"   value="{{Session::get('campania.nombre')}}"       />
                             <input type="text" class="text"         name="campania:asunto"      placeholder="Asunto"                        value="{{Session::get('campania.asunto')}}"       />
