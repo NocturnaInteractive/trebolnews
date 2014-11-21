@@ -97,63 +97,126 @@
                         <div id="configurar_redes_clasica">
                             <h3>Configuraci&oacute;n de Redes Sociales</h3>
                             <div id="agregar_redes_clasica">
-                                <input type="hidden" id="compartir" name="compartir" />
+
                                 <div id="mostrar_div">
-                                    <span class="activarydesactivar btbmostrar_div" onclick="ocultar_mostrar('mostrar_div'); return false;">Activar Compartir en:</span>
+                                    <a class="activarydesactivar btbmostrar_div" href="#" onclick="ocultar_mostrar('mostrar_div'); return false;">Activar Compartir en:</a>
                                     <div class="divparaocultar"></div>
                                 </div>
+
                                 <div id="info_agregar_redes">
                                     <a class="activarydesactivar" href="#" onclick="ocultar_mostrar('mostrar_div'); return false;">Desactivar Compartir en:</a>
-                                    <div id="rede_iconos">
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="facebook_agregar_redes" name="campania:redes[]" value="facebook" />
-                                            <label for="facebook_agregar_redes" id="label_facebook_agregar_redes"></label>
+
+                                    <p class="mensaje_agregar_redes">(Para activar la rede social que desea, haz click en el icono y luego pega el link)</p>
+
+                                    <form id="rede_iconos">
+
+                                        <div class="bto_linkizq">
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="facebook_agregar_redes" />
+                                                <label for="facebook_agregar_redes" id="label_facebook_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
                                         </div>
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="twitter_agregar_redes" name="campania:redes[]" value="twitter" />
-                                            <label for="twitter_agregar_redes" id="label_twitter_agregar_redes"></label>
+
+                                        <div class="bto_linkder">
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="twitter_agregar_redes" />
+                                                <label for="twitter_agregar_redes" id="label_twitter_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
                                         </div>
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="linkedin_agregar_redes" name="campania:redes[]" value="linkedin" />
-                                            <label for="linkedin_agregar_redes" id="label_linkedin_agregar_redes"></label>
-                                        </div>
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="google_agregar_redes" name="campania:redes[]" value="google" />
-                                            <label for="google_agregar_redes" id="label_google_agregar_redes"></label>
-                                        </div>
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="pinterest_agregar_redes" name="campania:redes[]" value="pinterest" />
-                                            <label for="pinterest_agregar_redes" id="label_pinterest_agregar_redes"></label>
-                                        </div>
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="blogger_agregar_redes" name="campania:redes[]" value="blogger" />
-                                            <label for="blogger_agregar_redes" id="label_blogger_agregar_redes"></label>
-                                        </div>
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="meneame_agregar_redes" name="campania:redes[]" value="meneame" />
-                                            <label for="meneame_agregar_redes" id="label_meneame_agregar_redes"></label>
-                                        </div>
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="tumblr_agregar_redes" name="campania:redes[]" value="tumblr" />
-                                            <label for="tumblr_agregar_redes" id="label_tumblr_agregar_redes"></label>
-                                        </div>
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="reddit_agregar_redes" name="campania:redes[]" value="reddit" />
-                                            <label for="reddit_agregar_redes" id="label_reddit_agregar_redes"></label>
-                                        </div>
-                                        <div class="iconosindividuales">
-                                            <input type="checkbox" id="digg_agregar_redes" name="campania:redes[]" value="digg" />
-                                            <label for="digg_agregar_redes" id="label_digg_agregar_redes"></label>
-                                        </div>
-                                        <div class="iconosindividuales checkbox_delicious">
-                                            <input type="checkbox" id="delicious_agregar_redes" name="campania:redes[]" value="delicious" />
-                                            <label for="delicious_agregar_redes" id="label_delicious_agregar_redes"></label>
-                                        </div>
-                                        <div class="cleaner"></div>
-                                    </div>
+
+                                        <div class="bto_linkizq">
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="linkedin_agregar_redes" />
+                                                <label for="linkedin_agregar_redes" id="label_linkedin_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
+                                        </div>     
+
+                                        <div class="bto_linkder">     
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="google_agregar_redes" />
+                                                <label for="google_agregar_redes" id="label_google_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
+                                        </div>      
+
+                                        <div class="bto_linkizq">     
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="pinterest_agregar_redes" />
+                                                <label for="pinterest_agregar_redes" id="label_pinterest_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
+                                        </div>      
+
+                                        <div class="bto_linkder"> 
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="blogger_agregar_redes" />
+                                                <label for="blogger_agregar_redes" id="label_blogger_agregar_redes"></label>
+                                            </div> 
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
+                                        </div> 
+
+                                        <div class="bto_linkizq">
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="meneame_agregar_redes" />
+                                                <label for="meneame_agregar_redes" id="label_meneame_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
+                                        </div> 
+
+                                        <div class="bto_linkder"> 
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="tumblr_agregar_redes" />
+                                                <label for="tumblr_agregar_redes" id="label_tumblr_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
+                                        </div> 
+
+                                        <div class="bto_linkizq">     
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="reddit_agregar_redes" />
+                                                <label for="reddit_agregar_redes" id="label_reddit_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
+                                        </div>      
+
+                                        <div class="bto_linkder"> 
+                                            <div class="iconosindividuales">
+                                                <input type="checkbox" id="digg_agregar_redes" />
+                                                <label for="digg_agregar_redes" id="label_digg_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
+                                        </div>      
+
+                                        <div class="bto_linkizq ultimo_link">     
+                                            <div class="iconosindividuales checkbox_delicious">
+                                                <input type="checkbox" id="delicious_agregar_redes" />
+                                                <label for="delicious_agregar_redes" id="label_delicious_agregar_redes"></label>
+                                            </div>
+                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <div class="cleaner"></div> 
+                                        </div>      
+
+
+                                        <div class="cleaner"></div>     
+
+                                    </form>
                                 </div>
                             </div><!--fin agregar_redes-->
-                            <div class="cleaner"></div>
+
+                            <div class="cleaner"></div>            
                         </div><!--fin configurar_redes-->
                         <div id="configurar_envio">
                             <h3>Configurar Env&iacute;o</h3>
