@@ -16,7 +16,7 @@
             <a href="{{ route('home') }}"><h1>TrebolNEWS</h1></a><br>
             <h2>Se le ha enviado un email con instrucciones para recuperar su contraseña.</h2>
             <p></p>
-            <!-- <div id="bothome"><a href="index.html">VOLVER A LOGUEARSE</a></div> -->
+            <div id="bothome"><a href="{{ route('home') }}">VOLVER A HOME</a></div>
         </div>
     </body>
 </html>
