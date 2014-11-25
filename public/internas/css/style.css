@@ -1258,8 +1258,8 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 
 .infocont #configurar_redes_clasica #rede_iconos { width:100%; margin:20px 0 0 0px !important}
 .infocont #configurar_redes_clasica #rede_iconos .iconosindividuales { position:relative; float:left; margin-right:12px}
-.infocont #configurar_redes_clasica #rede_iconos .link_clasic { visibility:visible; float:left; border:1px solid #17a387; height:35px; color:#737f80; margin-top:6px !important; font-size:18px; font-family:'ralewayregular',  'Raleway', sans-serif; padding-left:10px; width:369px; cursor:text !important}
-.infocont #configurar_redes_clasica #rede_iconos .link_clasic:focus {border:1px solid #0e6655; background-color:#17a387; color:#ecf0f1; -webkit-box-shadow:  2px 2px 0px 0px #0e6655; -moz-box-shadow:  2px 2px 0px 0px #0e6655; -o-box-shadow:  2px 2px 0px 0px #0e6655; box-shadow:  2px 2px 0px 0px #0e6655 }
+.infocont #configurar_redes_clasica .link_clasic { visibility:visible; float:left; border:1px solid #17a387; height:35px; color:#737f80; margin-top:6px !important; font-size:18px; font-family:'ralewayregular',  'Raleway', sans-serif; padding-left:10px; width:369px; cursor:text !important}
+.infocont #configurar_redes_clasica .link_clasic:focus {border:1px solid #0e6655; background-color:#17a387; color:#ecf0f1; -webkit-box-shadow:  2px 2px 0px 0px #0e6655; -moz-box-shadow:  2px 2px 0px 0px #0e6655; -o-box-shadow:  2px 2px 0px 0px #0e6655; box-shadow:  2px 2px 0px 0px #0e6655 }
 .infocont #configurar_redes_clasica #rede_iconos .bto_linkizq { height:46px; width:444px; float:left; margin-bottom:15px;}
 .infocont #configurar_redes_clasica #rede_iconos .bto_linkder { height:46px; width:444px; float:right; margin-bottom:15px;}
 .infocont #configurar_redes_clasica #rede_iconos .ultimo_link {margin-bottom:0px !important}
