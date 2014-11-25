@@ -1159,24 +1159,24 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 #info_agregar_redes #rede_iconos {width:420px; margin:30px 0 0 27px}
 #info_agregar_redes #rede_iconos .iconosindividuales { position:relative; float:left; margin-right:20px}
 
-#info_agregar_redes #rede_iconos input {height:50px; width:50px; visibility: hidden; position:relative; cursor:pointer; margin:0 !important}
-#info_agregar_redes #rede_iconos label{background-color:#FFF; display: block; width: 40px !important; height: 40px !important; cursor: pointer; position: absolute; z-index: 1; padding:4px !important; top:0px !important; left:0px !important; border:2px solid #FFF; background-position:center; background-repeat:no-repeat; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
-#info_agregar_redes #rede_iconos label:hover { border:2px solid #17A387; background-color:#f3f4f5}
-#info_agregar_redes #rede_iconos input[type=checkbox]:checked + label {padding:4px !important; margin:0 !important; border:2px solid #10705d}
-#info_agregar_redes #rede_iconos label:after {border:2px solid #17A387;  background-color:#f3f4f5}
+#info_agregar_redes input {height:50px; width:50px; visibility: hidden; position:relative; cursor:pointer; margin:0 !important}
+#info_agregar_redes label{background-color:#FFF; display: block; width: 40px !important; height: 40px !important; cursor: pointer; position: absolute; z-index: 1; padding:4px !important; top:0px !important; left:0px !important; border:2px solid #FFF; background-position:center; background-repeat:no-repeat; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
+#info_agregar_redes label:hover { border:2px solid #17A387; background-color:#f3f4f5}
+#info_agregar_redes input[type=checkbox]:checked + label {padding:4px !important; margin:0 !important; border:2px solid #10705d}
+#info_agregar_redes label:after {border:2px solid #17A387;  background-color:#f3f4f5}
 
-#info_agregar_redes #rede_iconos #label_facebook_agregar_redes { background-image:url(../imagenes/campania_facebook.png)}
-#info_agregar_redes #rede_iconos #label_twitter_agregar_redes { background-image:url(../imagenes/campania_tw.png)}
-#info_agregar_redes #rede_iconos #label_linkedin_agregar_redes { background-image:url(../imagenes/campania_link.png)}
-#info_agregar_redes #rede_iconos #label_google_agregar_redes { background-image:url(../imagenes/campania_gplus.png)}
-#info_agregar_redes #rede_iconos #label_pinterest_agregar_redes { background-image:url(../imagenes/campania_p.png)}
-#info_agregar_redes #rede_iconos #label_tumblr_agregar_redes { background-image:url(../imagenes/campania_tumbl.png)}
+#info_agregar_redes #label_facebook_agregar_redes { background-image:url(../imagenes/campania_facebook.png)}
+#info_agregar_redes #label_twitter_agregar_redes { background-image:url(../imagenes/campania_tw.png)}
+#info_agregar_redes #label_linkedin_agregar_redes { background-image:url(../imagenes/campania_link.png)}
+#info_agregar_redes #label_google_agregar_redes { background-image:url(../imagenes/campania_gplus.png)}
+#info_agregar_redes #label_pinterest_agregar_redes { background-image:url(../imagenes/campania_p.png)}
+#info_agregar_redes #label_tumblr_agregar_redes { background-image:url(../imagenes/campania_tumbl.png)}
 
-#info_agregar_redes #rede_iconos #label_blogger_agregar_redes { background-image:url(../imagenes/campania_b.png)}
-#info_agregar_redes #rede_iconos #label_meneame_agregar_redes { background-image:url(../imagenes/campania_meneame.png)}
-#info_agregar_redes #rede_iconos #label_reddit_agregar_redes { background-image:url(../imagenes/campania_reddit.png)}
-#info_agregar_redes #rede_iconos #label_digg_agregar_redes { background-image:url(../imagenes/campania_digg.png)}
-#info_agregar_redes #rede_iconos #label_delicious_agregar_redes { background-image:url(../imagenes/campania_delicius.png)}
+#info_agregar_redes #label_blogger_agregar_redes { background-image:url(../imagenes/campania_b.png)}
+#info_agregar_redes #label_meneame_agregar_redes { background-image:url(../imagenes/campania_meneame.png)}
+#info_agregar_redes #label_reddit_agregar_redes { background-image:url(../imagenes/campania_reddit.png)}
+#info_agregar_redes #label_digg_agregar_redes { background-image:url(../imagenes/campania_digg.png)}
+#info_agregar_redes #label_delicious_agregar_redes { background-image:url(../imagenes/campania_delicius.png)}
 
 
 
