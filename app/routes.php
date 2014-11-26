@@ -566,12 +566,14 @@ Route::group(array(
                 $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
                 $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
                 $imagenes             = Auth::user()->imagenes()->paginate(5, array('*', 'imagenes.nombre'));
+                $total                = count(Auth::user()->imagenes);
 
                 return View::make('trebolnews/libreria', array(
                     'carpeta_basura'       => $carpeta_basura,
                     'carpeta_mis_imagenes' => $carpeta_mis_imagenes,
                     'carpetas'             => $carpetas,
-                    'imagenes'             => $imagenes
+                    'imagenes'             => $imagenes,
+                    'total'                => $total
                 ));
             }
         ));

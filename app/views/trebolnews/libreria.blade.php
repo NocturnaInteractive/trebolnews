@@ -119,7 +119,7 @@
                             @foreach($carpetas as $carpeta)
                             <?php $cantidad += count($carpeta->imagenes); ?>
                             @endforeach
-                            <li><a href="{{ route('librerias') }}" id="filtrotodo" {{ isset($carpeta_seleccionada) ? '' : 'class="apretado"' }}>Todo <span>({{ count($imagenes) }})</span></a></li>
+                            <li><a href="{{ route('librerias') }}" id="filtrotodo" {{ isset($carpeta_seleccionada) ? '' : 'class="apretado"' }}>Todo <span>({{ $total }})</span></a></li>
                             <li><a href="{{ route('carpeta', $carpeta_mis_imagenes->id) }}" id="filtroimag" {{ isset($carpeta_seleccionada) ? ( $carpeta_seleccionada->id == $carpeta_mis_imagenes->id ? 'class="apretado"' : '' ) : '' }}>{{ Str::title($carpeta_mis_imagenes->descripcion) }} <span>({{ count($carpeta_mis_imagenes->imagenes) }})</span></a></li>
                             @foreach($carpetas as $carpeta)
                             <li><a href="{{ route('carpeta', $carpeta->id) }}" id="filtrocarpeta" {{ isset($carpeta_seleccionada) ? ($carpeta_seleccionada->id == $carpeta->id ? 'class="apretado"' : '') : '' }}>{{ Str::title($carpeta->nombre) }} <span>({{ count($carpeta->imagenes) }})</span></a></li>
