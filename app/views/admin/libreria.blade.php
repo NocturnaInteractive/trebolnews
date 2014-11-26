@@ -19,7 +19,7 @@
         @foreach($carpeta_imagenes->imagenes as $imagen)
         <tr>
             <td>{{ $imagen->nombre }}</td>
-            <td><img src="{{ asset('img/libreria/' . $imagen->archivo) }}" /></td>
+            <td><img src="{{ asset($imagen->archivo) }}" /></td>
             <td>
                 <a href="{{ route('admin/imagen', $imagen->id) }}">Editar</a>
                 <a href="{{ route('admin/eliminar_imagen', $imagen->id) }}">Eliminar</a>

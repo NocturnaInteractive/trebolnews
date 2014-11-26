@@ -82,7 +82,7 @@
         </p>
 
         <p>
-            <img id="img_imagen" src="{{ $imagen ? asset('img/libreria/' . $imagen->archivo) : '' }}" />
+            <img id="img_imagen" src="{{ $imagen ? asset($imagen->archivo) : '' }}" />
         </p>
 
         <p>

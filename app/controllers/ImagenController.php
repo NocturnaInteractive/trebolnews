@@ -73,9 +73,10 @@ class ImagenController extends BaseController {
             $imagen->nombre = Input::get('nombre');
 
             if(Input::hasFile('archivo')) {
+                $ruta = public_path() . '/img/libreria';
                 $nombre = 'libreriaimg' . $imagen->id . '.' . Input::file('archivo')->getClientOriginalExtension();
-                Input::file('archivo')->move(public_path() . '/img/libreria', $nombre);
-                $imagen->archivo = $nombre;
+                Input::file('archivo')->move($ruta, $nombre);
+                $imagen->archivo = 'img/libreria/' . $nombre;
             }
 
             $imagen->save();
