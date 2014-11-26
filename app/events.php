@@ -15,12 +15,14 @@ Event::listen('nuevo_registro', function(Usuario $usuario) {
     });
 
     Carpeta::create(array(
-        'id_usuario' => $usuario->id,
-        'nombre' => 'basura'
+        'id_usuario'  => $usuario->id,
+        'nombre'      => 'basura',
+        'descripcion' => 'basura'
     ));
 
     Carpeta::create(array(
-        'id_usuario' => $usuario->id,
-        'nombre' => 'mis imágenes'
+        'id_usuario'  => $usuario->id,
+        'nombre'      => 'mis_imagenes',
+        'descripcion' => 'mis imágenes'
     ));
 });

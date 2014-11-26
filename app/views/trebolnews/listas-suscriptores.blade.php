@@ -6,6 +6,13 @@
 
 @stop
 
+@section('data')
+
+    @parent
+    <input type="hidden" id="menu_principal" value="suscriptores" />
+
+@stop
+
 @section('head')
 
     <script>

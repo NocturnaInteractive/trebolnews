@@ -40,7 +40,11 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function carpeta_mis_imagenes() {
-        return $this->carpetas()->where('nombre', '=', 'mis imágenes')->first();
+        return $this->carpetas()->where('nombre', '=', 'mis_imagenes')->first();
+    }
+
+    public function imagenes() {
+        return $this->hasManyThrough('Imagen', 'Carpeta', 'id_usuario', 'id_carpeta');
     }
 
     public function campanias() {

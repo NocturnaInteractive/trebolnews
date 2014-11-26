@@ -1,25 +1,11 @@
 <?php
 
-Route::get('ver/{carpeta}/{vista}', function($carpeta, $vista) {
-    if(Auth::guest()) { Auth::loginUsingId(2); }
-    return View::make("$carpeta/$vista");
-});
-
-Route::get('ver/{vista}', function($vista) {
-    if(Auth::guest()) { Auth::loginUsingId(2); }
-    return View::make($vista);
-});
-
 Route::get('aux', function(){
 
 });
 
 Route::get('session', function(){
     var_dump(Session::all());
-});
-
-Route::get('auth', function(){
-    var_dump(Auth::user());
 });
 
 // desde acá
@@ -195,12 +181,6 @@ Route::group(array(
 
     Route::get('campaign/view/{campaignId}/{contactId}/{verification}', 'MailController@renderMail');
 
-    Route::get('banco', array(
-        'as' => 'banco',
-        function() {
-            return View::make('internas/banco');
-        }
-    ));
 });
 
 Route::get('términos-y-condiciones', array(
@@ -578,20 +558,20 @@ Route::group(array(
 
         Route::any('contact-search', 'ContactoController@search');
 
-        // banco de imágenes
+        // imágenes del usuario
         Route::get('librerías', array(
             'as' => 'librerias',
             function() {
-                $carpeta_imagenes = Carpeta::find(1); // esta es la carpeta de imágenes de trebolnews (ver seeder)
-                $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first(); // los usuarios tienen una carpeta 'basura' (ver eventos)
-                $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
-                $imagenes = $carpeta_imagenes->imagenes()->paginate(5);
+                $carpeta_basura       = Auth::user()->carpeta_basura();
+                $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
+                $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
+                $imagenes             = Auth::user()->imagenes()->paginate(5, array('*', 'imagenes.nombre'));
 
                 return View::make('trebolnews/libreria', array(
-                    'carpeta_imagenes' => $carpeta_imagenes,
-                    'carpeta_basura' => $carpeta_basura,
-                    'carpetas' => $carpetas,
-                    'imagenes' => $imagenes
+                    'carpeta_basura'       => $carpeta_basura,
+                    'carpeta_mis_imagenes' => $carpeta_mis_imagenes,
+                    'carpetas'             => $carpetas,
+                    'imagenes'             => $imagenes
                 ));
             }
         ));
@@ -601,19 +581,60 @@ Route::group(array(
             'as' => 'carpeta',
             function($id_carpeta) {
                 $carpeta_seleccionada = Carpeta::find($id_carpeta);
-                $carpeta_imagenes = Carpeta::find(1);
-                $carpeta_basura = Auth::user()->carpetas()->where('nombre', '=', 'basura')->first();
-                $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->orderBy('nombre', 'asc')->get();
-                $imagenes = $carpeta_seleccionada->imagenes()->paginate(5);
+                $carpeta_basura       = Auth::user()->carpeta_basura();
+                $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
+                $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
+                $imagenes             = $carpeta_seleccionada->imagenes()->paginate(5);
 
                 return View::make('trebolnews/libreria', array(
                     'carpeta_seleccionada' => $carpeta_seleccionada,
-                    'carpeta_imagenes' => $carpeta_imagenes,
-                    'carpeta_basura' => $carpeta_basura,
-                    'carpetas' => $carpetas,
-                    'imagenes' => $imagenes
+                    'carpeta_basura'       => $carpeta_basura,
+                    'carpeta_mis_imagenes' => $carpeta_mis_imagenes,
+                    'carpetas'             => $carpetas,
+                    'imagenes'             => $imagenes
                 ));
             }
+        ));
+
+        // base banco de imágenes
+        Route::get('banco', array(
+            'as' => 'banco',
+            function() {
+                $imagenes = Carpeta::find(1)->imagenes()->paginate(5);
+                $imagenes->setBaseUrl('lista-banco');
+
+                $html = View::make('trebolnews.listas.banco', array(
+                    'imagenes' => $imagenes
+                ));
+
+                return View::make('trebolnews.banco', array(
+                    'html'      => $html,
+                    'imagenes'  => $imagenes,
+                    'paginador' => $imagenes->links('trebolnews.paginador-ajax')->render()
+                ));
+            }
+        ));
+
+        // lista banco de imágenes
+        Route::get('lista-banco', array(
+            'as' => 'lista-banco',
+            function() {
+                $imagenes = Carpeta::find(1)->imagenes()->paginate(5);
+
+                $html = View::make('trebolnews.listas.banco', array(
+                    'imagenes' => $imagenes
+                ))->render();
+
+                return Response::json(array(
+                    'html' => $html,
+                    'paginador' => $imagenes->links('trebolnews.paginador-ajax')->render()
+                ));
+            }
+        ));
+
+        Route::post('subir-a-libreria', array(
+            'as' => 'subir-a-libreria',
+            'uses' => 'ImagenController@subir_a_libreria'
         ));
 
         // planes

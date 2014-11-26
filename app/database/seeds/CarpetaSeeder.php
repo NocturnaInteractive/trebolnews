@@ -6,28 +6,33 @@ class CarpetaSeeder extends Seeder {
         Eloquent::unguard();
 
         Carpeta::create(array(
-            'id'     => 1,
-            'nombre' => 'imágenes'
+            'id'          => 1,
+            'nombre'      => 'banco',
+            'descripcion' => 'banco de imágenes'
         ));
 
         Carpeta::create(array(
-            'id_usuario' => 1,
-            'nombre'     => 'basura'
+            'id_usuario'  => 1,
+            'nombre'      => 'basura',
+            'descripcion' => 'basura'
         ));
 
         Carpeta::create(array(
-            'id_usuario' => 1,
-            'nombre'     => 'mis imágenes'
+            'id_usuario'  => 1,
+            'nombre'      => 'mis_imagenes',
+            'descripcion' => 'mis imágenes'
         ));
 
         Carpeta::create(array(
-            'id_usuario' => 2,
-            'nombre'     => 'basura'
+            'id_usuario'  => 2,
+            'nombre'      => 'basura',
+            'descripcion' => 'basura'
         ));
 
         Carpeta::create(array(
-            'id_usuario' => 2,
-            'nombre'     => 'mis imágenes'
+            'id_usuario'  => 2,
+            'nombre'      => 'mis_imagenes',
+            'descripcion' => 'mis imágenes'
         ));
     }
 

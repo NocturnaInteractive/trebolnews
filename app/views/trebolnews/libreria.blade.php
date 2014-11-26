@@ -10,6 +10,7 @@
 
     @parent
     <input type="hidden" id="id_carpeta" value="{{ isset($carpeta_seleccionada) ? $carpeta_seleccionada->id : '' }}" />
+    <input type="hidden" id="menu_principal" value="librerias" />
 
 @stop
 
@@ -39,9 +40,16 @@
     <script>
     $(function(){
 
+        $('[controles]').hide();
+
         $('[rel="gallery"]').fancybox({
-            padding     : 5,
-            margin      : [20, 60, 20, 60] // Increase left/right margin
+            padding: 5,
+            margin: [20, 60, 20, 60],
+            helpers: {
+                overlay: {
+                    locked: false
+                }
+            }
         });
 
         $('.ver_libreria').on('click', function(e){
@@ -98,7 +106,7 @@
                             <li><a class="subiralibreria">SUBIR A LIBRER&Iacute;A</a>
                             <ul>
                                 <li><a id="btn_mipc" href="subir" popup="{{ url('popup/libreria_mipc') }}">Mi PC</a></li>
-                                <li><a id="btn_redes" href="subir" popup="{{ url('popup/libreria_redes') }}">Redes Sociales</a></li>
+                                <!-- <li><a id="btn_redes" href="subir" popup="{{ url('popup/libreria_redes') }}">Redes Sociales</a></li> -->
                                 <li><a href="{{ route('banco') }}">Banco de im&aacute;genes</a></li>
                             </ul>
                             </li>
@@ -111,8 +119,8 @@
                             @foreach($carpetas as $carpeta)
                             <?php $cantidad += count($carpeta->imagenes); ?>
                             @endforeach
-                            <li><a href="{{ route('librerias') }}" id="filtrotodo" {{ isset($carpeta_seleccionada) ? '' : 'class="apretado"' }}>Todo <span>({{ $cantidad + count($carpeta_imagenes->imagenes) }})</span></a></li>
-                            <li><a href="{{ route('carpeta', 1) }}" id="filtroimag" {{ isset($carpeta_seleccionada) ? ( $carpeta_seleccionada->id == 1 ? 'class="apretado"' : '' ) : '' }}>{{ Str::title($carpeta_imagenes->nombre) }} <span>({{ count($carpeta_imagenes->imagenes) }})</span></a></li>
+                            <li><a href="{{ route('librerias') }}" id="filtrotodo" {{ isset($carpeta_seleccionada) ? '' : 'class="apretado"' }}>Todo <span>({{ count($imagenes) }})</span></a></li>
+                            <li><a href="{{ route('carpeta', $carpeta_mis_imagenes->id) }}" id="filtroimag" {{ isset($carpeta_seleccionada) ? ( $carpeta_seleccionada->id == $carpeta_mis_imagenes->id ? 'class="apretado"' : '' ) : '' }}>{{ Str::title($carpeta_mis_imagenes->descripcion) }} <span>({{ count($carpeta_mis_imagenes->imagenes) }})</span></a></li>
                             @foreach($carpetas as $carpeta)
                             <li><a href="{{ route('carpeta', $carpeta->id) }}" id="filtrocarpeta" {{ isset($carpeta_seleccionada) ? ($carpeta_seleccionada->id == $carpeta->id ? 'class="apretado"' : '') : '' }}>{{ Str::title($carpeta->nombre) }} <span>({{ count($carpeta->imagenes) }})</span></a></li>
                             @endforeach
@@ -124,14 +132,16 @@
                         <div id="submenulibreria">
                             <ul id="filtroselecionados">
                                 <li><p>Seleccionados: <span id="span_seleccionados">0</span> de {{ count($imagenes) }} </p></li>
-                                <li><a id="agregarcapeta" href="#">Mover a</a></li>
-                                <li><a id="borrarselecionados" href="#">Eliminar</a></li>
+                                @if(isset($carpeta_seleccionada) && $carpeta_seleccionada->id != 1)
+                                <li controles ><a id="agregarcapeta" href="#">Mover a</a></li>
+                                <li controles ><a id="borrarselecionados" href="#">Eliminar</a></li>
+                                @endif
                             </ul>
                             <ul id="filtrover">
                                 <li><a id="filtroiconlinsta" class="apretado" href="#"><img src="{{ asset('internas/imagenes/filtroiconlinsta.png') }}" width="25" height="25"></a></li>
                                 <li><a id="filtroiconimagen" href="#"><img src="{{ asset('internas/imagenes/filtroiconimagen.png') }}" width="25" height="25"></a></li>
                             </ul>
-                            <ul id="cantidad">
+                            <!-- <ul id="cantidad">
                                 <li>
                                     <a href="#" class="boton">VER</a>
                                     <ul>
@@ -141,7 +151,7 @@
                                         <li><a href="#">100</a></li>
                                     </ul>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <div class="cleaner"></div>
                         </div><!--submenulibreria   -->
                         <table width="100%"  cellpadding="0" cellspacing="0" class="libret">
@@ -159,7 +169,6 @@
                                 <th scope="col" width="100px"></th>
                             </tr>
                             @foreach($imagenes as $imagen)
-                            <?php if(isset($carpeta_seleccionada) && $carpeta_seleccionada->id != 1) { $ruta = 'uploads/imagenes/'; } else { $ruta = 'img/libreria/'; } ?>
                             <tr>
                                 <td>
                                     <div class="checkbox">
@@ -168,14 +177,14 @@
                                     </div>
                                 </td>
                                 <td class="libre_img">
-                                    <a href="{{ asset($ruta . $imagen->archivo) }}" rel="gallery">
-                                        <label for="checkbox2"><img src="{{ asset($ruta . $imagen->archivo) }}" height="75" /></label>
+                                    <a href="{{ asset($imagen->archivo) }}" rel="gallery">
+                                        <label for="checkbox2"><img src="{{ asset($imagen->archivo) }}" height="75" /></label>
                                     </a>
                                 </td>
                                 <td class="nombrelibreria">{{ $imagen->nombre }}</td>
-                                <?php $dim = getimagesize(public_path() . '/' . $ruta . $imagen->archivo); ?>
+                                <?php $dim = getimagesize($imagen->archivo); ?>
                                 <td>{{ $dim[0] . ' x ' . $dim[1] }}</td>
-                                <td>{{ round(filesize(public_path() . '/' . $ruta . $imagen->archivo) / 1024, 2, PHP_ROUND_HALF_DOWN) . ' Kb' }}</td>
+                                <td>{{ round(filesize($imagen->archivo) / 1024, 2, PHP_ROUND_HALF_DOWN) . ' Kb' }}</td>
                                 <td>
                                     <a class="ver_libreria" href="#">
                                         <img src="{{ asset('internas/imagenes/ojoicono.png') }}" width="28" height="25">
@@ -193,7 +202,7 @@
                         </table>
                         <div id="paginador">
                             @if(count($imagenes) > 0)
-                            {{ $imagenes->links('paginador') }}
+                                {{ $imagenes->links('paginador') }}
                             @endif
                         </div><!--paginador-->
                     </div><!--tablalibreria-->

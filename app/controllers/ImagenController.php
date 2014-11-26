@@ -97,4 +97,21 @@ class ImagenController extends BaseController {
 
         return Redirect::back();
     }
+
+    public function subir_a_libreria() {
+        foreach(Input::get('chk_imagen') as $id_imagen) {
+            $imagen = Imagen::find($id_imagen);
+
+            Imagen::create(array(
+                'id_carpeta' => Auth::user()->carpeta_mis_imagenes()->id,
+                'nombre'     => $imagen->nombre,
+                'archivo'    => $imagen->archivo
+            ));
+        }
+
+        return Response::json(array(
+            'route' => route('librerias')
+        ));
+    }
+
 }
