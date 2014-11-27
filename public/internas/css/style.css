@@ -894,6 +894,14 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     padding: 0;
     margin: 0;
 }
+.formasdepago .content-titulo{
+    position: relative;
+    float: left;
+    width: 100%;
+}
+.formasdepago .content-titulo h4{
+    margin: 30px 0 5px 0;
+}
 .formasdepago .content-descripcion-compra{
     position: relative;
     float: left;
@@ -909,21 +917,37 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
-.formasdepago .content-descripcion-compra div{
+.formasdepago .content-descripcion-compra .fila{
+    width: 100%;
     position: relative;
     float: left;
-    margin: 0 5px;
-    min-width: 15%;
+    border-width: 0 0 1px 0;
+    border-color: #737f80;
+    border-style: solid;
+}
+.formasdepago .content-descripcion-compra .fila:last-child{
+    border:0;
+    background-color: #17a387;
+}
+.formasdepago .content-descripcion-compra .fila:last-child p{
+    color:#fff;
+}
+.formasdepago .content-descripcion-compra .fila div{
+    position: relative;
+    float: left;
+    margin: 0 0;
+    min-width: 20%;
     
 }
-.formasdepago .content-descripcion-compra div:last-child{
-    float: right;
-    margin-right: 20px;
+
+.formasdepago .content-descripcion-compra .fila div:first-child p{
+    padding: 8px 0 0 10px;
 }
-.formasdepago .content-descripcion-compra div p{
+.formasdepago .content-descripcion-compra .fila div p{
     font-size: 22px;
     padding: 8px 0;
     margin: 0;
+    
 }
 .formasdepago .content-select{position: relative; width: 100%; float: left;}
 .formasdepago select {border:1px solid #17a387; height:39px; color:#737f80; margin-bottom:15px; font-size:13px; font-family:'ralewayregular',  'Raleway', sans-serif; padding:10px 32px; width:318px; overflow:auto }

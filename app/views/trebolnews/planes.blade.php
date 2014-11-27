@@ -312,13 +312,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="content-descripcion-compra">
-                            <div><p>Paquete</p></div>
-                            <div><p>3 meses 10% Desc</p></div>
-                            <div><p>1.500</p></div>
-                            <div><p>Envíos</p></div>
-                            <div><p><b>Total:</b> $125.00</p></div>
+                        <div class="content-titulo">
+                            <h4>DETALLE FACTURA</h4>
                         </div>
+                        <div class="content-descripcion-compra">
+                            <div class="fila">
+                                <div><p>Paquete</p></div>
+                                <div><p>3 meses 10% Desc</p></div>
+                                <div><p>1.500</p></div>
+                                <div><p>Subtotal</p></div>
+                                <div><p> $125.00</p></div>
+                            </div>
+                            <div class="fila">
+                                <div><p>Inpuestos</p></div>
+                                <div><p></p></div>
+                                <div><p></p></div>
+                                <div><p>IVA 21%</p></div>
+                                <div><p> $125.00</p></div>
+                            </div>
+                            <div class="fila">
+                                <div><p></p></div>
+                                <div><p></p></div>
+                                <div><p></p></div>
+                                <div><p><b>Total:</b></p></div>
+                                <div><p> $125.00</p></div>
+                            </div>
+                            
+                        </div>
+                        
                     </div>
                     
                     <!-- END ENVIOS -->
