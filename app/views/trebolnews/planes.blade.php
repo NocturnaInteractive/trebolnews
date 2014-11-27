@@ -149,7 +149,7 @@
                                 if (!$plan->isSuscription) {
                             ?>
                             <div class="{{ $class }}info single plan">
-                                <div class="radioplanes radioplanes_largo">
+                                <div class="radioplanes radioplanes_corto">
                                     <input type="radio" name="opcion" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
                                     <label></label>
                                 </div>
@@ -179,13 +179,13 @@
                                 if ($plan->isSuscription) {
                             ?>
                             <div class="{{ $class }}info suscription plan">
-                                <div class="radioplanes radio   es_largo">
+                                <div class="radioplanes radioplanes_corto">
                                     <input type="radio" id="radio{{ $i }}" name="opcion" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
                                     <label for="radio{{ $i }}"></label>
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
                                 <div class="cleaner"></div>
-                                <h4 class="segundalinea_plan"><span class="hastaenv"> Suscriptores</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
+                                <h4 class="segundalinea_plan"><span class="hastaenv">Suscriptores</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
                             </div>
                             <?php
