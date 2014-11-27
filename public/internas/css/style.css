@@ -742,13 +742,13 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 
 #planes #pfree { margin-right:47px}
 
-#formasdepago { margin-bottom:5px}
-#formasdepago h6 { text-align:center; font-size:16px; color:#afb3b3; margin:0 0 15px 0; font-weight:normal}
+.formasdepago { margin-bottom:5px}
+.formasdepago h6 { text-align:center; font-size:16px; color:#afb3b3; margin:0 0 15px 0; font-weight:normal}
 
-.infocont #bto_planes {height:50px; width:160px; position:relative; margin:0 auto 35px auto}
+.infocont .bto_planes {height:50px; width:160px; position:relative; margin:0 auto 35px auto}
 
-.infocont #bto_planes #comprar { width:160px; height:25px; padding-top:9px;  display:block; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; -moz-box-shadow: 0px 3px 0px 0px #10705d; -o-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; color:#FFF !important; float:right}
-.infocont #bto_planes #comprar:hover {background-color:#17a387; -webkit-box-shadow: 0px 0px 0px 0px #943849; -moz-box-shadow: 0px 0px 0px 0px #943849; -o-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
+.infocont .bto_planes #comprar { width:160px; height:25px; padding-top:9px;  display:block; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; -moz-box-shadow: 0px 3px 0px 0px #10705d; -o-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; color:#FFF !important; float:right}
+.infocont .bto_planes #comprar:hover {background-color:#17a387; -webkit-box-shadow: 0px 0px 0px 0px #943849; -moz-box-shadow: 0px 0px 0px 0px #943849; -o-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
 
 #planes .radioplanes { position:relative; display:inline-block; z-index:2; float:left}
 
@@ -762,7 +762,204 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 #planes .radioplanes input[type=radio]:checked + label {height:20px !important; background-image:url(../imagenes/checkbox_bancoactivado.png) !important; padding:0 !important; margin:0 !important; }
 #planes .radioplanes label:after { background-color:transparent}
 
+.formasdepago .select-forma-de-pago{
+    position: relative;
+    background-color: #d4d8d9;
+    width: 226px;
+    height: 40px;
+    float: left;
+}
 
+.formasdepago h4{
+    color:#000;
+    font-size: 22px;
+}
+.formasdepago .select-forma-de-pago.active{
+    background-color: #12806a;
+}
+.formasdepago .select-forma-de-pago.active p{
+    color:#fff;
+    text-transform: uppercase;
+}
+.formasdepago .select-forma-de-pago p{
+    color:#17a387;
+    font-size: 13px;
+    position: absolute;
+    top: 0;
+    left: 38px;
+}
+.formasdepago label{
+    width: 202px !important;
+    z-index: 9900 !important;
+    height: 40px !important;
+    background-repeat: no-repeat;
+    position: absolute !important;
+    float: left;
+    margin: 0;
+    top: 11px !important;
+    left: 7px !important;
+    background-color:transparent !important; 
+    display: block;  
+    cursor: pointer; 
+    position: absolute; 
+    background-image:url(../imagenes/checkbox_banco.png) !important; 
+    padding:0 !important; 
+    top:9px !important; 
+    left:4px !important
+}
+.formasdepago label:hover { background-color:transparent !important}
+.formasdepago label:after { background-color:transparent}
+.formasdepago input {height:20px; width:30px; visibility: hidden; position:relative; top:0; left:0; cursor:pointer}
+.formasdepago input:checked + label  {
+    background-repeat: no-repeat;
+    height:20px !important; background-image:url(../imagenes/checkbox_bancoactivado.png) !important; padding:0 !important; margin:0 !important; 
+}
+.formasdepago .aclaracion-text{
+    font-size: 15px;
+    width: 100%;
+    color: #17a387;
+    position: relative;
+    float: left;
+    margin: 16px 0;
+}
+.formasdepago .content-medios-de-pago{
+    width: 100%;
+    position: relative;
+    float: left;
+    margin: 40px 0 0 0;
+}
+.formasdepago .content-codigo-de-promocion{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    float: left;
+}
+.formasdepago .content-codigo-de-promocion label{
+    top: 14px !important;
+    width: 300px !important;
+}
+.formasdepago .content-codigo-de-promocion p{
+    position: relative;
+    float: left;
+    font-size: 15px;
+    color: #17a387;
+    padding: 0 0 0 40px;
+}
+.comprar-envios-content{
+    position: relative;
+    width: 100%;
+    float: left;
+    margin: 30px 0 0 0;
+}
+.comprar-envios-content .titulo, .comprar-envios-content .meses {
+    position: relative;
+    float: left;
+    height: 37px;
+}
+.comprar-envios-content .titulo{
+    background-color: #17a387;
+    width: 275px;
+}
+.comprar-envios-content .titulo p{
+    color:#fff;
+    font-size: 13px;
+    text-align: center;
+}
+.comprar-envios-content .meses .select-mes{
+    position: relative;
+    background-color: #d4d8d9;
+    width: 80px;
+    height: 37px;
+    float: left;
+}
+.comprar-envios-content .meses .select-mes p{
+    font-size: 15px;
+    color: #17a387;
+    position: absolute;
+    top: 10px;
+    left: 39px;
+    padding: 0;
+    margin: 0;
+}
+.formasdepago .content-descripcion-compra{
+    position: relative;
+    float: left;
+    width: 100%;
+    margin: 5px 0 20px 0;
+    border-width: 1px;
+    border-color: #737f80;
+    border-style: solid;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.formasdepago .content-descripcion-compra div{
+    position: relative;
+    float: left;
+    margin: 0 5px;
+    min-width: 15%;
+    
+}
+.formasdepago .content-descripcion-compra div:last-child{
+    float: right;
+    margin-right: 20px;
+}
+.formasdepago .content-descripcion-compra div p{
+    font-size: 22px;
+    padding: 8px 0;
+    margin: 0;
+}
+   .ui-tooltip, .arrow:after {
+        background: #17a387;
+        border: 0 solid white;
+        
+  }
+  .ui-tooltip {
+      
+    position: absolute;
+    padding: 5px 10px;
+    
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color:#17a387;
+    
+  }
+  .arrow {
+    width: 34px;
+    height: 8px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -17px;
+    bottom: -8px;
+  }
+  .arrow.top {
+    top: -8px;
+    bottom: auto;
+  }
+  .arrow.left {
+    left: 20%;
+  }
+  .arrow:after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: -20px;
+    width: 15px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px #17a387;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+  }
 /*--------Planes------------------------------------------------------------------------------------*/
 
 

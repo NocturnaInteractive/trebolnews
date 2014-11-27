@@ -199,19 +199,103 @@
                         </div><!--infoplanes-->
                     </div><!--mensuales-->
                     <div class="cleaner"></div>
-                </div><!--planes-->
-                <div id="bto_planes">
+                </div>
+                
+                <div class="formasdepago">
+                    <h4>ELIGE LA FORMA DE PAGO</h4>
+                    <div class="select-forma-de-pago">
+                        <input type="radio" id="tarjeta-de-credito" name="forma-de-pago">
+                        <label for="tarjeta-de-credito"></label>
+                        <p for="tarjeta-de-credito">Compra con tarjeta</p>
+                    </div>
+                    <div class="select-forma-de-pago">
+                        <input type="radio" id="transferencia-bancaria" name="forma-de-pago">
+                        <label for="transferencia-bancaria"></label>
+                        <p>Transferencia bancaria</p>
+                    </div>
+                    <p class="aclaracion-text">Los paquetes que compres con tarjeta de crédito, se activarán inmeditamente en tu cuenta. Los mismos tienen una validez de 30 días para ser utilizados. Muchos éxitos en tus campañas!!!</p>
+                    <script>
+                        $(".select-forma-de-pago").find('input').change(function() {
+                            $(".select-forma-de-pago").removeClass('active');
+                            if(this.checked) {
+                                $(this).parent().addClass('active');
+                            }
+                        });
+                    </script>
+                    <div class="content-codigo-de-promocion" >
+                        <input type="checkbox" id="codigo-promocion" name="codigo-promocion">
+                        <label for="codigo-promocion"></label>                       
+                        <p>Si tenés un código promoción, indicarlo.</p>
+                    </div>
+                    
+                    <!-- ENVIOS -->
+                    
+                    <div class="comprar-envios-content">
+                        <div class="seleccion-meses">
+                            <div class="titulo">
+                                <p>SELECCIONAR CANTIDAD DE MESES</p>
+                            </div>
+                            <div class="meses">
+                                <div class="select-mes" title="10% Descuento">
+                                    <input type="radio" id="cantidad-meses-3" name="cantidad-meses">
+                                    <label for="cantidad-meses-3"></label>
+                                    <p for="cantidad-meses">3</p>
+                                </div>
+                                <div class="select-mes">
+                                    <input type="radio" id="cantidad-meses-6" name="cantidad-meses">
+                                    <label for="cantidad-meses-6"></label>
+                                    <p for="cantidad-meses">6</p>
+                                </div>
+                                <div class="select-mes" >
+                                    <input type="radio" id="cantidad-meses-12" name="cantidad-meses">
+                                    <label for="cantidad-meses-12"></label>
+                                    <p for="cantidad-meses">12</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-descripcion-compra">
+                            <div><p>Paquete</p></div>
+                            <div><p>3 meses 10% Desc</p></div>
+                            <div><p>1.500</p></div>
+                            <div><p>Envíos</p></div>
+                            <div><p><b>Total:</b> $125.00</p></div>
+                        </div>
+                    </div>
+                    
+                    <!-- END ENVIOS -->
+                    
+                    <div class="bto_planes">
                     <a href="#" id="comprar">COMPRAR AHORA</a>
                     <div class="cleaner"></div>
-                </div><!--bto_planes-->
-                <div id="formasdepago">
-                    <h6>Medios de pagos online</h6>
-                    <img src="imagenes/formasdepago.png" width="934" height="80" alt="formas de pago">
+                    </div>
+                    <div class="content-medios-de-pago">
+                        <h6>Medios de pagos online</h6>
+                        <img src="imagenes/formasdepago.png" width="934" height="80" alt="formas de pago">
+                    </div>
+                    
                     <div class="cleaner"></div>
                 </div><!--formasdepago-->
             </div> <!--infocont-->
         </div>
     </section>
+    <script>
+  $(function() {
+    $( document ).tooltip({
+      position: {
+        my: "center bottom-10",
+        at: "center top",
+        using: function( position, feedback ) {
+          $( this ).css( position );
+          $( "<div>" )
+            .addClass( "arrow" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+      }
+    });
+  });
+  </script>
 </div><!--conteiner-->
 
 @stop
