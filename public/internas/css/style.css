@@ -745,7 +745,11 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 .formasdepago { margin-bottom:5px}
 .formasdepago h6 { text-align:center; font-size:16px; color:#afb3b3; margin:0 0 15px 0; font-weight:normal}
 
-.infocont .bto_planes {height:50px; width:160px; position:relative; margin:0 auto 35px auto}
+.infocont .bto_planes {
+    height:50px; width:160px; position:relative; 
+    margin:0 auto 35px auto;
+    margin:0;
+}
 
 .infocont .bto_planes #comprar { width:160px; height:25px; padding-top:9px;  display:block; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; -moz-box-shadow: 0px 3px 0px 0px #10705d; -o-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; color:#FFF !important; float:right}
 .infocont .bto_planes #comprar:hover {background-color:#17a387; -webkit-box-shadow: 0px 0px 0px 0px #943849; -moz-box-shadow: 0px 0px 0px 0px #943849; -o-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
@@ -769,7 +773,9 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     height: 40px;
     float: left;
 }
-
+.formasdepago .transferencia-bancaria, .formasdepago .transferencia-bancaria .forms-afip{
+    display: none;
+}
 .formasdepago h4{
     color:#000;
     font-size: 22px;
@@ -809,11 +815,18 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 }
 .formasdepago label:hover { background-color:transparent !important}
 .formasdepago label:after { background-color:transparent}
-.formasdepago input {height:20px; width:30px; visibility: hidden; position:relative; top:0; left:0; cursor:pointer}
-.formasdepago input:checked + label  {
+.formasdepago input[type="checkbox"], .formasdepago input[type="radio"] {height:20px; width:30px; visibility: hidden; position:relative; top:0; left:0; cursor:pointer}
+.formasdepago input[type="checkbox"]:checked + label, .formasdepago input[type="radio"]:checked + label  {
     background-repeat: no-repeat;
     height:20px !important; background-image:url(../imagenes/checkbox_bancoactivado.png) !important; padding:0 !important; margin:0 !important; 
 }
+
+.formasdepago input[type="text"] {border:1px solid #d4d8d9; height:35px; color:#737f80; margin-bottom:15px; font-size:13px; font-family:'ralewayregular',  'Raleway', sans-serif; padding-left:4%; width:46%}
+.formasdepago input[type="text"]:focus {border:1px solid #0e6655; background-color:#17a387; color:#ecf0f1; -webkit-box-shadow:  2px 2px 0px 0px #0e6655; -moz-box-shadow:  2px 2px 0px 0px #0e6655; -o-box-shadow:  2px 2px 0px 0px #0e6655; box-shadow:  2px 2px 0px 0px #0e6655 }
+.formasdepago ::-webkit-input-placeholder { color:#d4d8d9; }
+.formasdepago ::-moz-placeholder { color:#d4d8d9; } /* firefox 19+ */
+.formasdepago :-ms-input-placeholder { color:#d4d8d9; } /* ie */
+.formasdepago input:-moz-placeholder { color:#d4d8d9; }
 .formasdepago .aclaracion-text{
     font-size: 15px;
     width: 100%;
@@ -912,6 +925,35 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     padding: 8px 0;
     margin: 0;
 }
+.formasdepago .content-select{position: relative; width: 100%; float: left;}
+.formasdepago select {border:1px solid #17a387; height:39px; color:#737f80; margin-bottom:15px; font-size:13px; font-family:'ralewayregular',  'Raleway', sans-serif; padding:10px 32px; width:318px; overflow:auto }
+.formasdepago select:focus {border:1px solid #0e6655; background-color:#17a387; color:#ecf0f1; -webkit-box-shadow:  2px 2px 0px 0px #0e6655; -moz-box-shadow:  2px 2px 0px 0px #0e6655; -o-box-shadow:  2px 2px 0px 0px #0e6655; box-shadow:  2px 2px 0px 0px #0e6655 }
+.formasdepago select option { height:39px; vertical-align:middle; padding: 10px 0;}
+.formasdepago .content-form-deposito{
+    position: relative;
+    float: left;
+    width: 100%;
+}
+.formasdepago .content-form-deposito .wrapper {
+    width: 70%;
+    padding: 0 30% 0 0;
+}
+.formasdepago .content-form-deposito form input[type="text"]{
+    width: 100%;
+}
+.formasdepago .content-form-deposito form .col-left{
+    position: relative;
+    float: left;
+    width: 48%;
+}
+.formasdepago .content-form-deposito form .col-right{
+    position: relative;
+    float: right;
+    width: 48%;
+}
+/*--------Planes------------------------------------------------------------------------------------*/
+
+/* TOOLTIP */
    .ui-tooltip, .arrow:after {
         background: #17a387;
         border: 0 solid white;
@@ -960,7 +1002,8 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     bottom: -20px;
     top: auto;
   }
-/*--------Planes------------------------------------------------------------------------------------*/
+/* END TOOLTIP */
+
 
 
 

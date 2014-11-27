@@ -200,7 +200,9 @@
                     </div><!--mensuales-->
                     <div class="cleaner"></div>
                 </div>
-                
+                <div class="content-medios-de-pago">
+                        <img src="imagenes/formasdepago2.png" width="934" height="80" alt="formas de pago">
+                    </div>
                 <div class="formasdepago">
                     <h4>ELIGE LA FORMA DE PAGO</h4>
                     <div class="select-forma-de-pago">
@@ -214,12 +216,69 @@
                         <p>Transferencia bancaria</p>
                     </div>
                     <p class="aclaracion-text">Los paquetes que compres con tarjeta de crédito, se activarán inmeditamente en tu cuenta. Los mismos tienen una validez de 30 días para ser utilizados. Muchos éxitos en tus campañas!!!</p>
+                    
+                    <div class="transferencia-bancaria">
+                        <div class="content-select">
+                            <select class="select-tipo-factura">
+                                <option>SELECCIONA TIPO DE FACTURA</option>
+                                <option value="consumidor-final">CONSUMIDOR FINAL</option>
+                                <option value="responsable-inscripto">RESPONSABLE INSCRIPTO</option>
+                            </select>
+                        </div>
+
+                        <div class="content-form-deposito">
+                            <div class="wrapper">
+                                <form>
+                                    <div class="forms-afip responsable-inscripto">
+                                        <div class="col-left">
+                                            <input type="text" placeholder="NOMBRE Y APELLIDO RESPONSABLE*">
+                                            <input type="text" placeholder="NOMBRE DE LA EMPRESA*">
+                                            <input type="text" placeholder="DIRECCIÓN DE FACTURACIÓN*">
+                                        </div>
+                                        <div class="col-right">
+                                            <input type="text" placeholder="MAIL DE CONTACTO*">
+                                            <input type="text" placeholder="CUIT EMPRESA*">
+                                            <input type="text" placeholder="TELÉFONO DE CONTACTO">
+                                        </div>
+                                    </div>
+                                    <div class="forms-afip consumidor-final">
+                                        <div class="col-left">
+                                            <input type="text" placeholder="NOMBRE Y APELLIDO RESPONSABLE*">
+                                            <input type="text" placeholder="EMPRESA">
+                                            <input type="text" placeholder="DIRECCIÓN">
+                                        </div>
+                                        <div class="col-right">
+                                            <input type="text" placeholder="MAIL DE CONTACTO*">
+                                            <input type="text" placeholder="TELÉFONO DE CONTACTO">
+                                        </div>
+                                    </div>
+                                        
+                                    
+                                </form>
+                            </div>                        
+                        </div>
+                    </div>
+                    
+                    
                     <script>
                         $(".select-forma-de-pago").find('input').change(function() {
+                            
+                            if(this.getAttribute('id') == 'transferencia-bancaria'){
+                                $('.transferencia-bancaria').fadeIn();
+                            }else{
+                                $('.transferencia-bancaria').fadeOut();
+                            }
                             $(".select-forma-de-pago").removeClass('active');
                             if(this.checked) {
                                 $(this).parent().addClass('active');
+                                
                             }
+                        });
+                        $('.select-tipo-factura').change(function() {
+                            var formVer = '.'+$(this).val();
+                            $('.forms-afip').hide();
+                               // $('.forms-afip').show();
+                            $(formVer).fadeIn();
                         });
                     </script>
                     <div class="content-codigo-de-promocion" >
@@ -268,10 +327,7 @@
                     <a href="#" id="comprar">COMPRAR AHORA</a>
                     <div class="cleaner"></div>
                     </div>
-                    <div class="content-medios-de-pago">
-                        <h6>Medios de pagos online</h6>
-                        <img src="imagenes/formasdepago.png" width="934" height="80" alt="formas de pago">
-                    </div>
+                    
                     
                     <div class="cleaner"></div>
                 </div><!--formasdepago-->
