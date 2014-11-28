@@ -219,11 +219,19 @@
                     
                     <div class="transferencia-bancaria">
                         <div class="content-select">
-                            <select class="select-tipo-factura">
-                                <option>SELECCIONA TIPO DE FACTURA</option>
-                                <option value="consumidor-final">CONSUMIDOR FINAL</option>
-                                <option value="responsable-inscripto">RESPONSABLE INSCRIPTO</option>
-                            </select>
+                            <div class="select-custom">
+                                <ul id="select-tipo-factura">
+                                    <li>
+                                        <a href="#" class="boton">SELECCIONA TIPO DE FACTURA</a>
+                                        <ul class="opciones-select">
+                                            <li><a href="#" tipo="consumidor-final">CONSUMIDOR FINAL</a></li>
+                                            <li><a href="#" tipo="responsable-inscripto">RESPONSABLE INSCRIPTO</a></li>
+                                        </ul>
+                                    </li>
+                                </ul> 
+                                <div class="cleaner"></div>
+                            </div>
+                           
                         </div>
 
                         <div class="content-form-deposito">
@@ -261,6 +269,22 @@
                     
                     
                     <script>
+                        $('#select-tipo-factura').find('a').click(function(e){
+                            e.preventDefault();
+                            
+                        });
+                        $('#select-tipo-factura').find('.boton').hover(function(e){
+                            $('#select-tipo-factura').find('.opciones-select').css('pointer-events', 'all');
+                        });
+                        $('#select-tipo-factura').find('.opciones-select').find('a').click(function(e){
+                            e.preventDefault();
+                            $('#select-tipo-factura').find('.boton').html($(this).html());
+                            $('#select-tipo-factura').find('.opciones-select').css('pointer-events', 'none');
+                           
+                            $('.forms-afip').hide();
+                            $('.'+this.getAttribute('tipo')).fadeIn();
+                            
+                        });
                         $(".select-forma-de-pago").find('input').change(function() {
                             
                             if(this.getAttribute('id') == 'transferencia-bancaria'){
@@ -275,12 +299,7 @@
                             }
                         });
                         
-                        $('.select-tipo-factura').change(function() {
-                            var formVer = '.'+$(this).val();
-                            $('.forms-afip').hide();
-                               // $('.forms-afip').show();
-                            $(formVer).fadeIn();
-                        });
+                       
                     </script>
                     <div class="content-codigo-de-promocion" >
                         <input type="checkbox" id="codigo-promocion" name="codigo-promocion">
@@ -296,17 +315,17 @@
                                 <p>SELECCIONAR CANTIDAD DE MESES</p>
                             </div>
                             <div class="meses">
-                                <div class="select-mes" title="10% Descuento">
+                                <div class="select-mes solo-envio" title="10% Descuento">
                                     <input type="radio" id="cantidad-meses-3" name="cantidad-meses">
                                     <label for="cantidad-meses-3"></label>
                                     <p for="cantidad-meses">3</p>
                                 </div>
-                                <div class="select-mes">
+                                <div class="select-mes solo-envio">
                                     <input type="radio" id="cantidad-meses-6" name="cantidad-meses">
                                     <label for="cantidad-meses-6"></label>
                                     <p for="cantidad-meses">6</p>
                                 </div>
-                                <div class="select-mes" >
+                                <div class="select-mes solo-envio" >
                                     <input type="radio" id="cantidad-meses-12" name="cantidad-meses">
                                     <label for="cantidad-meses-12"></label>
                                     <p for="cantidad-meses">12</p>

@@ -749,7 +749,7 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 .formasdepago h6 { text-align:center; font-size:16px; color:#afb3b3; margin:0 0 15px 0; font-weight:normal}
 
 .infocont .bto_planes {
-    height:50px; width:160px; position:relative; 
+    height:50px; width:100%; position:relative; 
     margin:0 auto 35px auto;
     margin:0;
 }
@@ -776,6 +776,50 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     height: 40px;
     float: left;
 }
+.formasdepago .content-select{
+    position: relative;
+    z-index: 9600;
+    margin-bottom: 10px;
+}
+.select-custom { 
+    background-color:#17a387
+}
+.formasdepago .select-custom {     
+    width: 318px;
+    
+}
+.select-custom a { text-decoration:none}
+.select-custom ul { float:right !important; z-index:5}
+.select-custom ul .boton { color:#FFF; width:100%; height:25px; font-size:14px; padding:8px 0 0 10px; text-decoration:none; display:block; float:left; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; border:1px solid #10705D; background-image:url(../imagenes/flechafiltro_blanca.png); background-repeat:no-repeat; background-position:right;}
+.select-custom ul .boton:hover { background-color:#10705D; border:1px solid #10705D}
+
+.select-custom .btosuscriptores {margin:8px 10px 0 0 !important}
+
+.select-custom ul { position:relative; margin:8px 12px 0 0}
+.select-custom ul  il ul {position:absolute; top:35px; left:80px; margin: 0; opacity:0 ;   /* se ubican debajo del enlace principal */
+
+  }
+.select-custom ul { float:none !important; }
+
+  /* son visibes al poner el cursor encima */
+.select-custom ul  li:hover > ul { opacity: 1!important ; overflow-x: hidden; position:absolute; top:26px; width:100%; z-index:1; border:1px solid #10705D; /*-webkit-box-shadow: 1px 1px 1px 0px #d4d8d9; -moz-box-shadow: 1px 1px 1px 0px #d4d8d9; -o-box-shadow: 1px 1px 1px 0px #d4d8d9; box-shadow:  1px 1px 1px 0px #d4d8d9;*/ height:auto}
+
+.select-custom ul  li ul li {
+    height: 0; /* no son visibles */
+    overflow: hidden;
+    padding: 0;float:none !important;
+  }
+
+.select-custom ul  li:hover > ul li { overflow: visible; float:none; padding: 0; height:35px;  }
+.select-custom ul  li ul li a { color:#FFF; font-size:14px; height:25px; padding:10px 0 0 10px; text-decoration:none; display:block; background-color:#17A387; }
+.select-custom ul  li ul li a:hover { background-color:#10705D; color:#FFF}
+.select-custom ul  li ul li:hover >#cantidad { background-color:#10705D !important}
+
+
+
+
+
+
 .formasdepago .transferencia-bancaria, .formasdepago .transferencia-bancaria .forms-afip{
     display: none;
 }
@@ -849,6 +893,7 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     width: 100%;
     height: 40px;
     float: left;
+    z-index: 1;
 }
 .formasdepago .content-codigo-de-promocion label{
     top: 14px !important;
