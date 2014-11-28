@@ -1891,6 +1891,15 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 #container_popup #encabeezado #cerrar_popup { margin:2px 20px 0 0; float:right; opacity:0.7}
 #container_popup #encabeezado #cerrar_popup:hover {opacity:1}
 
+.popup_eliminar .btn-rojo, .popup_eliminar .btn-verde{
+    border:0;
+}
+.popup_eliminar .btn-verde { width:160px; height:38px; padding-top:9px;  display:block; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; -moz-box-shadow: 0px 3px 0px 0px #10705d; -o-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; color:#FFF !important; 
+            float:right}
+.popup_eliminar .btn-verde:hover {background-color:#17a387; -webkit-box-shadow: 0px 0px 0px 0px #943849; -moz-box-shadow: 0px 0px 0px 0px #943849; -o-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
+.popup_eliminar .btn-rojo { width:160px; height:38px; padding-top:9px;  display:block; font-size:14px; text-align:center; background-color:#A31717; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #740000; -moz-box-shadow: 0px 3px 0px 0px #740000; -o-box-shadow: 0px 3px 0px 0px #740000; box-shadow:  0px 3px 0px 0px #740000; text-decoration:none; color:#FFF !important; float:left}
+.popup_eliminar .btn-rojo:hover {background-color:#740000; -webkit-box-shadow: 0px 0px 0px 0px #943849; -moz-box-shadow: 0px 0px 0px 0px #740000; -o-box-shadow: 0px 0px 0px 0px #740000; box-shadow:  0px 0px 0px 0px #740000; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
+
 
 #formpopup { margin-top:20px; width:100%}
 #formpopup input, .formpopup input {border:1px solid #17a387; height:35px; color:#737f80; margin-bottom:15px; font-size:18px; font-family:'ralewayregular',  'Raleway', sans-serif; padding-left:1%;}

@@ -42,8 +42,8 @@ $(function() {
 			<p id="pregunta_popup">&iquest;Est&aacute; seguro que desea eliminar la lista de suscriptores <strong>"{{ $lista->nombre }}"</strong> de forma permanente?</p>
 
 			<div id="botones_popup">
-				<input type="button" value="SI" name="submit" id="saveForm3" />
-				<input class="btn" id="borrar3" type="reset" value="NO" name="Enviar2" />
+				<input class="btn-verde" type="button" value="SI" name="submit" id="saveForm3" />
+				<input class="btn-rojo" id="borrar3" type="reset" value="NO" name="Enviar2" />
 				<div class="cleaner"></div>
 			</div>
 			</form>
