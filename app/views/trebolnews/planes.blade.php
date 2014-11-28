@@ -150,7 +150,7 @@
                             ?>
                             <div class="{{ $class }}info single plan">
                                 <div class="radioplanes radioplanes_corto">
-                                    <input type="radio" name="opcion" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
+                                    <input type="radio" name="opcion" tipo-plan="envio" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
                                     <label></label>
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{ $icon }}.png" width="18px" height="18px" alt="icono">{{ $plan->envios }}</h4>
@@ -180,7 +180,7 @@
                             ?>
                             <div class="{{ $class }}info suscription plan">
                                 <div class="radioplanes radioplanes_corto">
-                                    <input type="radio" id="radio{{ $i }}" name="opcion" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
+                                    <input type="radio" id="radio{{ $i }}" name="opcion" tipo-plan="suscriptor" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
                                     <label for="radio{{ $i }}"></label>
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
@@ -274,6 +274,7 @@
                                 
                             }
                         });
+                        
                         $('.select-tipo-factura').change(function() {
                             var formVer = '.'+$(this).val();
                             $('.forms-afip').hide();
@@ -290,7 +291,7 @@
                     <!-- ENVIOS -->
                     
                     <div class="comprar-envios-content">
-                        <div class="seleccion-meses">
+                        <div class="seleccion-meses solo-envio">
                             <div class="titulo">
                                 <p>SELECCIONAR CANTIDAD DE MESES</p>
                             </div>
@@ -357,6 +358,21 @@
     </section>
     <script>
   $(function() {
+     
+    $(".radioplanes").find('label').click(function () {
+        var tipoPlan = $(this).parent().find('input').attr('tipo-plan');
+            //envio
+            //suscriptor
+            if (tipoPlan == 'envio'){
+                $('.solo-envio').show();
+                $('.solo-suscriptor').hide();
+            }
+            if (tipoPlan == 'suscriptor'){
+                $('.solo-envio').hide();
+                $('.solo-suscriptor').show();
+            }
+            $('.formasdepago').fadeIn();
+    });
     $( document ).tooltip({
       position: {
         my: "center bottom-10",
