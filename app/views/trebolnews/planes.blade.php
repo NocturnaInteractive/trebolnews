@@ -121,7 +121,7 @@
                         <div class="infoplanes">
                             <div class="verdeinfo">
                                 <div class="radioplanes radioplanes_gratis">
-                                    <input type="radio" id="radio1" name="opcion" />
+                                    <input type="radio" id="radio1" name="opcion" tipo-plan="gratis" />
                                     <label for="radio1"></label>
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">500</h4>
@@ -371,7 +371,12 @@
                 $('.solo-envio').hide();
                 $('.solo-suscriptor').show();
             }
-            $('.formasdepago').fadeIn();
+            if (tipoPlan == 'gratis'){
+                $('.formasdepago').fadeOut();
+            }else{
+                $('.formasdepago').fadeIn();
+            }
+            
     });
     $( document ).tooltip({
       position: {
