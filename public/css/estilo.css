@@ -256,7 +256,7 @@ h2 {font-size:30px; color:#FFF; font-weight:normal !important; margin:0; font-fa
 #porinfo img { position:absolute; top:-50px; right:77.5px}
 
 
-#fbsection5 {background-color:#ecf0f1; min-height:1480px; padding-top:80px; border-bottom:5px solid #138a72; min-width:1024px}
+#fbsection5 {background-color:#ecf0f1; min-height:1603px; padding-top:80px; border-bottom:5px solid #138a72; min-width:1024px}
 #fbsection5 h2 {text-shadow:  1px 1px #0e6655; text-align:center; background-color:#17a387; height:60px; padding-top:20px; border-bottom:4px solid #bdc0c1}
 #planes { width:1024px; margin:70px  auto 55px auto; position: relative;}
 #planes h3 { font-size:24px; color:#17a387; font-weight:normal; margin:0}
@@ -268,13 +268,14 @@ h2 {font-size:30px; color:#FFF; font-weight:normal !important; margin:0; font-fa
 #planes .verdeinfo h4 { text-align:center; color:#17a387; font-size:22px; padding:17px 0; margin:0;}
 #planes .grisinfo h4 { text-align:center; color:#737f80; font-size:22px; padding:17px 0; margin:0;}
 
+#planes .content-comprar-ahora{width: 100%; position: relative; float: left;}
 #planes .hastaplan { font-weight:normal; font-size:18px;}
 #planes .hastaenv { font-weight:normal; font-size:18px}
 #planes .precioplan { font-size:20px;}
 #planes .xicon { margin: 24px 130px; }
 #planes img { margin: 0 5px 0 5px}
-#planes .bot { height:50px}
-#planes .botondecompra { width:160px; height:28px; padding-top:10px;  display:block; float:right; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; margin-right:74px}
+#planes .bot { height:50px; width: 160px; margin: 0 auto;}
+#planes .botondecompra { width:160px; height:28px; padding-top:10px;  display:block; float:right; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; }
 #planes .botondecompra:hover {background-color:#17a387; -webkit-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;}
 
 #pfree, #individual, #mensuales { width:308px; float:left}

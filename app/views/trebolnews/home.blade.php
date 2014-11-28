@@ -443,10 +443,8 @@
                                             </h4>
                                         </div>
                                     </div><!--infoplanes-->
-                                    <div class="bot">
-                                        <a href="{{ route('registro') }}" class="botondecompra">COMPRAR AHORA</a>
-                                        <div class="cleaner"></div>
-                                    </div>
+                                    
+                                    
                                 </div><!--individual-->
 
 
@@ -481,7 +479,12 @@
                                     </div><!--infoplanes-->
                                 </div><!--mensuales-->
 
-
+                                <div class="content-comprar-ahora">
+                                        <div class="bot">
+                                            <a href="{{ route('registro') }}" class="botondecompra">COMPRAR AHORA</a>
+                                            <div class="cleaner"></div>
+                                        </div>
+                                    </div>
                                 <div class="cleaner"></div>
                             </div><!--planes-->
 
