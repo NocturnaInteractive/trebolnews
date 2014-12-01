@@ -1,8 +1,14 @@
 @extends('admin/master')
 
 @section('titulo')
+
     Contactos
+
 @stop
+
+<h4>
+    <a href="{{ route('admin/home') }}">Menú principal</a>
+</h4>
 
 @section('contenido')
     <table>

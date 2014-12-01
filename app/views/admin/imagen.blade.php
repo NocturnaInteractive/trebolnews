@@ -1,10 +1,13 @@
 @extends('admin/master')
 
 @section('titulo')
+
     {{ $imagen ? 'Editar imagen' : 'Agregar imagen' }}
+
 @stop
 
 @section('script')
+
 <script>
     $(function(){
         $('#btn_imagen').one('click', imagen_handler);
@@ -64,9 +67,15 @@
 
     });
 </script>
+
 @stop
 
+<h4>
+    <a href="{{ route('admin/home') }}">Menú principal</a>
+</h4>
+
 @section('contenido')
+
     <form id="frm_imagen" action="{{ action('ImagenController@guardar_interna') }}" method="post">
         @if($imagen)
             <input type="hidden" name="id" value="{{ $imagen->id }}" />
@@ -82,6 +91,16 @@
         </p>
 
         <p>
+            <label for="categoria">Categoria:</label>
+            <select name="id_categoria">
+                <option value="">---</option>
+                @foreach($categorias as $categoria)
+                <option value="{{ $categoria->id }}" {{ $imagen ? ($imagen->id == $categoria->id ? 'selected' : '') : '' }} >{{ $categoria->descripcion }}</option>
+                @endforeach
+            </select>
+        </p>
+
+        <p>
             <img id="img_imagen" src="{{ $imagen ? asset($imagen->archivo) : '' }}" />
         </p>
 
@@ -89,4 +108,5 @@
             <input type="submit" id="btn_imagen" value="Enviar" />
         </p>
     </form>
+
 @stop

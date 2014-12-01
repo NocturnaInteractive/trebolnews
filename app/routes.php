@@ -1,5 +1,8 @@
 <?php
 
+require app_path().'/routes/admin.php';
+require app_path().'/routes/popups.php';
+
 Route::get('aux', function(){
 
 });
@@ -239,130 +242,6 @@ Route::group(array(
 
 });
 
-Route::group(array(
-    'prefix' => 'admin'
-), function() {
-
-    Route::get('/', array(
-        'as' => 'admin/login',
-        function() {
-            return View::make('admin/login');
-        }
-    ));
-
-    Route::post('login', 'AdminController@login');
-
-    Route::group(array(
-        'before' => 'admin'
-    ), function() {
-
-        Route::get('home', array(
-            'as' => 'admin/home',
-            function() {
-                return View::make('admin/home');
-            }
-        ));
-
-        Route::get('usuarios', array(
-            'as' => 'admin/usuarios',
-            function() {
-                $usuarios = Usuario::all();
-
-                return View::make('admin/usuarios', array(
-                    'usuarios' => $usuarios
-                ));
-            }
-        ));
-
-        Route::get('campañas', array(
-            'as' => 'admin/campanias',
-            function() {
-                $campanias = Campania::withTrashed()->get();
-
-                return View::make('admin/campanias', array(
-                    'campanias' => $campanias
-                ));
-            }
-        ));
-
-        Route::get('reestablecer_campania/{id}', 'CampaniaController@reestablecer');
-
-        Route::get('templates', array(
-            'as' => 'admin/templates',
-            function() {
-                $templates = Template::all();
-
-                return View::make('admin/templates', array(
-                    'templates' => $templates
-                ));
-            }
-        ));
-
-        Route::get('agregar-template', array(
-            'as' => 'admin/agregar_template',
-            function() {
-                return View::make('admin/agregar_template');
-            }
-        ));
-
-        Route::post('guardar_template', 'TemplateController@guardar');
-
-        Route::get('subir-imagenes/{id}', array(
-            'as' => 'admin/subir_imagenes',
-            'uses' => 'TemplateController@form_subir_imagenes'
-        ));
-
-        Route::post('subir_imagenes', 'TemplateController@subir_imagenes');
-
-        Route::get('libreria', array(
-            'as' => 'admin/libreria',
-            function() {
-                $carpeta_imagenes = Carpeta::find(1);
-
-                return View::make('admin/libreria', array(
-                    'carpeta_imagenes' => $carpeta_imagenes
-                ));
-            }
-        ));
-
-        Route::get('imagen/{id?}', array(
-            'as' => 'admin/imagen',
-            function($id = null) {
-                if($id) {
-                    $imagen = Imagen::find($id);
-                }
-
-                return View::make('admin/imagen', array(
-                    'imagen' => isset($imagen) ? $imagen : null
-                ));
-            }
-        ));
-
-        Route::post('imagen', array(
-            'as'   => 'admin/guardar_imagen',
-            'uses' => 'ImagenController@guardar_interna'
-        ));
-
-        Route::get('eliminar_imagen/{id}', array(
-            'as'   => 'admin/eliminar_imagen',
-            'uses' => 'ImagenController@eliminar_interna'
-        ));
-
-        Route::get('contactos', array(
-            'as' => 'admin/contactos',
-            function() {
-                $comentarios = Comentario::orderBy('created_at', 'desc')->get();
-
-                return View::make('admin/comentarios', array(
-                    'comentarios' => $comentarios
-                ));
-            }
-        ));
-
-    });
-
-});
-
 // acciones con el usuario
 
     // login con facebook
@@ -389,6 +268,9 @@ Route::group(array(
 
     // post para modificar la contraseña
     Route::post('cambiar_password', 'UsuarioController@cambiar_password');
+
+    // setear una preferencia
+    Route::post('set_preference', 'UsuarioController@set_preference');
 
 
 // fin acciones con el usuario
@@ -463,8 +345,10 @@ Route::group(array(
         Route::get('suscriptores', array(
             'as' => 'suscriptores',
             function() {
+                $cant = empty(Auth::user()->preferences()->cant_listas) ? 10 : Auth::user()->preferences()->cant_listas;
+
                 Session::forget('search-term');
-                $listas = Auth::user()->listas()->paginate(5);
+                $listas = Auth::user()->listas()->paginate($cant);
                 $listas->setBaseUrl('lista-suscriptores');
 
                 $html = View::make('trebolnews.listas.suscriptores', array(
@@ -482,10 +366,12 @@ Route::group(array(
         Route::get('lista-suscriptores', array(
             'as' => 'lista-suscriptores',
             function() {
+                $cant = empty(Auth::user()->preferences()->cant_listas) ? 10 : Auth::user()->preferences()->cant_listas;
+
                 if(Session::has('search-term')) {
                     $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Session::get('search-term') . '%')->paginate(5);
                 } else {
-                    $listas = Auth::user()->listas()->paginate(5);
+                    $listas = Auth::user()->listas()->paginate($cant);
                 }
                 $listas->setBaseUrl('lista-suscriptores');
 
@@ -507,9 +393,11 @@ Route::group(array(
         Route::get('lista/{id_lista}', array(
             'as' => 'lista',
             function($id_lista) {
+                $cant = empty(Auth::user()->preferences()->cant_suscriptores) ? 10 : Auth::user()->preferences()->cant_suscriptores;
+
                 Session::forget('search-term');
                 $lista = Lista::find($id_lista);
-                $contactos = $lista->contactos()->paginate(5);
+                $contactos = $lista->contactos()->paginate($cant);
                 $contactos->appends(array('lista' => $id_lista));
                 $contactos->setBaseUrl('../lista-contactos');
 
@@ -529,6 +417,8 @@ Route::group(array(
         Route::get('lista-contactos', array(
             'as' => 'lista-contactos',
             function() {
+                $cant = empty(Auth::user()->preferences()->cant_suscriptores) ? 10 : Auth::user()->preferences()->cant_suscriptores;
+
                 $lista = Lista::find(Input::get('lista'));
 
                 if(Session::has('search-term')) {
@@ -538,9 +428,9 @@ Route::group(array(
                               ->orWhere('apellido', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
                               ->orWhere('email', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%');
                         })
-                        ->paginate(5);
+                        ->paginate($cant);
                 } else {
-                    $contactos = $lista->contactos()->paginate(5);
+                    $contactos = $lista->contactos()->paginate($cant);
                 }
 
                 $contactos->appends(array('lista' => $lista->id));
@@ -558,22 +448,57 @@ Route::group(array(
 
         Route::any('contact-search', 'ContactoController@search');
 
-        // imágenes del usuario
+        // base librería
         Route::get('librerías', array(
             'as' => 'librerias',
             function() {
+                $cant = empty(Auth::user()->preferences()->cant_libreria) ? 10 : Auth::user()->preferences()->cant_libreria;
+
+                $type = empty(Auth::user()->preferences()->libreria_view) ? 'list' : Auth::user()->preferences()->libreria_view;
+                $view = "libreria-$type";
+
                 $carpeta_basura       = Auth::user()->carpeta_basura();
                 $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
                 $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
-                $imagenes             = Auth::user()->imagenes()->paginate(5, array('*', 'imagenes.nombre'));
+                $imagenes             = Auth::user()->imagenes()->paginate($cant, array('*', 'imagenes.nombre'));
                 $total                = count(Auth::user()->imagenes);
+
+                $imagenes->setBaseUrl('lista-libreria');
+
+                $html = View::make("trebolnews.listas.$view", array(
+                    'imagenes' => $imagenes
+                ));
 
                 return View::make('trebolnews/libreria', array(
                     'carpeta_basura'       => $carpeta_basura,
                     'carpeta_mis_imagenes' => $carpeta_mis_imagenes,
                     'carpetas'             => $carpetas,
                     'imagenes'             => $imagenes,
-                    'total'                => $total
+                    'total'                => $total,
+                    'type'                 => $type,
+                    'html'                 => $html
+                ));
+            }
+        ));
+
+        // tabla librería
+        Route::get('lista-libreria', array(
+            'as' => 'lista-libreria',
+            function() {
+                $cant = empty(Auth::user()->preferences()->cant_libreria) ? 8 : Auth::user()->preferences()->cant_libreria;
+
+                $type = empty(Auth::user()->preferences()->libreria_view) ? 'list' : Auth::user()->preferences()->libreria_view;
+                $view = "libreria-$type";
+
+                $imagenes = Auth::user()->imagenes()->paginate($cant, array('*', 'imagenes.nombre'));
+                $imagenes->setBaseUrl('lista-libreria');
+
+                return Response::json(array(
+                    'html' => View::make("trebolnews.listas.$view", array(
+                        'imagenes' => $imagenes
+                    ))->render(),
+                    'paginador' => $imagenes->links('trebolnews.paginador-ajax')->render(),
+                    'total'     => $imagenes->count()
                 ));
             }
         ));
@@ -582,19 +507,61 @@ Route::group(array(
         Route::get('carpeta/{id_carpeta}', array(
             'as' => 'carpeta',
             function($id_carpeta) {
+                $cant = empty(Auth::user()->preferences()->cant_libreria) ? 8 : Auth::user()->preferences()->cant_libreria;
+
+                $type = empty(Auth::user()->preferences()->libreria_view) ? 'grid' : Auth::user()->preferences()->libreria_view;
+                $view = "libreria-$type";
+
                 $carpeta_seleccionada = Carpeta::find($id_carpeta);
                 $carpeta_basura       = Auth::user()->carpeta_basura();
                 $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
                 $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
-                $imagenes             = $carpeta_seleccionada->imagenes()->paginate(5);
+                $imagenes             = $carpeta_seleccionada->imagenes()->paginate($cant);
+                $total                = count(Auth::user()->imagenes);
+
+                $imagenes->appends(array('carpeta' => $id_carpeta));
+                $imagenes->setBaseUrl('../lista-carpeta');
+
+                $html = View::make("trebolnews.listas.$view", array(
+                    'imagenes' => $imagenes
+                ));
 
                 return View::make('trebolnews/libreria', array(
                     'carpeta_seleccionada' => $carpeta_seleccionada,
                     'carpeta_basura'       => $carpeta_basura,
                     'carpeta_mis_imagenes' => $carpeta_mis_imagenes,
                     'carpetas'             => $carpetas,
-                    'imagenes'             => $imagenes
+                    'imagenes'             => $imagenes,
+                    'total'                => $total,
+                    'type'                 => $type,
+                    'html'                 => $html
                 ));
+            }
+        ));
+
+        Route::get('lista-carpeta', array(
+            'as' => 'lista-carpeta',
+            function() {
+                $cant = empty(Auth::user()->preferences()->cant_libreria) ? 8 : Auth::user()->preferences()->cant_libreria;
+
+                $type = empty(Auth::user()->preferences()->libreria_view) ? 'grid' : Auth::user()->preferences()->libreria_view;
+                $view = "libreria-$type";
+
+                $carpeta_seleccionada = Carpeta::find(Input::get('carpeta'));
+
+                $imagenes = $carpeta_seleccionada->imagenes()->paginate($cant);
+
+                $imagenes->appends(array('carpeta' => $carpeta_seleccionada->id));
+                $imagenes->setBaseUrl('../lista-carpeta');
+
+                return Response::json(array(
+                    'html' => View::make("trebolnews.listas.$view", array(
+                        'imagenes' => $imagenes
+                    ))->render(),
+                    'paginador' => $imagenes->links('trebolnews.paginador-ajax')->render(),
+                    'total'     => $imagenes->count()
+                ));
+
             }
         ));
 
@@ -602,14 +569,20 @@ Route::group(array(
         Route::get('banco', array(
             'as' => 'banco',
             function() {
-                $imagenes = Carpeta::find(1)->imagenes()->paginate(5);
+                $cant = empty(Auth::user()->preferences()->cant_banco) ? 10 : Auth::user()->preferences()->cant_banco;
+
+                $imagenes = Carpeta::find(1)->imagenes()->paginate($cant);
                 $imagenes->setBaseUrl('lista-banco');
 
-                $html = View::make('trebolnews.listas.banco', array(
+                $type = empty(Auth::user()->preferences()->banco_view) ? 'grid' : Auth::user()->preferences()->banco_view;
+                $view = "banco-$type";
+
+                $html = View::make("trebolnews.listas.$view", array(
                     'imagenes' => $imagenes
                 ));
 
                 return View::make('trebolnews.banco', array(
+                    'type'      => $type,
                     'html'      => $html,
                     'imagenes'  => $imagenes,
                     'paginador' => $imagenes->links('trebolnews.paginador-ajax')->render()
@@ -621,9 +594,14 @@ Route::group(array(
         Route::get('lista-banco', array(
             'as' => 'lista-banco',
             function() {
-                $imagenes = Carpeta::find(1)->imagenes()->paginate(5);
+                $cant = empty(Auth::user()->preferences()->cant_banco) ? 10 : Auth::user()->preferences()->cant_banco;
 
-                $html = View::make('trebolnews.listas.banco', array(
+                $imagenes = Carpeta::find(1)->imagenes()->paginate($cant);
+
+                $type = empty(Auth::user()->preferences()->banco_view) ? 'grid' : Auth::user()->preferences()->banco_view;
+                $view = "banco-$type";
+
+                $html = View::make("trebolnews.listas.$view", array(
                     'imagenes' => $imagenes
                 ))->render();
 
@@ -635,7 +613,7 @@ Route::group(array(
         ));
 
         Route::post('subir-a-libreria', array(
-            'as' => 'subir-a-libreria',
+            'as'   => 'subir-a-libreria',
             'uses' => 'ImagenController@subir_a_libreria'
         ));
 
@@ -662,122 +640,3 @@ Route::group(array(
     });
 
 // fin páginas del sitio
-
-// popups
-
-    Route::group(array(
-        'prefix' => 'popup'
-    ), function() {
-
-        // curados
-
-        Route::get('recuperar_password', function() {
-            return Response::json(array(
-                'popup' => View::make('trebolnews/popups/recuperar_password')->render()
-            ));
-        });
-
-        Route::get('crear_lista', function() {
-            return Response::json(array(
-                'popup' => View::make('trebolnews/popups/crear_lista')->render()
-            ));
-        });
-
-        Route::get('importar_lista', function() {
-            return Response::json(array(
-                'popup' => View::make('trebolnews/popups/importar_lista')->render()
-            ));
-        });
-
-        Route::get('eliminar_lista_multi', function() {
-            return Response::json(array(
-                'popup' => View::make('trebolnews/popups/eliminar_lista_multi')->render()
-            ));
-        });
-
-        Route::get('eliminar_suscriptor_multi', function() {
-            return Response::json(array(
-                'popup' => View::make('trebolnews/popups/eliminar_suscriptor_multi')->render()
-            ));
-        });
-
-        // llamado para usar cuando el popup no requiere data adicional
-        Route::get('{popup}', function($popup) {
-            return Response::json(array(
-                'popup' => View::make("internas/popup_$popup")->render()
-            ));
-        });
-
-        // fin curados
-
-        Route::get('editar_lista/{id_lista}', function($id_lista) {
-            $lista = Lista::find($id_lista);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_editarlista', array(
-                    'lista' => $lista
-                ))->render()
-            ));
-        });
-
-        Route::get('eliminar_lista/{id_lista}', function($id_lista) {
-            $lista = Lista::find($id_lista);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_eliminar_listasuscriptor', array(
-                    'lista' => $lista
-                ))->render()
-            ));
-        });
-
-        Route::get('crear_contacto/{id_lista}', function($id_lista) {
-            $lista = Lista::find($id_lista);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_crearsuscriptor', array(
-                    'lista' => $lista
-                ))->render()
-            ));
-        });
-
-        Route::get('editar_contacto/{id_contacto}', function($id_contacto) {
-            $contacto = Contacto::find($id_contacto);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_editarsuscriptor', array(
-                    'contacto' => $contacto
-                ))->render()
-            ));
-        });
-
-        Route::get('eliminar_contacto/{id_contacto}', function($id_contacto) {
-            $contacto = Contacto::find($id_contacto);
-
-            return Response::json(array(
-                'popup' => View::make('internas/popup_eliminarsuscriptor_individual', array(
-                    'contacto' => $contacto
-                ))->render()
-            ));
-        });
-
-        Route::get('libreria_mipc', function() {
-            return Response::json(array(
-                'popup' => View::make('internas/popup_libreria_mipc')->render()
-            ));
-        });
-
-        Route::get('libreria_redes', function() {
-            return Response::json(array(
-                'popup' => View::make('internas/popup_libreria_redes')->render()
-            ));
-        });
-
-        Route::get('crear_carpeta_libreria', function() {
-            return Response::json(array(
-                'popup' => View::make('internas/popup_crear_carpeta_libreria')->render()
-            ));
-        });
-
-    });
-
-// fin popups

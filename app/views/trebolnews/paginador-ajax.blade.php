@@ -12,7 +12,7 @@ $(function(){
         $.ajax({
             url: $(this).attr('href'),
             success: function(data) {
-                $('#table-content').html(data.html);
+                $('#table').html(data.html);
                 $('#paginador').html(data.paginador);
                 $('#txt-total').text(data.total);
             }

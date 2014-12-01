@@ -51,6 +51,14 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
         return $this->hasMany('Campania', 'id_usuario', 'id');
     }
 
+    public function preferences() {
+        if(!empty($this->preferences)) {
+            return json_decode($this->preferences);
+        } else {
+            return (object) array();
+        }
+    }
+
     public function getAuthIdentifier() {
         return $this->getKey();
     }

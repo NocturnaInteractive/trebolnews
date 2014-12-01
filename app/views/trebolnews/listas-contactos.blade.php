@@ -61,7 +61,7 @@
                 $('#frm-search').ajaxSubmit({
                     success: function(data) {
                         if(data.status == 'ok') {
-                            $('#table-content').html(data.html);
+                            $('#table').html(data.html);
                             $('#paginador').html(data.paginador);
                             $('#txt-total').text(data.total);
                         } else {
@@ -111,36 +111,18 @@
                         <ul id="cantidad" class="btosuscriptores">
                             <li><a href="#" class="boton">VER</a>
                             <ul>
-                                <li><a href="#">10</a></li>
-                                <li><a href="#">20</a></li>
-                                <li><a href="#">50</a></li>
-                                <li><a href="#">100</a></li>
+                                <li><a href="#" preference="cant_suscriptores.10">10</a></li>
+                                <li><a href="#" preference="cant_suscriptores.20">20</a></li>
+                                <li><a href="#" preference="cant_suscriptores.50">50</a></li>
+                                <li><a href="#" preference="cant_suscriptores.100">100</a></li>
                             </ul>
                             </li>
                         </ul>
                         <div class="cleaner"></div>
                     </div><!-- submenulibreria -->
-                    <table width="100%"  cellpadding="0" cellspacing="0" class="listadecontactos">
-                        <tr class="primeralinea">
-                            <th scope="col" width="40px">
-                                <div class="checkbox">
-                                    <input type="checkbox" class="todos" />
-                                    <label></label>
-                                </div>
-                            </th>
-                            <th scope="col" width="190px">Nombre y Apellido
-                                <!-- <a href="#" class="flechatabla"></a> -->
-                            </th>
-                            <th scope="col" width="189px">Email</th>
-                            <th scope="col" width="180px">Puesto / Cargo</th>
-                            <th scope="col" width="180px">Empresa</th>
-                            <th scope="col" width="90px">Pa&iacute;s</th>
-                            <th scope="col" width="65px"></th>
-                        </tr>
-                        <tbody id="table-content">
+                    <div id="table">
                         {{ $html }}
-                        </tbody>
-                    </table>
+                    </div>
                     <div id="paginador">
                         @if(count($contactos) > 0)
                             {{ $contactos->links('trebolnews/paginador-ajax') }}

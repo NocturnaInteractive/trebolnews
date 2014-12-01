@@ -12,12 +12,16 @@
         @section('script')
         @show
 
+        @section('head')
+        @show
+
         {{ HTML::style('css/admin.css') }}
     </head>
     <body>
         <h1>
             @yield('titulo')
         </h1>
+
         <div id="contenido">
             @section('contenido')
             @show

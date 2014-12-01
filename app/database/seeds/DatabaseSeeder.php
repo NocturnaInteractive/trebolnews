@@ -7,6 +7,7 @@ class DatabaseSeeder extends Seeder {
 
         $this->call('UsuarioSeeder');
         $this->call('CarpetaSeeder');
+        $this->call('CategoriaSeeder');
         $this->call('ImagenSeeder');
         $this->call('ListaSeeder');
         $this->call('ContactoSeeder');

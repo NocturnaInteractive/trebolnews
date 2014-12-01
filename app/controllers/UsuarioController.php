@@ -260,23 +260,23 @@ class UsuarioController extends BaseController {
 
             $empresa = array();
 
-            $empresa['nombre'] = Input::get('empresa_nombre');
-            $empresa['cuit'] = Input::get('empresa_cuit');
-            $empresa['factura'] = Input::get('empresa_factura');
-            $empresa['telefono'] = Input::get('empresa_telefono');
-            $empresa['direccion'] = Input::get('empresa_direccion');
-            $empresa['cp'] = Input::get('empresa_cp');
-            $empresa['ciudad'] = Input::get('empresa_ciudad');
+            $empresa['nombre']      = Input::get('empresa_nombre');
+            $empresa['cuit']        = Input::get('empresa_cuit');
+            $empresa['factura']     = Input::get('empresa_factura');
+            $empresa['telefono']    = Input::get('empresa_telefono');
+            $empresa['direccion']   = Input::get('empresa_direccion');
+            $empresa['cp']          = Input::get('empresa_cp');
+            $empresa['ciudad']      = Input::get('empresa_ciudad');
             $empresa['responsable'] = Input::get('empresa_responsable');
-            $empresa['email'] = Input::get('empresa_email');
+            $empresa['email']       = Input::get('empresa_email');
 
             $usuario->empresa = json_encode($empresa);
 
             $usuario->save();
 
             return Response::json(array(
-                'status'    => 'ok',
-                'mensaje'   => 'Perfil guardado'
+                'status'  => 'ok',
+                'mensaje' => 'Perfil guardado'
             ));
         } else {
             return Response::json(array(
@@ -284,6 +284,22 @@ class UsuarioController extends BaseController {
                 'validator' => $validator->messages()->toArray()
             ));
         }
+    }
+
+    public function set_preference() {
+        $preference = explode('.', Input::get('preference'));
+        $key = $preference[0];
+        $val = $preference[1];
+
+        $preferences = Auth::user()->preferences();
+        $preferences->$key = $val;
+
+        Auth::user()->preferences = json_encode($preferences);
+        Auth::user()->save();
+
+        return Response::json(array(
+            'status' => 'ok'
+        ));
     }
 
 }

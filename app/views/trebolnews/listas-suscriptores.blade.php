@@ -61,7 +61,7 @@
                 $('#frm-search').ajaxSubmit({
                     success: function(data) {
                         if(data.status == 'ok') {
-                            $('#table-content').html(data.html);
+                            $('#table').html(data.html);
                             $('#paginador').html(data.paginador);
                             $('#txt-total').text(data.total);
                         } else {
@@ -120,38 +120,21 @@
                         <ul id="cantidad" class="btosuscriptores">
                             <li><a href="#" class="boton">VER</a>
                             <ul>
-                                <li><a href="#">10</a></li>
-                                <li><a href="#">20</a></li>
-                                <li><a href="#">50</a></li>
-                                <li><a href="#">100</a></li>
+                                <li><a href="#" preference="cant_listas.10">10</a></li>
+                                <li><a href="#" preference="cant_listas.20">20</a></li>
+                                <li><a href="#" preference="cant_listas.50">50</a></li>
+                                <li><a href="#" preference="cant_listas.100">100</a></li>
                             </ul>
                             </li>
                         </ul>
                         <div class="cleaner"></div>
-                    </div><!--submenulibreria   -->
-                    <table width="100%" cellpadding="0" cellspacing="0" class="listacampanias" id="tabla_listas">
-                        <tr class="primeralinea">
-                            <th scope="col" width="40px">
-                                <div class="checkbox">
-                                    <input type="checkbox" class="todos" />
-                                    <label></label>
-                                </div>
-                            </th>
-                            <th scope="col" width="305px">Nombre de lista</th>
-                            <th scope="col" width="200px">Creada
-                                <!-- <a href="#" class="flechatabla"></a> -->
-                            </th>
-                            <th scope="col" width="149px">Editada</th>
-                            <th scope="col" width="140px">Suscriptores</th>
-                            <th scope="col" width="100px"></th>
-                        </tr>
-                        <tbody id="table-content">
+                    </div><!-- submenulibreria -->
+                    <div id="table">
                         {{ $html }}
-                        </tbody>
-                    </table>
+                    </div>
                     <div id="paginador">
                         @if(count($listas) > 0)
-                            {{ $listas->links('trebolnews/paginador-ajax') }}
+                            {{ $listas->links('trebolnews.paginador-ajax') }}
                         @endif
                     </div><!--paginador-->
                     <div class="cleaner"></div>

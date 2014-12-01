@@ -31,11 +31,31 @@ $(function(){
             type: 'post',
             dataType: 'json',
             data: {
-                session_data: $(this).attr('session')
+                session_data: boton.attr('session')
             },
             success: function(data) {
                 if(data.status == 'ok') {
                     window.location = boton.attr('href');
+                }
+            }
+        });
+    });
+
+    $('[preference]').on('click', function(e) {
+        e.preventDefault();
+
+        var boton = $(this);
+
+        $.ajax({
+            url: $('#preference_url').val(),
+            type: 'post',
+            dataType: 'json',
+            data: {
+                preference: boton.attr('preference')
+            },
+            success: function(data) {
+                if(data.status == 'ok') {
+                    location.reload();
                 }
             }
         });
@@ -71,6 +91,10 @@ function popupWindow(url, title, w, h) {
     var left = (screen.width/2)-(w/2);
     var top = (screen.height/2)-(h/2);
     return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+}
+
+function preventDefault(e) {
+    e.preventDefault();
 }
 
 /******************************

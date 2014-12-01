@@ -25,9 +25,9 @@ class ImagenController extends BaseController {
                 $imagen = Input::file('imagen')->move(public_path() . '/uploads/imagenes', $nombre);
 
                 $imagen = Imagen::create(array(
-                    'id_carpeta'    => Input::get('id_carpeta') ?: Auth::user()->carpeta_mis_imagenes()->id,
-                    'nombre'        => 'Nombre default',
-                    'archivo'       => $nombre
+                    'id_carpeta' => Input::get('id_carpeta') ?: Auth::user()->carpeta_mis_imagenes()->id,
+                    'nombre'     => 'Nombre default',
+                    'archivo'    => $nombre
                 ));
             }
 
@@ -50,13 +50,15 @@ class ImagenController extends BaseController {
         $data = Input::all();
 
         $rules = array(
-            'nombre'  => 'required',
-            'archivo' => 'required_without:id'
+            'nombre'    => 'required',
+            'archivo'   => 'required_without:id',
+            'id_categoria' => 'required'
         );
 
         $messages = array(
-            'nombre.required'  => 'Falta ingresar el nombre',
-            'archivo.required_without' => 'Faltar elegir un archivo'
+            'nombre.required'          => 'Falta ingresar el nombre',
+            'archivo.required_without' => 'Falta elegir un archivo',
+            'id_categoria.required'       => 'Hay que elegir una categoría'
         );
 
         $validator = Validator::make($data, $rules, $messages);
@@ -70,7 +72,8 @@ class ImagenController extends BaseController {
                 ));
             }
 
-            $imagen->nombre = Input::get('nombre');
+            $imagen->nombre       = Input::get('nombre');
+            $imagen->id_categoria = Input::get('id_categoria');
 
             if(Input::hasFile('archivo')) {
                 $ruta = public_path() . '/img/libreria';

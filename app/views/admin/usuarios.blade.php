@@ -4,6 +4,10 @@
     Usuarios
 @stop
 
+<h4>
+    <a href="{{ route('admin/home') }}">Menú principal</a>
+</h4>
+
 @section('contenido')
     <table>
         <tr>

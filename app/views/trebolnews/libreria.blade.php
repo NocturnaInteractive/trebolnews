@@ -131,78 +131,35 @@
                     <div id="tablalibreria">
                         <div id="submenulibreria">
                             <ul id="filtroselecionados">
-                                <li><p>Seleccionados: <span id="span_seleccionados">0</span> de {{ count($imagenes) }} </p></li>
+                                <li><p>Seleccionados: <span id="span_seleccionados">0</span> de <span id="txt-total">{{ count($imagenes) }}</span></p></li>
                                 @if(isset($carpeta_seleccionada) && $carpeta_seleccionada->id != 1)
                                 <li controles ><a id="agregarcapeta" href="#">Mover a</a></li>
                                 <li controles ><a id="borrarselecionados" href="#">Eliminar</a></li>
                                 @endif
                             </ul>
                             <ul id="filtrover">
-                                <li><a id="filtroiconlinsta" class="apretado" href="#"><img src="{{ asset('internas/imagenes/filtroiconlinsta.png') }}" width="25" height="25"></a></li>
-                                <li><a id="filtroiconimagen" href="#"><img src="{{ asset('internas/imagenes/filtroiconimagen.png') }}" width="25" height="25"></a></li>
+                                <li><a id="filtroiconlinsta" href="#" {{ $type == 'list' ? 'class="apretado"' : '' }} preference="libreria_view.list" ><img src="{{ asset('internas/imagenes/filtroiconlinsta.png') }}" width="25" height="25"></a></li>
+                                <li><a id="filtroiconimagen" href="#" {{ $type == 'grid' ? 'class="apretado"' : '' }} preference="libreria_view.grid" ><img src="{{ asset('internas/imagenes/filtroiconimagen.png') }}" width="25" height="25"></a></li>
                             </ul>
-                            <!-- <ul id="cantidad">
+                            <ul id="cantidad">
                                 <li>
                                     <a href="#" class="boton">VER</a>
                                     <ul>
-                                        <li><a href="#">10</a></li>
-                                        <li><a href="#">20</a></li>
-                                        <li><a href="#">50</a></li>
-                                        <li><a href="#">100</a></li>
+                                        <li><a href="#" preference="cant_libreria.8">8</a></li>
+                                        <li><a href="#" preference="cant_libreria.16">16</a></li>
+                                        <li><a href="#" preference="cant_libreria.48">48</a></li>
+                                        <li><a href="#" preference="cant_libreria.96">96</a></li>
                                     </ul>
                                 </li>
-                            </ul> -->
+                            </ul>
                             <div class="cleaner"></div>
-                        </div><!--submenulibreria   -->
-                        <table width="100%"  cellpadding="0" cellspacing="0" class="libret">
-                            <tr class="primeralibre">
-                                <th scope="col" width="40px">
-                                    <div class="checkbox">
-                                        <input type="checkbox" class="todos" />
-                                        <label></label>
-                                    </div>
-                                </th>
-                                <th scope="col" width="170px">Visualizaci&oacute;n</th>
-                                <th scope="col" width="200px">Nombre</th>
-                                <th scope="col" width="125px">Dimensiones</th>
-                                <th scope="col" width="99px">Tama&ntilde;o</th>
-                                <th scope="col" width="100px"></th>
-                            </tr>
-                            @foreach($imagenes as $imagen)
-                            <tr>
-                                <td>
-                                    <div class="checkbox">
-                                        <input type="checkbox" name="chk_imagen[]" value="{{ $imagen->id }}" />
-                                        <label></label>
-                                    </div>
-                                </td>
-                                <td class="libre_img">
-                                    <a href="{{ asset($imagen->archivo) }}" rel="gallery">
-                                        <label for="checkbox2"><img src="{{ asset($imagen->archivo) }}" height="75" /></label>
-                                    </a>
-                                </td>
-                                <td class="nombrelibreria">{{ $imagen->nombre }}</td>
-                                <?php $dim = getimagesize($imagen->archivo); ?>
-                                <td>{{ $dim[0] . ' x ' . $dim[1] }}</td>
-                                <td>{{ round(filesize($imagen->archivo) / 1024, 2, PHP_ROUND_HALF_DOWN) . ' Kb' }}</td>
-                                <td>
-                                    <a class="ver_libreria" href="#">
-                                        <img src="{{ asset('internas/imagenes/ojoicono.png') }}" width="28" height="25">
-                                    </a>
-                                    <a class="editarcampam" href="#">
-                                        <img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25">
-                                    </a>
-                                    <a class="borrarcam" href="#">
-                                        <img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25">
-                                    </a>
-                                    <div class="cleaner"></div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </table>
+                        </div><!-- submenulibreria -->
+                        <div id="table">
+                            {{ $html }}
+                        </div>
                         <div id="paginador">
                             @if(count($imagenes) > 0)
-                                {{ $imagenes->links('paginador') }}
+                                {{ $imagenes->links('trebolnews.paginador-ajax') }}
                             @endif
                         </div><!--paginador-->
                     </div><!--tablalibreria-->

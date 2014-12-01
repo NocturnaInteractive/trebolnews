@@ -39,6 +39,8 @@
     <script>
     $(function(){
 
+        $('#txt_resultados').hide();
+
         $('[rel="gallery"]').fancybox({
             padding: 5,
             margin: [20, 60, 20, 60],
@@ -49,13 +51,13 @@
             }
         });
 
-        $('#table-content').on('click', '.banco_ver', function(e){
+        $('#table').on('click', '.banco_ver', function(e){
             e.preventDefault();
 
             $(this).parents('table').first().find('[rel=gallery]').trigger('click');
         });
 
-        $('#table-content').on('click', '.checkbox', function(e){
+        $('#table').on('click', '.checkbox', function(e){
             e.preventDefault();
 
             var clicked = $(this).find('input');
@@ -147,29 +149,27 @@
                     <div id="banco">
                         <div id="submenulibreria">
                             <ul id="filtroselecionados">
-                                <li><p>Resultados de <em>&#8220;Lorem ipsum&#8221;</em></p></li>
+                                <li><p id="txt_resultados">Resultados de <em>&#8220;Lorem ipsum&#8221;</em></p></li>
                             </ul>
                             <ul id="filtrover">
-                                <li><a id="filtroiconlinsta" href="banco2.html"><img src="{{ asset('internas/imagenes/filtroiconlinsta.png') }}" width="25" height="25"></a></li>
-                                <li><a id="filtroiconimagen" class="apretado" href="banco.html"><img src="{{ asset('internas/imagenes/filtroiconimagen.png') }}" width="25" height="25"></a></li>
+                                <li><a id="filtroiconlinsta" href="#" {{ $type == 'list' ? 'class="apretado"' : '' }} preference="banco_view.list" ><img src="{{ asset('internas/imagenes/filtroiconlinsta.png') }}" width="25" height="25"></a></li>
+                                <li><a id="filtroiconimagen" href="#" {{ $type == 'grid' ? 'class="apretado"' : '' }} preference="banco_view.grid" ><img src="{{ asset('internas/imagenes/filtroiconimagen.png') }}" width="25" height="25"></a></li>
                             </ul>
                             <ul id="cantidad">
                                 <li><a href="#" class="boton">VER</a>
                                 <ul>
-                                    <li><a href="#">10</a></li>
-                                    <li><a href="#">20</a></li>
-                                    <li><a href="#">50</a></li>
-                                    <li><a href="#">100</a></li>
+                                    <li><a href="#" preference="cant_banco.10">10</a></li>
+                                    <li><a href="#" preference="cant_banco.20">20</a></li>
+                                    <li><a href="#" preference="cant_banco.50">50</a></li>
+                                    <li><a href="#" preference="cant_banco.100">100</a></li>
                                 </ul>
                                 </li>
                             </ul>
                             <div class="cleaner"></div>
                         </div><!-- submenulibreria -->
-                        <table width="100%" cellpadding="0" cellspacing="10px" class="tablabanco">
-                            <tbody id="table-content">
+                        <div id="table">
                             {{ $html }}
-                            </tbody>
-                        </table>
+                        </div>
                         <div class="cleaner"></div>
                     </div><!--banco -->
                     <div id="paginador">

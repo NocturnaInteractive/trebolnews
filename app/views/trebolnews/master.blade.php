@@ -28,7 +28,10 @@
     <body>
         <div style="display: none;">
             @section('data')
+
             <input type="hidden" id="session_url" value="{{ url('session') }}" />
+            <input type="hidden" id="preference_url" value="{{ url('set_preference') }}" />
+
             @show
         </div>
 

@@ -23,6 +23,7 @@ class CrearUsuarios extends Migration {
             $table->integer('availableMails')->default(0);
             $table->string('suscriptionType')->default('free'); // free | buyer | member
             $table->string('recuperar')->nullable();
+            $table->text('preferences')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->timestamps();
             $table->softDeletes();
