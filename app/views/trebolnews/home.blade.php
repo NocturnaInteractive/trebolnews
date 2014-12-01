@@ -404,80 +404,66 @@
                                 </div><!--pfree-->
 
                                 <div id="individual">
-                                    <h3>Plan Individual</h3>
-                                    <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. S contrata la cantidad de envíos que necesite. No hay límite de tiempo ni vencimientos de la compra.<br> </p>
-                                    <div class="infoplanes">
-                                        <?php
-                                            $class = 'verde';
-                                            $icon = '';
-                                            foreach ($plans as $plan) {
-
-                                                if (!$plan->isSuscription) {
-
-                                        ?>
-                                            <div class="{{$class.'info'}}">
-                                                <h4>
-                                                    <span class="hastaplan">Hasta</span>
-                                                    <img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}
-
-                                                    <div class="cleaner"></div>
-
-                                                    <span class="segundalinea_plan"> Envios</span>
-                                                    <span class="precioplan">&nbsp;
-                                                        <span class="moneda"></span>{{$plan->precio}}
-                                                    </span>
-                                                </h4>
-                                            </div>
-                                        <?php
-                                                $class = ($class==='verde')? 'gris' : 'verde';
-                                                $icon = ($icon==='')? 'gris' : '';
-                                                }
-                                            }
-                                        ?>
-                                        <div class="verdeinfo">
-                                            <h4>
-                                                <span class="hastaplan">M&aacute;s</span><img src="{{ asset('imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">100.000
-                                                <div class="cleaner"></div>
-                                                <span class="segundalinea_plan"> Envios</span>
-                                                <span class="precioplan">&nbsp;<span class="moneda"></span>0</span>
-                                            </h4>
-                                        </div>
-                                    </div><!--infoplanes-->
-                                    
-                                    
-                                </div><!--individual-->
-
-
-                                <div id="mensuales">
-                                    <h3>Planes Pro</h3>
-                                    <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos. Estos planes tienen una validez de 30 día para ser consumidos.</p>
-                                    <div class="infoplanes">
-                                        <?php
-                                            $class = 'verde';
-                                            $icon = '';
-                                            foreach ($plans as $plan) {
-
-                                                if ($plan->isSuscription) {
-
-                                        ?>
-                                            <div class="{{$class.'info'}}">
-                                                <h4><span class="hastaplan">Hasta</span><img src="{{ asset('home/imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">{{$plan->envios}}
-                                                    <div class="cleaner"></div>
-                                                    <span class="segundalinea_plan"> Suscriptores</span><span class="precioplan">&nbsp;<span class="moneda"></span>{{$plan->precio}}</span></h4>
-                                            </div>
-                                        <?php
-                                                $class = ($class==='verde')? 'gris' : 'verde';
-                                                $icon = ($icon==='')? 'gris' : '';
-                                                }
-                                            }
-                                        ?>
-                                        <div class="verdeinfo">
-                                            <h4><span class="hastaplan">M&aacute;s</span><img src="{{ asset('imagenes/plane'.$icon.'.png') }}" width="18px" height="18px" alt="icono">100.000
-                                                <div class="cleaner"></div>
-                                                <span class="segundalinea_plan"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span>0</span></h4>
-                                        </div>
-                                    </div><!--infoplanes-->
-                                </div><!--mensuales-->
+                        <h3>Plan Individual</h3>
+                        <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. S contrata la cantidad de envíos que necesite. No hay límite de tiempo ni vencimientos de la compra.<br> </p>
+                        <div class="infoplanes">
+                            <?php
+                            $class = 'verde';
+                            $icon = '';
+                            $i = 0;
+                            foreach ($plans as $plan) {
+                                if (!$plan->isSuscription) {
+                            ?>
+                            <div class="{{ $class }}info single plan">
+                                <div class="radioplanes radioplanes_corto">
+                                    <input type="radio" name="opcion" tipo-plan="envio" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
+                                    <label></label>
+                                </div>
+                                <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{ $icon }}.png" width="18px" height="18px" alt="icono">{{ $plan->envios }}</h4>
+                                <div class="cleaner"></div>
+                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
+                                <div class="cleaner"></div>
+                            </div>
+                            <?php
+                                $class = ($class==='verde')? 'gris' : 'verde';
+                                $icon = ($icon==='')? 'gris' : '';
+                                $i++;
+                                }
+                            }
+                            ?>
+                        </div><!--infoplanes-->
+                    </div><!--individual-->
+                    <div id="mensuales">
+                        <h3>Planes Mensuales</h3>
+                        <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos. Estos planes tienen una validez de 30 día para ser consumidos.</p>
+                        <div class="infoplanes">
+                            <?php
+                            $class = 'verde';
+                            $icon = '';
+                            $i = 0;
+                            foreach ($plans as $plan) {
+                                if ($plan->isSuscription) {
+                            ?>
+                            <div class="{{ $class }}info suscription plan">
+                                <div class="radioplanes radioplanes_corto">
+                                    <input type="radio" id="radio{{ $i }}" name="opcion" tipo-plan="suscriptor" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
+                                    <label for="radio{{ $i }}"></label>
+                                </div>
+                                <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
+                                <div class="cleaner"></div>
+                                <h4 class="segundalinea_plan"><span class="hastaenv">Suscriptores</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
+                                <div class="cleaner"></div>
+                            </div>
+                            <?php
+                                $class = ($class === 'verde') ? 'gris' : 'verde';
+                                $icon = ($icon === '') ? 'gris' : '';
+                                $i++;
+                                }
+                            }
+                            ?>
+                            
+                        </div><!--infoplanes-->
+                    </div><!--mensuales-->
 
                                 <div class="content-comprar-ahora">
                                         <div class="bot">

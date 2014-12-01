@@ -11,7 +11,7 @@ class CheckoutController extends BaseController {
             'title'       => $foundPlan['nombre'],
             'unit_price'  => (float) $foundPlan['precio'],
             'quantity'    => 1,
-            'currency_id' => 'ARS'
+            'currency_id' => 'USD'
         );
 
         $order = new Orden;
@@ -58,7 +58,7 @@ class CheckoutController extends BaseController {
                     "frequency"             => 1,
                     "frequency_type"        => "months",
                     "transaction_amount"    => $plan['unit_price'],
-                    "currency_id"           => "ARS"
+                    "currency_id"           => "USD"
                 )
             );
 
