@@ -452,7 +452,7 @@ Route::group(array(
         Route::get('librerías', array(
             'as' => 'librerias',
             function() {
-                $cant = empty(Auth::user()->preferences()->cant_libreria) ? 10 : Auth::user()->preferences()->cant_libreria;
+                $cant = empty(Auth::user()->preferences()->cant_libreria) ? 8 : Auth::user()->preferences()->cant_libreria;
 
                 $type = empty(Auth::user()->preferences()->libreria_view) ? 'list' : Auth::user()->preferences()->libreria_view;
                 $view = "libreria-$type";
