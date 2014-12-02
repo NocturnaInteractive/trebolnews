@@ -460,7 +460,7 @@ Route::group(array(
                 $carpeta_basura       = Auth::user()->carpeta_basura();
                 $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
                 $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
-                $imagenes             = Auth::user()->imagenes()->paginate($cant, array('*', 'imagenes.nombre'));
+                $imagenes             = Auth::user()->imagenes()->paginate($cant, array('*', 'imagenes.id', 'imagenes.nombre'));
                 $total                = count(Auth::user()->imagenes);
 
                 $imagenes->setBaseUrl('lista-libreria');

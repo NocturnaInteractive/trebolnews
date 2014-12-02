@@ -1,18 +1,27 @@
 <table width="100%"  cellpadding="0" cellspacing="0" class="libret">
-    <tr class="primeralibre">
-        <th scope="col" width="40px">
-            <div class="checkbox">
-                <input type="checkbox" class="todos" />
-                <label></label>
-            </div>
-        </th>
-        <th scope="col" width="170px">Visualizaci&oacute;n</th>
-        <th scope="col" width="200px">Nombre</th>
-        <th scope="col" width="125px">Dimensiones</th>
-        <th scope="col" width="99px">Tama&ntilde;o</th>
-        <th scope="col" width="100px"></th>
-    </tr>
+
+    <thead>
+
+        <tr class="primeralibre">
+            <th scope="col" width="40px">
+                <div class="checkbox">
+                    <input type="checkbox" class="todos" />
+                    <label></label>
+                </div>
+            </th>
+            <th scope="col" width="170px">Visualizaci&oacute;n</th>
+            <th scope="col" width="200px">Nombre</th>
+            <th scope="col" width="125px">Dimensiones</th>
+            <th scope="col" width="99px">Tama&ntilde;o</th>
+            <th scope="col" width="100px"></th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
     @foreach($imagenes as $imagen)
+
     <tr>
         <td>
             <div class="checkbox">
@@ -33,7 +42,7 @@
             <a class="ver_libreria" href="#">
                 <img src="{{ asset('internas/imagenes/ojoicono.png') }}" width="28" height="25">
             </a>
-            <a class="editarcampam" href="#">
+            <a class="editarcampam" href="#" popup="{{ url('popup/editar_imagen', $imagen->id) }}">
                 <img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25">
             </a>
             <a class="borrarcam" href="#">
@@ -42,5 +51,9 @@
             <div class="cleaner"></div>
         </td>
     </tr>
+
     @endforeach
+
+    </tbody>
+
 </table>

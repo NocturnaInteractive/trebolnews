@@ -6,20 +6,20 @@ class ImagenController extends BaseController {
         $data = Input::all();
 
         $rules = array(
-            'imagen' => 'required',
+            'imagen' => 'required_without:id',
         );
 
         $messages = array(
-            'imagen.required' => 'Es necesario seleccionar una imagen',
+            'imagen.required_without' => 'Es necesario seleccionar una imagen',
         );
 
         $validator = Validator::make($data, $rules, $messages);
 
         if($validator->passes()) {
             if(Input::has('id')) {
-                $carpeta = Carpeta::find(Input::get('id'));
-                $carpeta->nombre = Input::get('nombre');
-                $carpeta->save();
+                $imagen = Imagen::find(Input::get('id'));
+                $imagen->nombre = Input::get('nombre');
+                $imagen->save();
             } else {
                 $nombre = time() . '.' . Input::file('imagen')->getClientOriginalExtension();
                 $imagen = Input::file('imagen')->move(public_path() . '/uploads/imagenes', $nombre);
@@ -27,7 +27,7 @@ class ImagenController extends BaseController {
                 $imagen = Imagen::create(array(
                     'id_carpeta' => Input::get('id_carpeta') ?: Auth::user()->carpeta_mis_imagenes()->id,
                     'nombre'     => 'Nombre default',
-                    'archivo'    => $nombre
+                    'archivo'    => 'uploads/imagenes/' . $nombre
                 ));
             }
 

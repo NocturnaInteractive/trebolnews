@@ -18,12 +18,12 @@
                         <th scope="col"></th>
                         <th scope="col" width="35px">
                             <div class="checkbox">
-                                <input type="checkbox" value="valor1" />
+                                <input type="checkbox" name="chk_imagen[]" value="{{ $imagen->id }}" />
                                 <label></label>
                             </div>
                         </th>
                         <th scope="col" width="32px"><a class="banco_ver" href="#">ver</a></th>
-                        <th scope="col" width="25px"><a class="banco_editar" href="#">editar</a></th>
+                        <th scope="col" width="25px"><a class="banco_editar" href="#" popup="{{ url('popup/editar_imagen', $imagen->id) }}">editar</a></th>
                         <th scope="col" width="25px"><a class="banco_borar" href="#">borrar</a></th>
                     </tr>
                     <tr>

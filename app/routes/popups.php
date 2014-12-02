@@ -36,6 +36,22 @@ Route::group(array(
         ));
     });
 
+    Route::get('libreria_mipc', function() {
+        return Response::json(array(
+            'popup' => View::make('trebolnews/popups/libreria_mipc')->render()
+        ));
+    });
+
+    Route::get('editar_imagen/{id_imagen}', function($id_imagen) {
+        $imagen = Imagen::find($id_imagen);
+
+        return Response::json(array(
+            'popup' => View::make('trebolnews/popups/editar_imagen', array(
+                'imagen' => $imagen
+            ))->render()
+        ));
+    });
+
     // llamado para usar cuando el popup no requiere data adicional
     Route::get('{popup}', function($popup) {
         return Response::json(array(
@@ -92,12 +108,6 @@ Route::group(array(
             'popup' => View::make('internas/popup_eliminarsuscriptor_individual', array(
                 'contacto' => $contacto
             ))->render()
-        ));
-    });
-
-    Route::get('libreria_mipc', function() {
-        return Response::json(array(
-            'popup' => View::make('internas/popup_libreria_mipc')->render()
         ));
     });
 

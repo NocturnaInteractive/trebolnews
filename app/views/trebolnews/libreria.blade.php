@@ -52,13 +52,17 @@
             }
         });
 
-        $('.ver_libreria').on('click', function(e){
+        $('#table').on('click', '.ver_libreria', function(e){
             e.preventDefault();
-
             $(this).parents('tr').find('[rel="gallery"]').trigger('click');
         });
 
-        $('.checkbox').on('click', function(e){
+        $('#table').on('click', '.banco_ver', function(e){
+            e.preventDefault();
+            $(this).parents('td').find('[rel="gallery"]').trigger('click');
+        });
+
+        $('#table').on('click', '.checkbox', function(e){
             e.preventDefault();
 
             var clicked = $(this).find('input');
@@ -84,6 +88,12 @@
             } else {
                 $('.checkbox .todos').prop('checked', false);
             }
+
+            if($('.checkbox input:checked').not('.todos').length > 0) {
+                $('[controles]').show();
+            } else {
+                $('[controles]').hide();
+            }
         });
 
     });
@@ -105,7 +115,7 @@
                         <ul id="subiralibreria">
                             <li><a class="subiralibreria">SUBIR A LIBRER&Iacute;A</a>
                             <ul>
-                                <li><a id="btn_mipc" href="subir" popup="{{ url('popup/libreria_mipc') }}">Mi PC</a></li>
+                                <li><a id="btn_mipc" href="#" popup="{{ url('popup/libreria_mipc') }}">Mi PC</a></li>
                                 <!-- <li><a id="btn_redes" href="subir" popup="{{ url('popup/libreria_redes') }}">Redes Sociales</a></li> -->
                                 <li><a href="{{ route('banco') }}">Banco de im&aacute;genes</a></li>
                             </ul>

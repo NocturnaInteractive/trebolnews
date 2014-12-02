@@ -12,9 +12,17 @@ $(function(){
         $.ajax({
             url: $(this).attr('href'),
             success: function(data) {
-                $('#table').html(data.html);
+                $('#table').fadeOut(function(){
+                    $('#table').html(data.html);
+                    $('#table').fadeIn();
+                });
                 $('#paginador').html(data.paginador);
                 $('#txt-total').text(data.total);
+            },
+            complete: function() {
+                $('html, body').animate({
+                    scrollTop: $('header').offset().top + $('header').height() + 20
+                }, 400);
             }
         });
     }
