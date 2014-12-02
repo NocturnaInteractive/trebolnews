@@ -116,11 +116,15 @@ class UsuarioController extends BaseController {
         $fb = OAuth::consumer('Facebook');
 
         if(!empty($code)) {
-            $token = $fb->requestAccessToken($code);
+            try {
+                $token = $fb->requestAccessToken($code);
+            } catch (TokenResponseException $e) {
+                dd($e);
+            }
 
             $result = json_decode($fb->request('/me'), true);
 
-            $existe_fb = Usuario::where('fb_id', '=', $result['id'])->first();
+            $existe_fb    = Usuario::where('fb_id', '=', $result['id'])->first();
             $existe_email = Usuario::where('email', '=', $result['email'])->first();
 
             if(!$existe_fb && !$existe_email) { // no existe ninguno
