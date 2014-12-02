@@ -1,3 +1,24 @@
+function notys(pack) {
+    $.each(pack, function(i, v) {
+        noty({
+            text: v,
+            layout: 'topCenter',
+            timeout: 5000,
+            maxVisible: 10
+        });
+    });
+}
+
+function popupWindow(url, title, w, h) {
+    var left = (screen.width/2)-(w/2);
+    var top = (screen.height/2)-(h/2);
+    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+}
+
+function preventDefault(e) {
+    e.preventDefault();
+}
+
 $(function(){
     $(document).ajaxStart(function(){ $('html').addClass('wait'); });
     $(document).ajaxStop(function(){ $('html').removeClass('wait'); });
@@ -61,6 +82,36 @@ $(function(){
         });
     });
 
+    $('body').one('click', '[ajax]', ajax_handler);
+
+    function ajax_handler(e) {
+        e.preventDefault();
+
+        var clicked = $(this);
+
+        clicked.on('click', preventDefault);
+
+        $.ajax({
+            type: 'get',
+            url: clicked.attr('ajax'),
+            dataType: 'json',
+            success: function(data) {
+                if(data.status == 'ok') {
+                    if(data.refresh == 'yes') {
+                        location.reload()
+                    }
+                } else {
+                    if(data.validator) {
+                        notys(data.validator);
+                    }
+                }
+            },
+            complete: function() {
+                clicked.one('click', '[ajax]', ajax_handler);
+            }
+        });
+    }
+
     $('body').on('click', '#cerrar_popup', function(e) {
         e.preventDefault();
 
@@ -75,27 +126,6 @@ $(function(){
         }
     });
 });
-
-function notys(pack) {
-    $.each(pack, function(i, v) {
-        noty({
-            text: v,
-            layout: 'topCenter',
-            timeout: 5000,
-            maxVisible: 10
-        });
-    });
-}
-
-function popupWindow(url, title, w, h) {
-    var left = (screen.width/2)-(w/2);
-    var top = (screen.height/2)-(h/2);
-    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-}
-
-function preventDefault(e) {
-    e.preventDefault();
-}
 
 /******************************
    Google Universal Analytics

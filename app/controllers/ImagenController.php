@@ -42,6 +42,60 @@ class ImagenController extends BaseController {
         }
     }
 
+    public function mover() {
+        $data = Input::all();
+
+        $rules = array(
+            'id_carpeta' => 'required'
+        );
+
+        $messages = array(
+            'id_carpeta.required' => 'Es necesario elegir una carpeta'
+        );
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        if($validator->passes()) {
+            $id_carpeta = Input::get('id_carpeta');
+            foreach(Input::get('chk_imagen') as $id) {
+                $imagen = Imagen::find($id);
+                $imagen->id_carpeta = $id_carpeta;
+                $imagen->save();
+            }
+
+            return Response::json(array(
+                'status' => 'ok'
+            ));
+        } else {
+            return Response::json(array(
+                'status'    => 'error',
+                'validator' => $validator->messages()->toArray()
+            ));
+        }
+    }
+
+    public function trash() {
+        $carpeta_basura = Auth::user()->carpeta_basura();
+        $input = Input::get('chk_imagen');
+        if(!is_array($input)) {
+            $input = array($input);
+        }
+        foreach($input as $id) {
+            $imagen = Imagen::find($id);
+            if($imagen->id_carpeta == $carpeta_basura->id) {
+                $imagen->delete();
+            } else {
+                $imagen->id_carpeta = $carpeta_basura->id;
+                $imagen->save();
+            }
+        }
+
+        return Response::json(array(
+            'status'  => 'ok',
+            'refresh' => 'yes'
+        ));
+    }
+
     public function eliminar() {
         Imagen::destroy(Input::get('id'));
     }

@@ -2,6 +2,7 @@
 
 require app_path().'/routes/admin.php';
 require app_path().'/routes/popups.php';
+require app_path().'/routes/ajax.php';
 
 Route::get('aux', function(){
 
@@ -192,55 +193,6 @@ Route::get('términos-y-condiciones', array(
         return View::make('internas/terminosycondiciones');
     }
 ));
-
-Route::group(array(
-    'before' => 'ajax'
-), function() {
-
-    Route::post('registrar', 'UsuarioController@registrar');
-
-    Route::post('login', 'UsuarioController@login');
-    Route::post('login_con_fb', 'UsuarioController@login_con_fb');
-
-    Route::post('guardar_lista', 'ListaController@guardar');
-    Route::post('eliminar_lista', 'ListaController@eliminar');
-    Route::post('eliminar_lista_multi', 'ListaController@eliminar_multi');
-
-    Route::post('guardar_contacto', 'ContactoController@guardar');
-    Route::post('eliminar_contacto', 'ContactoController@eliminar');
-    Route::post('eliminar_contacto_multi', 'ContactoController@eliminar_multi');
-
-    Route::post('guardar_carpeta', 'CarpetaController@guardar');
-    Route::post('eliminar_carpeta', 'CarpetaController@eliminar');
-
-    Route::post('guardar_imagen', 'ImagenController@guardar');
-    // Route::post('eliminar_carpeta', 'CarpetaController@eliminar');
-
-    Route::post('guardar_campania', 'CampaniaController@guardar_campania');
-
-    Route::post('editar_perfil', 'UsuarioController@editar_perfil');
-
-    Route::post('guardar_comentario', 'ExtraController@guardar_comentario');
-    Route::post('guardar_suscripcion', 'ExtraController@guardar_suscripcion');
-
-    Route::post('session', function() {
-        if(Input::get('session_data') == 'flush') {
-            Session::forget('campania');
-        } else {
-            $todos = explode(';', Input::get('session_data'));
-            foreach($todos as $uno) {
-                $final = explode(':', $uno);
-                Session::put($final[0], $final[1]);
-            }
-        }
-
-        return Response::json(array(
-            'status' => 'ok',
-            'session_data' => Session::all()
-        ));
-    });
-
-});
 
 // acciones con el usuario
 
@@ -460,8 +412,8 @@ Route::group(array(
                 $carpeta_basura       = Auth::user()->carpeta_basura();
                 $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
                 $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
-                $imagenes             = Auth::user()->imagenes()->paginate($cant, array('*', 'imagenes.id', 'imagenes.nombre'));
-                $total                = count(Auth::user()->imagenes);
+                $imagenes             = Auth::user()->imagenes()->where('id_carpeta', '!=', $carpeta_basura->id)->paginate($cant, array('*', 'imagenes.id', 'imagenes.nombre'));
+                $total                = count(Auth::user()->imagenes()->where('id_carpeta', '!=', $carpeta_basura->id)->get());
 
                 $imagenes->setBaseUrl('lista-libreria');
 
@@ -517,7 +469,7 @@ Route::group(array(
                 $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
                 $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
                 $imagenes             = $carpeta_seleccionada->imagenes()->paginate($cant);
-                $total                = count(Auth::user()->imagenes);
+                $total                = count(Auth::user()->imagenes()->where('id_carpeta', '!=', $carpeta_basura->id)->get());
 
                 $imagenes->appends(array('carpeta' => $id_carpeta));
                 $imagenes->setBaseUrl('../lista-carpeta');

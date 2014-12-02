@@ -46,7 +46,7 @@
                 <img src="{{ asset('internas/imagenes/editarcamania.png') }}" alt="editar campa&ntilde;a" width="25" height="25">
             </a>
             <a class="borrarcam" href="#">
-                <img src="{{ asset('internas/imagenes/borrarcamania.png') }}" alt="borrar campa&ntilde;a" width="25" height="25">
+                <img src="{{ asset('internas/imagenes/borrarcamania.png') }}" ajax="{{ action('ImagenController@trash', array('chk_imagen' => $imagen->id)) }}" alt="borrar campa&ntilde;a" width="25" height="25">
             </a>
             <div class="cleaner"></div>
         </td>

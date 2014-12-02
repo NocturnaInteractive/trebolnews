@@ -22,8 +22,9 @@ class CarpetaController extends BaseController {
                 $carpeta->save();
             } else {
                 $carpeta = Carpeta::create(array(
-                    'id_usuario'    => Auth::user()->id,
-                    'nombre'        => Input::get('nombre')
+                    'id_usuario'  => Auth::user()->id,
+                    'nombre'      => Input::get('nombre'),
+                    'descripcion' => Input::get('nombre')
                 ));
             }
 

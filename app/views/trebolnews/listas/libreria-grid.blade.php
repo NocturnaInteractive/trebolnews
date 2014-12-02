@@ -24,7 +24,7 @@
                         </th>
                         <th scope="col" width="32px"><a class="banco_ver" href="#">ver</a></th>
                         <th scope="col" width="25px"><a class="banco_editar" href="#" popup="{{ url('popup/editar_imagen', $imagen->id) }}">editar</a></th>
-                        <th scope="col" width="25px"><a class="banco_borar" href="#">borrar</a></th>
+                        <th scope="col" width="25px"><a class="banco_borar" ajax="{{ action('ImagenController@trash', array('chk_imagen' => $imagen->id)) }}" href="#">borrar</a></th>
                     </tr>
                     <tr>
                         <td colspan="5">

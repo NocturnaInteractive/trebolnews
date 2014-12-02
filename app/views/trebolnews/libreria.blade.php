@@ -96,6 +96,32 @@
             }
         });
 
+        $('#borrarselecionados').one('click', borrar_handler);
+
+        function borrar_handler(e) {
+            e.preventDefault();
+
+            $('#borrarselecionados').on('click', preventDefault);
+
+            $('<form></form>').hide()
+                .attr('method', 'post')
+                .attr('action', $('#borrarselecionados').attr('action'))
+                .append($('[name="chk_imagen[]"]:checked').clone())
+                .ajaxSubmit({
+                    data: {
+                        id_carpeta: $('#id_carpeta').val()
+                    },
+                    success: function(data) {
+                        if(data.status == 'ok') {
+                            location.reload();
+                        }
+                    },
+                    complete: function() {
+                        $('#borrarselecionados').one('click', borrar_handler);
+                    }
+                });
+        }
+
     });
     </script>
 
@@ -143,8 +169,8 @@
                             <ul id="filtroselecionados">
                                 <li><p>Seleccionados: <span id="span_seleccionados">0</span> de <span id="txt-total">{{ count($imagenes) }}</span></p></li>
                                 @if(isset($carpeta_seleccionada) && $carpeta_seleccionada->id != 1)
-                                <li controles ><a id="agregarcapeta" href="#">Mover a</a></li>
-                                <li controles ><a id="borrarselecionados" href="#">Eliminar</a></li>
+                                <li controles ><a id="agregarcapeta" href="#" popup="{{ url('popup/mover_imagen', $carpeta_seleccionada->id) }}">Mover a</a></li>
+                                <li controles ><a id="borrarselecionados" href="#" action="{{ action('ImagenController@trash') }}">Eliminar</a></li>
                                 @endif
                             </ul>
                             <ul id="filtrover">

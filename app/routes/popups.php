@@ -52,6 +52,16 @@ Route::group(array(
         ));
     });
 
+    Route::get('mover_imagen/{id_carpeta}', function($id_carpeta) {
+        $carpetas = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('id', '!=', $id_carpeta)->get();
+
+        return Response::json(array(
+            'popup' => View::make('trebolnews/popups/mover_imagen', array(
+                'carpetas' => $carpetas
+            ))->render()
+        ));
+    });
+
     // llamado para usar cuando el popup no requiere data adicional
     Route::get('{popup}', function($popup) {
         return Response::json(array(
