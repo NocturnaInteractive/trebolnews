@@ -74,7 +74,7 @@ class UsuarioController extends BaseController {
                     'email'     => $usuario->email,
                     'password'  => Input::get('password'),
                     'confirmed' => true
-                ), Input::get('recordar', 'no') == 'on' ? true : false)) {
+                ), Input::get('recordar', 'si') == 'on' ? true : false)) {
                     Session::put('id_logueado', $usuario->id);
 
                     return Response::json(array(

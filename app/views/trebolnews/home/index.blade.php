@@ -26,66 +26,6 @@
     <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script>
         $(function() {
-            $('#loginentrar').one('click', login_handler);
-
-            function login_handler(e) {
-                e.preventDefault();
-
-                $('#loginentrar').on('click', function(e) {
-                    e.preventDefault();
-                });
-
-                $('#frm_login').ajaxSubmit({
-                    success: function(data) {
-                        if(data.status == 'ok') {
-                            location.reload();
-                        } else {
-                            $('#validator').css('display', 'none');
-                            if(data.validator) {
-                                $.each(data.validator, function(i, v) {
-                                    $('#validator').text(v);
-                                    return false;
-                                    // noty({
-                                    //     text: v,
-                                    //     layout: 'topCenter',
-                                    //     timeout: 5000
-                                    // });
-                            });
-                                $('#validator').fadeIn(50, function(){
-                                    setTimeout(function(){
-                                        $('#validator').fadeOut(50, function() {
-                                            $('#validator').text('').css('display', 'block');
-                                        });
-                                    }, 5000)
-                                });
-                            } else {
-                                $('#validator').text(data.mensaje);
-                                $('#validator').fadeIn(50, function(){
-                                    setTimeout(function(){
-                                        $('#validator').fadeOut(50, function(){
-                                            $('#validator').text('').css('display', 'block');
-                                        });
-                                    }, 5000)
-                                });
-                                // noty({
-                                //     text: data.mensaje,
-                                //     layout: 'topCenter',
-                                //     timeout: 5000
-                                // });
-                            }
-                        }
-                    },
-                    complete: function() {
-                        $('#loginentrar').one('click', login_handler);
-                    }
-                });
-            }
-
-            $('#frm_login input').on('keypress', function(e) {
-                if(e.which == 13) {
-                    $('#loginentrar').trigger('click');
-                }
-            });
 
             $('#login').on('click', function(e) {
                 e.preventDefault();
@@ -120,31 +60,8 @@
                     <a href="#fbsection4">&iquest;Por qu&eacute; elegirnos?</a>
                     <a href="#fbsection5">Planes</a>
                     <a href="#fbsection6">Contacto</a>
-                    <div id="sublogin"><a href="#" id="login"><img src="{{ asset('imagenes/iconlogin.png') }}" width="12px" height="14px" alt="icono de login">Iniciar Sesi&oacute;n</a>
-
-
-                        <ul>
-                            <span id="subflecha"></span>
-                            <div id="formasublogin">
-                                <form id="frm_login" action="{{ action('UsuarioController@login') }}" method="post">
-                                    <li class="loginizq"><input name="email" type="text"  id="loginemail" placeholder="Email:" /></li>
-                                    <li class="loginder"><input name="password" type="password"  id="loginpass"  placeholder="Password:" /></li>
-                                    <li class="loginizq"><input class="btn"  id="loginborrar" type="reset" value="BORRAR" name="Enviar2" /></li>
-                                    <li class="loginder"><input type="button" value="ENTRAR" name="submit1" id="loginentrar" /></li>
-                                </form>
-                                <div class="cleaner"></div>
-                                <li><p id="validator"></p></li>
-                                <li><hr></li>
-                                <li class="loginizq"><a href="{{ action('UsuarioController@facebook_login') }}" id="face">Connect</a></li>
-                                <li class="loginder"><a href="{{ route('registro') }}" id="registro">Reg&iacute;strate Gratis</a></li>
-                                <li><a href="#" id="olvido" popup="{{ url('popup/recuperar_password') }}">&iquest;Olvidaste tu contrase&ntilde;a?</a></li>
-                            </div>
-                        </ul>
-                        <div class="cleaner"></div>
-                    </div>
+                    @include('trebolnews/home/login')
                 </nav>
-
-
                 <div class="cleaner"></div>
             </div>
 
@@ -182,10 +99,7 @@
         </div> -->
     </header>
     <div id="conteiner" class="cbp-fbscroller">
-
         <section id="fbsection1">
-
-
             <div id="banner">
                 <div id="da-slider" class="da-slider">
                     <div class="da-slide">
@@ -195,13 +109,11 @@
                             <div class="da-img"><img src="{{ asset('imagenes/banner1.png') }}" width="1280" height="400" /></div>
                         </div>
 
-
                         <div class="da-slide">
                             <h2>Accede a un variado cat&aacute;logo de im&aacute;genes gratis.</h2>
                             <p>&iexcl;Aprov&eacute;chalo en todas tus campa&ntilde;as!</p>
                             <div class="da-img"><img src="{{ asset('imagenes/banner2.png') }}" width="1280" height="400" /></div>
                         </div>
-
 
                         <div class="da-slide">
                             <h2>Monitorea la evoluci&oacute;n de tu acci&oacute;n de email marketing.</h2>
@@ -209,7 +121,6 @@
                                 Analiza los resultados para planificar con eficacia tu pr&oacute;xima campa&ntilde;a.</p>
                                 <div class="da-img"><img src="{{ asset('imagenes/banner3.png') }}" width="1280" height="400" /></div>
                             </div>
-
 
                             <div class="da-slide">
                                 <h2>Crea, optimiza y gestiona tu lista de suscriptores.</h2>
@@ -231,15 +142,12 @@
                             <div class="cleaner"></div>
                         </div><!--banner-->
 
-
                         <div id="registrateg">
                             <h2>Es simple, r&aacute;pido &iexcl;y gratis hasta 500 env&iacute;os!</h2>
                             <div id="botgra"><a href="{{ route('registro') }}">REG&Iacute;STRATE GRATIS</a></div>
                         </div>
 
                     </section>
-
-
 
                     <section id="fbsection2">
                         <div id="fonquees">
@@ -266,8 +174,6 @@
                                 </div><!--quees-->
                             </div><!--fonquees-->
                         </section>
-
-
 
                         <section id="fbsection3">
                             <div id="servicios">
@@ -296,9 +202,11 @@
                                         <h6>Viralizaci&oacute;n:</h6><p>Integra tu campa&ntilde;a a las redes sociales para ampliar el alcance de tus emails.</p>
                                     </div>
                                     <div class="cleaner"></div>
+
                                 </div><!--serarriba-->
 
                                 <div id="serabajo">
+
                                     <div class="servinter">
                                         <img src="{{ asset('imagenes/6serv.png') }}" width="164" height="80" alt="icono">
                                         <h6>Programaci&oacute;n de env&iacute;os:</h6><p>Define en qu&eacute; tiempos y horarios quieres expedir tus mensajes, cuantas veces necesites.</p>
@@ -320,6 +228,7 @@
                                         <h6>Soporte t&eacute;cnico:</h6><p>Ante cualquier emergencia o consulta, comun&iacute;cate con nuestro soporte t&eacute;cnico mediante el chat online.</p>
                                     </div>
                                     <div class="cleaner"></div>
+
                                 </div><!--serabajo-->
 
                             </div><!--servicios-->
@@ -353,7 +262,6 @@
                                 </div>
                             </div><!--porque-->
                         </section>
-
 
                         <section id="fbsection5">
                             <h2>Planes y Precios</h2>
@@ -461,7 +369,7 @@
                                 }
                             }
                             ?>
-                            
+
                         </div><!--infoplanes-->
                     </div><!--mensuales-->
 
@@ -491,84 +399,7 @@
                         <section id="fbsection6">
                             <div id="contacto">
                                 <h2>Contacto</h2>
-                                <div id="infocontacto">
-                                    <script>
-                                    $(function(){
-                                        $('#form_contacto #saveForm').one('click', form_contacto_handler);
-
-                                        function form_contacto_handler(e) {
-                                            e.preventDefault();
-
-                                            $('#form_contacto #saveForm').on('click', function(e){
-                                                e.preventDefault();
-                                            });
-
-                                            $('#form_contacto').ajaxSubmit({
-                                                success: function(data) {
-                                                    if(data.status == 'ok') {
-                                                        noty({
-                                                            type: 'success',
-                                                            text: data.mensaje,
-                                                            layout: 'topCenter',
-                                                            timeout: 5000,
-                                                            maxVisible: 10
-                                                        });
-                                                    } else {
-                                                        notys(data.validator);
-                                                    }
-                                                },
-                                                complete: function() {
-                                                    $('#form_contacto #saveForm').one('click', form_contacto_handler);
-                                                }
-                                            });
-                                        }
-                                    });
-                                    </script>
-                                    <form id="form_contacto" action="{{ action('ExtraController@guardar_comentario') }}" method="post">
-                                        <ul>
-                                            <li id="formizq"><ul>
-                                                <li  class="izq" >
-                                                    <input name="nombre" type="text" class="element text medium" id="element_1" placeholder="&nbsp;*Nombre:" />
-                                                </li>
-
-                                                <li class="der" >
-                                                    <input name="apellido" type="text" class="element text medium"  placeholder="&nbsp;*Apellido:" />
-                                                </li>
-                                                <div class="cleaner"></div>
-
-                                                <li class="izq" >
-                                                    <input id="element_2" name="telefono" class="element text medium" type="text" placeholder="Tel&eacute;fono:"  />
-                                                </li>
-
-
-                                                <li class="der" >
-                                                    <input id="element_5" name="empresa" class="element text medium" type="text" placeholder="Empresa:" />
-                                                </li>
-
-
-                                                <div class="cleaner"></div>
-                                                <li>
-                                                    <input id="element_3" name="email" class="element text medium" type="text" placeholder="&nbsp;*Email:"  />
-                                                </li>
-                                                <p style="margin-top:20px; font-size:14px; color:#FFF">*&nbsp;Campos obligatorios </p>
-                                            </ul></li>
-
-
-                                            <li id="formder"><ul>
-                                                <li id="li_6" >
-                                                    <textarea id="element_6" name="comentario" placeholder="&nbsp;*Comentario:" class="element textarea medium"></textarea>
-                                                </li>
-
-                                                <li id="botonesform" class="buttons">
-                                                    <input type="button" value="ENVIAR" name="submit1" id="saveForm" />
-                                                    <input class="btn"  id="borrar" type="reset" value="BORRAR" name="Enviar2" />
-                                                    <div class="cleaner"></div>
-                                                </li>
-                                            </ul></li>
-                                            <div class="cleaner"></div>
-                                        </ul>
-                                    </form>
-                                </div><!--fin infocontacto-->
+                                @include('trebolnews.home.contacto')
                             </div><!--fin contacto-->
                             <div class="cleaner"></div>
                         </section>

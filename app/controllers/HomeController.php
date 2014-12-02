@@ -20,7 +20,7 @@ class HomeController extends BaseController {
             'plans' => Plan::all()
         );
 
-        return View::make('trebolnews/home', $res);
+        return View::make('trebolnews.home.index', $res);
     }
 
 }
