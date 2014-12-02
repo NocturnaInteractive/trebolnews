@@ -116,11 +116,11 @@ class UsuarioController extends BaseController {
         $fb = OAuth::consumer('Facebook');
 
         if(!empty($code)) {
-            try {
+            // try {
                 $token = $fb->requestAccessToken($code);
-            } catch (TokenResponseException $e) {
-                dd($e);
-            }
+            // } catch (TokenResponseException $e) {
+                // dd($e);
+            // }
 
             $result = json_decode($fb->request('/me'), true);
 
@@ -161,7 +161,7 @@ class UsuarioController extends BaseController {
         } else {
             $url = $fb->getAuthorizationUri();
 
-            return Redirect::to((string) $url . '&display=popup');
+            return Redirect::to((string) $url . '&display=popup/');
         }
     }
 
