@@ -168,10 +168,10 @@
                         <div id="submenulibreria">
                             <ul id="filtroselecionados">
                                 <li><p>Seleccionados: <span id="span_seleccionados">0</span> de <span id="txt-total">{{ count($imagenes) }}</span></p></li>
-                                @if(isset($carpeta_seleccionada) && $carpeta_seleccionada->id != 1)
-                                <li controles ><a id="agregarcapeta" href="#" popup="{{ url('popup/mover_imagen', $carpeta_seleccionada->id) }}">Mover a</a></li>
+                                {{-- @if(isset($carpeta_seleccionada) && $carpeta_seleccionada->id != 1) --}}
+                                <li controles ><a id="agregarcapeta" href="#" popup="{{ url('popup/mover_imagen', empty($carpeta_seleccionada->id) ?: $carpeta_seleccionada->id) }}">Mover a</a></li>
                                 <li controles ><a id="borrarselecionados" href="#" action="{{ action('ImagenController@trash') }}">Eliminar</a></li>
-                                @endif
+                                {{-- @endif --}}
                             </ul>
                             <ul id="filtrover">
                                 <li><a id="filtroiconlinsta" href="#" {{ $type == 'list' ? 'class="apretado"' : '' }} preference="libreria_view.list" ><img src="{{ asset('internas/imagenes/filtroiconlinsta.png') }}" width="25" height="25"></a></li>
