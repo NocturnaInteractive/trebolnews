@@ -161,7 +161,7 @@ class UsuarioController extends BaseController {
         } else {
             $url = $fb->getAuthorizationUri();
 
-            return Redirect::to((string) $url . '&display=popup/');
+            return Redirect::to((string) $url . '&display=popup');
         }
     }
 
