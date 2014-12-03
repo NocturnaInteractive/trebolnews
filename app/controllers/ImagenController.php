@@ -100,6 +100,48 @@ class ImagenController extends BaseController {
         Imagen::destroy(Input::get('id'));
     }
 
+    public function search_bank() {
+        $data = Input::all();
+
+        $rules = array(
+            'search-term' => 'required'
+        );
+
+        $messages = array(
+            'search-term.required' => 'Ingrese un término para la búsqueda'
+        );
+
+        $validator = Validator::make($data, $rules, $messages);
+
+        if($validator->passes()) {
+            Session::put('search-term', Input::get('search-term'));
+
+            $cant = empty(Auth::user()->preferences()->cant_banco) ? 10 : Auth::user()->preferences()->cant_banco;
+
+            $type = empty(Auth::user()->preferences()->banco_view) ? 'grid' : Auth::user()->preferences()->banco_view;
+            $view = "banco-$type";
+
+            $imagenes = Carpeta::find(1)->imagenes()->where('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')->paginate($cant);
+
+            $imagenes->setBaseUrl('lista-banco');
+
+            return Response::json(array(
+                'status'    => 'ok',
+                'html'      => View::make("trebolnews.listas.$view", array(
+                    'imagenes' => $imagenes
+                ))->render(),
+                'paginador' => $imagenes->links('trebolnews/paginador-ajax')->render(),
+                'total'     => $imagenes->count(),
+                'term'      => Input::get('search-term', Session::get('search-term'))
+            ));
+        } else {
+            return Response::json(array(
+                'status'    => 'error',
+                'validator' => $validator->messages()->toArray()
+            ));
+        }
+    }
+
     public function guardar_interna() {
         $data = Input::all();
 

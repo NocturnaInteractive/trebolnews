@@ -105,6 +105,25 @@
             });
         }
 
+        $('[name="search-term"]').on('keypress', function(e){
+            if(e.which == 13) {
+                e.preventDefault();
+
+                $('#frm-search').ajaxSubmit({
+                    success: function(data) {
+                        if(data.status == 'ok') {
+                            $('#table').html(data.html);
+                            $('#paginador').html(data.paginador);
+                            $('#txt_term').text(data.term);
+                            $('#txt_resultados').show();
+                        } else {
+                            notys(data.validator);
+                        }
+                    }
+                });
+            }
+        });
+
     });
     </script>
 
@@ -123,17 +142,14 @@
                             <li>
                                 <a class="filtro" href="#">CATEGOR&Iacute;AS</a>
                                 <ul>
-                                    <li><a href="#">Artes</a></li>
-                                    <li><a href="#">Gastronom&iacute;a</a></li>
-                                    <li><a href="#">Hotel</a></li>
-                                    <li><a href="#">Personas</a></li>
-                                    <li><a href="#">Tecnolog&iacute;a</a></li>
-                                    <li><a href="#">Turismo</a></li>
+                                    @foreach($categorias as $categoria)
+                                    <li><a href="#">{{ Str::title($categoria->descripcion) }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                         </ul>
-                        <form>
-                            <input class="search" type="text" placeholder="BUSCAR" name="Search" />
+                        <form id="frm-search" method="post" action="{{ action('ImagenController@search_bank') }}">
+                            <input class="search" type="text" placeholder="BUSCAR" name="search-term" />
                         </form>
                         <ul id="subiralibreria_banco">
                             <li>
@@ -149,7 +165,7 @@
                     <div id="banco">
                         <div id="submenulibreria">
                             <ul id="filtroselecionados">
-                                <li><p id="txt_resultados">Resultados de <em>&#8220;Lorem ipsum&#8221;</em></p></li>
+                                <li><p id="txt_resultados">Resultados de <em id="txt_term">&#8220;Lorem ipsum&#8221;</em></p></li>
                             </ul>
                             <ul id="filtrover">
                                 <li><a id="filtroiconlinsta" href="#" {{ $type == 'list' ? 'class="apretado"' : '' }} preference="banco_view.list" ><img src="{{ asset('internas/imagenes/filtroiconlinsta.png') }}" width="25" height="25"></a></li>

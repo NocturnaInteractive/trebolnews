@@ -521,23 +521,28 @@ Route::get('términos-y-condiciones', array(
         Route::get('banco', array(
             'as' => 'banco',
             function() {
-                $cant = empty(Auth::user()->preferences()->cant_banco) ? 10 : Auth::user()->preferences()->cant_banco;
+                Session::forget('search-term');
 
-                $imagenes = Carpeta::find(1)->imagenes()->paginate($cant);
-                $imagenes->setBaseUrl('lista-banco');
+                $cant = empty(Auth::user()->preferences()->cant_banco) ? 10 : Auth::user()->preferences()->cant_banco;
 
                 $type = empty(Auth::user()->preferences()->banco_view) ? 'grid' : Auth::user()->preferences()->banco_view;
                 $view = "banco-$type";
+
+                $categorias = Categoria::all();
+
+                $imagenes = Carpeta::find(1)->imagenes()->paginate($cant);
+                $imagenes->setBaseUrl('lista-banco');
 
                 $html = View::make("trebolnews.listas.$view", array(
                     'imagenes' => $imagenes
                 ));
 
                 return View::make('trebolnews.banco', array(
-                    'type'      => $type,
-                    'html'      => $html,
-                    'imagenes'  => $imagenes,
-                    'paginador' => $imagenes->links('trebolnews.paginador-ajax')->render()
+                    'categorias' => $categorias,
+                    'type'       => $type,
+                    'html'       => $html,
+                    'imagenes'   => $imagenes,
+                    'paginador'  => $imagenes->links('trebolnews.paginador-ajax')->render()
                 ));
             }
         ));
@@ -548,10 +553,14 @@ Route::get('términos-y-condiciones', array(
             function() {
                 $cant = empty(Auth::user()->preferences()->cant_banco) ? 10 : Auth::user()->preferences()->cant_banco;
 
-                $imagenes = Carpeta::find(1)->imagenes()->paginate($cant);
-
                 $type = empty(Auth::user()->preferences()->banco_view) ? 'grid' : Auth::user()->preferences()->banco_view;
                 $view = "banco-$type";
+
+                if(Session::has('search-term')) {
+                    $imagenes = Carpeta::find(1)->imagenes()->where('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')->paginate($cant);
+                } else {
+                    $imagenes = Carpeta::find(1)->imagenes()->paginate($cant);
+                }
 
                 $html = View::make("trebolnews.listas.$view", array(
                     'imagenes' => $imagenes
