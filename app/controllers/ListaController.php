@@ -67,7 +67,9 @@ class ListaController extends BaseController {
         if($validator->passes()) {
             Session::put('search-term', Input::get('search-term'));
 
-            $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')->paginate(5);
+            $cant = empty(Auth::user()->preferences()->cant_listas) ? 10 : Auth::user()->preferences()->cant_listas;
+
+            $listas = Auth::user()->listas()->where('nombre', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')->paginate($cant);
 
             $listas->setBaseUrl('lista-suscriptores');
 

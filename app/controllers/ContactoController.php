@@ -87,6 +87,8 @@ class ContactoController extends BaseController {
         if($validator->passes()) {
             Session::put('search-term', Input::get('search-term'));
 
+            $cant = empty(Auth::user()->preferences()->cant_suscriptores) ? 10 : Auth::user()->preferences()->cant_suscriptores;
+
             $lista = Lista::find(Input::get('id_lista'));
             $contactos = $lista->contactos()
                 ->where(function($q) {
@@ -94,7 +96,7 @@ class ContactoController extends BaseController {
                       ->orWhere('apellido', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%')
                       ->orWhere('email', 'like', '%' . Input::get('search-term', Session::get('search-term')) . '%');
                 })
-                ->paginate(5);
+                ->paginate($cant);
 
             $contactos->appends(array('lista' => $lista->id));
             $contactos->setBaseUrl('../lista-contactos');
