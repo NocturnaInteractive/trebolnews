@@ -112,11 +112,40 @@ class ListaController extends BaseController {
 
         if($validator->passes()) {
             $filename = Input::file('archivo')->getClientOriginalName();
+            $extlen = strlen(Input::file('archivo')->getClientOriginalExtension());
+            $name = substr($filename, 0, strlen($filename) - $extlen - 1);
             $path = storage_path() . '/tmp/';
             Input::file('archivo')->move($path, $filename);
             $data = File::get($path . '/' . $filename);
             $formatter = Formatter::make($data, Formatter::CSV);
-            var_dump($formatter->toArray());
+
+            $lista = Lista::where('id_usuario', '=', Auth::user()->id)
+                ->where('nombre', '=', $name)
+                ->first();
+
+            if(!$lista) {
+                $lista = Lista::create(array(
+                    'id_usuario' => Auth::user()->id,
+                    'nombre'     => $name
+                ));
+            }
+
+            foreach($formatter->toArray() as $contacto) {
+                Contacto::create(array(
+                    'id_lista' => $lista->id,
+                    'nombre'   => $contacto['nombre'],
+                    'apellido' => $contacto['apellido'],
+                    'email'    => $contacto['email'],
+                    'puesto'   => $contacto['puesto'],
+                    'empresa'  => $contacto['empresa'],
+                    'pais'     => $contacto['pais']
+                ));
+            }
+
+            return Response::json(array(
+                'status' => 'ok',
+                'route'  => route('lista', $lista->id)
+            ));
         } else {
             return Response::json(array(
                 'status' => 'error',

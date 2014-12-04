@@ -93,7 +93,7 @@
                         <ul class="opciones">
                             <li><a class="importarlista" href="#">OPCIONES</a>
                             <ul>
-                                <li><a href="#">Importar lista</a></li>
+                                <li><a href="#" popup="{{ url('popup/importar_lista') }}">Importar lista</a></li>
                                 @if(count($lista->contactos) > 0)
                                 <li><a id="btn_exportar" href="{{ action('ListaController@export', $lista->id) }}" target="_blank">Exportar lista</a></li>
                                 @endif

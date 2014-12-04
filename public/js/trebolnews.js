@@ -23,7 +23,7 @@ $(function(){
     $(document).ajaxStart(function(){ $('html').addClass('wait'); });
     $(document).ajaxStop(function(){ $('html').removeClass('wait'); });
 
-    $('[popup]').on('click', function (e) {
+    $('body').on('click', '[popup]', function (e) {
         e.preventDefault();
 
         $(this).on('click', function(e) {
@@ -42,7 +42,7 @@ $(function(){
         });
     });
 
-    $('[session]').on('click', function(e) {
+    $('body').on('click', '[session]', function(e) {
         e.preventDefault();
 
         var boton = $(this);
@@ -62,7 +62,7 @@ $(function(){
         });
     });
 
-    $('[preference]').on('click', function(e) {
+    $('body').on('click', '[preference]', function(e) {
         e.preventDefault();
 
         var boton = $(this);

@@ -28,7 +28,7 @@
                 <td>{{ $lista->updated_at->format('d/m/Y') }}</td>
                 <td>{{ count($lista->contactos) }}</td>
                 <td>
-                    <a class="descargarlista" href="#">
+                    <a class="descargarlista" href="{{ url('exportar', $lista->id) }}">
                         <img src="{{ asset('internas/imagenes/descargarlista.png') }}" alt="descargar lista" width="25" height="25">
                     </a>
                     <a class="editarcampam" href="#" popup="{{ url('popup/editar_lista' . '/' . $lista->id) }}">

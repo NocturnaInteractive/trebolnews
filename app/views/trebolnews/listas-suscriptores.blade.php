@@ -74,6 +74,15 @@
 
         $('#btn_exportar').on('click', function(e){
             e.preventDefault();
+
+            if($('.checkbox input:checked').length == 0) {
+                noty({
+                    text: 'Seleccione al menos una lista',
+                    layout: 'topCenter',
+                    timeout: 5000
+                });
+            }
+
             var url = $(this).attr('href');
             $('.checkbox input:checked').each(function(i,e){
                 var tab = window.open(url + '/' + $(e).val());
