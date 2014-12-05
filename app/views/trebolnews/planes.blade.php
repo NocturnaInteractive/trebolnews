@@ -321,12 +321,12 @@
                                     <label for="cantidad-meses-3"></label>
                                     <p for="cantidad-meses">3</p>
                                 </div>
-                                <div class="select-mes solo-envio" title="10% Descuento">
+                                <div class="select-mes solo-envio" title="25% Descuento">
                                     <input type="radio" id="cantidad-meses-6" name="cantidad-meses">
                                     <label for="cantidad-meses-6"></label>
                                     <p for="cantidad-meses">6</p>
                                 </div>
-                                <div class="select-mes solo-envio" title="10% Descuento">
+                                <div class="select-mes solo-envio" title="35% Descuento">
                                     <input type="radio" id="cantidad-meses-12" name="cantidad-meses">
                                     <label for="cantidad-meses-12"></label>
                                     <p for="cantidad-meses">12</p>
