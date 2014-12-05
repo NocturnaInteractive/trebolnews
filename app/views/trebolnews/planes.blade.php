@@ -305,6 +305,7 @@
                         <input type="checkbox" id="codigo-promocion" name="codigo-promocion">
                         <label for="codigo-promocion"></label>                       
                         <p>Si tenés un código promoción, indicarlo.</p>
+                        <input id="codigo-promocion-input" type="text" placeholder="CÓDIGO DE PROMOCIÓN">
                     </div>
                     
                     <!-- ENVIOS -->
@@ -320,12 +321,12 @@
                                     <label for="cantidad-meses-3"></label>
                                     <p for="cantidad-meses">3</p>
                                 </div>
-                                <div class="select-mes solo-envio">
+                                <div class="select-mes solo-envio" title="10% Descuento">
                                     <input type="radio" id="cantidad-meses-6" name="cantidad-meses">
                                     <label for="cantidad-meses-6"></label>
                                     <p for="cantidad-meses">6</p>
                                 </div>
-                                <div class="select-mes solo-envio" >
+                                <div class="select-mes solo-envio" title="10% Descuento">
                                     <input type="radio" id="cantidad-meses-12" name="cantidad-meses">
                                     <label for="cantidad-meses-12"></label>
                                     <p for="cantidad-meses">12</p>
@@ -377,7 +378,14 @@
     </section>
     <script>
   $(function() {
-     
+     $("#codigo-promocion").click(function(){
+         if($("#codigo-promocion").is(':checked')){
+             $('#codigo-promocion-input').fadeIn();
+         }else{
+             $('#codigo-promocion-input').fadeOut();
+         }
+         
+     });
     $(".radioplanes").find('label').click(function () {
         var tipoPlan = $(this).parent().find('input').attr('tipo-plan');
             //envio
