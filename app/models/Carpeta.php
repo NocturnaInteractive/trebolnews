@@ -5,7 +5,7 @@ class Carpeta extends Eloquent {
 	protected $table = 'carpetas';
 	protected $softDelete = true;
 
-	protected $fillable = array('id_usuario', 'nombre');
+	protected $fillable = array('id_usuario', 'nombre', 'descripcion');
 
 	public function usuario() {
 		return $this->belongsTo('Usuario', 'id_usuario', 'id');
