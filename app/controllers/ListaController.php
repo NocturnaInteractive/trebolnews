@@ -116,21 +116,11 @@ class ListaController extends BaseController {
             $name = substr($filename, 0, strlen($filename) - $extlen - 1);
             $path = storage_path() . '/tmp/';
             Input::file('archivo')->move($path, $filename);
-            $data = File::get($path . '/' . $filename);
-            $formatter = Formatter::make($data, Formatter::CSV);
+            $data = Excel::load($path . '/' . $filename);
 
-            $lista = Lista::where('id_usuario', '=', Auth::user()->id)
-                ->where('nombre', '=', $name)
-                ->first();
+            $lista = Lista::find(Input::get('id_lista'));
 
-            if(!$lista) {
-                $lista = Lista::create(array(
-                    'id_usuario' => Auth::user()->id,
-                    'nombre'     => $name
-                ));
-            }
-
-            foreach($formatter->toArray() as $contacto) {
+            foreach($data->all() as $contacto) {
                 Contacto::create(array(
                     'id_lista' => $lista->id,
                     'nombre'   => $contacto['nombre'],

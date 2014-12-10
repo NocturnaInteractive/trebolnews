@@ -87,7 +87,7 @@
                 <div class="infocont">
                     <div class="submenu">
                         <form id="frm-search" action="{{ action('ContactoController@search') }}" method="post">
-                            <input type="hidden" name="id_lista" value="{{ $lista->id }}" />
+                            <input type="hidden" id="id_lista" name="id_lista" value="{{ $lista->id }}" />
                             <input class="search" type="text" placeholder="BUSCAR" name="search-term" />
                         </form>
                         <ul class="opciones">

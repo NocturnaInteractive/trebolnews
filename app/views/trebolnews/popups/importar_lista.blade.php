@@ -11,6 +11,9 @@ $(function() {
         });
 
         $('#frm_importar_lista').ajaxSubmit({
+            data: {
+                id_lista: $('#id_lista').val()
+            },
             success: function(data) {
                 if(data.status == 'ok') {
                     window.location = data.route;
