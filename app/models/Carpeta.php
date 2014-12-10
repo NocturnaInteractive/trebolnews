@@ -2,17 +2,17 @@
 
 class Carpeta extends Eloquent {
 
-	protected $table = 'carpetas';
-	protected $softDelete = true;
+    protected $table = 'carpetas';
+    protected $softDelete = true;
 
-	protected $fillable = array('id_usuario', 'nombre', 'descripcion');
+    protected $fillable = array('id_usuario', 'nombre', 'descripcion');
 
-	public function usuario() {
-		return $this->belongsTo('Usuario', 'id_usuario', 'id');
-	}
+    public function usuario() {
+        return $this->belongsTo('Usuario', 'id_usuario', 'id');
+    }
 
-	public function imagenes() {
-		return $this->hasMany('Imagen', 'id_carpeta', 'id');
-	}
+    public function imagenes() {
+        return $this->hasMany('Imagen', 'id_carpeta', 'id');
+    }
 
 }
