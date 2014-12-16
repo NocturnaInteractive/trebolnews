@@ -5,7 +5,7 @@ require app_path().'/routes/popups.php';
 require app_path().'/routes/ajax.php';
 
 Route::get('aux', function(){
-    // some testing
+
 });
 
 Route::get('session', function(){
