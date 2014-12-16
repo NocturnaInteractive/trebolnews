@@ -139,7 +139,7 @@
                     </div><!--pfree-->
                     <div id="individual">
                         <h3>Plan Individual</h3>
-                        <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. S contrata la cantidad de envíos que necesite. No hay límite de tiempo ni vencimientos de la compra.<br> </p>
+                        <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. Se contrata la cantidad de envíos que necesite. No hay límite de tiempo ni vencimientos de la compra.<br> </p>
                         <div class="infoplanes">
                             <?php
                             $class = 'verde';
