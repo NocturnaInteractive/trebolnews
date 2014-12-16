@@ -412,7 +412,7 @@ Route::get('términos-y-condiciones', array(
                 $carpeta_basura       = Auth::user()->carpeta_basura();
                 $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
                 $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
-                $imagenes             = Auth::user()->imagenes()->where('id_carpeta', '!=', $carpeta_basura->id)->paginate($cant, array('*', 'imagenes.id', 'imagenes.nombre'));
+                $imagenes             = Auth::user()->imagenes()->where('id_carpeta', '!=', $carpeta_basura->id)->orderBy('imagenes.created_at', 'desc')->paginate($cant, array('*', 'imagenes.id', 'imagenes.nombre'));
                 $total                = count(Auth::user()->imagenes()->where('id_carpeta', '!=', $carpeta_basura->id)->get());
 
                 $imagenes->setBaseUrl('lista-libreria');
@@ -442,7 +442,7 @@ Route::get('términos-y-condiciones', array(
                 $type = empty(Auth::user()->preferences()->libreria_view) ? 'list' : Auth::user()->preferences()->libreria_view;
                 $view = "libreria-$type";
 
-                $imagenes = Auth::user()->imagenes()->paginate($cant, array('*', 'imagenes.nombre'));
+                $imagenes = Auth::user()->imagenes()->orderBy('imagenes.created_at', 'desc')->paginate($cant, array('*', 'imagenes.nombre'));
                 $imagenes->setBaseUrl('lista-libreria');
 
                 return Response::json(array(
@@ -468,7 +468,7 @@ Route::get('términos-y-condiciones', array(
                 $carpeta_basura       = Auth::user()->carpeta_basura();
                 $carpeta_mis_imagenes = Auth::user()->carpeta_mis_imagenes();
                 $carpetas             = Auth::user()->carpetas()->where('nombre', '!=', 'basura')->where('nombre', '!=', 'mis_imagenes')->get();
-                $imagenes             = $carpeta_seleccionada->imagenes()->paginate($cant);
+                $imagenes             = $carpeta_seleccionada->imagenes()->orderBy('created_at', 'desc')->paginate($cant);
                 $total                = count(Auth::user()->imagenes()->where('id_carpeta', '!=', $carpeta_basura->id)->get());
 
                 $imagenes->appends(array('carpeta' => $id_carpeta));
@@ -501,7 +501,7 @@ Route::get('términos-y-condiciones', array(
 
                 $carpeta_seleccionada = Carpeta::find(Input::get('carpeta'));
 
-                $imagenes = $carpeta_seleccionada->imagenes()->paginate($cant);
+                $imagenes = $carpeta_seleccionada->imagenes()->orderBy('created_at', 'desc')->paginate($cant);
 
                 $imagenes->appends(array('carpeta' => $carpeta_seleccionada->id));
                 $imagenes->setBaseUrl('../lista-carpeta');
