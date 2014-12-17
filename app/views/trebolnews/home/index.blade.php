@@ -187,7 +187,7 @@
                                     </div>
                                     <div class="servinter">
                                         <img src="{{ asset('imagenes/2serv.png') }}" width="164" height="80" alt="icono">
-                                        <h6>Banco de im&aacute;genes:</h6><p>Elige entre un abanico de im&aacute;genes.</p>
+                                        <h6>Banco de im&aacute;genes:</h6><p>Elige entre un abanico de im&aacute;genes free, para crear las mejores campa&ntilde;as.</p>
                                     </div>
                                     <div class="servinter">
                                         <img src="{{ asset('imagenes/3serv.png') }}" width="164" height="80" alt="icono">
@@ -221,11 +221,11 @@
                                     </div>
                                     <div class="servinter">
                                         <img src="{{ asset('imagenes/9serv.png') }}" width="164" height="80" alt="icono">
-                                        <h6>Reportes y estad&iacute;sticas:</h6><p>Monitorea constante-<br>mente los resultados de tu campa&ntilde;a. Mide su impacto con Google Analytics.</p>
+                                        <h6>Reportes y estad&iacute;sticas:</h6><p>Monitorea los resultados de tu campa&ntilde;a. Mide su impacto con nuestro poderoso sistema de reporte.</p>
                                     </div>
                                     <div class="servsin">
                                         <img src="{{ asset('imagenes/10serv.png') }}" width="164" height="80" alt="icono">
-                                        <h6>Soporte t&eacute;cnico:</h6><p>Ante cualquier emergencia o consulta, comun&iacute;cate con nuestro soporte t&eacute;cnico mediante el chat online.</p>
+                                        <h6>Soporte t&eacute;cnico:</h6><p>Ante cualquier emergencia o consulta, comun&iacute;cate con nuestro soporte t&eacute;cnico mediante el email support.</p>
                                     </div>
                                     <div class="cleaner"></div>
 
