@@ -48,12 +48,6 @@ Se proh&iacute;be el uso, la comercializaci&oacute;n y/o el alquiler de im&aacut
 Nocturna Comunicaci&oacute;n SRL y Trebolnews.com cumplen con la Ley de Protecci&oacute;n de Datos Personales, del Registro Nacional de Bases de Datos http://www.jus.gob.ar/datos-personales.aspx.<br>
 Nocturna Comunicaci&oacute;n SRL y Trebolnews.com ni ninguna empresa asociada a los directivos, socios o empleados poseen bases de datos propias. Tampoco brindamos listas a terceros para realizar env&iacute;os. Nocturna Comunicaci&oacute;n SRL yTrebolnews.com s&oacute;lo ofrecen la infraestructura de la plataforma, la tecnolog&iacute;a y el asesoramiento necesario para que nuestros clientes env&iacute;en emails con sus campa&ntilde;as a sus listas de contactos o a las plataformas de medios sociales.</p>
 
-<h3>Listas de contactos de los clientes</h3> 
-<p>Las listas de contactos de los clientes est&aacute;n ubicadas en servidores contratados por Nocturna Comunicaci&oacute;n SRL bajo estrictas medidas de seguridad y monitoreo constante. Por ning&uacute;n motivo, Nocturna Comunicaci&oacute;n SRL compartir&aacute; ninguna lista con terceros o con otros clientes en los mismos o en distintos servidores, a menos que la ley lo exija con la orden judicial correspondiente. Las listas de suscriptores como tambi&eacute;n la informaci&oacute;n de suscripci&oacute;n de los usuarios se registran en la plataforma Trebolnews.com una vez aceptados estos t&eacute;rminos y condiciones.<br>
-Nocturna Comunicaci&oacute;n SRL y Trebolnews.com cumplen con la Ley de Protecci&oacute;n de Datos Personales, del Registro Nacional de Bases de Datos http://www.jus.gob.ar/datos-personales.aspx.<br>
-Nocturna Comunicaci&oacute;n SRL y Trebolnews.com ni ninguna empresa asociada a los directivos, socios o empleados poseen bases de datos propias. Tampoco brindamos listas a terceros para realizar env&iacute;os. Nocturna Comunicaci&oacute;n SRL yTrebolnews.com s&oacute;lo ofrecen la infraestructura de la plataforma, la tecnolog&iacute;a y el asesoramiento necesario para que nuestros clientes env&iacute;en emails con sus campa&ntilde;as a sus listas de contactos o a las plataformas de medios sociales.</p>
-<p><strong>Nocturna Comunicación S.R.L</strong> - Cuit: 30-71304790-9 - Ciudad de Buenos Aires - Argentina. | consultas@trebolnews.com<br>
-
 
 </div><!--content_registro-->
 </div><!--container_registro-->
