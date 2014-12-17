@@ -8,7 +8,8 @@
 		"yangqi/htmldom": "dev-master",
 		"mercadopago/sdk": "dev-master",
 		"artdarek/oauth-4-laravel": "dev-master",
-		"maatwebsite/excel": "1.*"
+		"maatwebsite/excel": "1.*",
+		"soapbox/laravel-formatter": "2.x"
 	},
 	"autoload": {
 		"classmap": [
