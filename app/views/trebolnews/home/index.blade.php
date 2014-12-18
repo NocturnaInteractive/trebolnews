@@ -241,7 +241,7 @@
                                     <div id="tecno" class="porinfoespacio">
                                         <img src="{{ asset('imagenes/1porq.png') }}" width="80px" height="80px" alt="icono">
                                         <h5>TECNOLOG&Iacute;A</h5>
-                                        <p>Porque contamos con una herramienta online robusta y confiable, hosteada en servidores con filtros antivirus, que puedes utilizar en los distintos dispositivos, sean PC, tablets o smartphones.</p>
+                                        <p>Porque contamos con una herramienta online robusta y confiable, hosteada en servidores de extrema seguridad y con filtros antivirus paras que puedas hacer env&iacute;os con total tranquilidad.</p>
                                     </div>
                                     <div id="envio" class="porinfoespacio">
                                         <img src="{{ asset('imagenes/2porq.png') }}" width="80px" height="80px" alt="icono">
@@ -251,7 +251,7 @@
                                     <div id="soporte" class="porinfoespacio">
                                         <img src="{{ asset('imagenes/3porq.png') }}" width="80px" height="80px" alt="icono">
                                         <h5>SOPORTE T&Eacute;CNICO ONLINE</h5>
-                                        <p>Porque, dispones de un chat online que te guiar&aacute; paso a paso en lo que necesites para configurar o enviar tu campa&ntilde;a.</p>
+                                        <p>Porque, dispones de un mail suport online que te guiar&aacute; paso a paso en lo que necesites para configurar o enviar tu campa&ntilde;a.</p>
                                     </div>
                                     <div id="seguridad" class="porinfo">
                                         <img src="{{ asset('imagenes/4porq.png') }}" width="80px" height="80px" alt="icono">
@@ -313,7 +313,7 @@
 
                                 <div id="individual">
                         <h3>Plan Individual</h3>
-                        <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. Se contrata la cantidad de envíos que necesite. No hay límite de tiempo ni vencimientos de la compra.<br> </p>
+                        <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. Se contrata la cantidad de envíos que necesite.<br> </p>
                         <div class="infoplanes">
                             <?php
                             $class = 'verde';
@@ -343,7 +343,7 @@
                     </div><!--individual-->
                     <div id="mensuales">
                         <h3>Planes Mensuales</h3>
-                        <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos. Estos planes tienen una validez de 30 día para ser consumidos.</p>
+                        <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos.</p>
                         <div class="infoplanes">
                             <?php
                             $class = 'verde';
