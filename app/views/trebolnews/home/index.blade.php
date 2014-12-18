@@ -410,7 +410,7 @@
                                     <h6>TrebolNEWS</h6>
                                     <p>www.trebolnews.com - Copyright 2014</p>
                                 </div>
-                                <div id="foo_der"> <a href="{{ Config::get('trebolnews.social.pages.twitter') }}" class="twe">Seguinos por Tweter</a> <a href="{{ Config::get('trebolnews.social.pages.facebook') }}" class="face">Estamos en Facebook</a>
+                                <div id="foo_der"> <a href="{{ Config::get('trebolnews.social.pages.twitter') }}" class="twe">Seguinos por Twitter</a> <a href="{{ Config::get('trebolnews.social.pages.facebook') }}" class="face">Estamos en Facebook</a>
                                     <script>
                                     $(function(){
                                         $('#frm_suscripcion #button').one('click', suscripcion_handler);
