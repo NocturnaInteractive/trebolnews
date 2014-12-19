@@ -408,7 +408,7 @@
                             <div id="foo_text">
                                 <div id="foo_izq">
                                     <h6>TrebolNEWS</h6>
-                                    <p>www.trebolnews.com - Copyright 2014</p>
+                                    <p>www.trebolnews.com - Copyright 2015</p>
                                 </div>
                                 <div id="foo_der"> <a href="{{ Config::get('trebolnews.social.pages.twitter') }}" class="twe">Seguinos por Twitter</a> <a href="{{ Config::get('trebolnews.social.pages.facebook') }}" class="face">Estamos en Facebook</a>
                                     <script>

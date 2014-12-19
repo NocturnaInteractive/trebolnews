@@ -95,7 +95,7 @@
                                         <td>
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                 <tr><td><a href="{{ url('/') }}" style="display:block; height:22px; width:130px"><img src="{{ asset('internas/imagenes/logochiquitoemail.png') }}" width="130" height="22"></a></td></tr>
-                                                <tr><td><p style="margin:2px 0 0 0; font-size:12px;"><a href="{{ url('/') }}" style="text-decoration:none; color:#737F80">www.trebolnews.com</a> - Copyright 2013</p></td></tr>
+                                                <tr><td><p style="margin:2px 0 0 0; font-size:12px;"><a href="{{ url('/') }}" style="text-decoration:none; color:#737F80">www.trebolnews.com</a> - Copyright 2015</p></td></tr>
                                             </table>
                                         </td>
                                         <td width="44px">
