@@ -219,7 +219,7 @@ class CampaniaController extends BaseController {
 				'redes'         => Session::get('campania.redes') ? json_encode(Session::get('campania.redes')) : null,
 				'status'        => 'draft',
 				'envio'         => Session::get('campania.envio'),
-				'programacion'  => Session::get('campania.envio') == 'programado' ? Carbon::createFromFormat('d/m/Y H:i', Session::get('fecha') . ' ' . Session::get('hora')) : null,
+				'programacion'  => Session::get('campania.envio') == 'programmed' ? Carbon::createFromFormat('d/m/Y H:i', Session::get('fecha') . ' ' . Session::get('hora')) : null,
 				'notificacion'  => Session::get('campania.notificacion') == 'on' ? true : false
 			));
 			$campania->listas()->attach(Session::get('campania.listas'));
@@ -270,6 +270,8 @@ class CampaniaController extends BaseController {
 		} else {
 			return Redirect::to('/');
 		}
+
+
 	}
 
 	public function eliminar_campania($id) {

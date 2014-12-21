@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('CategoriaSeeder');
         $this->call('ImagenSeeder');
         $this->call('ListaSeeder');
+        $this->call('SuscripcionSeeder');
         $this->call('ContactoSeeder');
         $this->call('PlanSeeder');
         $this->call('TemplateSeeder');

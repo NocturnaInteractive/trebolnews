@@ -108,7 +108,7 @@
 
                                     <p class="mensaje_agregar_redes">(Para activar la rede social que desea, haz click en el icono y luego pega el link)</p>
 
-                                    <form id="rede_iconos">
+                                    
 
                                         <div class="bto_linkizq">
                                             <div class="iconosindividuales">
@@ -212,7 +212,6 @@
 
                                         <div class="cleaner"></div>     
 
-                                    </form>
                                 </div>
                             </div><!--fin agregar_redes-->
 

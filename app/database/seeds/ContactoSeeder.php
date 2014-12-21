@@ -10,7 +10,7 @@ class ContactoSeeder extends Seeder {
 			'id_lista' => 1,
 			'nombre' => 'Aníbal',
 			'apellido' => 'Moriconi',
-			'email' => 'amoriconi@gmail.com',
+			'email' => 'el.marto.mail@gmail.com',
 			'puesto' => 'Dueño',
 			'empresa' => 'Moriconi S.A.',
 			'pais' => 'Argentina'

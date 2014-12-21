@@ -18,6 +18,17 @@ class UsuarioSeeder extends Seeder {
 
 		Usuario::create(array(
 			'id' => 2,
+			'email' => 'el.marto.mail@gmail.com',
+			'password' => Hash::make('marto'),
+			'confirmed' => 1,
+			'availableMails' => 5000,
+			'suscriptionType' => 'member',
+			'nombre' => 'Martín',
+			'apellido' => 'Sacco'
+		));
+
+		Usuario::create(array(
+			'id' => 3,
 			'email' => 'usuario@gmail.com',
 			'password' => Hash::make('usuario'),
 			'confirmed' => 1,

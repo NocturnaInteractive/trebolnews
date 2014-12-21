@@ -16,7 +16,7 @@ class CrearCampanias extends Migration {
 			$table->string('remitente');
 			$table->string('email');
 			$table->string('respuesta');
-			$table->text('contenido');
+			$table->text('contenido')->nullable();
 			$table->string('redes')->nullable();
 			$table->string('status');
 			$table->string('envio');
