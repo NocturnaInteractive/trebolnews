@@ -186,7 +186,7 @@
 
 
 						<div id="opciones_pasos" >
-							<a id="guardarysalir" href="{{ route('campanias') }}" y="salir">GUARDAR Y SALIR</a>
+							<span ajax="{{ action('CampaniaController@guardar_campania') }}"><a id="guardarysalir" class="btn_guardar" href="{{ route('campanias') }}" y="salir">GUARDAR Y SALIR</a></span>
 							<ul>
 								<li><a href="{{ route('step4') }}" id="anterior">ANTERIOR</a></li>
 								<li ajax="{{ action('CampaniaController@guardar_campania') }}"><a href="{{ route('campanias') }}" id="siguiente" class="btn_guardar" y="confirmar">

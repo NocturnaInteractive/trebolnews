@@ -17,11 +17,13 @@
 
 	{{$generated}}
 
-
-	@if( $campaign->owner->suscriptionType === 'free' )
-	<footer>
-		<?php echo View::make('emails/non_suscriptor_footer'); ?>
-	</footer>
-	@endif
+	<div class="trebol_footer">
+		@if( $campaign->owner->suscriptionType === 'free' )
+			<?php echo View::make('emails/non_suscriptor_footer'); ?>
+		@endif
+		<div><a href="#">Unsuscribe</a></div>
+		<img src="http://www.trebolnews.com/campaigns/{{$campaign->id}}/report/pixel.gif">
+		<img src="http://upload.wikimedia.org/wikipedia/commons/c/ce/Transparent.gif">
+	</div>
 </body>
 </html>
