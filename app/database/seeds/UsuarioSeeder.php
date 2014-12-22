@@ -11,6 +11,7 @@ class UsuarioSeeder extends Seeder {
 			'password' => Hash::make('maimar'),
 			'confirmed' => 1,
 			'availableMails' => 5000,
+			'availablesuscriptors' => 300,
 			'suscriptionType' => 'member',
 			'nombre' => 'Martín',
 			'apellido' => 'Aimar'
@@ -22,6 +23,7 @@ class UsuarioSeeder extends Seeder {
 			'password' => Hash::make('marto'),
 			'confirmed' => 1,
 			'availableMails' => 5000,
+			'availablesuscriptors' => 300,
 			'suscriptionType' => 'member',
 			'nombre' => 'Martín',
 			'apellido' => 'Sacco'

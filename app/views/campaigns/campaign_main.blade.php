@@ -19,8 +19,6 @@
                     $('.tab-selector-3').trigger('click');
                 @elseif(Input::get('s') == 'enviadas')
                     $('.tab-selector-4').trigger('click');
-                @elseif(Input::get('s') == 'reporte')
-                    $('.tab-selector-5').trigger('click');
                 @endif
             @endif
 
@@ -70,8 +68,6 @@
             <label for="tab-3" class="tab-label-3">Programadas</label>
             <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4" />
             <label for="tab-4" class="tab-label-4">Enviadas</label>
-            <input id="tab-5" type="radio" name="radio-set" class="tab-selector-5" />
-            <label for="tab-5" class="tab-label-5">Reporte</label>
             <div class="clear-shadow"></div>
             <div class="content">
                 <div class="content-1">
@@ -95,6 +91,7 @@
                 <div class="content-2">
                     <h2>Borradores de campa&ntilde;as</h2>
                     <div class="infocont">
+                        @if(count(Auth::user()->campanias()->where('status', '=', 'draft')->get()) > 0 )
                         <div class="submenu">
                             <form>
                                 <input  class="search" type="text" name="" placeholder="BUSCAR" name="Search" />
@@ -123,11 +120,17 @@
                                 </tr>
                             @endforeach
                         </table>
+                        @else
+                        <p class="center">
+                            No cuentas con ninguna campaña en tus borradores.
+                        </p>
+                        @endif
                     </div> <!--infocont-->
                 </div>  <!--content-2-->
                 <div class="content-3">
                     <h2>Campa&ntilde;as Programadas</h2>
                     <div class="infocont">
+                        @if(count(Auth::user()->campanias()->where('status', '=', 'programmed')->get()) > 0 )
                         <div class="submenu">
                             <form>
                                 <input  class="search" type="text" name="" placeholder="BUSCAR" name="Search" />
@@ -154,11 +157,17 @@
                                 </tr>
                             @endforeach
                         </table>
+                        @else
+                        <p class="center">
+                            No cuentas con ninguna campaña programada.
+                        </p>
+                        @endif
                     </div> <!--infocont-->
                 </div> <!--content-3-->
                 <div class="content-4">
                     <h2>Campa&ntilde;as Enviadas</h2>
                     <div class="infocont">
+                        @if(count(Auth::user()->campanias()->where('status', '=', 'sent')->get()) > 0 )
                         <div class="submenu">
                             <form>
                                 <input  class="search" type="text" name="" placeholder="BUSCAR" name="Search" />
@@ -186,59 +195,14 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            </table>
+                        </table>
+                        @else
+                        <p class="center">
+                            Aún no has enviado ninguna campaña.
+                        </p>
+                        @endif
                     </div> <!--infocont-->
                 </div><!--content-4-->
-                <div class="content-5">
-                    <h2>Reporte de Campa&ntilde;as</h2>
-                    <div class="infocont">
-                        <table width="100%"  cellpadding="0" cellspacing="0" class="listacampanias">
-                            <tr class="primeralinea">
-                                <th scope="col" width="100px" >Tipo</th>
-                                <th scope="col" width="350px">Nombre de Campa&ntilde;a</th>
-                                <th scope="col" width="305px">Asunto</th>
-                                <th scope="col" width="255px">Fecha de Envio</th>
-                            </tr>
-                            <tr>
-                                <td>Clasica</td>
-                                <td>Newsletter de Noviembre 2013</td>
-                                <td>Noticias de Noviembre</td>
-                                <td>01 / 11 / 2013</td>
-                            </tr>
-                        </table>
-                        <table width="100%"  cellpadding="0" cellspacing="0" class="reportecampanias" style="margin-top:50px">
-                            <tr class="primeralineareport">
-                                <th scope="col" width="233.5px">Emails Enviados</th>
-                                <th scope="col" width="233.5px">Emails Rebotados</th>
-                                <th scope="col" width="233.5px">Emails Abiertos</th>
-                                <th scope="col" width="233.5px">Emails Clikeados</th>
-                            </tr>
-                            <tr class="reporteinfo">
-                                <td>959</td>
-                                <td>213</td>
-                                <td>183</td>
-                                <td>24</td>
-                            </tr>
-                        </table>
-                        <table width="100%"  cellpadding="0" cellspacing="0" class="reportecampanias" style="margin-top:50px">
-                            <tr style="height:20px"></tr>
-                            <tr class="primeralineareport">
-                                <th scope="col" width="186.8px">Fowards</th>
-                                <th scope="col" width="186.8px">Spam</th>
-                                <th scope="col" width="186.8px">Pa&iacute;ses</th>
-                                <th scope="col" width="186.8px">Ciudades</th>
-                                <th scope="col" width="186.8px">Browsers y OS</th>
-                            </tr>
-                            <tr class="reporteinfo">
-                                <td>48</td>
-                                <td>2</td>
-                                <td>12</td>
-                                <td>74</td>
-                                <td>4</td>
-                            </tr>
-                        </table>
-                    </div><!--infocont-->
-                </div><!--content-5-->
                 <div class="cleaner"></div>
             </div>
         </section>
