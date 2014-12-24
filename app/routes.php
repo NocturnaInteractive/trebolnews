@@ -285,16 +285,7 @@ Route::get('términos-y-condiciones', array(
     ), function() {
 
         // perfil e información del usuario
-        Route::get('perfil', array(
-            'as' => 'perfil',
-            function() {
-                $empresa = json_decode(Auth::user()->empresa);
-
-                return View::make('trebolnews/perfil', array(
-                    'empresa' => $empresa
-                ));
-            }
-        ));
+        Route::get('profile', array('as' => 'perfil', 'uses' => 'ProfileController@index'));
 
         // base listas de suscriptores
         Route::get('suscriptores', array(

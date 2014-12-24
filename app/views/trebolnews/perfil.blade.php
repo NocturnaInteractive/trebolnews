@@ -245,52 +245,45 @@
                 </div><!--infocont-->
             </div> <!--content-3-->
             <div class="content-4">
-                        <h2>Historial de compras</h2>
-                        <div class="infocont">
-                            <table width="100%"  cellpadding="0" cellspacing="0" class="perfiltabla">
-                                <tr class="primeraperfil">
-                                    <th scope="col" width="150px" class="datoperfil">Env&iacute;os</th>
-                                    <th scope="col" width="150px" class="datoperfil">Suscriptores</th>
-                                    <th scope="col" width="200px" class="datoperfil">Cantidades</th>
-                                    <th scope="col" width="200px" class="datoperfil">Costo U$S</th>
-                                    <th scope="col" width="200px" class="datoperfil">Fecha</th>
-                                    <th scope="col" width="200px" class="datoperfil">Ver detalle recibo</th>
-                                </tr>
-                                <tr class="primeraperfil">
-                                    <td class="datoperfil centerTable">x</td>
-                                    <td class="datoperfil centerTable"></td>
-                                    <td class="datoperfil">1500</td>
-                                    <td class="datoperfil">10</td>
-                                    <td class="datoperfil">2/9/2014</td>
-                                    <td class="datoperfil"><a href="#">Ver PDF</a></td>
-                                </tr>
-                                <tr class="primeraperfil">
-                                    <td class="datoperfil centerTable"></td>
-                                    <td class="datoperfil centerTable">x</td>
-                                    <td class="datoperfil">20000</td>
-                                    <td class="datoperfil">200</td>
-                                    <td class="datoperfil">4/9/2014</td>
-                                    <td class="datoperfil"><a href="#">Ver PDF</a></td>
-                                </tr>
-                                <tr class="primeraperfil">
-                                    <td class="datoperfil centerTable">x</td>
-                                    <td class="datoperfil centerTable"></td>
-                                    <td class="datoperfil">20000</td>
-                                    <td class="datoperfil">200</td>
-                                    <td class="datoperfil">4/9/2014</td>
-                                    <td class="datoperfil"><a href="#">Ver PDF</a></td>
-                                </tr>
-                                <tr class="primeraperfil">
-                                    <td class="datoperfil centerTable">x</td>
-                                    <td class="datoperfil centerTable"></td>
-                                    <td class="datoperfil">1500</td>
-                                    <td class="datoperfil">10</td>
-                                    <td class="datoperfil">2/9/2014</td>
-                                    <td class="datoperfil"><a href="#">Ver PDF</a></td>
-                                </tr>
-                            </table>
-                        </div>
+                <h2>Historial de compras</h2>
+
+                @if (count($payments) > 0)
+                    <div class="infocont">
+                        <table width="100%"  cellpadding="0" cellspacing="0" class="perfiltabla">
+                            <tr class="primeraperfil">
+                                <th scope="col" width="150px" class="datoperfil">Env&iacute;os</th>
+                                <th scope="col" width="150px" class="datoperfil">Suscriptores</th>
+                                <th scope="col" width="200px" class="datoperfil">Cantidades</th>
+                                <th scope="col" width="200px" class="datoperfil">Precio (U$S)</th>
+                                <th scope="col" width="200px" class="datoperfil">Fecha</th>
+                                <th scope="col" width="200px" class="datoperfil">Estado</th>
+                                <!--<th scope="col" width="200px" class="datoperfil">Ver detalle recibo</th>-->
+                            </tr>
+                            @foreach ($payments as $payment)
+                            <tr class="primeraperfil">
+                                <td class="datoperfil centerTable">
+                                    @if (!$payment->isSuscription)
+                                        x
+                                    @endif
+                                </td>
+                                <td class="datoperfil centerTable">
+                                    @if ($payment->isSuscription)
+                                        x
+                                    @endif
+                                </td>
+                                <td class="datoperfil">{{$payment->quantity}}</td>
+                                <td class="datoperfil">{{$payment->mount}}</td>
+                                <td class="datoperfil">{{$payment->created_at->format('d/m/Y')}}</td>
+                                <td class="datoperfil">{{$payment->status}}</td>
+                                <!--td class="datoperfil"><a href="#">Ver PDF</a></td-->
+                            </tr>
+                            @endforeach
+                        </table>
                     </div>
+                @else
+                    <p>Aún no has realizado ninguna compra.</p>
+                @endif  
+            </div>
         </div>
     </section>
 </div>

@@ -228,7 +228,10 @@ class CheckoutController extends BaseController {
     }
 
     private function updatePurchase($orden){
-        //incrementar la cantidad de envios del usuario por el numero que adquirio
+        $plan = Plan::find($orden->id_plan);
+        $user = User::find(Auth::user()->id);
+        $user->availableMails = $user->availableMails + $plan->envios;
+        $user->save();
     }
 
     public function payments(){
@@ -243,11 +246,16 @@ class CheckoutController extends BaseController {
     }
 
     public function test(){
-        $pago = Pago::all()->last();
+        $pago = new Pago;
+        $pago->id_orden      = 1;
+        $pago->id_usuario    = 2;
+        $pago->monto         = 439.00;
+        $pago->status        = 'approved';
+        $pago->save();
 
         if($pago)
             return ($pago);
         else
-            return 'cachai';
+            return 'El pago no fue generado';
     }
 }
