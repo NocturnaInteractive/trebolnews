@@ -49,6 +49,39 @@ class CheckoutController extends BaseController {
             /****************************
                   RECURRENT PAYMENTS
             ****************************/
+            $url = 'https://api.mercadolibre.com/currency_conversions/search?from=USD&to=ARS';
+
+             try{
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);     
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); 
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+                curl_setopt($ch, CURLOPT_SSLVERSION, 3);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                        'Content-Type: application/json'
+                    )
+                );
+
+                $json = curl_exec($ch);
+                curl_close($ch);
+
+                if($json){
+                    Log::info($json);     
+                    $currency_conversion = json_decode($json);
+                    $message = 'nothing found';
+                }else{
+                    return curl_error($ch);
+                }
+            
+            }catch(Exception $e){
+                Log::info('error on curl...'.$e->getMessage());
+                return 'problem on curl';
+            }
+
+            $ratio = (float) $currency_conversion->ratio;
+
             $preapproval_data = array(
                 "payer_email"           => $payer['email'],
                 "back_url"              => $back_urls['success'],
@@ -57,8 +90,8 @@ class CheckoutController extends BaseController {
                 "auto_recurring"        => array(
                     "frequency"             => 1,
                     "frequency_type"        => "months",
-                    "transaction_amount"    => $plan['unit_price'],
-                    "currency_id"           => "USD"
+                    "transaction_amount"    => number_format ( $plan['unit_price']*$ratio, 2),
+                    "currency_id"           => "ARS"
                 )
             );
 
