@@ -105,7 +105,7 @@
                     <div class="da-slide">
                         <h2>Desarrolla, gestiona y env&iacute;a tus campa&ntilde;as de email marketing.</h2>
                         <p>&iexcl;Simple y efectivo!<br>
-                            PROBAR GRATIS HASTA 500 ENV&Iacute;OS POR MES.</p>
+                            PROBAR GRATIS HASTA 500 ENV&Iacute;OS ;-)</p>
                             <div class="da-img"><img src="{{ asset('imagenes/banner1.png') }}" width="1280" height="400" /></div>
                         </div>
 
@@ -329,7 +329,7 @@
                                     
                                     <label></label>
                                 </div>
-                                <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{ $icon }}.png" width="18px" height="18px" alt="icono">{{ $plan->envios }}</h4>
+                                <h4><span class="hastaplan">Hasta</span>{{ $plan->envios }}</h4>
                                 <div class="cleaner"></div>
                                 <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
@@ -359,7 +359,7 @@
                                     <!--<input type="radio" id="radio{{ $i }}" name="opcion" tipo-plan="suscriptor" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" /> -->
                                     <label for="radio{{ $i }}"></label>
                                 </div>
-                                <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
+                                <h4><span class="hastaplan">Hasta</span>{{$plan->envios}}</h4>
                                 <div class="cleaner"></div>
                                 <h4 class="segundalinea_plan"><span class="hastaenv">Suscriptores</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
