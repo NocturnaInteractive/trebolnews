@@ -359,7 +359,7 @@
                                     <!--<input type="radio" id="radio{{ $i }}" name="opcion" tipo-plan="suscriptor" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" /> -->
                                     <label for="radio{{ $i }}"></label>
                                 </div>
-                                <h4><span class="hastaplan">Hasta</span>{{$plan->envios}} <span class="hastaenv">Suscriptores</span>.</h4>
+                                <h4><span class="hastaplan">Hasta</span> {{$plan->envios}} <span class="hastaenv">Suscriptores</span>.</h4>
                                 <!-- <div class="cleaner"></div> -->
                               <h4 class="segundalinea_plan"><span class="precioplan"><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
