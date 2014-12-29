@@ -297,9 +297,9 @@
                                         <div class="verdeinfo">
                                             <h4>
                                                 <span class="hastaplan">Hasta</span>
-                                                <img src="{{ asset('imagenes/plane.png') }}" width="18px" height="18px" alt="icono">500
+                                                500 Env&iacute;os
                                                 <div class="cleaner"></div>
-                                                <span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;Gratis</span>
+                                                <span class="hastaenv"> </span><span class="precioplan">Gratis</span>
                                             </h4>
                                         </div>
                                         <div class="grisinfo"><img class="xicon" src="{{ asset('imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
@@ -329,9 +329,9 @@
                                     
                                     <label></label>
                                 </div>
-                                <h4><span class="hastaplan">Hasta</span> {{ $plan->envios }} Envios</h4>
+                                <h4><span class="hastaplan">Hasta</span> {{ $plan->envios }} Envios.</h4>
                                <!-- <div class="cleaner"></div>-->
-                                <h4 class="segundalinea_plan"><span class="hastaenv"></span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
+                                <h4 class="segundalinea_plan"><span class="precioplan"><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
                             </div>
                             <?php
