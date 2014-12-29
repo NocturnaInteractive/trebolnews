@@ -329,9 +329,9 @@
                                     
                                     <label></label>
                                 </div>
-                                <h4><span class="hastaplan">Hasta</span>{{ $plan->envios }}</h4>
+                                <h4><span class="hastaplan">Hasta</span>{{ $plan->envios }} Envios</h4>
                                 <div class="cleaner"></div>
-                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
+                                <h4 class="segundalinea_plan"><span class="hastaenv"></span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
                             </div>
                             <?php
