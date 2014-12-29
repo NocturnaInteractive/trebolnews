@@ -324,7 +324,9 @@
                             ?>
                             <div class="{{ $class }}info single plan">
                                 <div class="radioplanes radioplanes_corto">
-                                    <input type="radio" name="opcion" tipo-plan="envio" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
+                                    
+                                    <!--<input type="radio" name="opcion" tipo-plan="envio" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />-->
+                                    
                                     <label></label>
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{ $icon }}.png" width="18px" height="18px" alt="icono">{{ $plan->envios }}</h4>
@@ -354,7 +356,7 @@
                             ?>
                             <div class="{{ $class }}info suscription plan">
                                 <div class="radioplanes radioplanes_corto">
-                                    <input type="radio" id="radio{{ $i }}" name="opcion" tipo-plan="suscriptor" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
+                                    <!--<input type="radio" id="radio{{ $i }}" name="opcion" tipo-plan="suscriptor" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" /> -->
                                     <label for="radio{{ $i }}"></label>
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
