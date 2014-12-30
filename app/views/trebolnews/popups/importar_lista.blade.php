@@ -16,7 +16,11 @@ $(function() {
             },
             success: function(data) {
                 if(data.status == 'ok') {
-                    window.location = data.route;
+                    $('#popup').fadeOut(400, function(){
+                        $('#popup').html('');
+                        $('#popup').html(data.popup);
+                        $('#popup').fadeIn(400);
+                    });
                 } else {
                     notys(data.validator);
                 }

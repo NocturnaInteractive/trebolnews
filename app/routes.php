@@ -333,7 +333,8 @@ Route::get('términos-y-condiciones', array(
 
         Route::any('list-search', 'ListaController@search');
         Route::get('exportar/{id?}', 'ListaController@export');
-        Route::post('importar', 'ListaController@import');
+        Route::post('importar1', 'ListaController@import');
+        Route::post('importar2', 'ListaController@do_import');
 
         // base listas de contactos
         Route::get('lista/{id_lista}', array(
