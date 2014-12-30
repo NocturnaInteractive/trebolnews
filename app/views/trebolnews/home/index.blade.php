@@ -312,8 +312,8 @@
                                 </div><!--pfree-->
 
                                 <div id="individual">
-                        <h3>Plan Individual</h3>
-                        <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. Se contrata la cantidad de envíos que necesite.<br> </p>
+                        <h3>Plan Mensual</h3>
+                        <p>Ideal para grandes campa&ntilde;as. Se abona s&oacute;lo la cantidad de env&iacute;os que necesita. Adem&aacute;s, no hay l&iacute;mite de env&iacute;os. Compra m&iacute;nima 3 meses.<br> </p>
                         <div class="infoplanes">
                             <?php
                             $class = 'verde';
@@ -344,8 +344,8 @@
                         </div><!--infoplanes-->
                     </div><!--individual-->
                     <div id="mensuales">
-                        <h3>Planes Mensuales</h3>
-                        <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos.</p>
+                        <h3>Planes Individual</h3>
+                        <p>Exclusivo paquete preparado para realizar env&iacute;os con poca frecuencia. Se contrata la cantidad de suscriptores que necesite para sus env&iacute;os.</p>
                         <div class="infoplanes">
                             <?php
                             $class = 'verde';

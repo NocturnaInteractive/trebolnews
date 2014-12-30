@@ -117,11 +117,12 @@
                 <div id="planes">
                     <div id="pfree">
                         <h3>Plan Gratuito</h3>
-                        <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os!</p>
+                        <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>
+                        No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os! </p>
                         <div class="infoplanes">
                             <div class="verdeinfo">
                                 <div class="radioplanes radioplanes_gratis">
-                                    <input type="radio" id="radio1" name="opcion" tipo-plan="gratis" />
+                                    <!--<input type="radio" id="radio1" name="opcion" tipo-plan="gratis" /> -->
                                     <label for="radio1"></label>
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">500</h4>
@@ -138,8 +139,8 @@
                         </div><!--infoplanes-->
                     </div><!--pfree-->
                     <div id="individual">
-                        <h3>Plan Individual</h3>
-                        <p>Exclusivo paquete preparado para realizar envíos con poca frecuencia. Se contrata la cantidad de envíos que necesite. No hay límite de tiempo ni vencimientos de la compra.<br> </p>
+                        <h3>Plan Mensual</h3>
+                        <p>Ideal para grandes campa&ntilde;as. Se abona s&oacute;lo la cantidad de env&iacute;os que necesita. Adem&aacute;s, no hay l&iacute;mite de env&iacute;os. Compra m&iacute;nima 3 meses.<br> </p>
                         <div class="infoplanes">
                             <?php
                             $class = 'verde';
@@ -168,8 +169,8 @@
                         </div><!--infoplanes-->
                     </div><!--individual-->
                     <div id="mensuales">
-                        <h3>Planes Mensuales</h3>
-                        <p>Ideal para grandes envíos de campañas. Se abona sólo la cantidad de suscriptores que necesita. Además, no hay límite de envíos. Estos planes tienen una validez de 30 día para ser consumidos.</p>
+                         <h3>Planes Individual</h3>
+                        <p>Exclusivo paquete preparado para realizar env&iacute;os con poca frecuencia. Se contrata la cantidad de suscriptores que necesite para sus env&iacute;os.</p>
                         <div class="infoplanes">
                             <?php
                             $class = 'verde';
