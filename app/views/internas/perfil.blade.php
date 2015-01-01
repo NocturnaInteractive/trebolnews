@@ -328,6 +328,9 @@ owurl7.style.display='none':owurl7.style.display='block';
 <div id="info_piecam">
 <a class="verpiedecam usarpie" href="#" onclick="ocultar_mostrar('mostrar_piecam'); return false;">Usar Pie por default</a>
 <a class="verpiedecam editarpiecam">Editar Pie</a>
+asdsad
+{{ Form::open(array('url' => 'foo/bar', 'files' => true)) }}
+asdasd
 
 <form id="formularioperfil"  action="" method="post">
 

@@ -101,14 +101,15 @@
                 precio('USD');
 
                 $.ajax({
-                    url: 'http://www.freecurrencyconverterapi.com/api/v2/convert',
-                    method: 'post',
+                    url: 'https://api.mercadolibre.com/currency_conversions/search',
+                    method: 'get',
                     dataType: "jsonp",
                     data:{
-                        q: 'USD_ARS',
+                        from: 'USD',
+                        to: 'ARS'
                     },
                     success: function(data){
-                        ARS_rate = data.results.USD_ARS.val;
+                        ARS_rate = data[2].ratio;
                     }
                 });
             });

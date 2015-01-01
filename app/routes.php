@@ -286,6 +286,8 @@ Route::get('términos-y-condiciones', array(
 
         // perfil e información del usuario
         Route::get('profile', array('as' => 'perfil', 'uses' => 'ProfileController@index'));
+        Route::post('profile/footer-form', array('uses' => 'ProfileController@footerForm'));
+        Route::get('profile/footer-form', array('uses' => 'ProfileController@footerForm'));
 
         // base listas de suscriptores
         Route::get('suscriptores', array(

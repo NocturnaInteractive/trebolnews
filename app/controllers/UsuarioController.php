@@ -28,6 +28,7 @@ class UsuarioController extends BaseController {
                 // 'newsletter'   => Input::get('newsletter') ? true : false,
                 'confirmation' => sha1(Input::get('email')),
                 // 'confirmed'    => true
+                'availableMails' => 500
             ));
 
             if(Input::get('newsletter')) {

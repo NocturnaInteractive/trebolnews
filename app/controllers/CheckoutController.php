@@ -264,6 +264,7 @@ class CheckoutController extends BaseController {
         $plan = Plan::find($orden->id_plan);
         $user = User::find(Auth::user()->id);
         $user->availableMails = $user->availableMails + $plan->envios;
+        $user->suscriptionType = 'member';
         $user->save();
     }
 

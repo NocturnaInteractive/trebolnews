@@ -7,6 +7,7 @@
 @stop
 
 @section('script')
+    
 
     <script>
         $(function(){
@@ -57,6 +58,26 @@
                 var input = $('input[name="' + campo.attr('editable') + '"]', $('#frm_perfil'));
                 input.val($.trim(campo.text()));
             });
+
+
+            function enviar_footer_handler(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                $('#formularioperfil').ajaxSubmit({
+                    success: function(data) {
+                        if(data.status == 'ok') {
+                           
+                        } else {
+                           
+                        }
+                    },
+                    complete: function() {
+                        $('#saveFooterForm').one('click', guardar_perfil_handler);
+                    }
+                });
+            }
+            $('#saveFooterForm').click(enviar_footer_handler);
         });
     </script>
 
@@ -146,6 +167,7 @@
                     </div>
                 </div> <!--infocont-->
             </div> <!--content-1-->
+
             <div class="content-2">
                 <h2>Edita la informaci&oacute;n de tu empresa</h2>
                 <div class="infocont">
@@ -211,36 +233,51 @@
                     </div>
                 </div><!--infocont-->
             </div> <!--content-2-->
+            
             <div class="content-3">
                 <h2>Edita tus env&iacute;os</h2>
                 <div class="infocont">
                     <h3>Pie de Campa&ntilde;a</h3>
-                    <p>S&oacute;lo para cuentas pagas. Las cuentas free no pueden editarse.</p>
+                    
                     <div id="configurar_piecam">
-                        <div id="mostrar_piecam">
-                            <a class="verpiedecam usarpie">Usar Pie por default</a>
-                            <a class="verpiedecam editarpiecam" href="#" onclick="ocultar_mostrar('mostrar_piecam'); return false;">Editar Pie</a>
-                            <div class="divparaocultar"></div>
-                        </div>
-                        <div id="info_piecam">
-                            <a class="verpiedecam usarpie" href="#" onclick="ocultar_mostrar('mostrar_piecam'); return false;">Usar Pie por default</a>
-                            <a class="verpiedecam editarpiecam">Editar Pie</a>
-                            <form id="formularioperfil"  action="" method="post">
-                                <input name="empresa" type="text" class="text" id="" placeholder="Empresa:" />
-                                <input name="logo" type="file" class="text der" id="file" placeholder="Logo" />
-                                <div class="cleaner"></div>
-                                <input name="email" type="text" class="text" id=""   placeholder="Email:" />
-                                <input name="direccion" type="text" class="text der" id="" placeholder="Direcci&oacute;n:" />
-                                <div class="cleaner"></div>
-                                <div id="botonesform" class="buttons">
-                                    <p class="indicacion">* Especificar medidas m&aacute;xima del logo en px.</p>
-                                    <input type="button" value="GUARDAR" name="submit" onClick="enviar(this.form)" id="saveForm" />
-                                    <input class="btn"  id="borrar" type="reset" value="BORRAR" name="Enviar2" />
+
+                        @if(Auth::user()->suscriptionType === 'free') 
+                            <p>S&oacute;lo para cuentas pagas. Los pie de campania de cuentas free no pueden editarse.</p>
+                        @else
+                            <div id="mostrar_piecam">
+                                <?php
+                                    $free_checked = '';
+                                    $paid_checked = '';
+                                    if(count(CampaignFooter::where('user_id',Auth::user()->id) ) > 0){
+                                        $paid_checked = 'checked';
+                                    } else {
+                                        $free_checked = 'checked';
+                                    }
+
+                                ?>
+                                <div><input name="profilefooter" id="free_footer" type="radio" value="free" {{$free_checked}} /><label for="free_footer">Free</label></div>
+                                <div><input name="profilefooter" id="paid_footer" type="radio" value="paid" {{$paid_checked}} /><label for="paid_footer">Pago</label></div>
+                            </div>
+
+                            <div id="paid_footer_wrapper" <?php if($free_checked == 'checked'){ ?>  style="display:none;" <?php } ?>  >
+                                
+                                {{ Form::open(array('url' => 'profile/footer-form', 'files' => true, 'id'=>'formularioperfil')) }}
+                                    <input name="name" type="text" class="text" id="" placeholder="Empresa:" />
+                                    {{ Form::file('image', array( 'class' => 'text der', 'placeholder' => 'Logo' )) }}
                                     <div class="cleaner"></div>
-                                </div>
-                            </form>
-                            <div class="cleaner"></div>
-                        </div><!--info_piecam-->
+                                    <input name="email" type="text" class="text" id=""   placeholder="Email:" />
+                                    <input name="address" type="text" class="text der" id="" placeholder="Direcci&oacute;n:" />
+                                    <div class="cleaner"></div>
+                                    <div id="botonesform" class="buttons">
+                                        <input type="button" value="GUARDAR" name="submit" id="saveFooterForm" />
+                                        <div class="cleaner"></div>
+                                    </div>
+                                {{ Form::close() }}
+                                <div class="cleaner"></div>
+                            </div><!--info_piecam-->
+
+                        @endif
+
                     </div><!--configurar_piecam-->
                 </div><!--infocont-->
             </div> <!--content-3-->
@@ -287,5 +324,5 @@
         </div>
     </section>
 </div>
-
+{{ HTML::script('js/sections/profile.js') }}
 @stop
