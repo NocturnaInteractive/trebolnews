@@ -52,7 +52,7 @@
                 <h2>Soporte</h2>
                 <div class="infocont">
                     <div id="consulta">
-                    <h3>Dejanos tu consulta</h3>
+                    <h3>Dejanos tu consulta. Nos comunicaremos a la brevedad.</h3>
                     <form id="form_contacto" action="{{ action('ExtraController@guardar_comentario') }}" method="post">
                         <input type="hidden" name="nombre" value="{{ Auth::user()->nombre ?: 'N/A' }}" />
                         <input type="hidden" name="apellido" value="{{ Auth::user()->apellido ?: 'N/A' }}" />

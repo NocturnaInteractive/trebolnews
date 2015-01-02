@@ -188,7 +188,7 @@ Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viver
 
 
 <div id="consulta">
-      <h3>Dejanos tu consulta</h3>
+      <h3>Dejanos tu consulta. Nos comunicaremos a la brevedad. </h3>
       <form id="form_contacto"  action="soporte.php" method="post">
 
 		<textarea name="comentario" class="textarea" placeholder="Consulta:"></textarea>
