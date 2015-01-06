@@ -80,7 +80,7 @@
                             <img src="{{ asset('internas/imagenes/nuevacampana.png') }}" width="180" height="155" alt="nueva campa&ntilde;a">
                             <p>Inicia el proceso, sigue el paso a paso y personaliza tu primer env&iacute;o.</p>
                         </a>
-                        <a id="tutorial" href="#">
+                        <a id="tutorial" target="_blank" href="{{ asset('tutoriales/HELP!_Tutoriales.pdf') }}">
                             <h4>Tutoriales</h4>
                             <img src="{{ asset('internas/imagenes/tutoriales.png') }}" width="180" height="155" alt="tutoriales">
                             <p>Aprende c&oacute;mo crear tu primera <br>campa&ntilde;a.</p>
