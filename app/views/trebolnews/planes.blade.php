@@ -124,7 +124,7 @@
                             <div class="verdeinfo">
                                 <div class="radioplanes radioplanes_gratis">
                                     <!--<input type="radio" id="radio1" name="opcion" tipo-plan="gratis" /> -->
-                                    <label for="radio1"></label>
+                                    <!-- <label for="radio1"></label> -->
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">500</h4>
                                 <div class="cleaner"></div>
