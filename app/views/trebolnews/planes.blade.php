@@ -207,8 +207,8 @@
                     </div>
                 <div class="formasdepago">
                     <h4>ELIGE LA FORMA DE PAGO</h4>
-                    <div class="select-forma-de-pago">
-                        <input type="radio" id="tarjeta-de-credito" name="forma-de-pago">
+                    <div class="select-forma-de-pago active">
+                        <input checked type="radio" id="tarjeta-de-credito" name="forma-de-pago">
                         <label for="tarjeta-de-credito"></label>
                         <p for="tarjeta-de-credito">Compra con tarjeta</p>
                     </div>
@@ -335,6 +335,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--
                         <div class="content-titulo">
                             <h4>DETALLE FACTURA</h4>
                         </div>
@@ -360,7 +361,7 @@
                                 <div><p><b>Total:</b></p></div>
                                 <div><p> $125.00</p></div>
                             </div>
-                            
+                            -->
                         </div>
                         
                     </div>
