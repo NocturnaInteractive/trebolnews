@@ -975,6 +975,9 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     border-color: #737f80;
     border-style: solid;
 }
+.ui-helper-hidden-accessible div:last-child{
+    display: none;
+}
 .formasdepago .content-descripcion-compra .fila:last-child{
     border:0;
     background-color: #17a387;

@@ -360,6 +360,22 @@
                                     <label for="cantidad-meses-12"></label>
                                     <p for="cantidad-meses">12</p>
                                 </div>
+                                <script>
+                                $( document ).tooltip({
+      position: {
+        my: "center bottom-10",
+        at: "center top",
+        using: function( position, feedback ) {
+          $( this ).css( position );
+          $( "<div>" )
+            .addClass( "arrow" )
+            .addClass( feedback.vertical )
+            .addClass( feedback.horizontal )
+            .appendTo( this );
+        }
+      }
+    });
+                                    </script>
                             </div>
                         </div>
                         <div class="detalle-factura">
@@ -470,21 +486,9 @@
             }
             
     });
-    $( document ).tooltip({
-      position: {
-        my: "center bottom-10",
-        at: "center top",
-        using: function( position, feedback ) {
-          $( this ).css( position );
-          $( "<div>" )
-            .addClass( "arrow" )
-            .addClass( feedback.vertical )
-            .addClass( feedback.horizontal )
-            .appendTo( this );
-        }
-      }
-    });
+    
   });
+  
   </script>
 </div><!--conteiner-->
 
