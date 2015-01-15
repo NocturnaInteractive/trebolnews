@@ -371,7 +371,7 @@
                                     <div><p>Subtotal</p></div>
                                     <div><p> $125.00</p></div>
                                 </div>
-                                <div class="fila solo-susrciptor">
+                                <div class="fila solo-suscriptor">
                                     <div><p>Paquete</p></div>
                                     <div><p>Hasta</p></div>
                                     <div><p>3.000</p></div>
