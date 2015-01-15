@@ -982,6 +982,14 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 .formasdepago .content-descripcion-compra .fila:last-child p{
     color:#fff;
 }
+.formasdepago .content-descripcion-compra .fila:first-child{
+    border:0;
+    background-color: #fff;
+}
+.formasdepago .content-descripcion-compra .fila:first-child p{
+    color:#737f80;
+}
+
 .formasdepago .content-descripcion-compra .fila div{
     position: relative;
     float: left;

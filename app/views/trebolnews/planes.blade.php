@@ -272,11 +272,14 @@
                     
                     
                     <script>
-                                $(document).ready(function(){
-                                    $('.tarjeta').show();
-                                $('.transferencia').hide();
-                                });
-                       
+                        $(document).ready(function(){
+                            $('.tarjeta').show();
+                            $('.transferencia').hide();
+                        });
+                       function reiniciarForm(){
+                           $('.tarjeta').show();
+                            $('.transferencia').hide();
+                       }
                         $('#select-tipo-factura').find('a').click(function(e){
                             e.preventDefault();
                             
@@ -395,6 +398,24 @@
                                 </div>
                             </div>  
                         </div>
+                        <div class="detalle-factura-envios-tarjeta solo-envio tarjeta">
+                            <div class="content-titulo solo-envio">
+                                <h4>DETALLE FACTURA</h4>
+                            </div>
+                            <div class="content-descripcion-compra solo-envio">
+                                
+                                <div class="fila solo-envio" style="width: 99%;">
+                                    <div><p>Paquete</p></div>
+                                    <div><p class="decripcion-plan">3 meses 10% Desc</p></div>
+                                    <div><p>1.500</p></div>
+                                    <div><p>Subtotal</p></div>
+                                    <div><p> $125.00</p></div>
+                                </div>
+                                
+                               
+                               
+                            </div>  
+                        </div>
                         
                     </div>
                     
@@ -418,6 +439,7 @@
   $(function() {
      $(".select-mes").click(function(){
          $('.decripcion-plan').html($(this).attr('descripcion'));
+         
      });
      $("#codigo-promocion").click(function(){
          if($("#codigo-promocion").is(':checked')){
@@ -429,7 +451,8 @@
      });
     $(".radioplanes").find('label').click(function () {
          $('.detalle-factura').hide();
-        var tipoPlan = $(this).parent().find('input').attr('tipo-plan');
+         reiniciarForm();
+            var tipoPlan = $(this).parent().find('input').attr('tipo-plan');
             //envio
             //suscriptor
             if (tipoPlan == 'envio'){
