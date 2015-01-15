@@ -408,8 +408,8 @@
                                     <div><p>Paquete</p></div>
                                     <div><p class="decripcion-plan">3 meses 10% Desc</p></div>
                                     <div><p>1.500</p></div>
-                                    <div><p>Subtotal</p></div>
-                                    <div><p> $125.00</p></div>
+                                    <div><p style="text-align: right;">Subtotal</p></div>
+                                    <div><p style="text-align: right;"> $125.00</p></div>
                                 </div>
                                 
                                
