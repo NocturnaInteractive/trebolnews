@@ -342,17 +342,17 @@
                                 <p>SELECCIONAR CANTIDAD DE MESES</p>
                             </div>
                             <div class="meses">
-                                <div class="select-mes solo-envio" title="10% Descuento">
-                                    <input type="radio" id="cantidad-meses-3" name="cantidad-meses">
+                                <div class="select-mes solo-envio" title="10% Descuento" descripcion="3 meses 10% Desc">
+                                    <input checked type="radio"  id="cantidad-meses-3" name="cantidad-meses">
                                     <label for="cantidad-meses-3"></label>
                                     <p for="cantidad-meses">3</p>
                                 </div>
-                                <div class="select-mes solo-envio" title="25% Descuento">
+                                <div class="select-mes solo-envio" title="25% Descuento" descripcion="6 meses 25% Desc">
                                     <input type="radio" id="cantidad-meses-6" name="cantidad-meses">
                                     <label for="cantidad-meses-6"></label>
                                     <p for="cantidad-meses">6</p>
                                 </div>
-                                <div class="select-mes solo-envio" title="35% Descuento">
+                                <div class="select-mes solo-envio" title="35% Descuento" descripcion="12 meses 30% Desc">
                                     <input type="radio" id="cantidad-meses-12" name="cantidad-meses">
                                     <label for="cantidad-meses-12"></label>
                                     <p for="cantidad-meses">12</p>
@@ -366,7 +366,7 @@
                             <div class="content-descripcion-compra">
                                 <div class="fila solo-envio">
                                     <div><p>Paquete</p></div>
-                                    <div><p>3 meses 10% Desc</p></div>
+                                    <div><p class="decripcion-plan">3 meses 10% Desc</p></div>
                                     <div><p>1.500</p></div>
                                     <div><p>Subtotal</p></div>
                                     <div><p> $125.00</p></div>
@@ -416,6 +416,9 @@
     </section>
     <script>
   $(function() {
+     $(".select-mes").click(function(){
+         $('.decripcion-plan').html($(this).attr('descripcion'));
+     });
      $("#codigo-promocion").click(function(){
          if($("#codigo-promocion").is(':checked')){
              $('#codigo-promocion-input').fadeIn();
