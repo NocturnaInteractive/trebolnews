@@ -217,7 +217,8 @@
                         <label for="transferencia-bancaria"></label>
                         <p>Transferencia bancaria</p>
                     </div>
-                    <p class="aclaracion-text">Los paquetes que compres con tarjeta de crédito, se activarán inmeditamente en tu cuenta. Los mismos tienen una validez de 30 días para ser utilizados. Muchos éxitos en tus campañas!!!</p>
+                    <p class="aclaracion-text tarjeta">Los paquetes que compres con tarjeta de crédito, se activarán inmeditamente en tu cuenta. Los mismos tienen una validez de 30 días para ser utilizados. Muchos éxitos en tus campañas!!!</p>
+                    <p class="aclaracion-text transferencia">Al enviar tus datos te llegará un email con la factura y datos para realizar la transferencia bancaria.<br>Envíanos el comprobante de transferencia para poder activar tu compra. Muchos éxitos!</p>
                     
                     <div class="transferencia-bancaria">
                         <div class="content-select">
@@ -271,6 +272,8 @@
                     
                     
                     <script>
+                       $('.tarjeta').show();
+                                $('.transferencia').hide();
                         $('#select-tipo-factura').find('a').click(function(e){
                             e.preventDefault();
                             
@@ -278,6 +281,7 @@
                         $('#select-tipo-factura').find('.boton').hover(function(e){
                             $('#select-tipo-factura').find('.opciones-select').css('pointer-events', 'all');
                         });
+                        
                         $('#select-tipo-factura').find('.opciones-select').find('a').click(function(e){
                             e.preventDefault();
                             $('#select-tipo-factura').find('.boton').html($(this).html());
@@ -285,14 +289,31 @@
                            
                             $('.forms-afip').hide();
                             $('.'+this.getAttribute('tipo')).fadeIn();
-                            
+                            if(this.getAttribute('tipo') == 'consumidor-final'){
+                                $('.consumidor-final').show();
+                                $('.responsable-inscripto').hide();
+                                $('.detalle-factura').show();
+                            }else if(this.getAttribute('tipo') == 'responsable-inscripto'){
+                                $('.consumidor-final').hide();
+                                $('.responsable-inscripto').show();
+                                $('.detalle-factura').show();
+                            }
                         });
+                        
+                        
                         $(".select-forma-de-pago").find('input').change(function() {
                             
                             if(this.getAttribute('id') == 'transferencia-bancaria'){
                                 $('.transferencia-bancaria').fadeIn();
+                                $('.detalle-factura').hide();
+                                $('.tarjeta').hide();
+                                $('.transferencia').show();
+                                
                             }else{
                                 $('.transferencia-bancaria').fadeOut();
+                                $('.detalle-factura').hide();       
+                                $('.tarjeta').show();
+                                $('.transferencia').hide();
                             }
                             $(".select-forma-de-pago").removeClass('active');
                             if(this.checked) {
@@ -335,33 +356,33 @@
                                 </div>
                             </div>
                         </div>
-                        <!--
-                        <div class="content-titulo">
-                            <h4>DETALLE FACTURA</h4>
-                        </div>
-                        <div class="content-descripcion-compra">
-                            <div class="fila">
-                                <div><p>Paquete</p></div>
-                                <div><p>3 meses 10% Desc</p></div>
-                                <div><p>1.500</p></div>
-                                <div><p>Subtotal</p></div>
-                                <div><p> $125.00</p></div>
+                        <div class="detalle-factura">
+                            <div class="content-titulo">
+                                <h4>DETALLE FACTURA</h4>
                             </div>
-                            <div class="fila">
-                                <div><p>Inpuestos</p></div>
-                                <div><p></p></div>
-                                <div><p></p></div>
-                                <div><p>IVA 21%</p></div>
-                                <div><p> $125.00</p></div>
-                            </div>
-                            <div class="fila">
-                                <div><p></p></div>
-                                <div><p></p></div>
-                                <div><p></p></div>
-                                <div><p><b>Total:</b></p></div>
-                                <div><p> $125.00</p></div>
-                            </div>
-                            -->
+                            <div class="content-descripcion-compra">
+                                <div class="fila">
+                                    <div><p>Paquete</p></div>
+                                    <div><p>3 meses 10% Desc</p></div>
+                                    <div><p>1.500</p></div>
+                                    <div><p>Subtotal</p></div>
+                                    <div><p> $125.00</p></div>
+                                </div>
+                                <div class="fila responsable-inscripto">
+                                    <div><p>Inpuestos</p></div>
+                                    <div><p></p></div>
+                                    <div><p></p></div>
+                                    <div><p>IVA 21%</p></div>
+                                    <div><p> $125.00</p></div>
+                                </div>
+                                <div class="fila">
+                                    <div><p></p></div>
+                                    <div><p></p></div>
+                                    <div><p></p></div>
+                                    <div><p><b>Total:</b></p></div>
+                                    <div><p> $125.00</p></div>
+                                </div>
+                            </div>  
                         </div>
                         
                     </div>
@@ -390,6 +411,7 @@
          
      });
     $(".radioplanes").find('label').click(function () {
+         $('.detalle-factura').hide();
         var tipoPlan = $(this).parent().find('input').attr('tipo-plan');
             //envio
             //suscriptor
