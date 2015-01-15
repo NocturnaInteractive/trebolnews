@@ -272,8 +272,11 @@
                     
                     
                     <script>
-                       $('.tarjeta').show();
+                                $(document).ready(function(){
+                                    $('.tarjeta').show();
                                 $('.transferencia').hide();
+                                });
+                       
                         $('#select-tipo-factura').find('a').click(function(e){
                             e.preventDefault();
                             
@@ -361,10 +364,17 @@
                                 <h4>DETALLE FACTURA</h4>
                             </div>
                             <div class="content-descripcion-compra">
-                                <div class="fila">
+                                <div class="fila solo-envio">
                                     <div><p>Paquete</p></div>
                                     <div><p>3 meses 10% Desc</p></div>
                                     <div><p>1.500</p></div>
+                                    <div><p>Subtotal</p></div>
+                                    <div><p> $125.00</p></div>
+                                </div>
+                                <div class="fila solo-susrciptor">
+                                    <div><p>Paquete</p></div>
+                                    <div><p>Hasta</p></div>
+                                    <div><p>3.000</p></div>
                                     <div><p>Subtotal</p></div>
                                     <div><p> $125.00</p></div>
                                 </div>
@@ -390,7 +400,10 @@
                     <!-- END ENVIOS -->
                     
                     <div class="bto_planes">
-                    <a href="#" id="comprar">COMPRAR AHORA</a>
+                    <a href="#" id="comprar">
+                        <span class="tarjeta">COMPRAR AHORA</span>
+                        <span class="transferencia">ENVIAR AHORA</span>
+                    </a>
                     <div class="cleaner"></div>
                     </div>
                     
