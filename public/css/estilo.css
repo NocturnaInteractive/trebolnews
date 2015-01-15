@@ -270,6 +270,16 @@ h2 {font-size:30px; color:#FFF; font-weight:normal !important; margin:0; font-fa
 #planes .verdeinfo h4{padding-bottom: 2px !important;}
 #planes .grisinfo h4{padding-bottom: 2px !important;}
 #planes .segundalinea_plan{padding-top: 0 !important;}
+#planes .content-medios-de-pago{
+    position: relative;
+    float: left;
+    width: 100%;
+}
+#planes .content-medios-de-pago img{
+    display: table;
+    margin: 13px auto;
+    padding-left: 35px;
+}
 
 #planes .content-comprar-ahora{width: 100%; position: relative; float: left;}
 #planes .hastaplan { font-weight:normal; font-size:18px;}

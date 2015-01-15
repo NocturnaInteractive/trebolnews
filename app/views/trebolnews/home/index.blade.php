@@ -374,7 +374,9 @@
 
                         </div><!--infoplanes-->
                     </div><!--mensuales-->
-
+<div class="content-medios-de-pago">
+                        <img src="imagenes/formasdepago2.png" width="934" height="80" alt="formas de pago">
+                    </div>
                                 <div class="content-comprar-ahora">
                                         <div class="bot">
                                             <a href="{{ route('registro') }}" class="botondecompra">COMPRAR AHORA</a>
@@ -382,6 +384,7 @@
                                         </div>
                                     </div>
                                 <div class="cleaner"></div>
+                                
                             </div><!--planes-->
 
                             <div id="planesexclusivos">
