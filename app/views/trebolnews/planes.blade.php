@@ -383,34 +383,34 @@
                                 <h4>DETALLE FACTURA</h4>
                             </div>
                             <div class="content-descripcion-compra">
-                                <div class="fila solo-envio">
+                                <div class="fila solo-envio" style="width: 99% !important;">
                                     <div><p>Paquete</p></div>
                                     <div><p class="decripcion-plan">3 meses 10% Desc</p></div>
-                                    <div><p>1.500</p></div>
-                                    <div><p>Subtotal</p></div>
-                                    <div><p> $125.00</p></div>
+                                    <div><p style="text-align: right;">Envios 1.500</p></div>
+                                    <div><p style="text-align: right;">Subtotal</p></div>
+                                    <div><p style="text-align: right;"> $125.00</p></div>
                                 </div>
                                 
                                 <div class="fila solo-suscriptor">
                                     <div><p>Paquete</p></div>
                                     <div><p>Hasta</p></div>
                                     <div><p>3.000</p></div>
-                                    <div><p>Subtotal</p></div>
-                                    <div><p> $125.00</p></div>
+                                    <div><p style="text-align: right;">Subtotal</p></div>
+                                    <div><p style="text-align: right;"> $125.00</p></div>
                                 </div>
                                 <div class="fila responsable-inscripto">
                                     <div><p>Inpuestos</p></div>
                                     <div><p></p></div>
                                     <div><p></p></div>
-                                    <div><p>IVA 21%</p></div>
-                                    <div><p> $125.00</p></div>
+                                    <div><p style="text-align: right;">IVA 21%</p></div>
+                                    <div><p style="text-align: right;"> $125.00</p></div>
                                 </div>
                                 <div class="fila">
                                     <div><p></p></div>
                                     <div><p></p></div>
                                     <div><p></p></div>
-                                    <div><p><b>Total:</b></p></div>
-                                    <div><p> $125.00</p></div>
+                                    <div><p style="text-align: right;"><b>Total:</b></p></div>
+                                    <div><p style="text-align: right;"> $125.00</p></div>
                                 </div>
                             </div>  
                         </div>
@@ -423,7 +423,7 @@
                                 <div class="fila solo-envio" style="width: 99% !important;">
                                     <div><p>Paquete</p></div>
                                     <div><p class="decripcion-plan">3 meses 10% Desc</p></div>
-                                    <div><p style="text-align: center;">1.500</p></div>
+                                    <div><p style="text-align: right;">Envios 1.500</p></div>
                                     <div><p style="text-align: right;">Subtotal</p></div>
                                     <div><p style="text-align: right;"> $125.00</p></div>
                                 </div>
