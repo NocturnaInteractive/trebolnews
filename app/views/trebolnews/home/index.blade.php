@@ -331,7 +331,7 @@
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span> {{ $plan->envios }} Envios.</h4>
                                <!-- <div class="cleaner"></div>-->
-                                <h4 class="segundalinea_plan"><span class="precioplan"><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
+                               <h4 class="segundalinea_plan"><span class="precioplan"><span class="price" data-price="{{ $plan->precio }}"><span class="moneda"></span>{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
                             </div>
                             <?php
@@ -361,7 +361,7 @@
                                 </div>
                                 <h4><span class="hastaplan">Hasta</span> {{$plan->envios}} <span class="hastaenv">Suscriptores</span>.</h4>
                                 <!-- <div class="cleaner"></div> -->
-                              <h4 class="segundalinea_plan"><span class="precioplan"><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
+                              <h4 class="segundalinea_plan"><span class="precioplan"><span class="price" data-price="{{ $plan->precio }}"><span class="moneda"></span>{{ $plan->precio }}</span></span></h4>
                                 <div class="cleaner"></div>
                             </div>
                             <?php
