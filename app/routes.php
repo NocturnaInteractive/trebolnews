@@ -92,6 +92,12 @@ Route::group(array(
         'uses' => 'MailController@test'
     ));
 
+    Route::get('mail/demo', array(
+        function() {
+            return View::make('emails/demo');
+        }
+    ));
+
     Route::get('campaign/step1', array(
         'as' => 'nueva_campania',
         function() {

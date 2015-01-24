@@ -162,7 +162,7 @@
 									<div class="cleaner"></div>
 								</div><!--tiyulos_resumen-->
 								<table cellpadding="0" cellspacing="0" id="campania_resumen">
-									<tr><td>{{ Session::get('campania.contenido') }}</td></tr>
+									<tr><td><iframe style="width:100%;height:100%;" src="/mail/demo"></iframe></td></tr>
 								</table>
 							</div><!--contenido_resumen-->
 

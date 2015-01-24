@@ -221,6 +221,7 @@ class CheckoutController extends BaseController {
                 $message = $this->setPayment($orden,$payment_status);
                 //gives to the user the purchased product
                 $this->updatePurchase($orden);
+                $this->sendPaymentEmail($orden);
                 break;
             case 'pending':
                 $message = $this->setPayment($orden,$payment_status);
@@ -266,6 +267,21 @@ class CheckoutController extends BaseController {
         $user->availableMails = $user->availableMails + $plan->envios;
         $user->suscriptionType = 'member';
         $user->save();
+    }
+    
+    private function sendPaymentEmail($order){
+        $plan = Plan::find($order->id_plan);
+        $user = User::find(Auth::user()->id);
+
+        Mail::send('emails.payment_confirmation', array(
+                'user' => $user,
+                'order'=> $order,
+                'plan' => $plan
+            ), function($mail) use($user) {
+                $mail->to($user->email);
+                $mail->subject('TrebolNEWS - Confirmación de pago');
+                $mail->from('no-responder@trebolnews.com', 'TrebolNEWS');
+            });
     }
 
     public function payments(){

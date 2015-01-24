@@ -28,7 +28,7 @@ class MailController extends \BaseController {
 					$campaignView->suscriptor->email = $contacto->email;
 
 
-					Mail::send('emails/prueba', array(
+					Mail::send('emails/campaign', array(
 						'campaign' => $campaignView
 					), function($mail) use($campaign, $contacto) {
 
