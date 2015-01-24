@@ -263,7 +263,7 @@ class CheckoutController extends BaseController {
 
     private function updatePurchase($orden){
         $plan = Plan::find($orden->id_plan);
-        $user = User::find(Auth::user()->id);
+        $user = Usuario::find(Auth::user()->id);
         $user->availableMails = $user->availableMails + $plan->envios;
         $user->suscriptionType = 'member';
         $user->save();
@@ -271,7 +271,7 @@ class CheckoutController extends BaseController {
     
     private function sendPaymentEmail($order){
         $plan = Plan::find($order->id_plan);
-        $user = User::find(Auth::user()->id);
+        $user = Usuario::find(Auth::user()->id);
 
         Mail::send('emails.payment_confirmation', array(
                 'user' => $user,
