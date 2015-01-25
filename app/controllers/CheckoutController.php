@@ -273,8 +273,11 @@ class CheckoutController extends BaseController {
         Log::info('User Retrieved');
         Log::info($user);
         $user->availableMails = $user->availableMails + $plan->envios;
+        Log::info('Available Mails are setted now!');
         $user->suscriptionType = 'member';
+        Log::info('Logged user becomes a member!');
         $user->save();
+        Log::info('Save changes!');
         return $user;
     }
     
