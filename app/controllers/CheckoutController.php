@@ -305,6 +305,6 @@ class CheckoutController extends BaseController {
 
     public function test(){
         $orden = Orden::find( 1 );
-        var_dump($this->updatePurchase($orden,'approved'));
+        var_dump($this->sendPaymentEmail($orden,'approved'));
     }
 }
