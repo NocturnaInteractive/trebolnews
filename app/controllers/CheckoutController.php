@@ -279,7 +279,7 @@ class CheckoutController extends BaseController {
         Log::info('Sending Payment Email...');
 
         $plan = (object) Plan::find($order->id_plan);
-        $user = (object) Usuario::find($orden->id_usuario);
+        $user = (object) Usuario::find($order->id_usuario);
 
         Mail::send('emails.payment_confirmation', array(
                 'user' => $user,
