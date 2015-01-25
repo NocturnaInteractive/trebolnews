@@ -269,6 +269,7 @@ class CheckoutController extends BaseController {
         $plan = (object) Plan::find($orden->id_plan);
         Log::info('Plan Retrieved');
         Log::info($plan);
+        Log::info('Trying to Retrieve the user with id..' + Auth::user()->id);
         $user = (object) Usuario::find(Auth::user()->id);
         Log::info('User Retrieved');
         Log::info($user);
