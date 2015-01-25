@@ -252,24 +252,31 @@ class CheckoutController extends BaseController {
     }
 
     private function setPayment($orden,$status){
-        //$pago = Pago::where('id_orden', $orden['id'])->first();
+        Log::info('Setting Payment...');
+
         $pago = new Pago;
         $pago->id_orden      = $orden['id'];
         $pago->id_usuario    = $orden['id_usuario'];
         $pago->monto         = (float) $orden['monto'];
         $pago->status = $status;
         $pago->save();
+        return $pago;
     }
 
     private function updatePurchase($orden){
+        Log::info('Updating Purchase...');
+
         $plan = Plan::find($orden->id_plan);
         $user = Usuario::find(Auth::user()->id);
         $user->availableMails = $user->availableMails + $plan->envios;
         $user->suscriptionType = 'member';
         $user->save();
+        return $user;
     }
     
     private function sendPaymentEmail($order){
+        Log::info('Sending Payment Email...');
+
         $plan = Plan::find($order->id_plan);
         $user = Usuario::find(Auth::user()->id);
 
@@ -296,16 +303,7 @@ class CheckoutController extends BaseController {
     }
 
     public function test(){
-        $pago = new Pago;
-        $pago->id_orden      = 1;
-        $pago->id_usuario    = 2;
-        $pago->monto         = 439.00;
-        $pago->status        = 'approved';
-        $pago->save();
-
-        if($pago)
-            return ($pago);
-        else
-            return 'El pago no fue generado';
+        $orden = Orden::find( 1 );
+        var_dump($this->setPayment($orden,'approved'));
     }
 }
