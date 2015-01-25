@@ -193,7 +193,7 @@ class CheckoutController extends BaseController {
                 //checks for external reference / order id
                 if (isset($payment_info->collection->external_reference)) {
                     $external_reference = $payment_info->collection->external_reference;
-                    $orden = Orden::find( (int) $external_reference );
+                    $orden = (object) Orden::find( (int) $external_reference );
 
                     if($orden){
                         $message = $this->managePayment($orden,$payment_status);
@@ -255,9 +255,9 @@ class CheckoutController extends BaseController {
         Log::info('Setting Payment...');
 
         $pago = new Pago;
-        $pago->id_orden      = $orden['id'];
-        $pago->id_usuario    = $orden['id_usuario'];
-        $pago->monto         = (float) $orden['monto'];
+        $pago->id_orden      = $orden->id;
+        $pago->id_usuario    = $orden->id_usuario;
+        $pago->monto         = (float) $orden->monto;
         $pago->status = $status;
         $pago->save();
         return $pago;
@@ -266,8 +266,8 @@ class CheckoutController extends BaseController {
     private function updatePurchase($orden){
         Log::info('Updating Purchase...');
 
-        $plan = Plan::find($orden->id_plan);
-        $user = Usuario::find(Auth::user()->id);
+        $plan = (object) Plan::find($orden->id_plan);
+        $user = (object) Usuario::find(Auth::user()->id);
         $user->availableMails = $user->availableMails + $plan->envios;
         $user->suscriptionType = 'member';
         $user->save();
@@ -277,8 +277,8 @@ class CheckoutController extends BaseController {
     private function sendPaymentEmail($order){
         Log::info('Sending Payment Email...');
 
-        $plan = Plan::find($order->id_plan);
-        $user = Usuario::find(Auth::user()->id);
+        $plan = (object) Plan::find($order->id_plan);
+        $user = (object) Usuario::find(Auth::user()->id);
 
         Mail::send('emails.payment_confirmation', array(
                 'user' => $user,
