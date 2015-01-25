@@ -267,7 +267,11 @@ class CheckoutController extends BaseController {
         Log::info('Updating Purchase...');
 
         $plan = (object) Plan::find($orden->id_plan);
+        Log::info('Plan Retrieved');
+        Log::info($plan);
         $user = (object) Usuario::find(Auth::user()->id);
+        Log::info('User Retrieved');
+        Log::info($user);
         $user->availableMails = $user->availableMails + $plan->envios;
         $user->suscriptionType = 'member';
         $user->save();
@@ -304,6 +308,6 @@ class CheckoutController extends BaseController {
 
     public function test(){
         $orden = Orden::find( 1 );
-        var_dump($this->setPayment($orden,'approved'));
+        var_dump($this->updatePurchase($orden,'approved'));
     }
 }
