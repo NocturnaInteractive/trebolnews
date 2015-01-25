@@ -267,18 +267,11 @@ class CheckoutController extends BaseController {
         Log::info('Updating Purchase...');
 
         $plan = (object) Plan::find($orden->id_plan);
-        Log::info('Plan Retrieved');
-        Log::info($plan);
-        Log::info('Trying to Retrieve the user with id..' + Auth::user()->id);
-        $user = (object) Usuario::find(Auth::user()->id);
-        Log::info('User Retrieved');
+        $user = (object) Usuario::find($orden->id_usuario);
         Log::info($user);
         $user->availableMails = $user->availableMails + $plan->envios;
-        Log::info('Available Mails are setted now!');
         $user->suscriptionType = 'member';
-        Log::info('Logged user becomes a member!');
         $user->save();
-        Log::info('Save changes!');
         return $user;
     }
     
@@ -286,7 +279,7 @@ class CheckoutController extends BaseController {
         Log::info('Sending Payment Email...');
 
         $plan = (object) Plan::find($order->id_plan);
-        $user = (object) Usuario::find(Auth::user()->id);
+        $user = (object) Usuario::find($orden->id_usuario);
 
         Mail::send('emails.payment_confirmation', array(
                 'user' => $user,
