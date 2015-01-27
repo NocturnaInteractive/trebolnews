@@ -96,17 +96,12 @@
                         </div><!--selecionar_suscriptores-->
                         <div id="configurar_redes_clasica">
                             <h3>Configuraci&oacute;n de Redes Sociales</h3>
+                            <p>
+                                Copia y pega en el enlace al perfil social que desees para activarlo.
+                            </p>
                             <div id="agregar_redes_clasica">
 
-                                <div id="mostrar_div">
-                                    <a class="activarydesactivar btbmostrar_div" href="#" onclick="ocultar_mostrar('mostrar_div'); return false;">Activar Compartir en:</a>
-                                    <div class="divparaocultar"></div>
-                                </div>
-
                                 <div id="info_agregar_redes">
-                                    <a class="activarydesactivar" href="#" onclick="ocultar_mostrar('mostrar_div'); return false;">Desactivar Compartir en:</a>
-
-                                    <p class="mensaje_agregar_redes">(Para activar la rede social que desea, haz click en el icono y luego pega el link)</p>
 
                                     
 
@@ -115,7 +110,7 @@
                                                 <input type="checkbox" id="facebook_agregar_redes" />
                                                 <label for="facebook_agregar_redes" id="label_facebook_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.facebook" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_facebook')}}" />
                                             <div class="cleaner"></div> 
                                         </div>
 
@@ -124,7 +119,7 @@
                                                 <input type="checkbox" id="twitter_agregar_redes" />
                                                 <label for="twitter_agregar_redes" id="label_twitter_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.twitter" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_twitter')}}" />
                                             <div class="cleaner"></div> 
                                         </div>
 
@@ -133,7 +128,7 @@
                                                 <input type="checkbox" id="linkedin_agregar_redes" />
                                                 <label for="linkedin_agregar_redes" id="label_linkedin_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.linkedin" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_linkedin')}}" />
                                             <div class="cleaner"></div> 
                                         </div>     
 
@@ -142,7 +137,7 @@
                                                 <input type="checkbox" id="google_agregar_redes" />
                                                 <label for="google_agregar_redes" id="label_google_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.googleplus" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_googleplus')}}" />
                                             <div class="cleaner"></div> 
                                         </div>      
 
@@ -151,7 +146,7 @@
                                                 <input type="checkbox" id="pinterest_agregar_redes" />
                                                 <label for="pinterest_agregar_redes" id="label_pinterest_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.pinterest" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_pinterest')}}" />
                                             <div class="cleaner"></div> 
                                         </div>      
 
@@ -160,7 +155,7 @@
                                                 <input type="checkbox" id="blogger_agregar_redes" />
                                                 <label for="blogger_agregar_redes" id="label_blogger_agregar_redes"></label>
                                             </div> 
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.blogger" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_blogger')}}" />
                                             <div class="cleaner"></div> 
                                         </div> 
 
@@ -169,7 +164,7 @@
                                                 <input type="checkbox" id="meneame_agregar_redes" />
                                                 <label for="meneame_agregar_redes" id="label_meneame_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.meneame" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_meneame')}}" />
                                             <div class="cleaner"></div> 
                                         </div> 
 
@@ -178,7 +173,7 @@
                                                 <input type="checkbox" id="tumblr_agregar_redes" />
                                                 <label for="tumblr_agregar_redes" id="label_tumblr_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.tumblr" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_tumblr')}}" />
                                             <div class="cleaner"></div> 
                                         </div> 
 
@@ -187,7 +182,7 @@
                                                 <input type="checkbox" id="reddit_agregar_redes" />
                                                 <label for="reddit_agregar_redes" id="label_reddit_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.reddit" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_reddit')}}" />
                                             <div class="cleaner"></div> 
                                         </div>      
 
@@ -196,7 +191,7 @@
                                                 <input type="checkbox" id="digg_agregar_redes" />
                                                 <label for="digg_agregar_redes" id="label_digg_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.digg" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_digg')}}" />
                                             <div class="cleaner"></div> 
                                         </div>      
 
@@ -205,7 +200,7 @@
                                                 <input type="checkbox" id="delicious_agregar_redes" />
                                                 <label for="delicious_agregar_redes" id="label_delicious_agregar_redes"></label>
                                             </div>
-                                            <input name="link" type="text" class="link_clasic" id="" placeholder="Link:" />
+                                            <input name="campania:socialLinks.delicious" type="text" class="link_clasic" id="" placeholder="Link:" value="{{Session::get('campania.socialLinks_delicious')}}" />
                                             <div class="cleaner"></div> 
                                         </div>      
 

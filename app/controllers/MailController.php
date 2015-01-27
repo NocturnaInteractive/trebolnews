@@ -68,18 +68,21 @@ class MailController extends \BaseController {
 		$campaignView->owner = new stdClass();
 		$campaignView->owner->suscriptionType = $owner->suscriptionType;
 
+		$socialLinks = SocialLink::find($campaign->social_link_id);
+		$campaignView->socialLinks = $socialLinks;
+
 		return $campaignView;
 	}
 
 
 	public function test(){
-		$campaign = Campania::find(1);
+		$campaign = Campania::find(3);
 		$campaignView = $this->getCampaignView($campaign);
 		$campaignView->suscriptor->name  = 'Martin';
 		$campaignView->suscriptor->last  = 'Sacco';
 		$campaignView->suscriptor->email = 'el.marto.mail@gmail.com';
 
-		Mail::send('emails/prueba', array(
+		Mail::send('emails/campaign', array(
 			'campaign' => $campaignView
 		), function($mail){
 

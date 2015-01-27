@@ -77,6 +77,26 @@ $(function() {
 		    minuteText: 'Minutos'
 		});
 		*/
+
+		//disable all social links
+		$('#info_agregar_redes input[type=text]').each(function(n,o){
+			$this = $(o);
+			checkSocialLinks($this);
+		});
+		//social link enable event
+		$('#info_agregar_redes').on('keyup','input[type=text]',function(e){
+			$this = $(e.target);
+			checkSocialLinks($this);
+		});
+
+		function checkSocialLinks(inputElement){
+			$this = $(inputElement);
+			if($this.val()==""){
+				$this.siblings().first().css({ opacity: 0.3 });
+			}else{
+				$this.siblings().first().css({ opacity: 1 });
+			}
+		}
 	}
 
 	

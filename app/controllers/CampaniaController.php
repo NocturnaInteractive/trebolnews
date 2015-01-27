@@ -127,7 +127,6 @@ class CampaniaController extends BaseController {
 				Session::put(str_replace(':', '.', $key), $value);
 			}
 
-			
 			//Determine an action
 			switch(Input::get('y')) {
 
@@ -188,26 +187,64 @@ class CampaniaController extends BaseController {
 	//Gets and returns a campaign from db or session
 	private function getCampaignCreated() {
 		$id = Session::get('campania.id');
+
+		//edit mode
 		if($id) {
 			$campania = Campania::find($id);
-			$campania->id  = Session::get('campania.id');
-			$campania->tipo  = Session::get('campania.tipo');
-			$campania->subtipo = Session::get('campania.subtipo');
-			$campania->nombre = Session::get('campania.nombre');
-			$campania->asunto = Session::get('campania.asunto');
-			$campania->remitente = Session::get('campania.remitente');
-			$campania->email = Session::get('campania.email');
-			$campania->respuesta = Session::get('campania.respuesta');
-			$campania->contenido = Session::get('campania.contenido');
-			$campania->redes = Session::get('campania.redes');
-			$campania->status = Session::get('campania.status');
-			$campania->envio = Session::get('campania.envio');
+			$campania->id  			= Session::get('campania.id');
+			$campania->tipo  		= Session::get('campania.tipo');
+			$campania->subtipo 		= Session::get('campania.subtipo');
+			$campania->nombre 		= Session::get('campania.nombre');
+			$campania->asunto 		= Session::get('campania.asunto');
+			$campania->remitente	= Session::get('campania.remitente');
+			$campania->email 		= Session::get('campania.email');
+			$campania->respuesta 	= Session::get('campania.respuesta');
+			$campania->contenido 	= Session::get('campania.contenido');
+			$campania->redes 		= Session::get('campania.redes');
+			$campania->status 		= Session::get('campania.status');
+			$campania->envio 		= Session::get('campania.envio');
 			$campania->notificacion = Session::get('campania.notificacion');
-
+			if($campania->notificacion == 'on'){
+				$campania->notificacion = true;
+			}else if($campania->notificacion == 'off'){
+				$campania->notificacion = false;
+			}
 			$campania->save();
+
+			$socialLink = SocialLink::find($campania->social_link_id);
+			$socialLink->facebook	= Session::get('campania.socialLinks_facebook');
+			$socialLink->twitter	= Session::get('campania.socialLinks_twitter');
+			$socialLink->linkedin	= Session::get('campania.socialLinks_linkedin');
+			$socialLink->googleplus	= Session::get('campania.socialLinks_googleplus');
+			$socialLink->pinterest	= Session::get('campania.socialLinks_pinterest');
+			$socialLink->blogger	= Session::get('campania.socialLinks_blogger');
+			$socialLink->meneame	= Session::get('campania.socialLinks_meneame');
+			$socialLink->tumblr		= Session::get('campania.socialLinks_tumblr');
+			$socialLink->reddit		= Session::get('campania.socialLinks_reddit');
+			$socialLink->digg		= Session::get('campania.socialLinks_digg');
+			$socialLink->delicious	= Session::get('campania.socialLinks_delicious');
+			$socialLink->save();
+
+		//new mode
 		} else {
+
+			$socialLink = new SocialLink;
+			$socialLink->facebook	= Session::get('campania.socialLinks_facebook');
+			$socialLink->twitter	= Session::get('campania.socialLinks_twitter');
+			$socialLink->linkedin	= Session::get('campania.socialLinks_linkedin');
+			$socialLink->googleplus	= Session::get('campania.socialLinks_googleplus');
+			$socialLink->pinterest	= Session::get('campania.socialLinks_pinterest');
+			$socialLink->blogger	= Session::get('campania.socialLinks_blogger');
+			$socialLink->meneame	= Session::get('campania.socialLinks_meneame');
+			$socialLink->tumblr		= Session::get('campania.socialLinks_tumblr');
+			$socialLink->reddit		= Session::get('campania.socialLinks_reddit');
+			$socialLink->digg		= Session::get('campania.socialLinks_digg');
+			$socialLink->delicious	= Session::get('campania.socialLinks_delicious');
+			$socialLink->save();
+
 			$campania = Campania::create(array(
 				'id_usuario'    => Auth::user()->id,
+				'social_link_id'=> $socialLink->id,
 				'tipo'          => Session::get('campania.tipo'),
 				'subtipo'       => Session::get('campania.subtipo'),
 				'nombre'        => Session::get('campania.nombre'),
@@ -223,6 +260,7 @@ class CampaniaController extends BaseController {
 				'notificacion'  => Session::get('campania.notificacion') == 'on' ? true : false
 			));
 			$campania->listas()->attach(Session::get('campania.listas'));
+
 		}
 		return $campania;
 	}
@@ -232,23 +270,37 @@ class CampaniaController extends BaseController {
 		$campania = Campania::find($id);
 
 		if(isset($campania)){
-			Session::put('campania.id', $campania->id );
-			Session::put('campania.tipo', $campania->tipo );
-			Session::put('campania.subtipo', $campania->subtipo);
-			Session::put('campania.nombre', $campania->nombre);
-			Session::put('campania.asunto', $campania->asunto);
-			Session::put('campania.remitente', $campania->remitente);
-			Session::put('campania.email', $campania->email);
-			Session::put('campania.respuesta', $campania->respuesta);
-			Session::put('campania.contenido', $campania->contenido);
-			Session::put('campania.redes', $campania->redes);
-			Session::put('campania.status', $campania->status);
-			Session::put('campania.envio', $campania->envio);
-			Session::put('campania.notificacion', $campania->notificacion);
+			Session::put('campania.id', 			$campania->id );
+			Session::put('campania.social_link_id', $campania->social_link_id );
+			Session::put('campania.tipo', 			$campania->tipo );
+			Session::put('campania.subtipo', 		$campania->subtipo);
+			Session::put('campania.nombre', 		$campania->nombre);
+			Session::put('campania.asunto', 		$campania->asunto);
+			Session::put('campania.remitente', 		$campania->remitente);
+			Session::put('campania.email', 			$campania->email);
+			Session::put('campania.respuesta', 		$campania->respuesta);
+			Session::put('campania.contenido', 		$campania->contenido);
+			Session::put('campania.redes', 			$campania->redes);
+			Session::put('campania.status', 		$campania->status);
+			Session::put('campania.envio', 			$campania->envio);
+			Session::put('campania.notificacion', 	$campania->notificacion);
 
 			foreach ($campania->listas as $lista) {
 				Session::push('campania.listas', $lista->id);
 			}
+
+			$socialLink = SocialLink::find($campania->social_link_id);
+			Session::put('campania.socialLinks_facebook', 	$socialLink->facebook);
+			Session::put('campania.socialLinks_twitter', 	$socialLink->twitter);
+			Session::put('campania.socialLinks_linkedin', 	$socialLink->linkedin);
+			Session::put('campania.socialLinks_googleplus', $socialLink->googleplus);
+			Session::put('campania.socialLinks_pinterest', 	$socialLink->pinterest);
+			Session::put('campania.socialLinks_blogger', 	$socialLink->blogger);
+			Session::put('campania.socialLinks_meneame', 	$socialLink->meneame);
+			Session::put('campania.socialLinks_tumblr', 	$socialLink->tumblr);
+			Session::put('campania.socialLinks_reddit', 	$socialLink->reddit);
+			Session::put('campania.socialLinks_digg', 		$socialLink->digg);
+			Session::put('campania.socialLinks_delicious', 	$socialLink->delicious);
 		}else{
 			return 'No se ha encontrado la campaña';
 		}

@@ -42,7 +42,7 @@
 						<div id="configuracion_resumen"> <!-- class="resumen_mal" -->
 							<div class="tiyulos_resumen">
 								<h3>Configuraci&oacute;n</h3>
-								<a class="editar_resumen" href="#" id="btn_editar_informacion_basica">editar</a>
+								<a class="editar_resumen"  href="{{ route('step3') }}" id="btn_editar_informacion_basica">editar</a>
 								<div class="cleaner"></div>
 							</div><!--tiyulos_resumen-->
 							<p class="secciones">Informaci&oacute;n B&aacute;sica</p>
@@ -82,7 +82,7 @@
 									<?php $s_list = Session::get('campania.listas'); $i = 0; ?>
 	                                @foreach($listas = Auth::user()->listas()->has('contactos', '>', '0')->get() as $lista)
 	                                    
-	                                    	@if(isset($s_list[$i]) && $s_list[$i] == $lista->id)
+	                                    	@if(is_null($s_list[$i]) && $s_list[$i] == $lista->id)
 		                                    	<tr>
 													<td>{{ $lista->nombre }}</td>
 			                                        <td>{{ $lista->created_at->format('d/m/Y') }}</td>
@@ -106,17 +106,59 @@
 							<div id="resumen_redes">
 								<p class="secciones">Redes Sociales Elegidas</p>
 								<div id="resumenredes_clasica">
-									<div class="iconosredes_resumencla noelegidored" id="face_resumen" red="facebook"></div>
-									<div class="iconosredes_resumencla noelegidored" id="tw_resumen" red="twitter"></div>
-									<div class="iconosredes_resumencla noelegidored" id="link_resumen" red="linkedin"></div>
-									<div class="iconosredes_resumencla noelegidored" id="gplus_resumen" red="google"></div>
-									<div class="iconosredes_resumencla noelegidored" id="p_resumen" red="pinterest"></div>
-									<div class="iconosredes_resumencla noelegidored" id="b_resumen" red="blogger"></div>
-									<div class="iconosredes_resumencla noelegidored" id="meneame_resumen" red="meneame"></div>
-									<div class="iconosredes_resumencla noelegidored" id="tumbl_resumen" red="tumblr"></div>
-									<div class="iconosredes_resumencla noelegidored" id="reddit_resumen" red="reddit"></div>
-									<div class="iconosredes_resumencla noelegidored" id="digg_resumen" red="digg"></div>
-									<div class="iconosredes_resumencla noelegidored" id="delicius_resumen" red="delicious"></div>
+									<?php 
+										$socialLinksChecker = array();
+										for($x=0; $x<11; $x++){
+											$socialLinksChecker[$x] = '';
+										}
+
+										
+
+										if (Session::get('campania.socialLinks_facebook') == '' ){
+											$socialLinksChecker[0] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_twitter') == '' ){
+											$socialLinksChecker[1] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_linkedin') == '' ){
+											$socialLinksChecker[2] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_googleplus') == '' ){
+											$socialLinksChecker[3] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_pinterest') == '' ){
+											$socialLinksChecker[4] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_blogger') == '' ){
+											$socialLinksChecker[5] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_meneame') == '' ){
+											$socialLinksChecker[6] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_tumblr') == '' ){
+											$socialLinksChecker[7] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_reddit') == '' ){
+											$socialLinksChecker[8] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_digg') == '' ){
+											$socialLinksChecker[9] = 'noelegidored';
+										}
+										if (Session::get('campania.socialLinks_delicious') == '' ){
+											$socialLinksChecker[10] = 'noelegidored';
+										}
+									?>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[0]}}" id="face_resumen" red="facebook"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[1]}}" id="tw_resumen" red="twitter"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[2]}}" id="link_resumen" red="linkedin"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[3]}}" id="gplus_resumen" red="google"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[4]}}" id="p_resumen" red="pinterest"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[5]}}" id="b_resumen" red="blogger"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[6]}}" id="meneame_resumen" red="meneame"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[7]}}" id="tumbl_resumen" red="tumblr"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[8]}}" id="reddit_resumen" red="reddit"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[9]}}" id="digg_resumen" red="digg"></div>
+									<div class="iconosredes_resumencla {{$socialLinksChecker[10]}}" id="delicius_resumen" red="delicious"></div>
 									<div style="display: none;" id="redes_seleccionadas">
 										@if(Session::has('campania.redes'))
 										@foreach(Session::get('campania.redes') as $red)
@@ -173,7 +215,9 @@
 								<form>
 									<textarea class="emaildeprueba" class="textarea" placeholder="¿A qué emails quieres enviar la prueba?">{{Auth::user()->email}}</textarea>
 									<div id="boton_prueba">
-										<input type="button" value="PROBAR" id="probar_boton" />
+										<span ajax="{{ action('CampaniaController@guardar_campania') }}">
+											<input type="button" value="PROBAR" id="probar_boton" class="btn_guardar"  y="confirmar" />
+										</span>
 										<div class="cleaner"></div>
 									</div>
 								</form>

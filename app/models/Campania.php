@@ -7,6 +7,7 @@ class Campania extends Eloquent {
 
     protected $fillable = array(
         'id_usuario',
+        'social_link_id',
         'tipo',
         'subtipo',
         'nombre',
@@ -29,7 +30,7 @@ class Campania extends Eloquent {
     }
 
     public function listas() {
-     return $this->belongsToMany('Lista', 'campanias_listas', 'id_campania', 'id_lista');
+        return $this->belongsToMany('Lista', 'campanias_listas', 'id_campania', 'id_lista');
     }
 
 }
