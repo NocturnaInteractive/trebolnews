@@ -3,7 +3,7 @@
 class Helpers {
 
 	public static function extraer_imagenes(Template $template) {
-		$html = new Htmldom(storage_path("templates/{$template->archivo}/{$template->archivo}"));
+		$html = new Htmldom($template->content);
 		$imagenes = array();
 
 		$attr_style = $html->find('[style]');
@@ -34,9 +34,9 @@ class Helpers {
 
 	public static function template_completa(Template $template) {
 		$imagenes = Helpers::extraer_imagenes($template);
-
+		$templateName = $template->category.'_'.$template->name;
 		foreach($imagenes as $imagen) {
-			if(!File::exists(storage_path("templates/{$template->archivo}/img/$imagen"))) {
+			if(!File::exists(storage_path("templates/{$templateName}/img/$imagen"))) {
 				return false;
 			}
 		}

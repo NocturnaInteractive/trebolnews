@@ -43,26 +43,33 @@
         </script>
     </head>
     <body>
-        <form id="frm_agregar_template" action="{{ action('TemplateController@guardar') }}" method="post">
+        <form id="frm_agregar_template" action="{{ action('TemplateController@guardar') }}" method="post" enctype="multipart/form-data">
             <p>
-                <label for="nombre">
+                <label for="name">
                     Nombre:
                 </label>
-                <input type="text" name="nombre" />
+                <input type="text" name="name" />
             </p>
 
             <p>
-                <label for="categoria">
+                <label for="category">
                     Categoría:
                 </label>
-                <input type="text" name="categoria" />
+                <input type="text" name="category" />
             </p>
 
             <p>
-                <label for="archivo">
-                    Archivo:
+                <label for="content">
+                    Contenido:
                 </label>
-                <input type="file" name="archivo" />
+                <textarea name="content"></textarea>
+            </p>
+
+            <p>
+                <label for="thumbnail">
+                    Imagen:
+                </label>
+                <input type="file" name="thumbnail" />
             </p>
 
             <p>

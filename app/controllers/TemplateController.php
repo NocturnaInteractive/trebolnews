@@ -8,7 +8,7 @@ class TemplateController extends BaseController {
         $rules = array(
             // 'nombre'    => 'required',
             // 'categoria' => 'required',
-            'archivo'   => 'required'
+            //'archivo'   => 'required'
         );
 
         $messages = array(
@@ -21,35 +21,54 @@ class TemplateController extends BaseController {
         $validator = Validator::make($data, $rules, $messages);
 
         if($validator->passes()) {
+
+            //UPDATE TEMPLATE
             if(Input::has('id')) {
                 // $template = Template::find(Input::get('id'));
                 // $template->nombre    = Input::get('nombre');
                 // $template->categoria = Input::get('categoria');
                 // $template->archivo   = Input::get('archivo');
                 // $template->save();
+
+            //NEW TEMPLATE
             } else {
-                $archivo = Input::file('archivo')->getClientOriginalName();
+                $templateExits = Template::where('name', Input::get('name'))->first();
 
-                $template = Template::where('archivo', '=', $archivo)->first();
-
-                if($template) {
+                if($templateExits) {
                     return Response::json(array(
                         'status'  => 'error',
-                        'mensaje' => 'Existe un archivo con ese nombre'
+                        'mensaje' => 'Existe un template con ese nombre'
                     ));
+                }else{
+
+                    $template = new Template;
+
+                    $templateName = Input::get('category').'_'.Input::get('name');
+                    $path_to_file = 'public/imagenes/templates/'.$templateName.'/';
+                    $path_to_call = '../imagenes/templates/'.$templateName.'/';
+                    $filename = 'thumbnail.jpg';
+                    $upload_success = Input::file('thumbnail')->move($path_to_file, $filename);
+
+                    if( $upload_success ) {
+
+                        $template->name = Input::get('name');
+                        $template->category = Input::get('category');
+                        $template->content = Input::get('content');
+                        $template->thumbnail = $path_to_call.$filename;
+                        $template->save();
+
+                        
+                    }else{
+                        return Response::json(array(
+                            'status'    => 'error'
+                        ));
+                    }
+
+ 
                 }
 
-                $template = Template::create(array(
-                    'categoria' => Input::get('categoria'),
-                    'nombre'    => Input::get('nombre')
-                ));
 
-                File::makeDirectory(storage_path("templates/$archivo"));
-                File::makeDirectory(storage_path("templates/$archivo/img"));
-                Input::file('archivo')->move(storage_path("templates/$archivo"), $archivo);
-
-                $template->archivo = $archivo;
-                $template->save();
+                
             }
 
             return Response::json(array(
@@ -76,6 +95,7 @@ class TemplateController extends BaseController {
 
     public function subir_imagenes() {
         $template = Template::find(Input::get('id'));
+        $templateName = $template->category.'_'.$template->name;
         $imagenes = Helpers::extraer_imagenes($template);
 
         $data = Input::all();
@@ -93,7 +113,7 @@ class TemplateController extends BaseController {
             foreach($imagenes as $imagen) {
                 $aux = str_replace('.', '_', $imagen);
                 $archivo = Input::file($aux)->getClientOriginalName();
-                Input::file($aux)->move(storage_path("templates/{$template->archivo}/img"), $archivo);
+                Input::file($aux)->move(storage_path("templates/".$templateName."/img"), $archivo);
             }
 
             return Response::json(array(

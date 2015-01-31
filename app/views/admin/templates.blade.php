@@ -22,9 +22,9 @@
             @foreach($templates as $template)
             <tr>
                 <td>{{ $template->id }}</td>
-                <td>{{ $template->nombre }}</td>
-                <td>{{ $template->categoria }}</td>
-                <td>{{ $template->archivo }}</td>
+                <td>{{ $template->name }}</td>
+                <td>{{ $template->category }}</td>
+                <td><img src="{{ $template->thumbnail }}" style="width:30px; height:30px;" /></td>
                 <td>
                     @if(Helpers::template_completa($template))
                     Si
@@ -34,7 +34,7 @@
                 </td>
                 <td>{{ $template->created_at }}</td>
                 <td>{{ $template->updated_at }}</td>
-                <td>{{ $template->deleted_at }}</td>
+                <td>{{ $template->deleted_at || 'no' }}</td>
             </tr>
             @endforeach
         </table>
