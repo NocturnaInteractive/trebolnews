@@ -142,6 +142,8 @@ class CampaniaController extends BaseController {
 					$response =  Response::json(array('status' => 'ok' ));
 					break;
 
+				
+
 				case 'confirmar':
 					$campania = $this->getCampaignCreated();
 					$success = false;
@@ -172,6 +174,17 @@ class CampaniaController extends BaseController {
 					else
 						$response = Response::json(array('status' => 'error' ));
 					break;
+
+
+				case 'test':
+					$campania = $this->getCampaignCreated();
+
+					$success = false;
+					$mail = new MailController();
+					if($mail->emailTest($campania, Input::get('emailtest') )){
+						$success = true;
+					}
+					$response = Response::json(array('status' => 'ok' ));
 
 			}
 		} else {

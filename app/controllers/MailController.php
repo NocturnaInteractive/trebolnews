@@ -75,22 +75,29 @@ class MailController extends \BaseController {
 	}
 
 
-	public function test(){
-		$campaign = Campania::find(3);
+	public function emailTest($campaign, $email){
+		//$campaign = Campania::find(3);
 		$campaignView = $this->getCampaignView($campaign);
-		$campaignView->suscriptor->name  = 'Martin';
-		$campaignView->suscriptor->last  = 'Sacco';
-		$campaignView->suscriptor->email = 'el.marto.mail@gmail.com';
+		$campaignView->suscriptor = new stdClass();
+		$campaignView->suscriptor->email = $email;
+		$campaignView->suscriptor->name =  'John';
+		$campaignView->suscriptor->last =  'Doe';
+		$campaignView->subject =  $campaign->asunto;
+		$campaignView->reply =  $campaign->respuesta;
+		$campaignView->remitent =  $campaign->remitente;
+		$campaignView->from =  $campaign->email;
 
 		Mail::send('emails/campaign', array(
 			'campaign' => $campaignView
-		), function($mail){
+		), function($mail) use($campaignView) {
+			$mail->to($campaignView->suscriptor->email, "{$campaignView->suscriptor->name} {$campaignView->suscriptor->last}")
+				 ->subject($campaignView->subject)
+				 ->from($campaignView->from, $campaignView->remitent)
+				 ->replyTo($campaignView->reply);
 
-			$mail->to('el.marto.mail@gmail.com', "Martin Sacco")
-				 ->subject('Asunto')
-				 ->from('martin.sacco@glob.com', 'martin.sacco@glob.com')
-				 ->replyTo('no-response@gol.com');
+			Log::info('Test Mail Sent');
 		});
+
 	}
 
 	public function renderMail($campaignId,$contactId,$verification){

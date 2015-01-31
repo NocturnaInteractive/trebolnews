@@ -204,7 +204,7 @@
 									<div class="cleaner"></div>
 								</div><!--tiyulos_resumen-->
 								<table cellpadding="0" cellspacing="0" id="campania_resumen">
-									<tr><td><iframe style="width:100%;height:100%;" src="/mail/demo"></iframe></td></tr>
+									<tr><td><iframe style="width:100%;height:100%; border:none;" src="/mail/demo"></iframe></td></tr>
 								</table>
 							</div><!--contenido_resumen-->
 
@@ -212,11 +212,11 @@
 							<div id="probarenvio_resumen">
 								<h3>Prueba</h3>
 								<p>Realice un envi&oacute; de prueba. Separar emails por punto y coma.</p>
-								<form>
-									<textarea class="emaildeprueba" class="textarea" placeholder="¿A qué emails quieres enviar la prueba?">{{Auth::user()->email}}</textarea>
+								<form class="form_info_basica">
+									<input class="text nomcam" id="email-test" name="email-test" placeholder="¿A qué emails quieres enviar la prueba?" value="{{Auth::user()->email}}" />
 									<div id="boton_prueba">
 										<span ajax="{{ action('CampaniaController@guardar_campania') }}">
-											<input type="button" value="PROBAR" id="probar_boton" class="btn_guardar"  y="confirmar" />
+											<input type="button" value="PROBAR" id="probar_boton" class="btn_guardar"  y="test" />
 										</span>
 										<div class="cleaner"></div>
 									</div>
@@ -232,14 +232,18 @@
 						<div id="opciones_pasos" >
 							<span ajax="{{ action('CampaniaController@guardar_campania') }}"><a id="guardarysalir" class="btn_guardar" href="{{ route('campanias') }}" y="salir">GUARDAR Y SALIR</a></span>
 							<ul>
-								<li><a href="{{ route('step4') }}" id="anterior">ANTERIOR</a></li>
-								<li ajax="{{ action('CampaniaController@guardar_campania') }}"><a href="{{ route('campanias') }}" id="siguiente" class="btn_guardar" y="confirmar">
-									@if(Session::get('campania.envio') == 'direct')
-									ENVIAR
-									@elseif(Session::get('campania.envio') == 'programmed')
-									PROGRAMAR
-									@endif
-								</a></li>
+								<li>
+									<a href="{{ route('step4') }}" id="anterior">ANTERIOR</a>
+								</li>
+								<li ajax="{{ action('CampaniaController@guardar_campania') }}">
+									<a href="{{ route('campanias') }}" id="siguiente" class="btn_guardar" y="confirmar">
+										@if(Session::get('campania.envio') == 'direct')
+										ENVIAR
+										@elseif(Session::get('campania.envio') == 'programmed')
+										PROGRAMAR
+										@endif
+									</a>
+								</li>
 							</ul>
 							<div class="cleaner"></div>
 						</div><!--opciones_pasos-->

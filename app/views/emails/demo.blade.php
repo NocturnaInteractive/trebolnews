@@ -11,7 +11,7 @@
 		$suscriptor = new stdClass();
 		$suscriptor->name = 'John';
 		$suscriptor->last = 'Doe';
-		$suscriptor->email = 'johndow@fakemail.com';
+		$suscriptor->email = 'johndoe@sample.com';
 		$generated = $campaign->contenido;
 		$socialLink = new stdClass();
 		$socialLink->facebook	= Session::get('campania.socialLinks_facebook');

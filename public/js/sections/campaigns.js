@@ -31,11 +31,16 @@ $(function() {
 					type: 'post',
 					url:  $(this).parents('[ajax]').attr('ajax'),
 					data: {
-						y: $this.attr('y')
+						y: $this.attr('y'),
+						emailtest: $('#email-test').val()
 					},
 					success: function(data) {
 						if(data.status == 'ok') {
-							window.location = $this.attr('href');
+							if($this.attr('href')){
+								window.location = $this.attr('href');
+							}else if($this.attr('y') == 'test'){
+								alert('¡Email de Prueba Enviado!');
+							}
 						} else {
 							if(typeof(data.validator) !== "undefined")
 			                	notys(data.validator);
