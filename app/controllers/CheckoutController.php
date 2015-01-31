@@ -90,11 +90,11 @@ class CheckoutController extends BaseController {
                 "auto_recurring"        => array(
                     "frequency"             => 1,
                     "frequency_type"        => "months",
-                    "transaction_amount"    => number_format ( $plan['unit_price']*$ratio, 2),
+                    "transaction_amount"    => number_format ( $plan['unit_price']*$ratio, 2, ".", ""),
                     "currency_id"           => "ARS"
                 )
             );
-
+            Log::info( $preapproval_data );
             $preapproval = $mp->create_preapproval_payment ($preapproval_data);
 
             $result = array(

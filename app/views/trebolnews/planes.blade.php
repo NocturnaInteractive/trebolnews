@@ -23,12 +23,27 @@
             else
                 input = $this.find('input');
             input.prop('checked', 'checked');
+            var tipoPlan = input.attr('tipo-plan');
+            if (tipoPlan == 'envio'){
+                $('.solo-envio').show();
+                $('.solo-suscriptor').hide();
+            }
+            if (tipoPlan == 'suscriptor'){
+                $('.solo-envio').hide();
+                $('.solo-suscriptor').show();
+            }
+            if (tipoPlan == 'gratis'){
+                $('.formasdepago').fadeOut();
+            }else{
+                $('.formasdepago').fadeIn();
+            }
             var planId = input.data('plan');
             var planName = input.data('plan-name');
             $('#comprar').attr('href', '/checkout/' + planId);
         });
 
         $('#comprar').click(function(e){
+            debugger;
             e.preventDefault();
             var input = $('.plan').find('input:checked');
             var planId = input.data('plan');
@@ -273,12 +288,10 @@
                     
                     <script>
                         $(document).ready(function(){
-                            $('.tarjeta').show();
-                            $('.transferencia').hide();
+                            $('#comprar').text('COMPRAR AHORA');
                         });
                        function reiniciarForm(){
-                           $('.tarjeta').show();
-                            $('.transferencia').hide();
+                           $('#comprar').text('COMPRAR AHORA');
                        }
                         $('#select-tipo-factura').find('a').click(function(e){
                             e.preventDefault();
@@ -312,19 +325,16 @@
                             if(this.getAttribute('id') == 'transferencia-bancaria'){
                                 $('.transferencia-bancaria').fadeIn();
                                 $('.detalle-factura').hide();
-                                $('.tarjeta').hide();
-                                $('.transferencia').show();
+                                $('#comprar').text('ENVIAR AHORA');
                                 
                             }else{
                                 $('.transferencia-bancaria').fadeOut();
                                 $('.detalle-factura').hide();       
-                                $('.tarjeta').show();
-                                $('.transferencia').hide();
+                                $('#comprar').text('COMPRAR AHORA');
                             }
                             $(".select-forma-de-pago").removeClass('active');
                             if(this.checked) {
                                 $(this).parent().addClass('active');
-                                
                             }
                         });
                         
@@ -436,10 +446,7 @@
                     <!-- END ENVIOS -->
                     
                     <div class="bto_planes">
-                    <a href="#" id="comprar">
-                        <span class="tarjeta">COMPRAR AHORA</span>
-                        <span class="transferencia">ENVIAR AHORA</span>
-                    </a>
+                    <a href="#" id="comprar">COMPRAR AHORA</a>
                     <div class="cleaner"></div>
                     </div>
                     
@@ -463,27 +470,7 @@
          }
          
      });
-    $(".radioplanes").find('label').click(function () {
-         $('.detalle-factura').hide();
-         reiniciarForm();
-            var tipoPlan = $(this).parent().find('input').attr('tipo-plan');
-            //envio
-            //suscriptor
-            if (tipoPlan == 'envio'){
-                $('.solo-envio').show();
-                $('.solo-suscriptor').hide();
-            }
-            if (tipoPlan == 'suscriptor'){
-                $('.solo-envio').hide();
-                $('.solo-suscriptor').show();
-            }
-            if (tipoPlan == 'gratis'){
-                $('.formasdepago').fadeOut();
-            }else{
-                $('.formasdepago').fadeIn();
-            }
-            
-    });
+    
     
   });
   
