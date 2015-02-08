@@ -236,7 +236,7 @@
 									<a href="{{ route('step4') }}" id="anterior">ANTERIOR</a>
 								</li>
 								<li ajax="{{ action('CampaniaController@guardar_campania') }}">
-									<a href="{{ route('campanias') }}" id="siguiente" class="btn_guardar" y="confirmar">
+									<a href="{{ route('campaign_sent') }}" id="siguiente" class="btn_guardar" y="confirmar">
 										@if(Session::get('campania.envio') == 'direct')
 										ENVIAR
 										@elseif(Session::get('campania.envio') == 'programmed')

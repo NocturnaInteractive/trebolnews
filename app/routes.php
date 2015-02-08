@@ -189,6 +189,13 @@ Route::group(array(
         }
     ));
 
+    Route::get('campaign/sent', array(
+        'as' => 'campaign_sent',
+        function() {
+            return View::make('campaigns/campaign_sent');
+        }
+    ));
+
     Route::get('campaigns/{id}/report', 'ReportController@show');
     Route::get('campaigns/{id}/report/pixel.gif', 'ReportController@pixel');
 
