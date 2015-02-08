@@ -367,7 +367,9 @@ class CampaniaController extends BaseController {
 
 	public function getTemplate($id) {
 		$template = Template::find($id);
-
+		$templateName = strtolower($template->category.'_'.$template->name);
+		$html = Helpers::fixImagePaths($template->content, $templateName);
+		$template->content = $html.'';
 		return $template;
 	}
 

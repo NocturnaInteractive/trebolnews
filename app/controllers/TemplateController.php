@@ -43,7 +43,7 @@ class TemplateController extends BaseController {
 
                     $template = new Template;
 
-                    $templateName = Input::get('category').'_'.Input::get('name');
+                    $templateName = strtolower(Input::get('name').'_'.Input::get('category'));
                     $path_to_file = 'public/imagenes/templates/'.$templateName.'/';
                     $path_to_call = '../imagenes/templates/'.$templateName.'/';
                     $filename = 'thumbnail.jpg';
@@ -57,17 +57,13 @@ class TemplateController extends BaseController {
                         $template->thumbnail = $path_to_call.$filename;
                         $template->save();
 
-                        
                     }else{
                         return Response::json(array(
                             'status'    => 'error'
                         ));
                     }
 
- 
                 }
-
-
                 
             }
 
@@ -83,6 +79,7 @@ class TemplateController extends BaseController {
         }
     }
 
+
     public function form_subir_imagenes($id) {
         $template = Template::find($id);
         $imagenes = Helpers::extraer_imagenes($template);
@@ -93,9 +90,10 @@ class TemplateController extends BaseController {
         ));
     }
 
+
     public function subir_imagenes() {
         $template = Template::find(Input::get('id'));
-        $templateName = $template->category.'_'.$template->name;
+        $templateName = strtolower($template->category.'_'.$template->name);
         $imagenes = Helpers::extraer_imagenes($template);
 
         $data = Input::all();
@@ -112,8 +110,7 @@ class TemplateController extends BaseController {
         if($validator->passes()) {
             foreach($imagenes as $imagen) {
                 $aux = str_replace('.', '_', $imagen);
-                $archivo = Input::file($aux)->getClientOriginalName();
-                Input::file($aux)->move(storage_path("templates/".$templateName."/img"), $archivo);
+                Input::file($aux)->move("public/imagenes/templates/".$templateName."/img", $imagen);
             }
 
             return Response::json(array(
@@ -127,6 +124,7 @@ class TemplateController extends BaseController {
             ));
         }
     }
+
 
     public function eliminar() {
         // Template::destroy(Input::get('id'));

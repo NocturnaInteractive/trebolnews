@@ -44,7 +44,7 @@
 					<div id="template-gallery">
 						@foreach (Template::all() as $template)
 						<a href="#" data-template="{{$template->id}}" class="template" style="display:inline-block">
-							<img style="width:100px; height:100px;" src="http://images.sharefaith.com/images/3/1283540378534_180/page-02.jpg">
+							<img style="width:100px; height:100px;" src="{{$template->thumbnail}}">
 							<div><input type="radio" name="template" />{{$template->name}}</div>
 						</a>
 						@endforeach

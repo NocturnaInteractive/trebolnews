@@ -34,7 +34,7 @@
                 </td>
                 <td>{{ $template->created_at }}</td>
                 <td>{{ $template->updated_at }}</td>
-                <td>{{ $template->deleted_at || 'no' }}</td>
+                <td>{{ $template->deleted_at }}</td>
             </tr>
             @endforeach
         </table>

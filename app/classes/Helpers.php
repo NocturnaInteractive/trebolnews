@@ -6,7 +6,7 @@ class Helpers {
 		$html = new Htmldom($template->content);
 		$imagenes = array();
 
-		$attr_style = $html->find('[style]');
+		/*$attr_style = $html->find('[style]');
 		foreach($attr_style as $tag) {
 		    if(stristr($tag->style, 'background-image')) {
 		        $primera = stristr($tag->style, 'background-image');
@@ -17,13 +17,12 @@ class Helpers {
 		            array_push($imagenes, $filename);
 		        }
 		    }
-		}
+		}*/
 
 		$tags_img = $html->find('img');
 		foreach($tags_img as $img) {
-		    $filename = substr(strrchr($img->src, '/'), 1);
-		    if(!in_array($filename, $imagenes)) {
-		        array_push($imagenes, $filename);
+		    if(!strpos($img->src,'/') && !in_array($img->src, $imagenes)) {
+		        array_push($imagenes, $img->src);
 		    }
 		}
 
@@ -32,11 +31,35 @@ class Helpers {
 		return $imagenes;
 	}
 
+	public static function fixImagePaths($templateContent, $templateName) {
+		$html = new Htmldom($templateContent);
+
+		/*$attr_style = $html->find('[style]');
+		foreach($attr_style as $tag) {
+		    if(stristr($tag->style, 'background-image')) {
+		        $primera = stristr($tag->style, 'background-image');
+		        $segunda = substr(stristr($primera, '('), 1, strlen($primera));
+		        $tercera = stristr($segunda, ')', true);
+		        $filename = substr(strrchr($tercera, '/'), 1);
+		        if(!in_array($filename, $imagenes)) {
+		            array_push($imagenes, $filename);
+		        }
+		    }
+		}*/
+		
+		$tags_img = $html->find('img');
+		foreach($tags_img as &$img) {		
+		    $img->src = '//'.$_SERVER['HTTP_HOST'].'/imagenes/templates/'.$templateName.'/img/'.$img->src;
+		}
+
+		return $html;
+	}
+
 	public static function template_completa(Template $template) {
 		$imagenes = Helpers::extraer_imagenes($template);
-		$templateName = $template->category.'_'.$template->name;
+		$templateName = strtolower($template->category.'_'.$template->name);
 		foreach($imagenes as $imagen) {
-			if(!File::exists(storage_path("templates/{$templateName}/img/$imagen"))) {
+			if(!File::exists("public/imagenes/templates/{$templateName}/img/$imagen")) {
 				return false;
 			}
 		}

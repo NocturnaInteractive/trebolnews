@@ -59,17 +59,18 @@
             </p>
 
             <p>
-                <label for="content">
-                    Contenido:
+                <label for="thumbnail">
+                    Thumbnail:
                 </label>
-                <textarea name="content"></textarea>
+                <input type="file" name="thumbnail" />
             </p>
 
             <p>
-                <label for="thumbnail">
-                    Imagen:
-                </label>
-                <input type="file" name="thumbnail" />
+                <label for="content">
+                    Contenido:<br>
+                    (images paths must be without "/". Eg: src="image.png")
+                </label><br>
+                <textarea style="width:100%; min-height:400px;" name="content"></textarea>
             </p>
 
             <p>
