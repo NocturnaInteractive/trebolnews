@@ -267,8 +267,19 @@
                             <h2>Planes y Precios</h2>
                             <div id="planes">
                                 <select class="select-precios" id="planes-home">
-                                    <option value="pesos">Pesos Argentinos</option>
-                                    <option value="dolares">Dolares estadounidenses</option>
+                                  <option value="$ AR">$ Pesos Argentinos</option>
+                                  <option value="USD">USD Dolares estadounidenses</option>
+                                  <option value="Pesos Colombianos">$ Peso Colombia</option>
+                                  <option value="$ MXM">$ Peso Mexico</option>
+                                  <option value="$ CLP">$ Peso Chile</option>
+                                  <option value="Reais Brasil">$ Brasil</option>
+                                  <option value="$ UYU">$ Pesos Uruguayos</option>
+                                  <option value="$ DOP">$ Pesos Dominicanos</option>
+                                  <option value="PEN">PEN Nuevos Soles Per&uacute;</option>
+                                  <option value="PAB">Balboas Panam&aacute;</option>
+                                  <option value="VEZ">Venezuela</option>
+                                  <option value="ECU">Ecuador</option>
+                                  <option value="CRC">Costa Rica</option>
                                 </select>
                                 <script>
                                     var moneda = 'pesos';
@@ -280,7 +291,7 @@
                                             case 'dolares':
                                                 $('.moneda').html('U$S');
                                                 break;
-                                        }
+                                     }
                                     }
 
                                     $( ".select-precios" ).change(function() {
