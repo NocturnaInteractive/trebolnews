@@ -100,6 +100,7 @@
         <section class="tabs">
             <div class="content">
                 <h2>Listas de suscriptores</h2>
+                <a style="position: absolute; right: 15px; top: 14px; color: white; font-size: 18px; text-decoration: none;" href="#">Guía cómo importar lista de contactos -></a>
                 <div class="infocont">
                     <div class="submenu">
                         <form id="frm-search" action="{{ action('ListaController@search') }}" method="post">
