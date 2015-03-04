@@ -19,6 +19,8 @@ var PlanServices = {
 	loadCurrencies: function (){
 		PlanServices.currencyList.push(new Currency('USD','Dólares Estadounidenses', 'US$', 1));
 		PlanServices.currencyList.push(new Currency('ARS','Pesos Argentinos', 'AR$'));
+		PlanServices.currencyList.push(new Currency('CLP','Pesos Chilenos', 'CH$'));
+		PlanServices.currencyList.push(new Currency('UYU','Pesos Uruguayos', 'UY$'));
 	},
 	
 	setCurrencies: function (){

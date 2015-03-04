@@ -29,7 +29,7 @@ class CheckoutController extends BaseController {
         $order = new Orden;
         $order->id_usuario    = $user->id;
         $order->id_plan       = $foundPlan['id'];
-        $order->monto         = $foundPlan['precio'];
+        $order->monto         = $finalPrice;
         $order->isSuscription = $foundPlan['isSuscription'];
         $order->save();
 
@@ -102,7 +102,7 @@ class CheckoutController extends BaseController {
                 "auto_recurring"        => array(
                     "frequency"             => $months,
                     "frequency_type"        => "months",
-                    "transaction_amount"    => number_format ( $plan['unit_price']*$ratio, 2, ".", ""),
+                    "transaction_amount"    => number_format ( $finalPrice*$ratio, 2, ".", ""),
                     "currency_id"           => "ARS"
                 )
             );
