@@ -192,7 +192,7 @@
 
 
 						<div id="mensuales">
-							<h3>Planes Mensuales</h3>
+							<h3>Planes asdas</h3>
 							<p>Exclusivo paquete preparado para realizar grandes env&iacute;os. Con una suscripci&oacute;n mensual se contrata una cantidad de env&iacute;os y no hay l&iacute;mite de tiempo para hacerlos.</p>
 							<div class="infoplanes">
 								<?php
