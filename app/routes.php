@@ -33,10 +33,11 @@ Route::get('gracias', array(
     }
 ));
 
-Route::get('/checkout/{id}',function($id){
+
+Route::get('/checkout/{planId}/{months}',function($planId, $months){
     $action = 'index';
     if(Auth::check()) {
-        return App::make('CheckoutController')->$action($id);
+        return App::make('CheckoutController')->$action($planId, $months);
     } else {
         return Redirect::to('/');
     }

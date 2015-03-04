@@ -19,7 +19,12 @@
 <div id="conteinerco">
 	<a href="/"><h1>TrebolNEWS</h1></a>
 	<h2>Gracias por su compra.</h2>
-	<p>Tu &oacute;rden de compra es: <br> <strong>{{$plan['title']}} | {{$plan['unit_price']}}</strong></p> 
+	<p>Tu &oacute;rden de compra es: <br> 
+	<?php 
+		if ($months > 1) 
+			echo $months . ' meses de ';
+	?>
+	<strong>{{$plan['title']}} por U$S {{round($finalPrice,2)}}</strong></p> 
 	<div id="bothome"><a href="{{$mplink['sandbox_init_point']}}">PAGAR</a></div>
 </div>
 

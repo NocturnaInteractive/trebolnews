@@ -8,54 +8,6 @@
 
 @section('script')
     {{ HTML::style('css/general.css') }} {{-- oops --}}
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
-    <script>
-    $(function(){
-
-        $('.plan').click(function(e){
-            e.preventDefault();
-            $('.plan').find('input').prop('checked', '');
-            var $this = $(this);
-            var input;
-            if($this.data('plan'))
-                input = $this;
-            else
-                input = $this.find('input');
-            input.prop('checked', 'checked');
-            var tipoPlan = input.attr('tipo-plan');
-            if (tipoPlan == 'envio'){
-                $('.solo-envio').show();
-                $('.solo-suscriptor').hide();
-            }
-            if (tipoPlan == 'suscriptor'){
-                $('.solo-envio').hide();
-                $('.solo-suscriptor').show();
-            }
-            if (tipoPlan == 'gratis'){
-                $('.formasdepago').fadeOut();
-            }else{
-                $('.formasdepago').fadeIn();
-            }
-            var planId = input.data('plan');
-            var planName = input.data('plan-name');
-            $('#comprar').attr('href', '/checkout/' + planId);
-        });
-
-        $('#comprar').click(function(e){
-            debugger;
-            e.preventDefault();
-            var input = $('.plan').find('input:checked');
-            var planId = input.data('plan');
-            var planName = input.data('plan-name');
-
-            if(confirm('Esta seguro que desea comprar ' + planName)) {
-                window.top.location.href = $(e.target).attr('href');
-            }
-        });
-
-    });
-    </script>
 @stop
 
 @section('data')
@@ -71,64 +23,7 @@
     <section class="tabs">
         <div class="content">
             <h2>Precios y Planes</h2>
-            <select class="select-precios">
-                <option value='USD'>Dolares estadounidenses</option>
-                <option value='ARS'>Pesos Argentinos</option>
-            </select>
-            <script>
-            var moneda = 'USD';
-            var ARS_rate = 0;
-            function precio(moneda){
-                switch (moneda) {
-                case 'ARS':
-                    $('.moneda').html('AR$');
-                    break;
-                case 'USD':
-                    $('.moneda').html('US$');
-                    break;
-                }
-            }
-
-            $(".select-precios").change(function(e) {
-                if(moneda != 'ARS' && $(".select-precios").val() == 'ARS' && ARS_rate != 0){
-                    $('.price').each(function(n,o){
-                        var new_price = (parseFloat( $(this).data('price') ) * ARS_rate);
-                        $(this).html( new_price.toFixed(2) );
-                    });
-
-                    precio($(this).val());
-                    moneda = 'ARS';
-                }else if(moneda != 'USD' && $(".select-precios").val() == 'USD' && ARS_rate != 0){
-                    $('.price').each(function(n,o){
-                        $(this).html( parseFloat( $(this).data('price') ));
-                    });
-
-                    precio($(this).val());
-                    moneda = 'USD';
-                }else{
-                    $(".select-precios").val('USD');
-                    e.preventDefault();
-                }
-                
-            });
-
-            $(document).ready(function(){
-                precio('USD');
-
-                $.ajax({
-                    url: 'https://api.mercadolibre.com/currency_conversions/search',
-                    method: 'get',
-                    dataType: "jsonp",
-                    data:{
-                        from: 'USD',
-                        to: 'ARS'
-                    },
-                    success: function(data){
-                        ARS_rate = data[2].ratio;
-                    }
-                });
-            });
-            </script>
+            <select id="currency-dropdown" class="select-precios"></select>
             <div class="infocont">
                 <div id="planes">
                     <div id="pfree">
@@ -221,8 +116,8 @@
                         <img src="imagenes/formasdepago2.png" width="934" height="80" alt="formas de pago">
                     </div>
                 <div class="formasdepago">
-                    <h4>ELIGE LA FORMA DE PAGO</h4>
-                    <div class="select-forma-de-pago active">
+                    <h4>FORMA DE PAGO</h4>
+                    <!-- div class="select-forma-de-pago active">
                         <input checked type="radio" id="tarjeta-de-credito" name="forma-de-pago">
                         <label for="tarjeta-de-credito"></label>
                         <p for="tarjeta-de-credito">Compra con tarjeta</p>
@@ -231,9 +126,9 @@
                         <input type="radio" id="transferencia-bancaria" name="forma-de-pago">
                         <label for="transferencia-bancaria"></label>
                         <p>Transferencia bancaria</p>
-                    </div>
-                    <p class="aclaracion-text tarjeta">Los paquetes que compres con tarjeta de crédito, se activarán inmeditamente en tu cuenta. Los mismos tienen una validez de 30 días para ser utilizados. Muchos éxitos en tus campañas!!!</p>
-                    <p class="aclaracion-text transferencia">Al enviar tus datos te llegará un email con la factura y datos para realizar la transferencia bancaria.<br>Envíanos el comprobante de transferencia para poder activar tu compra. Muchos éxitos!</p>
+                    </div-->
+                    <p class="aclaracion-text tarjeta">Los paquetes que compres con tarjeta de crédito, se activarán inmeditamente en tu cuenta y tienen una validez de 30 días para ser utilizados.</p>
+                    <!--p class="aclaracion-text transferencia">Al enviar tus datos te llegará un email con la factura y datos para realizar la transferencia bancaria.<br>Envíanos el comprobante de transferencia para poder activar tu compra. Muchos éxitos!</p-->
                     
                     <div class="transferencia-bancaria">
                         <div class="content-select">
@@ -251,7 +146,7 @@
                             </div>
                            
                         </div>
-
+                        
                         <div class="content-form-deposito">
                             <div class="wrapper">
                                 <form>
@@ -286,168 +181,79 @@
                     </div>
                     
                     
-                    <script>
-                        $(document).ready(function(){
-                            $('#comprar').text('COMPRAR AHORA');
-                        });
-                       function reiniciarForm(){
-                           $('#comprar').text('COMPRAR AHORA');
-                       }
-                        $('#select-tipo-factura').find('a').click(function(e){
-                            e.preventDefault();
-                            
-                        });
-                        $('#select-tipo-factura').find('.boton').hover(function(e){
-                            $('#select-tipo-factura').find('.opciones-select').css('pointer-events', 'all');
-                        });
-                        
-                        $('#select-tipo-factura').find('.opciones-select').find('a').click(function(e){
-                            e.preventDefault();
-                            $('#select-tipo-factura').find('.boton').html($(this).html());
-                            $('#select-tipo-factura').find('.opciones-select').css('pointer-events', 'none');
-                           
-                            $('.forms-afip').hide();
-                            $('.'+this.getAttribute('tipo')).fadeIn();
-                            if(this.getAttribute('tipo') == 'consumidor-final'){
-                                $('.consumidor-final').show();
-                                $('.responsable-inscripto').hide();
-                                $('.detalle-factura').show();
-                            }else if(this.getAttribute('tipo') == 'responsable-inscripto'){
-                                $('.consumidor-final').hide();
-                                $('.responsable-inscripto').show();
-                                $('.detalle-factura').show();
-                            }
-                        });
-                        
-                        
-                        $(".select-forma-de-pago").find('input').change(function() {
-                            
-                            if(this.getAttribute('id') == 'transferencia-bancaria'){
-                                $('.transferencia-bancaria').fadeIn();
-                                $('.detalle-factura').hide();
-                                $('#comprar').text('ENVIAR AHORA');
-                                
-                            }else{
-                                $('.transferencia-bancaria').fadeOut();
-                                $('.detalle-factura').hide();       
-                                $('#comprar').text('COMPRAR AHORA');
-                            }
-                            $(".select-forma-de-pago").removeClass('active');
-                            if(this.checked) {
-                                $(this).parent().addClass('active');
-                            }
-                        });
-                        
-                       
-                    </script>
-                    <div class="content-codigo-de-promocion" >
-                        <input type="checkbox" id="codigo-promocion" name="codigo-promocion">
-                        <label for="codigo-promocion"></label>                       
-                        <p>Si tenés un código promoción, indicarlo.</p>
-                        <input id="codigo-promocion-input" type="text" placeholder="CÓDIGO DE PROMOCIÓN">
-                    </div>
                     
                     <!-- ENVIOS -->
-                    
                     <div class="comprar-envios-content">
-                        <div class="seleccion-meses solo-envio">
+
+                        <!--SUSCRIPTOR-->
+                        <div class="seleccion-meses solo-suscriptor">
                             <div class="titulo">
                                 <p>SELECCIONAR CANTIDAD DE MESES</p>
                             </div>
                             <div class="meses">
-                                <div class="select-mes solo-envio" title="10% Descuento" descripcion="3 meses 10% Desc">
-                                    <input checked type="radio"  id="cantidad-meses-3" name="cantidad-meses">
+                                <div class="select-mes">
+                                    <input value="1" data-index="0" checked type="radio"  id="cantidad-meses-1" name="cantidad-meses">
+                                    <label for="cantidad-meses-1"></label>
+                                    <p for="cantidad-meses">1</p>
+                                </div>
+                                <div class="select-mes" title="10% Descuento" descripcion="3 meses 10% Descuento">
+                                    <input value="3" data-index="1" type="radio"  id="cantidad-meses-3" name="cantidad-meses">
                                     <label for="cantidad-meses-3"></label>
                                     <p for="cantidad-meses">3</p>
                                 </div>
-                                <div class="select-mes solo-envio" title="25% Descuento" descripcion="6 meses 25% Desc">
-                                    <input type="radio" id="cantidad-meses-6" name="cantidad-meses">
+                                <div class="select-mes" title="25% Descuento" descripcion="6 meses 25% Descuento">
+                                    <input value="6" data-index="2" type="radio" id="cantidad-meses-6" name="cantidad-meses">
                                     <label for="cantidad-meses-6"></label>
                                     <p for="cantidad-meses">6</p>
                                 </div>
-                                <div class="select-mes solo-envio" title="35% Descuento" descripcion="12 meses 30% Desc">
-                                    <input type="radio" id="cantidad-meses-12" name="cantidad-meses">
+                                <div class="select-mes" title="35% Descuento" descripcion="12 meses 30% Descuento">
+                                    <input value="12" data-index="3" type="radio" id="cantidad-meses-12" name="cantidad-meses">
                                     <label for="cantidad-meses-12"></label>
                                     <p for="cantidad-meses">12</p>
                                 </div>
-                                <script>
-                                $( document ).tooltip({
-      position: {
-        my: "center bottom-10",
-        at: "center top",
-        using: function( position, feedback ) {
-          $( this ).css( position );
-          $( "<div>" )
-            .addClass( "arrow" )
-            .addClass( feedback.vertical )
-            .addClass( feedback.horizontal )
-            .appendTo( this );
-        }
-      }
-    });
-                                    </script>
                             </div>
                         </div>
+
                         <div class="detalle-factura">
                             <div class="content-titulo">
                                 <h4>DETALLE FACTURA</h4>
                             </div>
                             <div class="content-descripcion-compra">
-                                <div class="fila solo-envio" style="width: 99% !important;">
+                                <div class="fila" style="width: 99% !important;">
                                     <div><p>Paquete</p></div>
-                                    <div><p class="decripcion-plan">3 meses 10% Desc</p></div>
-                                    <div><p style="text-align: right;">Envios 1.500</p></div>
-                                    <div><p style="text-align: right;">Subtotal</p></div>
-                                    <div><p style="text-align: right;"> $125.00</p></div>
+                                    <div><p class="plan-name" class="decripcion-plan"></p></div>
+                                    <div style="float:right;"><p class="plan-price" style="text-align: right;"></p></div>
+                                    <div style="float:right;"><p style="text-align: right;">Subtotal</p></div>
                                 </div>
-                                
-                                <div class="fila solo-suscriptor">
-                                    <div><p>Paquete</p></div>
-                                    <div><p>Hasta</p></div>
-                                    <div><p>3.000</p></div>
-                                    <div><p style="text-align: right;">Subtotal</p></div>
-                                    <div><p style="text-align: right;"> $125.00</p></div>
-                                </div>
-                                <div class="fila responsable-inscripto">
-                                    <div><p>Inpuestos</p></div>
+                                <div class="fila discount-row" style="width: 99% !important;">
+                                    <div><p>Descuentos</p></div>
                                     <div><p></p></div>
-                                    <div><p></p></div>
-                                    <div><p style="text-align: right;">IVA 21%</p></div>
-                                    <div><p style="text-align: right;"> $125.00</p></div>
+                                    <div style="float:right;"><p class="plan-price-discount" style="text-align: right;"></p></div>
+                                    <div style="float:right;"><p style="text-align: right;"></p></div>
                                 </div>
+                                <!--div class="fila responsable-inscripto">
+                                    <div><p>Impuestos</p></div>
+                                    <div><p></p></div>
+                                    <div style="float:right;"><p class="plan-price-tax" style="text-align: right;"> $125.00</p></div>
+                                    <div style="float:right;"><p style="text-align: right;">IVA 21%</p></div>
+                                </div-->
                                 <div class="fila">
                                     <div><p></p></div>
                                     <div><p></p></div>
-                                    <div><p></p></div>
-                                    <div><p style="text-align: right;"><b>Total:</b></p></div>
-                                    <div><p style="text-align: right;"> $125.00</p></div>
+                                    <div style="float:right;"><p class="plan-price-total" style="text-align: right;"></p></div>
+                                    <div style="float:right;"><p style="text-align: right;"><b>Total:</b></p></div>
                                 </div>
                             </div>  
                         </div>
-                        <div class="detalle-factura-envios-tarjeta solo-envio tarjeta">
-                            <div class="content-titulo solo-envio">
-                                <h4>DETALLE FACTURA</h4>
-                            </div>
-                            <div class="content-descripcion-compra solo-envio">
-                                
-                                <div class="fila solo-envio" style="width: 99% !important;">
-                                    <div><p>Paquete</p></div>
-                                    <div><p class="decripcion-plan">3 meses 10% Desc</p></div>
-                                    <div><p style="text-align: right;">Envios 1.500</p></div>
-                                    <div><p style="text-align: right;">Subtotal</p></div>
-                                    <div><p style="text-align: right;"> $125.00</p></div>
-                                </div>
-                               
-                            </div>  
-                        </div>
+                        
                         
                     </div>
                     
                     <!-- END ENVIOS -->
                     
                     <div class="bto_planes">
-                    <a href="#" id="comprar">COMPRAR AHORA</a>
-                    <div class="cleaner"></div>
+                        <a href="#" id="comprar">COMPRAR AHORA</a>
+                        <div class="cleaner"></div>
                     </div>
                     
                     
@@ -456,25 +262,24 @@
             </div> <!--infocont-->
         </div>
     </section>
+    
     <script>
-  $(function() {
-     $(".select-mes").click(function(){
-         $('.decripcion-plan').html($(this).attr('descripcion'));
-         
-     });
-     $("#codigo-promocion").click(function(){
-         if($("#codigo-promocion").is(':checked')){
-             $('#codigo-promocion-input').fadeIn();
-         }else{
-             $('#codigo-promocion-input').fadeOut();
-         }
-         
-     });
-    
-    
-  });
-  
-  </script>
+        var Plan = function (id, name, value, isSuscription) {
+            this.id = id;
+            this.name = name;
+            this.value = value;
+            this.isSuscription = isSuscription;
+        };
+        <?php
+            echo 'var planList = [];';
+            foreach ($plans as $plan) {
+                $isSuscription = ($plan->isSuscription)?'true':'false';
+                echo 'planList.push( new Plan('.$plan->id.',"'.$plan->nombre.'",'.$plan->precio.', '.$isSuscription.'));';
+            }
+        ?>
+    </script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    {{ HTML::script('js/sections/plans.js') }}
 </div><!--conteiner-->
 
 @stop

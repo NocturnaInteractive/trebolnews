@@ -2,7 +2,7 @@
 
 class CheckoutController extends BaseController {
 
-    public function index($id) {
+    public function index($id, $months = 1) {
 
         $user=Auth::user();
 
@@ -14,6 +14,18 @@ class CheckoutController extends BaseController {
             'currency_id' => 'USD'
         );
 
+        //Calculate Prices
+        $discountList = array(
+                '1' => 0,
+                '3' => 0.1,
+                '6' => 0.25,
+                '12'=> 0.35
+            );
+        $fullPrice = $foundPlan['precio'] * $months;
+        $discountPrice =  $fullPrice * $discountList[$months.''];
+        $finalPrice = $fullPrice - $discountPrice;
+
+        //Create Order
         $order = new Orden;
         $order->id_usuario    = $user->id;
         $order->id_plan       = $foundPlan['id'];
@@ -88,7 +100,7 @@ class CheckoutController extends BaseController {
                 "reason"                => $plan['title'],
                 "external_reference"    => (string) $external_reference,
                 "auto_recurring"        => array(
-                    "frequency"             => 1,
+                    "frequency"             => $months,
                     "frequency_type"        => "months",
                     "transaction_amount"    => number_format ( $plan['unit_price']*$ratio, 2, ".", ""),
                     "currency_id"           => "ARS"
@@ -99,6 +111,8 @@ class CheckoutController extends BaseController {
 
             $result = array(
                 'plan'     => $plan,
+                'months'   => $months,
+                'finalPrice'  => $finalPrice,
                 'mplink'   => $preapproval['response']
             );
         }else{
@@ -119,6 +133,8 @@ class CheckoutController extends BaseController {
             
             $result = array(
                 'plan'     => $plan,
+                'months'   => $months,
+                'finalPrice'  => $finalPrice,
                 'mplink'   => $preferenceResult['response'],
                 'test'     => $mp
             );
