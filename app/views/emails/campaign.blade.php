@@ -20,7 +20,9 @@
 	?>
 
 	{{$generated}}
-	{{$_SERVER}}
+	<?php
+	var_dump($_SERVER);
+	?>
 
 	<div class="trebol_footer">
 		@if(!is_null($footer))
