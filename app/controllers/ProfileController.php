@@ -86,28 +86,34 @@ class ProfileController extends \BaseController {
 		$path_to_call = 'uploads/custom-footer/';
 		$user_id = Auth::user()->id;
 		$filename = $user_id;
-		$upload_success = Input::file('image')->move($path_to_file, $filename);
 
-		if( isset($upload_success) ) {
+		try {
+			$upload_success = Input::file('image')->move($path_to_file, $filename);
 
-			Log::info('Footer Image Uploaded: '. gettype($upload_success));
+			if( isset($upload_success) ) {
 
-			$footer = CampaignFooter::where('user_id',$user_id)->first();
-			if(!$footer){
-				$footer = new CampaignFooter;
-				$footer->user_id 	= $user_id;
+				Log::info('Footer Image Uploaded: '. gettype($upload_success));
+
+				$footer = CampaignFooter::where('user_id',$user_id)->first();
+				if(!$footer){
+					$footer = new CampaignFooter;
+					$footer->user_id 	= $user_id;
+				}
+				$footer->name 		= Input::get('name');
+				$footer->imagePath  = $path_to_call.$filename;
+				$footer->email 		= Input::get('email');
+				$footer->address    = Input::get('address');
+				$footer->save();
+
+				var_dump(Input::file('image'));
+				return Response::json(array('status' => 'ok'), 200);
+			} else {
+				return Response::json(array('status' => 'error'), 400);
 			}
-			$footer->name 		= Input::get('name');
-			$footer->imagePath  = $path_to_call.$filename;
-			$footer->email 		= Input::get('email');
-			$footer->address    = Input::get('address');
-			$footer->save();
-
-			var_dump(Input::file('image'));
-			return Response::json(array('status' => 'ok'), 200);
-		} else {
-			return Response::json(array('status' => 'error'), 400);
+		} catch (Exception $e) {
+			return Response::json(array('status' => 'error', 'message' => $e->getMessage()), 400);
 		}
+		
 	}
 
 }
