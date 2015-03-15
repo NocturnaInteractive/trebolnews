@@ -27,6 +27,7 @@
 		$socialLink->delicious	= Session::get('campania.socialLinks_delicious');
 		$query = CampaignFooter::where('user_id',Auth::user()->id);
 		$footer = $query->first();
+
 		
 		if($suscriptor){
 			$generated = str_replace("%%suscriptor.name%%",  $suscriptor->name, $generated);
@@ -38,15 +39,24 @@
 	{{$generated}}
 
 	<div class="trebol_footer">
-		<?php
-			echo View::make('emails/social_footer', array( 'socialLink' =>  $socialLink, 'host' => $host));
-		?>
 		@if( $footer )
-			<?php echo View::make('emails/suscriptor_footer', array( 'footer' =>  $footer)); ?>
+			<?php 
+				echo View::make('emails/suscriptor_footer', array( 'footer' =>  $footer, 'host' => $host)); 
+				if($socialLink){
+					echo View::make('emails/social_footer', array( 'socialLink' =>  $socialLink, 'host' => $host));
+				}
+			?>
 		@else
-			<?php echo View::make('emails/non_suscriptor_footer'); ?>
+			<?php 
+				echo View::make('emails/non_suscriptor_footer', array( 'user' =>  Auth::user(), 'host' => $host ) ); 
+			?>
 		@endif
-		<div><a href="#">Unsuscribe</a></div>
+		<div><table width="600px" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;">
+			<tr>
+				<td align="left"><a href="#" style="font-size:12px; margin-left:20px; text-decoration:none; color:#333; font-family:Helvetica, Arial, sans-serif;">Desuscribirse</a></td>
+				<td align="right"><a href="#" style="font-size:12px; margin-right:20px; text-decoration:none; color:#333; font-family:Helvetica, Arial, sans-serif;">Enviar a un amigo</a></td>
+			</tr>
+		</table></div>
 	</div>
 </body>
 </html>

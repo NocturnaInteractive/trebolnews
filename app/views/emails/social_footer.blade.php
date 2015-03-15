@@ -1,3 +1,4 @@
+<div style="text-align: center;">
 <?php
 	if ($socialLink->facebook != '' ){	echo '<a class="sociallink_facebook" 	href="'.$socialLink->facebook.'">	<img src="'.$host.'/internas/imagenes/campania_facebook.png" /></a>';	}
 	if ($socialLink->twitter != '' ){	echo '<a class="sociallink_twitter" 	href="'.$socialLink->twitter.'">	<img src="'.$host.'/internas/imagenes/campania_tw.png" /></a>';	}
@@ -11,3 +12,4 @@
 	if ($socialLink->digg != '' ){		echo '<a class="sociallink_digg" 		href="'.$socialLink->digg.'">		<img src="'.$host.'/internas/imagenes/campania_digg.png" /></a>';	}
 	if ($socialLink->delicious != '' ){	echo '<a class="sociallink_delicious" 	href="'.$socialLink->delicious.'">	<img src="'.$host.'/internas/imagenes/campania_delicius.png" /></a>';	}	
 ?>
+</div>
