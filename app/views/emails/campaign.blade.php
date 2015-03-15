@@ -20,6 +20,7 @@
 	?>
 
 	{{$generated}}
+	{{$host}}
 
 	<div class="trebol_footer">
 		@if(!is_null($footer))
