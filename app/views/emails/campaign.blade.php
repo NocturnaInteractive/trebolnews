@@ -6,7 +6,7 @@
 </head>
 <body>
 	<?php
-		$host = '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . '/';
+		$host = '';
 		$generated = $campaign->template;
 		$socialLink = $campaign->socialLinks;
 		$query = CampaignFooter::where('user_id',Auth::user()->id);
