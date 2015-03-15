@@ -103,6 +103,7 @@ class ProfileController extends \BaseController {
 			$footer->address    = Input::get('address');
 			$footer->save();
 
+			var_dump(Input::file('image'));
 			return Response::json(array('status' => 'ok'), 200);
 		} else {
 			return Response::json(array('status' => 'error'), 400);
