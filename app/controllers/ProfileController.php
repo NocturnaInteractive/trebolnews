@@ -103,7 +103,8 @@ class ProfileController extends \BaseController {
 			$footer->address    = Input::get('address');
 			$footer->save();
 
-			return var_dump($upload_success);
+			echo 'Footer Image Uploaded:';
+			var_dump($upload_success);
 			return Response::json(array('status' => 'ok'), 200);
 		} else {
 			return Response::json(array('status' => 'error'), 400);
