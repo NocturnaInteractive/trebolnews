@@ -6,7 +6,7 @@
 </head>
 <body>
 	<?php
-		$host = '//'.Request::server("SERVER_NAME") . ':' . Request::server('SERVER_PORT') . '/';
+		$host = '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . '/';
 		$generated = $campaign->template;
 		$socialLink = $campaign->socialLinks;
 		$query = CampaignFooter::where('user_id',Auth::user()->id);
@@ -20,7 +20,7 @@
 	?>
 
 	{{$generated}}
-	{{$host}}
+	{{$_SERVER}}
 
 	<div class="trebol_footer">
 		@if(!is_null($footer))
