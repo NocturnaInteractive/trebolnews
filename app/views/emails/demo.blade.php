@@ -37,6 +37,7 @@
 	?>
 
 	{{$generated}}
+	
 
 	<div class="trebol_footer">
 		@if( $footer )
