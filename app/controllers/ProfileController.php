@@ -105,7 +105,7 @@ class ProfileController extends \BaseController {
 
 			echo 'Footer Image Uploaded:';
 			var_dump($upload_success);
-			return Response::json(array('status' => 'ok'), 200);
+			return Response::json($upload_success);
 		} else {
 			return Response::json(array('status' => 'error'), 400);
 		}
