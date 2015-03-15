@@ -6,7 +6,7 @@
 </head>
 <body>
 	<?php
-		$host = '';
+		$host = $_SERVER['HTTP_ORIGIN'];
 		$generated = $campaign->template;
 		$socialLink = $campaign->socialLinks;
 		$query = CampaignFooter::where('user_id',Auth::user()->id);
@@ -20,9 +20,6 @@
 	?>
 
 	{{$generated}}
-	<?php
-	var_dump($_SERVER);
-	?>
 
 	<div class="trebol_footer">
 		@if(!is_null($footer))
