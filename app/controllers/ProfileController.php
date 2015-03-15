@@ -90,7 +90,7 @@ class ProfileController extends \BaseController {
 
 		if( $upload_success ) {
 
-			Log::info('Footer Image Uploaded: '. var_dump($upload_success));
+			Log::info('Footer Image Uploaded: '. gettype($upload_success));
 
 			$footer = CampaignFooter::where('user_id',$user_id)->first();
 			if(!$footer){
