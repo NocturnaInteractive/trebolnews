@@ -82,7 +82,7 @@ class ProfileController extends \BaseController {
 
 
 	public function footerForm(){
-		$path_to_file = 'public/uploads/custom-footer/';
+		$path_to_file = public_path() . '/uploads/custom-footer/';
 		$path_to_call = 'uploads/custom-footer/';
 		$user_id = Auth::user()->id;
 		$filename = $user_id;
