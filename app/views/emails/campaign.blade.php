@@ -6,7 +6,7 @@
 </head>
 <body>
 	<?php
-		$host = 'http://www.trebolnews.com';
+		$host = '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
 		$generated = $campaign->template;
 		$socialLink = $campaign->socialLinks;
 		$query = CampaignFooter::where('user_id',Auth::user()->id);
