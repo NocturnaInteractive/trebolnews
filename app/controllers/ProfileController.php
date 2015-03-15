@@ -88,7 +88,7 @@ class ProfileController extends \BaseController {
 		$filename = $user_id;
 		$upload_success = Input::file('image')->move($path_to_file, $filename);
 
-		if( $upload_success ) {
+		if( isset($upload_success) ) {
 
 			Log::info('Footer Image Uploaded: '. gettype($upload_success));
 
@@ -103,9 +103,7 @@ class ProfileController extends \BaseController {
 			$footer->address    = Input::get('address');
 			$footer->save();
 
-			echo 'Footer Image Uploaded:';
-			var_dump($upload_success);
-			return Response::json($upload_success);
+			return Response::json(array('status' => 'ok'), 200);
 		} else {
 			return Response::json(array('status' => 'error'), 400);
 		}
