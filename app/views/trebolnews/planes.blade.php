@@ -117,7 +117,7 @@
                     </div>
                 <div class="formasdepago">
                     <h4>FORMA DE PAGO</h4>
-                    <!-- div class="select-forma-de-pago active">
+                    <div class="select-forma-de-pago active">
                         <input checked type="radio" id="tarjeta-de-credito" name="forma-de-pago">
                         <label for="tarjeta-de-credito"></label>
                         <p for="tarjeta-de-credito">Compra con tarjeta</p>
@@ -126,66 +126,11 @@
                         <input type="radio" id="transferencia-bancaria" name="forma-de-pago">
                         <label for="transferencia-bancaria"></label>
                         <p>Transferencia bancaria</p>
-                    </div-->
-                    <p class="aclaracion-text tarjeta">Los paquetes que compres con tarjeta de crédito, se activarán inmeditamente en tu cuenta y tienen una validez de 30 días para ser utilizados.</p>
-                    <!--p class="aclaracion-text transferencia">Al enviar tus datos te llegará un email con la factura y datos para realizar la transferencia bancaria.<br>Envíanos el comprobante de transferencia para poder activar tu compra. Muchos éxitos!</p-->
-                    
-                    <div class="transferencia-bancaria">
-                        <div class="content-select">
-                            <div class="select-custom">
-                                <ul id="select-tipo-factura">
-                                    <li>
-                                        <a href="#" class="boton">SELECCIONA TIPO DE FACTURA</a>
-                                        <ul class="opciones-select">
-                                            <li><a href="#" tipo="consumidor-final">CONSUMIDOR FINAL</a></li>
-                                            <li><a href="#" tipo="responsable-inscripto">RESPONSABLE INSCRIPTO</a></li>
-                                        </ul>
-                                    </li>
-                                </ul> 
-                                <div class="cleaner"></div>
-                            </div>
-                           
-                        </div>
-                        
-                        <div class="content-form-deposito">
-                            <div class="wrapper">
-                                <form>
-                                    <div class="forms-afip responsable-inscripto">
-                                        <div class="col-left">
-                                            <input type="text" placeholder="NOMBRE Y APELLIDO RESPONSABLE*">
-                                            <input type="text" placeholder="NOMBRE DE LA EMPRESA*">
-                                            <input type="text" placeholder="DIRECCIÓN DE FACTURACIÓN*">
-                                        </div>
-                                        <div class="col-right">
-                                            <input type="text" placeholder="MAIL DE CONTACTO*">
-                                            <input type="text" placeholder="CUIT EMPRESA*">
-                                            <input type="text" placeholder="TELÉFONO DE CONTACTO">
-                                        </div>
-                                    </div>
-                                    <div class="forms-afip consumidor-final">
-                                        <div class="col-left">
-                                            <input type="text" placeholder="NOMBRE Y APELLIDO RESPONSABLE*">
-                                            <input type="text" placeholder="EMPRESA">
-                                            <input type="text" placeholder="DIRECCIÓN">
-                                        </div>
-                                        <div class="col-right">
-                                            <input type="text" placeholder="MAIL DE CONTACTO*">
-                                            <input type="text" placeholder="TELÉFONO DE CONTACTO">
-                                        </div>
-                                    </div>
-                                        
-                                    
-                                </form>
-                            </div>                        
-                        </div>
                     </div>
                     
+                    <div class="cleaner"><br><br><br><br></div>
                     
-                    
-                    <!-- ENVIOS -->
-                    <div class="comprar-envios-content">
-
-                        <!--SUSCRIPTOR-->
+                    <!--SUSCRIPTOR-->
                         <div class="seleccion-meses solo-suscriptor">
                             <div class="titulo">
                                 <p>SELECCIONAR CANTIDAD DE MESES</p>
@@ -213,6 +158,91 @@
                                 </div>
                             </div>
                         </div>
+
+                    <div class="transferencia-bancaria">
+                        <p class="aclaracion-text transferencia">Al enviar tus datos te llegará un email con la factura y datos para realizar la transferencia bancaria.<br>Envíanos el comprobante de transferencia para poder activar tu compra. Muchos éxitos!</p>
+                        <div class="content-select">
+                            <div class="select-custom">
+                                <ul id="select-tipo-factura">
+                                    <li>
+                                        <a href="#" class="boton">SELECCIONA TIPO DE FACTURA</a>
+                                        <ul class="opciones-select">
+                                            <li><a href="#" tipo="consumidor-final">CONSUMIDOR FINAL</a></li>
+                                            <li><a href="#" tipo="responsable-inscripto">RESPONSABLE INSCRIPTO</a></li>
+                                        </ul>
+                                    </li>
+                                </ul> 
+                                <div class="cleaner"></div>
+                            </div>
+                           
+                        </div>
+                        
+                        <div class="content-form-deposito">
+                            <div class="wrapper">
+                                <form>
+                                    <div class="forms-afip">
+                                        <div class="col-left">
+                                            <input type="text" placeholder="NOMBRE Y APELLIDO RESPONSABLE*">
+                                            <input type="text" placeholder="NOMBRE DE LA EMPRESA*">
+                                            <input type="text" placeholder="DIRECCIÓN DE FACTURACIÓN*">
+                                        </div>
+                                        <div class="col-right">
+                                            <input type="text" placeholder="MAIL DE CONTACTO*">
+                                            <input type="text" placeholder="TELÉFONO DE CONTACTO">
+                                            <input type="text" class="responsable-inscripto" placeholder="CUIT EMPRESA*">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>                        
+                        </div>
+
+
+
+                        <div class="detalle-factura">
+                            <div class="content-titulo">
+                                <h4>DETALLE FACTURA</h4>
+                            </div>
+                            <div class="content-descripcion-compra">
+                                <div class="fila" style="width: 99% !important;">
+                                    <div><p>Paquete</p></div>
+                                    <div><p class="plan-name" class="decripcion-plan"></p></div>
+                                    <div style="float:right;"><p class="plan-price" style="text-align: right;"></p></div>
+                                    <div style="float:right;"><p style="text-align: right;">Subtotal</p></div>
+                                </div>
+                                <div class="fila discount-row" style="width: 99% !important;">
+                                    <div><p>Descuentos</p></div>
+                                    <div><p></p></div>
+                                    <div style="float:right;"><p class="plan-price-discount" style="text-align: right;"></p></div>
+                                    <div style="float:right;"><p style="text-align: right;"></p></div>
+                                </div>
+                                <div class="fila responsable-inscripto">
+                                    <div><p>Impuestos</p></div>
+                                    <div><p></p></div>
+                                    <div style="float:right;"><p class="plan-price-tax" style="text-align: right;"> $125.00</p></div>
+                                    <div style="float:right;"><p style="text-align: right;">IVA 21%</p></div>
+                                </div>
+                                <div class="fila responsable-inscripto total">
+                                    <div><p></p></div>
+                                    <div><p></p></div>
+                                    <div style="float:right;"><p class="plan-price-totaltax" style="text-align: right;"></p></div>
+                                    <div style="float:right;"><p style="text-align: right;"><b>Total:</b></p></div>
+                                </div>
+                                <div class="fila consumidor-final total">
+                                    <div><p></p></div>
+                                    <div><p></p></div>
+                                    <div style="float:right;"><p class="plan-price-total" style="text-align: right;"></p></div>
+                                    <div style="float:right;"><p style="text-align: right;"><b>Total:</b></p></div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <!-- ENVIOS -->
+                    <div class="comprar-envios-content">
+
+                        <p class="aclaracion-text tarjeta">Los paquetes que compres con tarjeta de crédito, se activarán inmeditamente en tu cuenta y tienen una validez de 30 días para ser utilizados.</p>
 
                         <div class="detalle-factura">
                             <div class="content-titulo">
@@ -253,6 +283,7 @@
                     
                     <div class="bto_planes">
                         <a href="#" id="comprar">COMPRAR AHORA</a>
+                        <a href="#" id="enviar" style="display:none;">ENVIAR AHORA</a>
                         <div class="cleaner"></div>
                     </div>
                     

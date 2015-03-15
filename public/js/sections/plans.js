@@ -143,9 +143,11 @@ var PlanServices = {
     	var comboIndex = $('#cantidad-meses-'+PlanServices.selectedCombo).data('index');
     	var discount = (plan.isSuscription) ? price * (PlanServices.comboDiscounts[comboIndex]) / 100 : 0;
     	var total = price - discount;
+    	var totaltax = price + tax - discount;
     	$('.plan-price').html(PlanServices.selectedCurrency.symbol + price.toFixed(2));
     	$('.plan-price-tax').html(PlanServices.selectedCurrency.symbol + tax.toFixed(2));
     	$('.plan-price-total').html(PlanServices.selectedCurrency.symbol + total.toFixed(2));
+    	$('.plan-price-totaltax').html(PlanServices.selectedCurrency.symbol + totaltax.toFixed(2));
     	$('.plan-price-discount').html('-' + PlanServices.selectedCurrency.symbol + discount.toFixed(2));
     	if(discount > 0)
     		$('.discount-row').show();
@@ -161,6 +163,29 @@ var PlanServices = {
 	    if (confirm('Esta seguro que desea comprar \n' + plan.name)) {
 	        window.top.location.href = $(e.target).attr('href');
 	    }
+	},
+
+	paymentFormHandler: function (e){
+		$('.transferencia-bancaria').hide();
+		$('.comprar-envios-content').hide();
+	    $('#comprar').hide();
+	    $('#enviar').hide();
+
+	    if (this.getAttribute('id') == 'transferencia-bancaria') {
+	        $('.transferencia-bancaria').show();
+	    	$('#enviar').show();
+
+	    } else {
+	        $('.transferencia-bancaria').fadeOut();
+	        $('.comprar-envios-content').show();
+	    	$('#comprar').show();
+	    }
+	    $(".select-forma-de-pago").removeClass('active');
+	    if (this.checked) {
+	        $(this).parent().addClass('active');
+	    }
+
+	    $('#select-tipo-factura .opciones-select').find('a').eq(0).trigger('click');
 	},
 
 	comboCheckboxHandler: function (e){
@@ -182,6 +207,7 @@ $(".select-mes").click(PlanServices.comboCheckboxHandler);
 $('#comprar').click(PlanServices.buyButtonHandler);
 $('.plan').click(PlanServices.planClickHandler);
 $('#currency-dropdown').change(PlanServices.currencyDropdownHandler);
+$(".select-forma-de-pago").find('input').change(PlanServices.paymentFormHandler);
 PlanServices.setCurrencies();
 $(document).tooltip({
     position: {
@@ -202,13 +228,6 @@ $(document).tooltip({
 
 ////////////
 
-$(document).ready(function() {
-    $('#comprar').text('COMPRAR AHORA');
-});
-
-function reiniciarForm() {
-    $('#comprar').text('COMPRAR AHORA');
-}
 $('#select-tipo-factura').find('a').click(function(e) {
     e.preventDefault();
 
@@ -222,7 +241,6 @@ $('#select-tipo-factura').find('.opciones-select').find('a').click(function(e) {
     $('#select-tipo-factura').find('.boton').html($(this).html());
     $('#select-tipo-factura').find('.opciones-select').css('pointer-events', 'none');
 
-    $('.forms-afip').hide();
     $('.' + this.getAttribute('tipo')).fadeIn();
     if (this.getAttribute('tipo') == 'consumidor-final') {
         $('.consumidor-final').show();
@@ -232,57 +250,5 @@ $('#select-tipo-factura').find('.opciones-select').find('a').click(function(e) {
         $('.consumidor-final').hide();
         $('.responsable-inscripto').show();
         $('.detalle-factura').show();
-    }
-});
-
-
-$(".select-forma-de-pago").find('input').change(function() {
-
-    if (this.getAttribute('id') == 'transferencia-bancaria') {
-        $('.transferencia-bancaria').fadeIn();
-        $('.detalle-factura').hide();
-        $('#comprar').text('ENVIAR AHORA');
-
-    } else {
-        $('.transferencia-bancaria').fadeOut();
-        $('.detalle-factura').hide();
-        $('#comprar').text('COMPRAR AHORA');
-    }
-    $(".select-forma-de-pago").removeClass('active');
-    if (this.checked) {
-        $(this).parent().addClass('active');
-    }
-});
-
-
-/////////////
-
-
-
-
-
-///////////
-
-
-
-
-
-
-
-
-/**
-*	Events
-*/
-
-
-
-
-
-
-$("#codigo-promocion").click(function() {
-    if ($("#codigo-promocion").is(':checked')) {
-        $('#codigo-promocion-input').fadeIn();
-    } else {
-        $('#codigo-promocion-input').fadeOut();
     }
 });

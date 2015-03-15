@@ -753,8 +753,12 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     margin:0;
 }
 
-.infocont .bto_planes #comprar { width:160px; height:25px; padding-top:9px;  display:block; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; -moz-box-shadow: 0px 3px 0px 0px #10705d; -o-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; color:#FFF !important; float:right}
-.infocont .bto_planes #comprar:hover {background-color:#17a387; -webkit-box-shadow: 0px 0px 0px 0px #943849; -moz-box-shadow: 0px 0px 0px 0px #943849; -o-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
+.infocont .bto_planes #comprar,
+.infocont .bto_planes #enviar
+ { width:160px; height:25px; padding-top:9px;  display:block; font-size:14px; text-align:center; background-color:#17a387; color:#FFF;  -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 0px 3px 0px 0px #10705d; -moz-box-shadow: 0px 3px 0px 0px #10705d; -o-box-shadow: 0px 3px 0px 0px #10705d; box-shadow:  0px 3px 0px 0px #10705d; text-decoration:none; color:#FFF !important; float:right}
+.infocont .bto_planes #comprar:hover,
+.infocont .bto_planes #enviar:hover
+{background-color:#17a387; -webkit-box-shadow: 0px 0px 0px 0px #943849; -moz-box-shadow: 0px 0px 0px 0px #943849; -o-box-shadow: 0px 0px 0px 0px #943849; box-shadow:  0px 0px 0px 0px #943849; margin-top:3px; -webkit-border-radius: 2px; -moz-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px;}
 
 #planes .radioplanes { position:relative; display:inline-block; z-index:2; float:left}
 
@@ -819,7 +823,7 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 
 
 
-.formasdepago .transferencia-bancaria, .formasdepago .transferencia-bancaria .forms-afip{
+.formasdepago .transferencia-bancaria{
     display: none;
 }
 .formasdepago h4{
@@ -914,28 +918,28 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
     float: left;
     margin: 30px 0 0 0;
 }
-.comprar-envios-content .titulo, .comprar-envios-content .meses {
+.seleccion-meses .titulo, .seleccion-meses .meses {
     position: relative;
     float: left;
     height: 37px;
 }
-.comprar-envios-content .titulo{
+.seleccion-meses .titulo{
     background-color: #17a387;
     width: 275px;
 }
-.comprar-envios-content .titulo p{
+.seleccion-meses .titulo p{
     color:#fff;
     font-size: 13px;
     text-align: center;
 }
-.comprar-envios-content .meses .select-mes{
+.seleccion-meses .meses .select-mes{
     position: relative;
     background-color: #d4d8d9;
     width: 80px;
     height: 37px;
     float: left;
 }
-.comprar-envios-content .meses .select-mes p{
+.seleccion-meses .meses .select-mes p{
     font-size: 15px;
     color: #17a387;
     position: absolute;
@@ -978,11 +982,14 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 .ui-helper-hidden-accessible div:last-child{
     display: none;
 }
-.formasdepago .content-descripcion-compra .fila:last-child{
+.formasdepago .content-descripcion-compra .fila:last-child,
+.formasdepago .content-descripcion-compra .fila.total {
     border:0;
     background-color: #17a387;
 }
-.formasdepago .content-descripcion-compra .fila:last-child p{
+.formasdepago .content-descripcion-compra .fila:last-child p,
+.formasdepago .content-descripcion-compra .fila.total p
+{
     color:#fff;
 }
 .formasdepago .content-descripcion-compra .fila:first-child{
