@@ -150,6 +150,44 @@ Route::group(array(
             }
         ));
 
+
+        Route::get('usuarios/{user_id}/orders', array(
+            function($user_id) {
+                $user = Usuario::find($user_id);
+                $orders = Orden::where('id_usuario',$user_id)
+                                ->select(array(
+                                        'ordenes.id as orderId',
+                                        'planes.nombre',
+                                        'ordenes.monto',
+                                        'ordenes.id_plan',
+                                        'ordenes.id_usuario',
+                                        'ordenes.created_at'
+                                    ))
+                                ->join('planes', 'planes.id', '=', 'ordenes.id_plan')
+                                ->get();
+                $plans = Plan::all();
+
+                $ordersUnpayed = DB::table('ordenes')
+                    ->select(array(
+                                'ordenes.id as orderId',
+                                'planes.nombre',
+                                'ordenes.monto',
+                                'ordenes.id_plan',
+                                'ordenes.id_usuario',
+                                'ordenes.created_at'
+                        ))
+                    ->leftJoin('planes', 'planes.id', '=', 'ordenes.id_plan')
+                    ->leftJoin('pagos', 'ordenes.id', '=', 'pagos.id_orden')
+                    ->where('ordenes.id_usuario',$user_id)
+                    ->whereRaw('pagos.id_orden is NULL')
+                    ->get();
+
+                return View::make('admin/user_orders', array( 'orders' => $orders, 'ordersUnpayed' => $ordersUnpayed, 'plans' => $plans, 'user' => $user));
+            }
+        ));
+
+        Route::post('plan-to-user', 'AdminController@planToUser');
+
     });
 
 });

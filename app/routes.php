@@ -46,6 +46,7 @@ Route::get('/checkout/{planId}/{months}',function($planId, $months){
 Route::get('/checkout-success', 'CheckoutController@success');
 Route::get('/notifications',    'CheckoutController@notifications');
 Route::post('/notifications',    'CheckoutController@notifications');
+Route::post('/checkout/manual',    'CheckoutController@createManualOrder');
 Route::get('/test',    'CheckoutController@test');
 
 Route::get('/payments',function(){

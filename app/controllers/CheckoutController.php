@@ -143,6 +143,55 @@ class CheckoutController extends BaseController {
         return View::make('checkout/checkout_review', $result );
     }
 
+    public function createManualOrder (){
+        $planId = Request::input('planId');
+        $months = Request::input('months');
+        $taxApply = Request::input('taxApply');
+
+        if(!isset($months)){
+            $months = 1;
+        }
+
+
+        $user=Auth::user();
+
+        $foundPlan = Plan::find($planId);
+        $plan  = array(
+            'title'       => $foundPlan['nombre'],
+            'unit_price'  => (float) $foundPlan['precio'],
+            'quantity'    => 1,
+            'currency_id' => 'USD'
+        );
+
+        //Calculate Prices
+        $discountList = array(
+                '1' => 0,
+                '3' => 0.1,
+                '6' => 0.25,
+                '12'=> 0.35
+            );
+
+        $tax = 0;
+
+        $fullPrice = $foundPlan['precio'] * $months;
+        $discountPrice =  $fullPrice * $discountList[$months.''];
+        $finalPrice = $fullPrice - $discountPrice;
+
+        if($taxApply == 'true'){
+            $finalPrice = $finalPrice * 1.21;
+        }
+
+        $finalPrice = number_format ( $finalPrice, 2, ".", "");
+
+        $order = new Orden;
+        $order->id_usuario    = $user->id;
+        $order->id_plan       = $foundPlan['id'];
+        $order->monto         = $finalPrice;
+        $order->isSuscription = $foundPlan['isSuscription'];
+        $order->save();
+
+    }
+
     private function mlAuth(){
         /* IDs MercadoPago */
         $mpClientId = "7444";
@@ -229,6 +278,10 @@ class CheckoutController extends BaseController {
         }
 
         return $message;
+    }
+
+    public function manualPayment ($order){
+        $this->managePayment($order,'approved');
     }
 
     private function managePayment ($orden,$payment_status){

@@ -14,6 +14,7 @@ var PlanServices = {
 	selectedCurrency: null,
 	selectedPlan: null,
 	selectedCombo: 1,
+	taxApply: false,
 	comboDiscounts: [0,10,25,35],
 
 	loadCurrencies: function (){
@@ -24,7 +25,7 @@ var PlanServices = {
 	},
 	
 	setCurrencies: function (){
-
+		PlanServices.taxApply = false;
 		PlanServices.loadCurrencies();
 		PlanServices.selectedCurrency = PlanServices.currencyList[0];
 		PlanServices.currencyList.forEach(function (element, index){
@@ -88,7 +89,7 @@ var PlanServices = {
 
 	planClickHandler: function (e){
 		e.preventDefault();
-
+		PlanServices.taxApply = false;
 
 		// get the input element and check it
 	    $('.plan').find('input').prop('checked', '');
@@ -139,7 +140,7 @@ var PlanServices = {
 	setPrices: function (){
 		var plan = PlanServices.selectedPlan;
 		var price = (parseFloat(plan.value) * PlanServices.selectedCurrency.ratio * PlanServices.selectedCombo);
-    	var tax = (plan.isSuscription) ? price * 0.21 : 0 ;
+    	var tax = price * 0.21;
     	var comboIndex = $('#cantidad-meses-'+PlanServices.selectedCombo).data('index');
     	var discount = (plan.isSuscription) ? price * (PlanServices.comboDiscounts[comboIndex]) / 100 : 0;
     	var total = price - discount;
@@ -162,6 +163,20 @@ var PlanServices = {
 
 	    if (confirm('Esta seguro que desea comprar \n' + plan.name)) {
 	        window.top.location.href = $(e.target).attr('href');
+	    }
+	},
+
+	sendButtonHandler: function (e){
+		e.preventDefault();
+
+	    var plan = PlanServices.selectedPlan;
+
+	    if (confirm('Esta seguro que desea enviar la orden por \n' + plan.name)) {
+	        $.post('/checkout/manual',{
+	        	'planId': plan.id, 
+	        	'months': PlanServices.selectedCombo, 
+	        	'taxApply':  PlanServices.taxApply
+	        });
 	    }
 	},
 
@@ -205,6 +220,7 @@ var PlanServices = {
 
 $(".select-mes").click(PlanServices.comboCheckboxHandler);
 $('#comprar').click(PlanServices.buyButtonHandler);
+$('#enviar').click(PlanServices.sendButtonHandler);
 $('.plan').click(PlanServices.planClickHandler);
 $('#currency-dropdown').change(PlanServices.currencyDropdownHandler);
 $(".select-forma-de-pago").find('input').change(PlanServices.paymentFormHandler);
@@ -238,15 +254,18 @@ $('#select-tipo-factura').find('.boton').hover(function(e) {
 
 $('#select-tipo-factura').find('.opciones-select').find('a').click(function(e) {
     e.preventDefault();
+    PlanServices.taxApply = false;
     $('#select-tipo-factura').find('.boton').html($(this).html());
     $('#select-tipo-factura').find('.opciones-select').css('pointer-events', 'none');
 
     $('.' + this.getAttribute('tipo')).fadeIn();
     if (this.getAttribute('tipo') == 'consumidor-final') {
+    	PlanServices.taxApply = true;
         $('.consumidor-final').show();
         $('.responsable-inscripto').hide();
         $('.detalle-factura').show();
     } else if (this.getAttribute('tipo') == 'responsable-inscripto') {
+    	
         $('.consumidor-final').hide();
         $('.responsable-inscripto').show();
         $('.detalle-factura').show();

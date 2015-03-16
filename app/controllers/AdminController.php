@@ -39,4 +39,13 @@ class AdminController extends BaseController {
         }
     }
 
+    public function planToUser() {
+        $orderId = Request::input('orderId');
+        $order = Orden::find($orderId);
+        $checkout = new CheckoutController();
+        $checkout->manualPayment($order);
+
+        return Response::json(array('status' => 'ok'), 200);
+    }
+
 }

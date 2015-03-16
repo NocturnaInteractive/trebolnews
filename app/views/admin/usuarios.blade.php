@@ -27,6 +27,7 @@
             <th>Creado</th>
             <th>Editado</th>
             <th>Eliminado</th>
+            <th style="width:100px;">Acciones</th>
         </tr>
         @foreach($usuarios as $usuario)
         <tr>
@@ -46,6 +47,9 @@
             <td>{{ $usuario->created_at }}</td>
             <td>{{ $usuario->updated_at }}</td>
             <td>{{ $usuario->deleted_at }}</td>
+            <td>
+                <a href="/admin/usuarios/{{$usuario->id}}/orders">Ver Ordenes</a>
+            </td>
         </tr>
         @endforeach
     </table>

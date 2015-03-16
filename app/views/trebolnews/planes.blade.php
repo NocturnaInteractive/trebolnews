@@ -215,19 +215,19 @@
                                     <div style="float:right;"><p class="plan-price-discount" style="text-align: right;"></p></div>
                                     <div style="float:right;"><p style="text-align: right;"></p></div>
                                 </div>
-                                <div class="fila responsable-inscripto">
+                                <div class="fila consumidor-final">
                                     <div><p>Impuestos</p></div>
                                     <div><p></p></div>
                                     <div style="float:right;"><p class="plan-price-tax" style="text-align: right;"> $125.00</p></div>
                                     <div style="float:right;"><p style="text-align: right;">IVA 21%</p></div>
                                 </div>
-                                <div class="fila responsable-inscripto total">
+                                <div class="fila consumidor-final total">
                                     <div><p></p></div>
                                     <div><p></p></div>
                                     <div style="float:right;"><p class="plan-price-totaltax" style="text-align: right;"></p></div>
                                     <div style="float:right;"><p style="text-align: right;"><b>Total:</b></p></div>
                                 </div>
-                                <div class="fila consumidor-final total">
+                                <div class="fila responsable-inscripto total">
                                     <div><p></p></div>
                                     <div><p></p></div>
                                     <div style="float:right;"><p class="plan-price-total" style="text-align: right;"></p></div>
