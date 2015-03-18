@@ -55,7 +55,7 @@ class ReportController extends \BaseController {
 		$report = Report::where('campaign_id', $campaign_id)->first();
 		$report->opened++;
 		$report->save();
-		$response = Response::download(public_path().'/imagenes/pixel.gif', 'pixel.gif');
+		$response = Response::make(File::get(public_path().'/imagenes/pixel.gif'));
 		$response->header('Content-Type', 'image/gif');
 		return $response;
 	}
