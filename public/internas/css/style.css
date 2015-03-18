@@ -313,7 +313,7 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 /*--------------------------------------------------------------------------------------------*/
 
 
-.infocont { padding:45px;}
+.infocont { margin: 45px; position: relative; }
 
 .content h3 { color:#17a387; font-weight:normal; font-size:25px; margin:0}
 .content p { font-size:14px; z-index: 1000; }
@@ -1922,6 +1922,22 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 .tabla_template .radio label:after { background-color:transparent}
 
 
+#template-gallery { position: absolute; height: 87%; width: 100%; background-color: white; z-index: 999; border:1px solid #D4D8D9; overflow-y: auto; }
+#template-gallery .template-wrapper { margin: 8px; display: inline-block;}
+#template-gallery .template-wrapper .template { padding: 5px; display: block; border:1px solid #D4D8D9; text-decoration: none;}
+#template-gallery .template-wrapper .template:hover { border:1px solid #17a387; }
+#template-gallery .template-wrapper .template .template-image-mask { overflow: hidden; width: 155px; height: 210px; position: relative; }
+#template-gallery .template-wrapper .template .template-image-mask img { max-width: 155px; position: absolute; margin: 0 auto; }
+#template-gallery .template-wrapper .template input {display: none;}
+#template-gallery .template-wrapper .template .template-name {margin-top: 5px; }
+#template-gallery .template-wrapper .icon-container { text-align: right; margin: 10px 0; }
+#template-gallery .template-wrapper .icon-container .template-view-button { background: url(../imagenes/template-view-button.png); display: inline-block; width: 22px; height: 22px; cursor: pointer; }
+
+.show-template { position: absolute; width: 50%; height: 100%; overflow: hidden; background: white; top: 0; left: 50%; margin-top: 30px; margin-left: -25%; z-index: 9999; padding: 30px; box-shadow: 0 0 10px #17a387;}
+.show-template img { max-width: 100%; max-height: 100%;}
+
+
+#open-template-gallery-button { padding: 10px; margin:20px 0; color: white; background: #17a387; text-transform: uppercase; border: none; border-radius: 3px; cursor: pointer; }
 
 .opciones_paso4 {margin-top:80px; }
 #detalle_template {border: 1px solid #D4D8D9; padding: 5px; margin:0 auto; width:800px}

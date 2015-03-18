@@ -39,17 +39,21 @@
 
 
 
-				<div style="border:1px solid #D4D8D9;">
-				
-					<div id="template-gallery">
-						@foreach (Template::all() as $template)
+				<div id="template-gallery">
+					@foreach (Template::all() as $template)
+					<div class="template-wrapper">
+						<div class="icon-container">
+							<a href="{{$template->thumbnail}}" class="icon template-view-button"></a>
+						</div>
 						<a href="#" data-template="{{$template->id}}" class="template" style="display:inline-block">
-							<img style="width:100px; height:100px;" src="{{$template->thumbnail}}">
-							<div><input type="radio" name="template" />{{$template->name}}</div>
+							<div class="template-image-mask"><img src="{{$template->thumbnail}}"></div>
+							<div class="template-name"><input type="radio" name="template" />{{$template->name}}</div>
 						</a>
-						@endforeach
 					</div>
+					@endforeach
 				</div>
+
+				<button id="open-template-gallery-button">Utilizar otro template</button>
 
 				<div style="border:1px solid #D4D8D9; height:400px;">
 					<form action="{{ action('CampaniaController@guardar_campania') }}" id="frm_campania" method="post" data-step="4">
