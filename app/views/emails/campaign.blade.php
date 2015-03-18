@@ -42,7 +42,7 @@
 				<td align="right"><a href="#" style="font-size:12px; margin-right:20px; text-decoration:none; color:#333; font-family:Helvetica, Arial, sans-serif;">Enviar a un amigo</a></td>
 			</tr>
 		</table></div>
-		<img src="{{$host}}/campaigns/{{$campaign->id}}/report/pixel.gif">
+		<img src="{{$host}}/campaigns/{{$campaign->id}}/report/pixel.png">
 	</div>
 </body>
 </html>

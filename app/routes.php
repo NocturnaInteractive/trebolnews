@@ -199,7 +199,7 @@ Route::group(array(
     ));
 
     Route::get('campaigns/{id}/report', 'ReportController@show');
-    Route::get('campaigns/{id}/report/pixel.gif', 'ReportController@pixel');
+    Route::get('campaigns/{id}/report/pixel.png', 'ReportController@pixel');
 
     Route::get('campaign/view/{campaignId}/{contactId}/{verification}', 'MailController@renderMail');
 
