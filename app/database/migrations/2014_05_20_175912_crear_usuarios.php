@@ -20,7 +20,7 @@ class CrearUsuarios extends Migration {
             $table->bigInteger('fb_id')->unsigned()->nullable();
             $table->string('confirmation')->nullable();
             $table->boolean('confirmed')->default(false);
-            $table->integer('availableMails')->default(0);
+            $table->integer('availableMails')->default(500);
             $table->integer('availableSuscriptors')->default(0);
             $table->string('suscriptionType')->default('free'); // free | buyer | member
             $table->string('recuperar')->nullable();
