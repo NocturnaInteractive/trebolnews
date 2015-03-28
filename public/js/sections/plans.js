@@ -262,11 +262,11 @@ $('#select-tipo-factura').find('.opciones-select').find('a').click(function(e) {
 
     $('.' + this.getAttribute('tipo')).fadeIn();
     if (this.getAttribute('tipo') == 'consumidor-final') {
-    	PlanServices.taxApply = true;
         $('.consumidor-final').show();
         $('.responsable-inscripto').hide();
         $('.detalle-factura').show();
     } else if (this.getAttribute('tipo') == 'responsable-inscripto') {
+    	PlanServices.taxApply = true;
     	
         $('.consumidor-final').hide();
         $('.responsable-inscripto').show();
