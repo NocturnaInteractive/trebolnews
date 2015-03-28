@@ -57,7 +57,7 @@ return array(
 			'host'      => '104.131.97.126',
 			'database'  => 'trebolnews',
 			'username'  => 'forge',
-			'password'  => 'MDCqSRNH85i1o0jaKLvd',
+			'password'  => 'Trebol2014News',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

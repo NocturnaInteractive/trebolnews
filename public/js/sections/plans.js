@@ -177,7 +177,7 @@ var PlanServices = {
 	        	'months': PlanServices.selectedCombo, 
 	        	'taxApply':  PlanServices.taxApply
 	        }).done(function (data){
-	        	alert('La Orden ha sido creada. Por favor realice la transferencia con los datos provistos. \n Muchas gracias.');
+	        	window.location.href = '/plans/transfer-success';
 	        });
 	    }
 	},

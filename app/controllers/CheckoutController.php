@@ -190,6 +190,16 @@ class CheckoutController extends BaseController {
         $order->isSuscription = $foundPlan['isSuscription'];
         $order->save();
 
+        Mail::send('emails/transfer_send_payment', array(
+                'user' => $user,
+                'order'=> $order,
+                'plan' => $foundPlan
+            ), function($mail) use($user) {
+                $mail->to($user->email);
+                $mail->subject('TrebolNEWS - Realice su Pago');
+                $mail->from('no-responder@trebolnews.com', 'TrebolNEWS');
+            });
+
     }
 
     private function mlAuth(){
