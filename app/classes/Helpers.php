@@ -49,7 +49,7 @@ class Helpers {
 		
 		$tags_img = $html->find('img');
 		foreach($tags_img as &$img) {		
-		    $img->src = '//'.$_SERVER['HTTP_HOST'].'/imagenes/templates/'.$templateName.'/img/'.$img->src;
+		    $img->src = 'http://'.$_SERVER['HTTP_HOST'].'/imagenes/templates/'.$templateName.'/img/'.$img->src;
 		}
 
 		return $html;

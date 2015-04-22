@@ -17,15 +17,10 @@
     
 
 <div id="conteinerco">
-	<a href="/"><h1>TrebolNEWS</h1></a>
-	<h2>Gracias por su compra.</h2>
-	<p>Tu &oacute;rden de compra es: <br> 
-	<?php 
-		if ($months > 1) 
-			echo $months . ' meses de ';
-	?>
-	<strong>{{$plan['title']}} por U$S {{round($finalPrice,2)}}</strong></p> 
-	<div id="bothome"><a href="{{$mplink['sandbox_init_point']}}">PAGAR</a></div>
+<a href="/campañas"><h1>TrebolNEWS</h1></a>
+<h2>Gracias por su env&iacute;o.</h2>
+<p>Le llegar&aacute; un mail con los datos de cuenta para su pago. Una vez hecha la transferencia/ dep&oacute;sito, env&iacute;e al mismo mail su comprobante de transferencia/ dep&oacute;sito y se activar&aacute;n sus env&iacute;os para ser consumidos. Gracias! Y muchos &eacute;xitos en sus env&iacute;os!</p> 
+<div id="bothome"><a href="/campañas">VOLVER A CAMPA&Ntilde;AS</a></div>
 </div>
 
 

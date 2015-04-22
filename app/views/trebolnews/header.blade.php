@@ -7,8 +7,8 @@ $(function() {
 
 <div class="information-header">
     <div class="center">
-        <p>SUSCRIPTORES: <span class="yellow">{{Auth::user()->availableSuscriptors}}</span> comprados.</p>
-        <p>ENVIOS: <span class="yellow">{{Auth::user()->availableMails}}</span> comprados.</p>
+        <!--p>SUSCRIPTORES: <span class="yellow">{{Auth::user()->availableSuscriptors}}</span> comprados.</p-->
+        <p><strong>ENVIOS DISPONIBLES<span class="yellow" style="margin-left:10px;">{{Auth::user()->availableMails}}</span></strong></p>
     </div>
 </div>
 

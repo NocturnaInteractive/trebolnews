@@ -17,7 +17,7 @@ class CrearOrden extends Migration {
 			$table->integer('id_usuario')->unsigned();
 			$table->integer('id_plan')->unsigned();
 			$table->boolean('isSuscription');
-			$table->decimal('monto',5,2);
+			$table->decimal('monto',7,2);
 			$table->timestamps();
 			$table->softDeletes();
 		});

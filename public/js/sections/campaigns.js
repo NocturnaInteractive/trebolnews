@@ -130,8 +130,32 @@ $(function() {
 				url:  '/templates/' + $this.data('template'),
 				success: function(data) {
 					CKEDITOR.instances.txt_campania.setData(data.content);
+					$('#template-gallery').slideUp(200);
 				}
 			});
+
+		});
+
+		$('#open-template-gallery-button').on('click', function(){
+			$('#template-gallery').slideDown(200);
+		});
+
+		$('.template-view-button').on('click', function(e){
+			e.preventDefault();
+			var $this = $(this);
+
+			var templatePreview = $('<div class="show-template"></div>')
+					.append(
+						$('<img>').attr('src',$this.attr('href'))
+					).on('click', function(){
+						$(this).fadeOut(200, function(){
+							$(this).remove()
+						});
+					});
+
+			templatePreview.css('top',$(document).scrollTop());
+
+			$('body').append(templatePreview);
 
 		});
 
@@ -145,6 +169,11 @@ $(function() {
 				}
 			});
 		});
+
+
+		if( $('#txt_campania').html() !== '' ){
+			$('#template-gallery').hide();
+		}
 	}
 
 	

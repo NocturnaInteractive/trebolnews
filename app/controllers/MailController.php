@@ -48,6 +48,8 @@ class MailController extends \BaseController {
 				'received' => ( $sent - count(Mail::failures()) ),
 				'failiure' => count(Mail::failures())
 			));
+
+			$this->discountMails($sent);
 		
 			return true;
 		}catch(Exception $e){
@@ -134,5 +136,14 @@ class MailController extends \BaseController {
         $items = array('campaign' => $campaignView );
         return View::make('emails/prueba', $items);
 	}
+
+
+	public function discountMails ($discountQuantity) {
+		$user = (object) Usuario::find(Auth::user()->id);
+        $user->availableMails = $user->availableMails - $discountQuantity;
+        $user->save();
+        return $user->availableMails;
+	}
+
 
 }

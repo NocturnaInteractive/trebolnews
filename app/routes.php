@@ -33,10 +33,11 @@ Route::get('gracias', array(
     }
 ));
 
-Route::get('/checkout/{id}',function($id){
+
+Route::get('/checkout/{planId}/{months}',function($planId, $months){
     $action = 'index';
     if(Auth::check()) {
-        return App::make('CheckoutController')->$action($id);
+        return App::make('CheckoutController')->$action($planId, $months);
     } else {
         return Redirect::to('/');
     }
@@ -45,7 +46,12 @@ Route::get('/checkout/{id}',function($id){
 Route::get('/checkout-success', 'CheckoutController@success');
 Route::get('/notifications',    'CheckoutController@notifications');
 Route::post('/notifications',    'CheckoutController@notifications');
+Route::post('/checkout/manual',    'CheckoutController@createManualOrder');
 Route::get('/test',    'CheckoutController@test');
+
+Route::get('plans/transfer-success', array(function() {
+    return View::make('trebolnews/thankyou-transfer');
+}));
 
 Route::get('/payments',function(){
     $action = 'payments';
@@ -197,7 +203,7 @@ Route::group(array(
     ));
 
     Route::get('campaigns/{id}/report', 'ReportController@show');
-    Route::get('campaigns/{id}/report/pixel.gif', 'ReportController@pixel');
+    Route::get('campaigns/{id}/report/pixel.png', 'ReportController@pixel');
 
     Route::get('campaign/view/{campaignId}/{contactId}/{verification}', 'MailController@renderMail');
 

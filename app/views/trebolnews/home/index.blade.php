@@ -264,137 +264,105 @@
                         </section>
 
                         <section id="fbsection5">
-                            <h2>Planes y Precios</h2>
-                            <div id="planes">
-                                <select class="select-precios" id="planes-home">
-                                  <option value="$ AR">$ Pesos Argentinos</option>
-                                  <option value="USD">USD Dolares estadounidenses</option>
-                                  <option value="Pesos Colombianos">$ Peso Colombia</option>
-                                  <option value="$ MXM">$ Peso Mexico</option>
-                                  <option value="$ CLP">$ Peso Chile</option>
-                                  <option value="Reais Brasil">$ Brasil</option>
-                                  <option value="$ UYU">$ Pesos Uruguayos</option>
-                                  <option value="$ DOP">$ Pesos Dominicanos</option>
-                                  <option value="PEN">PEN Nuevos Soles Per&uacute;</option>
-                                  <option value="PAB">Balboas Panam&aacute;</option>
-                                  <option value="VEZ">Venezuela</option>
-                                  <option value="ECU">Ecuador</option>
-                                  <option value="CRC">Costa Rica</option>
-                                </select>
-                                <script>
-                                    var moneda = 'pesos';
-                                    function precio(moneda){
-                                        switch(moneda){
-                                            case 'pesos':
-                                                $('.moneda').html('$');
-                                                break;
-                                            case 'dolares':
-                                                $('.moneda').html('U$S');
-                                                break;
-                                     }
-                                    }
-
-                                    $( ".select-precios" ).change(function() {
-                                        precio( $(this).val() );
-                                    });
-                                    $(document).ready(function(){
-                                        precio('pesos');
-                                    });
-                                </script>
-                                <div id="pfree">
-                                    <h3>Plan Gratuito</h3>
-                                    <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os!</p>
-                                    <div class="infoplanes">
-                                        <div class="verdeinfo">
-                                            <h4>
-                                                <span class="hastaplan">Hasta</span>
-                                                500 Env&iacute;os
+                            <h2>Precios y Planes</h2>
+                            <select id="currency-dropdown" class="select-precios" style="position:relative; margin:25px; float: right;"></select>
+                            <div class="infocont">
+                                <div id="planes">
+                                    <div id="pfree">
+                                        <h3>Plan Gratuito</h3>
+                                        <p>Dise&ntilde;ado para negocios o proyectos peque&ntilde;os, este plan permite experimentar la plataforma y los servicios que ofrece TrebolNews.<br>
+                                        No se requieren los datos de la tarjeta de cr&eacute;dito. &iexcl;Prueba gratis hasta 500 env&iacute;os! </p>
+                                        <div class="infoplanes">
+                                            <div class="verdeinfo">
+                                                <div class="radioplanes radioplanes_gratis">
+                                                    <!--<input type="radio" id="radio1" name="opcion" tipo-plan="gratis" /> -->
+                                                    <!-- <label for="radio1"></label> -->
+                                                </div>
+                                                <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane.png" width="18px" height="18px" alt="icono">500</h4>
                                                 <div class="cleaner"></div>
-                                                <span class="hastaenv"> </span><span class="precioplan">Gratis</span>
-                                            </h4>
-                                        </div>
-                                        <div class="grisinfo"><img class="xicon" src="{{ asset('imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
-                                        <div class="verdeinfo"><img class="xicon" src="{{ asset('imagenes/cruziconverde.png') }}" width="38px" height="38px" alt="icono"></div>
-                                        <div class="grisinfo"><img class="xicon" src="{{ asset('imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
-                                        <div class="verdeinfo"><img class="xicon" src="{{ asset('imagenes/cruziconverde.png') }}" width="38px" height="38px" alt="icono"></div>
-                                        <div class="grisinfo"><img class="xicon" src="{{ asset('imagenes/cruzicongris.png') }}" width="38px" height="38px" alt="icono"></div>
-                                        <div class="verdeinfo"><img class="xicon" src="{{ asset('imagenes/cruziconverde.png') }}" width="38px" height="38px" alt="icono"></div>
-                                    </div><!--infoplanes-->
-                                </div><!--pfree-->
-
-                                <div id="individual">
-                        <h3>Plan Mensual</h3>
-                        <p>Ideal para grandes campa&ntilde;as. Se abona s&oacute;lo la cantidad de env&iacute;os que necesita. Adem&aacute;s, no hay l&iacute;mite de env&iacute;os. Compra m&iacute;nima 3 meses.<br> </p>
-                        <div class="infoplanes">
-                            <?php
-                            $class = 'verde';
-                            $icon = '';
-                            $i = 0;
-                            foreach ($plans as $plan) {
-                                if (!$plan->isSuscription) {
-                            ?>
-                            <div class="{{ $class }}info single plan">
-                                <div class="radioplanes radioplanes_corto">
-                                    
-                                    <!--<input type="radio" name="opcion" tipo-plan="envio" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />-->
-                                    
-                                    <label></label>
-                                </div>
-                                <h4><span class="hastaplan">Hasta</span> {{ $plan->envios }} Envios.</h4>
-                               <!-- <div class="cleaner"></div>-->
-                               <h4 class="segundalinea_plan"><span class="precioplan"><span class="price" data-price="{{ $plan->precio }}"><span class="moneda"></span>{{ $plan->precio }}</span></span></h4>
-                                <div class="cleaner"></div>
-                            </div>
-                            <?php
-                                $class = ($class==='verde')? 'gris' : 'verde';
-                                $icon = ($icon==='')? 'gris' : '';
-                                $i++;
-                                }
-                            }
-                            ?>
-                        </div><!--infoplanes-->
-                    </div><!--individual-->
-                    <div id="mensuales">
-                        <h3>Planes Individual</h3>
-                        <p>Exclusivo paquete preparado para realizar env&iacute;os con poca frecuencia. Se contrata la cantidad de suscriptores que necesite para sus env&iacute;os.</p>
-                        <div class="infoplanes">
-                            <?php
-                            $class = 'verde';
-                            $icon = '';
-                            $i = 0;
-                            foreach ($plans as $plan) {
-                                if ($plan->isSuscription) {
-                            ?>
-                            <div class="{{ $class }}info suscription plan">
-                                <div class="radioplanes radioplanes_corto">
-                                    <!--<input type="radio" id="radio{{ $i }}" name="opcion" tipo-plan="suscriptor" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" /> -->
-                                    <label for="radio{{ $i }}"></label>
-                                </div>
-                                <h4><span class="hastaplan">Hasta</span> {{$plan->envios}} <span class="hastaenv">Suscriptores</span>.</h4>
-                                <!-- <div class="cleaner"></div> -->
-                              <h4 class="segundalinea_plan"><span class="precioplan"><span class="price" data-price="{{ $plan->precio }}"><span class="moneda"></span>{{ $plan->precio }}</span></span></h4>
-                                <div class="cleaner"></div>
-                            </div>
-                            <?php
-                                $class = ($class === 'verde') ? 'gris' : 'verde';
-                                $icon = ($icon === '') ? 'gris' : '';
-                                $i++;
-                                }
-                            }
-                            ?>
-
-                        </div><!--infoplanes-->
-                    </div><!--mensuales-->
-                               
-                                <div class="content-comprar-ahora">
+                                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;Gratis</span></h4>
+                                                <div class="cleaner"></div>
+                                            </div>
+                                            <div class="grisinfo"><img class="xicon" src="imagenes/cruzicongris.png" width="38px" height="38px" alt="icono"></div>
+                                            <div class="verdeinfo"><img class="xicon" src="imagenes/cruziconverde.png" width="38px" height="38px" alt="icono"></div>
+                                            <div class="grisinfo"><img class="xicon" src="imagenes/cruzicongris.png" width="38px" height="38px" alt="icono"></div>
+                                            <div class="verdeinfo"><img class="xicon" src="imagenes/cruziconverde.png" width="38px" height="38px" alt="icono"></div>
+                                            <div class="grisinfo"><img class="xicon" src="imagenes/cruzicongris.png" width="38px" height="38px" alt="icono"></div>
+                                            <div class="verdeinfo"><img class="xicon" src="imagenes/cruziconverde.png" width="38px" height="38px" alt="icono"></div>
+                                        </div><!--infoplanes-->
+                                    </div><!--pfree-->
+                                    <div id="individual">
+                                        <h3>Plan Mensual</h3>
+                                        <p>Ideal para grandes campa&ntilde;as. Se abona s&oacute;lo la cantidad de env&iacute;os que necesita. Adem&aacute;s, no hay l&iacute;mite de env&iacute;os. Compra m&iacute;nima 3 meses.<br> </p>
+                                        <div class="infoplanes">
+                                            <?php
+                                            $class = 'verde';
+                                            $icon = '';
+                                            $i = 0;
+                                            foreach ($plans as $plan) {
+                                                if (!$plan->isSuscription) {
+                                            ?>
+                                            <div class="{{ $class }}info single plan">
+                                                <div style="display:none;" class="radioplanes radioplanes_corto">
+                                                    <input type="radio" name="opcion" tipo-plan="envio" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
+                                                    <label></label>
+                                                </div>
+                                                <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{ $icon }}.png" width="18px" height="18px" alt="icono">{{ $plan->envios }}</h4>
+                                                <div class="cleaner"></div>
+                                                <h4 class="segundalinea_plan"><span class="hastaenv"> Envios</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
+                                                <div class="cleaner"></div>
+                                            </div>
+                                            <?php
+                                                $class = ($class==='verde')? 'gris' : 'verde';
+                                                $icon = ($icon==='')? 'gris' : '';
+                                                $i++;
+                                                }
+                                            }
+                                            ?>
+                                        </div><!--infoplanes-->
+                                    </div><!--individual-->
+                                    <div id="mensuales">
+                                         <h3>Planes Individual</h3>
+                                        <p>Exclusivo paquete preparado para realizar env&iacute;os con poca frecuencia. Se contrata la cantidad de suscriptores que necesite para sus env&iacute;os.</p>
+                                        <div class="infoplanes">
+                                            <?php
+                                            $class = 'verde';
+                                            $icon = '';
+                                            $i = 0;
+                                            foreach ($plans as $plan) {
+                                                if ($plan->isSuscription) {
+                                            ?>
+                                            <div class="{{ $class }}info suscription plan">
+                                                <div style="display:none;" class="radioplanes radioplanes_corto">
+                                                    <input type="radio" id="radio{{ $i }}" name="opcion" tipo-plan="suscriptor" data-plan="{{ $plan->id }}" data-plan-name="{{ $plan->nombre }}" />
+                                                    <label for="radio{{ $i }}"></label>
+                                                </div>
+                                                <h4><span class="hastaplan">Hasta</span><img src="imagenes/plane{{$icon}}.png" width="18px" height="18px" alt="icono">{{$plan->envios}}</h4>
+                                                <div class="cleaner"></div>
+                                                <h4 class="segundalinea_plan"><span class="hastaenv">Suscriptores</span><span class="precioplan">&nbsp;<span class="moneda"></span><span class="price" data-price="{{ $plan->precio }}">{{ $plan->precio }}</span></span></h4>
+                                                <div class="cleaner"></div>
+                                            </div>
+                                            <?php
+                                                $class = ($class === 'verde') ? 'gris' : 'verde';
+                                                $icon = ($icon === '') ? 'gris' : '';
+                                                $i++;
+                                                }
+                                            }
+                                            ?>
+                                            
+                                        </div><!--infoplanes-->
+                                        
+                                    </div><!--mensuales-->
+                                    <div class="content-comprar-ahora">
                                         <div class="bot">
                                             <a href="{{ route('registro') }}" class="botondecompra">COMPRAR AHORA</a>
                                             <div class="cleaner"></div>
                                         </div>
                                     </div>
-                                <div class="cleaner"></div>
+                                    <div class="cleaner"></div>
+                                </div>
                                 
-                            </div><!--planes-->
+                            </div> <!--infocont-->   
 
                             <div id="planesexclusivos">
                                 <h5>&iquest;Necesitas alg&uacute;n plan a medida? &iexcl;Cont&aacute;ctanos!</h5>
@@ -408,7 +376,6 @@
                             </div><!--formasdepago-->
 
                         </section>
-
 
                         <section id="fbsection6">
                             <div id="contacto">
@@ -595,6 +562,23 @@
 
 
 </script>
+<script>
+        var Plan = function (id, name, value, isSuscription) {
+            this.id = id;
+            this.name = name;
+            this.value = value;
+            this.isSuscription = isSuscription;
+        };
+        <?php
+            echo 'var planList = [];';
+            foreach ($plans as $plan) {
+                $isSuscription = ($plan->isSuscription)?'true':'false';
+                echo 'planList.push( new Plan('.$plan->id.',"'.$plan->nombre.'",'.$plan->precio.', '.$isSuscription.'));';
+            }
+        ?>
+    </script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    {{ HTML::script('js/sections/plans.js') }}
 
 <!--explorer placeholder-->
 <div id="popup">
