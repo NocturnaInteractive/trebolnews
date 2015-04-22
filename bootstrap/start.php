@@ -28,7 +28,7 @@ $env = $app->detectEnvironment(array(
 
 	'local' => array('homestead'),
 	'digitalocean' => array('trebolnews'),
-    'nocturna' => array('web')
+    'nocturna' => array('web', 'ssh1')
 
 ));
 
