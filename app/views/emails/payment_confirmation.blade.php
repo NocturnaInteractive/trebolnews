@@ -13,14 +13,15 @@
 		Estimado {{$user->nombre}},
 	</p>
 	<p>
-		Hemos recibido tu pago por {{$order->monto}}.<br>
+		Se ha creado la orden de pago por {{$order->monto}} debido a la compra del siguiente producto:<br>
 		El siguiente producto fue agregado a tu cuenta:
 	</p>
 	<p>
 		{{$plan->nombre}}
 	</p>
+	
 	<p>
-		Muchas gracias por tu compra.<br>
+		Muchas gracias por tu compra.
 		Atentamente,<br><br>
 		El equipo de TrebolNEWS
 	</p>

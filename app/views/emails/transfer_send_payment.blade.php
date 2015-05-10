@@ -7,31 +7,32 @@
 <body>
 		
 	<h1>TrebolNEWS</h1>
-	<h2>Realice el Pago</h2>
+	<h2>Confirmación de Pago</h2>
 
 	<p>
 		Estimado {{$user->nombre}},
 	</p>
 	<p>
-		Se ha creado la orden de pago por {{$order->monto}}<br>
-		debido a la compra del siguiente producto:
+		Se ha creado la orden de pago por {{$order->monto}} debido a la compra del siguiente producto:<br>
+		El siguiente producto fue agregado a tu cuenta:
 	</p>
 	<p>
 		{{$plan->nombre}}
 	</p>
-	<p>
-		Por favor, realice su pago a los siguientes datos:
+	<p>Por favor, realice su pago a los siguientes datos:
+
 		<ul>
-			<li>TrebolNEWS SA</li>
-			<li>CBU 3234234 2342234234</li>
-			<li>CUIT 123123123123</li>
+			<li>Nocturna Comunicación SRL</li>
+			<li>Cuenta Corriente Banco Galicia: 10920-2 019-1</li>
+			<li>CBU: 00700191-20000010920217</li>
+			<li>CUIT: 30-71304790-9</li>
 		</ul>
 	</p>
 	<p>
-		El producto sera acreditado dentro de las siguientes 72hs habiles.
+		El producto será acreditado una vez que recibamos el comprobante de pago vía mail a: <strong>ventas@trebolnews.com</strong>
 	</p>
 	<p>
-		Muchas gracias por tu compra.<br>
+		Muchas gracias por tu compra.
 		Atentamente,<br><br>
 		El equipo de TrebolNEWS
 	</p>
