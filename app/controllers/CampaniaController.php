@@ -225,34 +225,14 @@ class CampaniaController extends BaseController {
 			$campania->save();
 
 			$socialLink = SocialLink::find($campania->social_link_id);
-			$socialLink->facebook	= Session::get('campania.socialLinks_facebook');
-			$socialLink->twitter	= Session::get('campania.socialLinks_twitter');
-			$socialLink->linkedin	= Session::get('campania.socialLinks_linkedin');
-			$socialLink->googleplus	= Session::get('campania.socialLinks_googleplus');
-			$socialLink->pinterest	= Session::get('campania.socialLinks_pinterest');
-			$socialLink->blogger	= Session::get('campania.socialLinks_blogger');
-			$socialLink->meneame	= Session::get('campania.socialLinks_meneame');
-			$socialLink->tumblr		= Session::get('campania.socialLinks_tumblr');
-			$socialLink->reddit		= Session::get('campania.socialLinks_reddit');
-			$socialLink->digg		= Session::get('campania.socialLinks_digg');
-			$socialLink->delicious	= Session::get('campania.socialLinks_delicious');
+			$socialLink = $this->getSocialLinksFromSession($socialLink);
 			$socialLink->save();
 
 		//new mode
 		} else {
 
 			$socialLink = new SocialLink;
-			$socialLink->facebook	= Session::get('campania.socialLinks_facebook');
-			$socialLink->twitter	= Session::get('campania.socialLinks_twitter');
-			$socialLink->linkedin	= Session::get('campania.socialLinks_linkedin');
-			$socialLink->googleplus	= Session::get('campania.socialLinks_googleplus');
-			$socialLink->pinterest	= Session::get('campania.socialLinks_pinterest');
-			$socialLink->blogger	= Session::get('campania.socialLinks_blogger');
-			$socialLink->meneame	= Session::get('campania.socialLinks_meneame');
-			$socialLink->tumblr		= Session::get('campania.socialLinks_tumblr');
-			$socialLink->reddit		= Session::get('campania.socialLinks_reddit');
-			$socialLink->digg		= Session::get('campania.socialLinks_digg');
-			$socialLink->delicious	= Session::get('campania.socialLinks_delicious');
+			$socialLink = $this->getSocialLinksFromSession($socialLink);
 			$socialLink->save();
 
 			$campania = Campania::create(array(
@@ -276,6 +256,21 @@ class CampaniaController extends BaseController {
 
 		}
 		return $campania;
+	}
+
+	public function getSocialLinksFromSession($socialLink) {
+		$socialLink->facebook	= Session::get('campania.socialLinks_facebook');
+		$socialLink->twitter	= Session::get('campania.socialLinks_twitter');
+		$socialLink->linkedin	= Session::get('campania.socialLinks_linkedin');
+		$socialLink->googleplus	= Session::get('campania.socialLinks_googleplus');
+		$socialLink->pinterest	= Session::get('campania.socialLinks_pinterest');
+		$socialLink->blogger	= Session::get('campania.socialLinks_blogger');
+		$socialLink->meneame	= Session::get('campania.socialLinks_meneame');
+		$socialLink->tumblr		= Session::get('campania.socialLinks_tumblr');
+		$socialLink->reddit		= Session::get('campania.socialLinks_reddit');
+		$socialLink->digg		= Session::get('campania.socialLinks_digg');
+		$socialLink->delicious	= Session::get('campania.socialLinks_delicious');
+		return $socialLink;
 	}
 
 	//Gets a campaign and return its view
@@ -336,6 +331,59 @@ class CampaniaController extends BaseController {
 			return Redirect::to('/');
 		}
 
+
+	}
+
+	public function duplicateCampaign($id) {
+		Session::put('campania.tipo','clasica');
+		Session::put('campania.subtipo','editor');
+
+		$campania = Campania::find($id);
+
+		Session::put('campania.social_link_id', $campania->social_link_id );
+		Session::put('campania.tipo', 			$campania->tipo );
+		Session::put('campania.subtipo', 		$campania->subtipo);
+		Session::put('campania.nombre', 		$campania->nombre);
+		Session::put('campania.asunto', 		$campania->asunto);
+		Session::put('campania.remitente', 		$campania->remitente);
+		Session::put('campania.email', 			$campania->email);
+		Session::put('campania.respuesta', 		$campania->respuesta);
+		Session::put('campania.contenido', 		$campania->contenido);
+		Session::put('campania.redes', 			$campania->redes);
+		Session::put('campania.status', 		$campania->status);
+		Session::put('campania.envio', 			$campania->envio);
+		Session::put('campania.notificacion', 	$campania->notificacion);
+
+		foreach ($campania->listas as $lista) {
+			Session::push('campania.listas', $lista->id);
+		}
+
+		$socialLink = SocialLink::find($campania->social_link_id);
+		Session::put('campania.socialLinks_facebook', 	$socialLink->facebook);
+		Session::put('campania.socialLinks_twitter', 	$socialLink->twitter);
+		Session::put('campania.socialLinks_linkedin', 	$socialLink->linkedin);
+		Session::put('campania.socialLinks_googleplus', $socialLink->googleplus);
+		Session::put('campania.socialLinks_pinterest', 	$socialLink->pinterest);
+		Session::put('campania.socialLinks_blogger', 	$socialLink->blogger);
+		Session::put('campania.socialLinks_meneame', 	$socialLink->meneame);
+		Session::put('campania.socialLinks_tumblr', 	$socialLink->tumblr);
+		Session::put('campania.socialLinks_reddit', 	$socialLink->reddit);
+		Session::put('campania.socialLinks_digg', 		$socialLink->digg);
+		Session::put('campania.socialLinks_delicious', 	$socialLink->delicious);
+
+		$socialLink = new SocialLink;
+		$socialLink = $this->getSocialLinksFromSession($socialLink);
+		$socialLink->save();
+
+		if(Auth::user()->id == $campania->id_usuario) {
+			switch($campania->tipo) {
+				case 'clasica':
+					return Redirect::route('step3');
+					break;
+			}
+		} else {
+			return Redirect::to('/');
+		}
 
 	}
 

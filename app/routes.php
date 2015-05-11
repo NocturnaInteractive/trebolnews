@@ -94,6 +94,11 @@ Route::group(array(
         'uses' => 'CampaniaController@campania'
     ));
 
+    Route::get('campaña/{id}/duplicate', array(
+        'as' => 'campania',
+        'uses' => 'CampaniaController@duplicateCampaign'
+    ));
+
     Route::get('mail/test', array(
         'uses' => 'MailController@test'
     ));

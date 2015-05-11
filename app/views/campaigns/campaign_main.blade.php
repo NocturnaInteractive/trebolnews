@@ -190,7 +190,7 @@
                                     <td>{{ $campania->envio == 'direct' ? $campania->created_at : $campania->programacion }}</td>
                                     <td>
                                         <a class="duplicamania" href="/campaigns/{{$campania->id}}/report"><img src="{{ asset('internas/imagenes/duplicamania.png') }}" alt="Ver Reporte" width="25" height="25"></a>
-                                        <a class="utilizarcam" href="#"><img src="{{ asset('internas/imagenes/spinner.png') }}" alt="Utilizar Campa&ntilde;a" width="25" height="25"></a>
+                                        <a class="utilizarcam" href="campaña/{{$campania->id}}/duplicate"><img src="{{ asset('internas/imagenes/spinner.png') }}" alt="Utilizar Campa&ntilde;a" width="25" height="25"></a>
                                         <div class="cleaner"></div>
                                     </td>
                                 </tr>
