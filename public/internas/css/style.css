@@ -352,7 +352,7 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 
 
 
-#campanacla { width:277px; height:380px; background-color:#f3f4f5; -webkit-box-shadow: 1px 1px 1px 0px #a7a9ab; -moz-box-shadow: 1px 1px 1px 0px #a7a9ab; -o-box-shadow: 1px 1px 1px 0px #a7a9ab; box-shadow:  1px 1px 1px 0px #a7a9ab; -webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; float:left; margin-top:40px; text-decoration:none; padding:0 5px; display:block}
+#campanacla { width:47%; height:380px; background-color:#f3f4f5; -webkit-box-shadow: 1px 1px 1px 0px #a7a9ab; -moz-box-shadow: 1px 1px 1px 0px #a7a9ab; -o-box-shadow: 1px 1px 1px 0px #a7a9ab; box-shadow:  1px 1px 1px 0px #a7a9ab; -webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; float:left; margin-top:40px; text-decoration:none; padding:0 5px; display:block; text-align: center;}
 #campanacla img { margin:15px 65px}
 #campanacla:hover { background-color:#17a387; -webkit-box-shadow:none; -moz-box-shadow:none; -o-box-shadow:none; box-shadow:none; color:#FFF;}
 
@@ -360,7 +360,7 @@ width:204px; height:30px; display:block; background:#d4d8d9; padding-top:10px;  
 #campanasocial img { margin:15px 65px}
 #campanasocial:hover { background-color:#17a387; -webkit-box-shadow:none; -moz-box-shadow:none; -o-box-shadow:none; box-shadow:none; color:#FFF;}
 
-#testsocial { width:277px; height:380px; background-color:#f3f4f5; -webkit-box-shadow: 1px 1px 1px 0px #a7a9ab; -moz-box-shadow: 1px 1px 1px 0px #a7a9ab; -o-box-shadow: 1px 1px 1px 0px #a7a9ab; box-shadow:  1px 1px 1px 0px #a7a9ab; -webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; float:right; margin-top:40px; text-decoration:none; padding:0 5px; display:block}
+#testsocial { width:47%; height:380px; background-color:#f3f4f5; -webkit-box-shadow: 1px 1px 1px 0px #a7a9ab; -moz-box-shadow: 1px 1px 1px 0px #a7a9ab; -o-box-shadow: 1px 1px 1px 0px #a7a9ab; box-shadow:  1px 1px 1px 0px #a7a9ab; -webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; float:right; margin-top:40px; text-decoration:none; padding:0 5px; display:block; text-align: center;}
 #testsocial img { margin:25px 65px}
 #testsocial:hover { background-color:#17a387; -webkit-box-shadow:none; -moz-box-shadow:none; -o-box-shadow:none; box-shadow:none; color:#FFF;}
 #testsocial h4 { margin-top:40px}

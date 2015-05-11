@@ -41,11 +41,11 @@
                         <img src="{{ asset('internas/imagenes/camclasica.png') }}" width="160" height="150" alt="campa&ntilde;a clasica">
                         <p>Cree sus propias campa&ntilde;as. &Oacute; suba su campa&ntilde;a ya dise&ntilde;ada en html o por url.</p>
                     </a>
-                    <a id="campanasocial" href="{{ route('campania_social') }}" session="campania.tipo:social">
+                    <!--a id="campanasocial" href="{{ route('campania_social') }}" session="campania.tipo:social">
                         <h4>Campa&ntilde;as Social<br>Media</h4>
                         <img src="{{ asset('internas/imagenes/camsicial.png') }}" width="160" height="150" alt="campa&ntilde;a social">
                         <p>Integre las campa&ntilde;as con las redes Facebook y Tw para viralizar sus env&iacute;os.</p>
-                    </a>
+                    </a-->
                     <a id="testsocial" href="#">
                         <h4>Test de Campa&ntilde;as</h4>
                         <img src="{{ asset('internas/imagenes/testdecam.png') }}" width="160" height="150" alt=" test de campa&ntilde;as">
