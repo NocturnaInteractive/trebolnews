@@ -10,7 +10,7 @@
 		"artdarek/oauth-4-laravel": "dev-master",
 		"maatwebsite/excel": "1.*",
 		"soapbox/laravel-formatter": "2.x",
-		"pda/pheanstalk": "^3.0"
+		"pda/pheanstalk": "~2.1"
 	},
 	"autoload": {
 		"classmap": [

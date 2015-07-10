@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4a97df22769c8d80f4e1e464b8ad10dc",
+    "hash": "5a687ac7f8abb4eb966f31777ff2eb66",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
@@ -896,33 +896,25 @@
         },
         {
             "name": "pda/pheanstalk",
-            "version": "v3.0.2",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pda/pheanstalk.git",
-                "reference": "2078587884faf43fc00976b152b2dde0b5e3830e"
+                "reference": "672eb5cc9049d61e4eb68d30f0f33de65a947e6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pda/pheanstalk/zipball/2078587884faf43fc00976b152b2dde0b5e3830e",
-                "reference": "2078587884faf43fc00976b152b2dde0b5e3830e",
+                "url": "https://api.github.com/repos/pda/pheanstalk/zipball/672eb5cc9049d61e4eb68d30f0f33de65a947e6b",
+                "reference": "672eb5cc9049d61e4eb68d30f0f33de65a947e6b",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
             "autoload": {
-                "psr-4": {
-                    "Pheanstalk\\": "src/"
+                "psr-0": {
+                    "Pheanstalk": "classes/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -942,7 +934,7 @@
             "keywords": [
                 "beanstalkd"
             ],
-            "time": "2014-11-08 20:00:00"
+            "time": "2014-12-02 22:44:56"
         },
         {
             "name": "phpoffice/phpexcel",
