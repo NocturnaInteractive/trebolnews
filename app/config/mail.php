@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'maimar@gmail.com',
+	'username' => 'maxi@nocturnainteractive.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => '-_L-We68RBxaUtdsYtdtOw',
+	'password' => 'EUsZf5kVhJGYHgSHY1V3wg',
 
 	/*
 	|--------------------------------------------------------------------------
