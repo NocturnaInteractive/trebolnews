@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default' => 'beanstalkd',
+	'default' => (App::environment() === 'production') ? 'beanstalkd' : 'sync',
 
 	/*
 	|--------------------------------------------------------------------------

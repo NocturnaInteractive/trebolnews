@@ -51,17 +51,17 @@ return array(
 			'database' => __DIR__.'/../database/production.sqlite',
 			'prefix'   => '',
 		),
-
+		
 		'mysql' => array(
-			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'trebolnews',
-			'username'  => 'homestead',
-			'password'  => 'secret',
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-		),
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'trebolnews',
+            'username'  => 'root',
+            'password'  => 'root',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ),
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',

@@ -13,7 +13,7 @@
 
 
 </head>
-<body style="background-color:#17A387; background-image:url(imagenes/confirma_bg.png); background-repeat:no-repeat; background-position: bottom center; background-size:auto; height:auto">
+<body style="background-color:#17A387; background-image:url(/imagenes/confirma_bg.png); background-repeat:no-repeat; background-position: bottom center; background-size:auto; height:auto">
 
 
     <div id="conteinerco">

@@ -27,16 +27,11 @@ class MailController extends \BaseController {
 					$campaignView->suscriptor->last  = $contacto->apellido;
 					$campaignView->suscriptor->email = $contacto->email;
 
-
-					Mail::send('emails/campaign', array(
-						'campaign' => $campaignView
-					), function($mail) use($campaign, $contacto) {
-
-						$mail->to($contacto->email, "{$contacto->nombre} {$contacto->apellido}")
-							 ->subject($campaign->asunto)
-							 ->from($campaign->email, $campaign->remitente)
-							 ->replyTo($campaign->respuesta);
-					});
+					Queue::push('SendEmailQueue', array(
+						'campaignView' => $campaignView,
+						'campaign' => $campaign,
+						'contacto' => $contacto
+					));
 
 					$sent++;
 				}
