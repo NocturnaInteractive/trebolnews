@@ -7,14 +7,14 @@ class MailController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function sendCampaign($campaign, $forcedContacts = []){
-		
-		
+	public function sendCampaign($campaign, $programmedTime = null, $forcedContacts = []){
 		
 		if(count($forcedContacts) > 0){
 			$campaign->listas = [];
 			array_push($campaign->listas, $forcedContacts);
 		}
+
+		$isProgrammed = $campaign->envio === 'programmed';
 
 		try{
 
@@ -23,10 +23,20 @@ class MailController extends \BaseController {
 			foreach($campaign->listas as $lista) {
 				foreach($lista->contactos as $contacto) {
 
-					Queue::push('SendEmailQueue', array(
-						'campaign' => $campaign,
-						'contact' => $contacto
-					));
+					if ($isProgrammed) {
+						Log::info('Programmed Mail queued');
+						Queue::later($programmedTime, 'SendEmailQueue', array(
+							'campaign' => $campaign,
+							'contact' => $contacto
+						));
+					} else {
+						Log::info('Direct Mail queued');
+						Queue::push('SendEmailQueue', array(
+							'campaign' => $campaign,
+							'contact' => $contacto
+						));
+					}
+
 
 					$sent++;
 				}
@@ -49,6 +59,7 @@ class MailController extends \BaseController {
 	}
 
 	public function sendSingleMail($data){
+		Log::info('Sending email...');
     	$campaign = (object) $data['campaign'];
     	$contacto = (object) $data['contact'];
     	$campaignView = $this->getCampaignView($campaign);

@@ -147,27 +147,25 @@ class CampaniaController extends BaseController {
 				case 'confirmar':
 					$campania = $this->getCampaignCreated();
 					$success = false;
-					switch($campania->envio) {
-						
-						case 'direct':
-							$mail = new MailController();
-							if($mail->sendCampaign($campania)){
-								$campania->status = 'sent';
-								$campania->save();
-								$success = true;
-								Session::forget('campania');
-
-							}
-							break;
-
-						case 'programmed':
-							$campania->status = 'programmed';
-							$campania->save();
-							$success = true;
-							Session::forget('campania');
-							break;
+					$programmedTime = null;
+					if ($campania->envio === 'programmed') {
+						// $year = 2015;
+						// $month = 07;
+						// $day = 13;
+						// $hour = 00;
+						// $minute = 30;
+						// $second = 00;
+						// $programmedTime = Carbon::create($year, $month, $day, $hour, $minute, $second, $tz);
+						$programmedTime = Carbon::now()->addMinutes(2);
 					}
+					$mail = new MailController();
 
+					if($mail->sendCampaign($campania, $programmedTime)){
+						$campania->status = 'sent';
+						$campania->save();
+						$success = true;
+						Session::forget('campania');
+					}
 					
 					if($success)
 						$response = Response::json(array('status' => 'ok' ));
