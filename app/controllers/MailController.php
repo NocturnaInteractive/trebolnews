@@ -9,7 +9,7 @@ class MailController extends \BaseController {
 	 */
 	public function sendCampaign($campaign, $forcedContacts = []){
 		
-		$campaignView = $this->getCampaignView($campaign);
+		
 		
 		if(count($forcedContacts) > 0){
 			$campaign->listas = [];
@@ -23,14 +23,9 @@ class MailController extends \BaseController {
 			foreach($campaign->listas as $lista) {
 				foreach($lista->contactos as $contacto) {
 
-					$campaignView->suscriptor->name  = $contacto->nombre;
-					$campaignView->suscriptor->last  = $contacto->apellido;
-					$campaignView->suscriptor->email = $contacto->email;
-
 					Queue::push('SendEmailQueue', array(
-						'campaignView' => $campaignView,
 						'campaign' => $campaign,
-						'contacto' => $contacto
+						'contact' => $contacto
 					));
 
 					$sent++;
@@ -53,8 +48,26 @@ class MailController extends \BaseController {
 		
 	}
 
+	public function sendSingleMail($data){
+    	$campaign = (object) $data['campaign'];
+    	$contacto = (object) $data['contact'];
+    	$campaignView = $this->getCampaignView($campaign);
+    	$campaignView->suscriptor->name  = $contacto->nombre;
+		$campaignView->suscriptor->last  = $contacto->apellido;
+		$campaignView->suscriptor->email = $contacto->email;
+
+    	Mail::send('emails/campaign', array(
+			'campaign' => $campaignView
+		), function($mail) use($campaign, $contacto) {
+			$mail->to($contacto->email, "{$contacto->nombre} {$contacto->apellido}")
+				 ->subject($campaign->asunto)
+				 ->from($campaign->email, $campaign->remitente)
+				 ->replyTo($campaign->respuesta);
+		});
+	}
+
 	public function getCampaignView($campaign){
-		
+		$campaign = (object) $campaign;
 		$owner = Usuario::find($campaign->id_usuario);
 
 		$campaignView = new stdClass();
