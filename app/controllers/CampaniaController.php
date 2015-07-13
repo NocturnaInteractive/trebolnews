@@ -156,7 +156,7 @@ class CampaniaController extends BaseController {
 						// $minute = 30;
 						// $second = 00;
 						// $programmedTime = Carbon::create($year, $month, $day, $hour, $minute, $second, $tz);
-						$programmedTime = Carbon::now()->addMinutes(2);
+						$programmedTime = Carbon::now()->addMinutes(1);
 					}
 					$mail = new MailController();
 
