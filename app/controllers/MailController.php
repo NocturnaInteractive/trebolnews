@@ -70,7 +70,7 @@ class MailController extends \BaseController {
 			$campaignView->suscriptor->last  = $contacto->apellido;
 			$campaignView->suscriptor->email = $contacto->email;
 			Log::info('Sending email...');
-			print_r($_SERVER);
+			Log::info($_SERVER);
 
 	    	Mail::send('emails/campaign', array(
 				'campaign' => $campaignView
