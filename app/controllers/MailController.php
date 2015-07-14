@@ -70,6 +70,7 @@ class MailController extends \BaseController {
 			$campaignView->suscriptor->last  = $contacto->apellido;
 			$campaignView->suscriptor->email = $contacto->email;
 			Log::info('Sending email...');
+			print_r($_SERVER);
 
 	    	Mail::send('emails/campaign', array(
 				'campaign' => $campaignView
@@ -82,6 +83,8 @@ class MailController extends \BaseController {
 		} catch (Exception $e) {
 		    echo 'Exception Found!! ',  $e->getMessage(), "\n";
 		}
+
+		return false;
 
 	}
 

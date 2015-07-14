@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default' => (App::environment() === 'local') ? 'sync' : 'beanstalkd',
+	'default' => 'beanstalkd',
 
 	/*
 	|--------------------------------------------------------------------------
