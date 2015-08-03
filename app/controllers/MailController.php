@@ -75,11 +75,14 @@ class MailController extends \BaseController {
 	    	Mail::send('emails/campaign', array(
 				'campaign' => $campaignView
 			), function($mail) use($campaign, $contacto) {
+				Log::info('Processing email...');
 				$mail->to($contacto->email, "{$contacto->nombre} {$contacto->apellido}")
 					 ->subject($campaign->asunto)
 					 ->from($campaign->email, $campaign->remitente)
 					 ->replyTo($campaign->respuesta);
 			});
+			Log::info('Email Sent to '.$campaignView->suscriptor->email);
+
 		} catch (Exception $e) {
 		    echo 'Exception Found!! ',  $e->getMessage(), "\n";
 		}
