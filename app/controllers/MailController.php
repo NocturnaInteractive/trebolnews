@@ -128,7 +128,8 @@ class MailController extends \BaseController {
 		$campaignView->from =  $campaign->email;
 
 		Mail::send('emails/campaign', array(
-			'campaign' => $campaignView
+			'campaign' => $campaignView,
+			'async' => true
 		), function($mail) use($campaignView) {
 			$mail->to($campaignView->suscriptor->email, "{$campaignView->suscriptor->name} {$campaignView->suscriptor->last}")
 				 ->subject($campaignView->subject)
