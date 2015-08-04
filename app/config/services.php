@@ -9,6 +9,9 @@ return array(
 
     'mandrill' => array(
         'secret' => 'EUsZf5kVhJGYHgSHY1V3wg',
+        'options' => array(
+            'async' => true,
+        )
     ),
 
     'stripe' => array(

@@ -73,7 +73,7 @@ class MailController extends \BaseController {
 			
 			Log::info('Setting Data...');
 			$data = array( 
-				'email' => 'el.marto.mail@gmail.com', 
+				'email' => 'maxi@nocturnainteractive.com', 
 				'async' => true, 
 				'campaign' => $campaignView
 			);
