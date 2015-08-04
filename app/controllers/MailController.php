@@ -78,7 +78,15 @@ class MailController extends \BaseController {
 				'campaign' => $campaignView
 			);
 			Log::info('Sending email...');
-
+			
+			Mail::queue('emails/campaign', $data, function($mail) use($campaign, $contacto) {
+				Log::info('Processing email...');
+				$mail->to($contacto->email, "{$contacto->nombre} {$contacto->apellido}")
+					 ->subject($campaign->asunto)
+					 ->from($campaign->email, $campaign->remitente)
+					 ->replyTo($campaign->respuesta);
+			});
+			
 	    	Mail::send('emails/campaign', $data, function($mail) use($campaign, $contacto) {
 				Log::info('Processing email...');
 				$mail->to($contacto->email, "{$contacto->nombre} {$contacto->apellido}")
