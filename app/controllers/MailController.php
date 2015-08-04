@@ -90,7 +90,7 @@ class MailController extends \BaseController {
 
 		} catch (Exception $e) {
 			Log::info('Exception Found!! '. $e->getMessage());
-			Log::info('$SERVER[]: '. $_SERVER);
+			Log::info($_SERVER);
 		    echo 'Exception Found!! ',  $e->getMessage(), "\n";
 		}
 
