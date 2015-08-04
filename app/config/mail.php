@@ -16,6 +16,7 @@ return array(
 	*/
 
 	'driver' => 'mandrill',
+	'from' => array('address' => 'maxi@nocturnainteractive.com', 'name' => 'TrebolNEWS'),
 
 	/*
 	|--------------------------------------------------------------------------
