@@ -90,7 +90,7 @@ class MailController extends \BaseController {
 
 		} catch (Exception $e) {
 			Log::info('Exception Found!! '. $e->getMessage());
-			Log::info('$SERVER[HTTP_ORIGIN]: '. $_SERVER['HTTP_ORIGIN']);
+			Log::info('$SERVER[]: '. $_SERVER);
 		    echo 'Exception Found!! ',  $e->getMessage(), "\n";
 		}
 
