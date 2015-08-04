@@ -69,12 +69,17 @@ class MailController extends \BaseController {
 	    	$campaignView->suscriptor->name  = $contacto->nombre;
 			$campaignView->suscriptor->last  = $contacto->apellido;
 			$campaignView->suscriptor->email = $contacto->email;
-			Log::info('Sending email...');
-			Log::info($_SERVER);
 
-	    	Mail::send('emails/campaign', array(
+			
+			Log::info('Setting Data...');
+			$data = array( 
+				'email' => $email, 
+				'async' => true, 
 				'campaign' => $campaignView
-			), function($mail) use($campaign, $contacto) {
+			);
+			Log::info('Sending email...');
+
+	    	Mail::send('emails/campaign', $data, function($mail) use($campaign, $contacto) {
 				Log::info('Processing email...');
 				$mail->to($contacto->email, "{$contacto->nombre} {$contacto->apellido}")
 					 ->subject($campaign->asunto)
