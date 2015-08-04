@@ -31,29 +31,10 @@ class MailController extends \BaseController {
 						));
 					} else {
 						Log::info('Direct Mail queued');
-						$campaignView = $this->getCampaignView($campaign);
-				    	$campaignView->suscriptor->name  = $contacto->nombre;
-						$campaignView->suscriptor->last  = $contacto->apellido;
-						$campaignView->suscriptor->email = $contacto->email;
-
-						
-						Log::info('Setting Data...');
-						$data = array( 
-							'email' => 'maxi@nocturnainteractive.com', 
-							'async' => true, 
-							'campaign' => $campaignView
-						);
-						Log::info('Sending email...');
-
-				    	Mail::queue('emails/campaign', $data, function($mail) use($campaign, $contacto) {
-							Log::info('Processing email...');
-							$mail->to($contacto->email, "{$contacto->nombre} {$contacto->apellido}")
-								 ->subject($campaign->asunto)
-								 ->from($campaign->email, $campaign->remitente)
-								 ->replyTo($campaign->respuesta);
-						});
-						Log::info('Email Sent to '.$campaignView->suscriptor->email);
-
+						Queue::push('SendEmailQueue', array(
+							'campaign' => $campaign,
+							'contact' => $contacto
+						));
 					}
 
 
@@ -108,6 +89,7 @@ class MailController extends \BaseController {
 			Log::info('Email Sent to '.$campaignView->suscriptor->email);
 
 		} catch (Exception $e) {
+			Log::info('Exception Found!! '.$campaignView->suscriptor->email);
 		    echo 'Exception Found!! ',  $e->getMessage(), "\n";
 		}
 
