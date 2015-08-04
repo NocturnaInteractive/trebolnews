@@ -64,8 +64,6 @@ class MailController extends \BaseController {
 	    	$campaign = (object) $data['campaign'];
 			Log::info('Setting Contact...');
 	    	$contacto = (object) $data['contact'];
-	    	Log::info('Setting Contact...'.$data['email']);
-	    	$email = (object) $data['email'];
 			Log::info('Setting View...');
 	    	$campaignView = $this->getCampaignView($campaign);
 	    	$campaignView->suscriptor->name  = $contacto->nombre;
@@ -75,7 +73,7 @@ class MailController extends \BaseController {
 			
 			Log::info('Setting Data...');
 			$data = array( 
-				'email' => $email, 
+				'email' => 'el.marto.mail@gmail.com', 
 				'async' => true, 
 				'campaign' => $campaignView
 			);
