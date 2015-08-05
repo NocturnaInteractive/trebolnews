@@ -58,7 +58,7 @@ class MailController extends \BaseController {
 		
 	}
 
-	public function sendSingleMail($data){
+	public function sendSingleMail(){
 
 		$data = Input::all();
 
