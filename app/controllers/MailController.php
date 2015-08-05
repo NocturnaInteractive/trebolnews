@@ -59,6 +59,9 @@ class MailController extends \BaseController {
 	}
 
 	public function sendSingleMail($data){
+
+		$data = Input::all();
+
 		try {
 		    Log::info('Setting Campaign...');
 	    	$campaign = (object) $data['campaign'];
