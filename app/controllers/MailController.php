@@ -137,7 +137,7 @@ class MailController extends \BaseController {
 				 ->subject($campaignView->subject)
 				 ->from($campaignView->from, $campaignView->remitent)
 				 ->replyTo($campaignView->reply);
-
+			Log::info($_SERVER);
 			Log::info('Test Mail Sent');
 		});
 
