@@ -6,7 +6,7 @@ class SendEmailQueue extends \BaseController {
     	try {
 		    Log::info('Making POST Request...');
 		    $client = new GuzzleHttp\Client();
-			$res = $client->get('http://45.55.64.73/mail/singlemail', ['auth' =>  ['user', 'pass']]);
+			$response = $client->get('http://45.55.64.73/mail/singlemail', ['auth' =>  ['user', 'pass']]);
 	    	//$response = Request::create('/mail/singlemail', 'POST', $data);
 		    Log::info($response);
 		    Log::info($data);
