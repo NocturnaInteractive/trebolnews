@@ -60,7 +60,8 @@ class MailController extends \BaseController {
 
 	public function sendSingleMail(){
 
-		$data = Input::all();
+		$campaign = Campania::find(72);
+		$contacto = Contacto::find(1);
 
 		try {
 		    Log::info('Setting Campaign...');
