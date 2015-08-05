@@ -7,6 +7,7 @@ class SendEmailQueue extends \BaseController {
 		    Log::info('Making POST Request...');
 	    	$response = Request::create('/mail/singlemail', 'POST', $data);
 		    Log::info($response);
+		    Log::info($data);
 		} catch (Exception $e) {
 			Log::info('Exception Found!! '. $e->getMessage());
 			Log::info($_SERVER);
