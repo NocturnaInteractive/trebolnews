@@ -64,11 +64,6 @@ class MailController extends \BaseController {
 		$contacto = Contacto::find(1);
 
 		try {
-		    Log::info('Setting Campaign...');
-	    	$campaign = (object) $data['campaign'];
-			Log::info('Setting Contact...');
-	    	$contacto = (object) $data['contact'];
-			Log::info('Setting View...');
 	    	$campaignView = $this->getCampaignView($campaign);
 	    	$campaignView->suscriptor->name  = $contacto->nombre;
 			$campaignView->suscriptor->last  = $contacto->apellido;
