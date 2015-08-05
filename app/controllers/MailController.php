@@ -91,13 +91,15 @@ class MailController extends \BaseController {
 			});
 			Log::info('Email Sent to '.$campaignView->suscriptor->email);
 
+			return 'ok';
+
 		} catch (Exception $e) {
 			Log::info('Exception Found!! '. $e->getMessage());
 			Log::info($_SERVER);
 		    echo 'Exception Found!! ',  $e->getMessage(), "\n";
 		}
 
-		return false;
+		return 'error';
 
 	}
 
