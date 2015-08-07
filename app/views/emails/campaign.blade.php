@@ -7,12 +7,17 @@
 <body>
 	<?php
 		$host = 'http://45.55.64.73/';
+		Log::info('1');
 		$generated = $campaign->template;
+		Log::info('2');
 		$socialLink = $campaign->socialLinks;
+		Log::info('3');
 		$query = CampaignFooter::where('user_id',Auth::user()->id);
+		Log::info('4');
 		$footer = $query->first();
-		
+		Log::info('5');
 		if($campaign->suscriptor){
+			Log::info('6');
 			$generated = str_replace("%%suscriptor.name%%",  $campaign->suscriptor->name, $generated);
 			$generated = str_replace("%%suscriptor.last%%",  $campaign->suscriptor->last, $generated);
 			$generated = str_replace("%%suscriptor.email%%", $campaign->suscriptor->email, $generated);
