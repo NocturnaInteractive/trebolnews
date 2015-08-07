@@ -6,7 +6,7 @@
 </head>
 <body>
 	<?php
-		$host = $_SERVER['HTTP_ORIGIN'];
+		$host = 'http://45.55.64.73/';
 		$generated = $campaign->template;
 		$socialLink = $campaign->socialLinks;
 		$query = CampaignFooter::where('user_id',Auth::user()->id);
