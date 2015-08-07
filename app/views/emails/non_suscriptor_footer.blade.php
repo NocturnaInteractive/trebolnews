@@ -1,15 +1,3 @@
-<!--p>
-	Powered by TrebolNEWS
-</p-->
-
-<?php
-	if (isset($user->empresa)){
-		$entity = $user->empresa;
-	} else {
-		$entity = $user->nombre . ' ' . $user->apellido;
-	}
-?>
-
 
 <table height="100%" width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" style=" background-color:#fff; color:#000; font-size:14px; font-family:Helvetica, Arial, sans-serif;">
 

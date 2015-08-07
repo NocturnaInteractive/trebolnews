@@ -31,7 +31,7 @@
 			?>
 		@else
 			<?php 
-				//echo View::make('emails/non_suscriptor_footer', array( 'user' =>  Auth::user(), 'host' => $host ) );
+				echo View::make('emails/non_suscriptor_footer', array( 'entity' => $campaign->entity , 'host' => $host ) );
 			?>
 		@endif
 
