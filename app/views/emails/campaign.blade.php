@@ -12,7 +12,7 @@
 		Log::info('2');
 		$socialLink = $campaign->socialLinks;
 		Log::info('3');
-		$query = CampaignFooter::where('user_id', $campaign->user_id);
+		$query = CampaignFooter::where('user_id', $campaign->id_usuario;
 		Log::info('4');
 		$footer = $query->first();
 		Log::info('5');

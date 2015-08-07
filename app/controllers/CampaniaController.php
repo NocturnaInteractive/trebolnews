@@ -277,6 +277,7 @@ class CampaniaController extends BaseController {
 
 		if(isset($campania)){
 			Session::put('campania.id', 			$campania->id );
+			Session::put('campania.id_usuario', 	$campania->id_usuario );
 			Session::put('campania.social_link_id', $campania->social_link_id );
 			Session::put('campania.tipo', 			$campania->tipo );
 			Session::put('campania.subtipo', 		$campania->subtipo);
@@ -337,7 +338,7 @@ class CampaniaController extends BaseController {
 		Session::put('campania.subtipo','editor');
 
 		$campania = Campania::find($id);
-
+		Session::put('campania.id_usuario', 	$campania->id_usuario );
 		Session::put('campania.social_link_id', $campania->social_link_id );
 		Session::put('campania.tipo', 			$campania->tipo );
 		Session::put('campania.subtipo', 		$campania->subtipo);

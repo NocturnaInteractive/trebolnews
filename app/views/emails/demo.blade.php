@@ -25,7 +25,7 @@
 		$socialLink->reddit		= Session::get('campania.socialLinks_reddit');
 		$socialLink->digg		= Session::get('campania.socialLinks_digg');
 		$socialLink->delicious	= Session::get('campania.socialLinks_delicious');
-		$query = CampaignFooter::where('user_id',Auth::user()->id);
+		$query = CampaignFooter::where('user_id',$campaign->id_usuario);
 		$footer = $query->first();
 
 		
