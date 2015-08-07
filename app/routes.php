@@ -99,10 +99,6 @@ Route::group(array(
         'uses' => 'CampaniaController@duplicateCampaign'
     ));
 
-    Route::post('mail/singlemail', array(
-        'uses' => 'MailController@sendSingleMail'
-    ));
-
     Route::get('mail/test', array(
         'uses' => 'MailController@test'
     ));

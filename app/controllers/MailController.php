@@ -58,12 +58,13 @@ class MailController extends \BaseController {
 		
 	}
 
-	public function sendSingleMail(){
-
-		$campaign = Campania::find(72);
-		$contacto = Contacto::find(1);
-
+	public function sendSingleMail($data){
 		try {
+		    Log::info('Setting Campaign...');
+	    	$campaign = (object) $data['campaign'];
+			Log::info('Setting Contact...');
+	    	$contacto = (object) $data['contact'];
+			Log::info('Setting View...');
 	    	$campaignView = $this->getCampaignView($campaign);
 	    	$campaignView->suscriptor->name  = $contacto->nombre;
 			$campaignView->suscriptor->last  = $contacto->apellido;
@@ -87,15 +88,11 @@ class MailController extends \BaseController {
 			});
 			Log::info('Email Sent to '.$campaignView->suscriptor->email);
 
-			return 'ok';
-
 		} catch (Exception $e) {
-			Log::info('Exception Found!! '. $e->getMessage());
-			Log::info($_SERVER);
 		    echo 'Exception Found!! ',  $e->getMessage(), "\n";
 		}
 
-		return 'error';
+		return false;
 
 	}
 
@@ -138,7 +135,7 @@ class MailController extends \BaseController {
 				 ->subject($campaignView->subject)
 				 ->from($campaignView->from, $campaignView->remitent)
 				 ->replyTo($campaignView->reply);
-			Log::info($_SERVER);
+
 			Log::info('Test Mail Sent');
 		});
 
