@@ -20,6 +20,11 @@ class HomeController extends BaseController {
             'plans' => Plan::all()
         );
 
+
+            $client = new GuzzleHttp\Client();
+            $response = $client->get('http://api.geonames.org/citiesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&lang=de&username=demo');
+            $response = $client->post('http://localhost:8000/mail/singlemail');
+
         return View::make('trebolnews.home.index', $res);
     }
 
