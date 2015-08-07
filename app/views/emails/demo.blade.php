@@ -12,6 +12,7 @@
 		$suscriptor->name = 'John';
 		$suscriptor->last = 'Doe';
 		$suscriptor->email = 'johndoe@sample.com';
+		$campaign->entity = 'Google';
 		$generated = $campaign->contenido;
 		$socialLink = new stdClass();
 		$socialLink->facebook	= Session::get('campania.socialLinks_facebook');
@@ -49,7 +50,7 @@
 			?>
 		@else
 			<?php 
-				echo View::make('emails/non_suscriptor_footer', array( 'user' =>  Auth::user(), 'host' => $host ) ); 
+				echo View::make('emails/non_suscriptor_footer', array( 'entity' => $campaign->entity, 'host' => $host ) ); 
 			?>
 		@endif
 		<div><table width="600px" border="0" cellspacing="0" cellpadding="0" style="margin:0 auto;">
