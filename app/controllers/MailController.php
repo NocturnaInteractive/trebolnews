@@ -70,7 +70,6 @@ class MailController extends \BaseController {
 			$data = array(
 				'campaign' => $campaignView
 			);
-			Log::info('Sending email...');
 
 	    	Mail::send('emails/campaign', $data, function($mail) use($campaign, $contacto) {
 				$mail->to($contacto->email, "{$contacto->nombre} {$contacto->apellido}")

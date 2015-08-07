@@ -149,14 +149,8 @@ class CampaniaController extends BaseController {
 					$success = false;
 					$programmedTime = null;
 					if ($campania->envio === 'programmed') {
-						// $year = 2015;
-						// $month = 07;
-						// $day = 13;
-						// $hour = 00;
-						// $minute = 30;
-						// $second = 00;
-						// $programmedTime = Carbon::create($year, $month, $day, $hour, $minute, $second, $tz);
-						$programmedTime = Carbon::now()->addMinutes(1);
+						 $programmedTime = Carbon::createFromFormat('Y-m-d H:i:s', $campania->programacion);
+						//$programmedTime = Carbon::now()->addMinutes(1);
 					}
 					$mail = new MailController();
 
@@ -203,6 +197,7 @@ class CampaniaController extends BaseController {
 		if($id) {
 			$campania = Campania::find($id);
 			$campania->id  			= Session::get('campania.id');
+			$campania->id_usuario	= Session::get('campania.id_usuario');
 			$campania->tipo  		= Session::get('campania.tipo');
 			$campania->subtipo 		= Session::get('campania.subtipo');
 			$campania->nombre 		= Session::get('campania.nombre');
@@ -220,6 +215,7 @@ class CampaniaController extends BaseController {
 			}else if($campania->notificacion == 'off'){
 				$campania->notificacion = false;
 			}
+			$campania->programacion = Session::get('campania.programacion');
 			$campania->save();
 
 			$socialLink = SocialLink::find($campania->social_link_id);
@@ -232,7 +228,6 @@ class CampaniaController extends BaseController {
 			$socialLink = new SocialLink;
 			$socialLink = $this->getSocialLinksFromSession($socialLink);
 			$socialLink->save();
-
 			$campania = Campania::create(array(
 				'id_usuario'    => Auth::user()->id,
 				'social_link_id'=> $socialLink->id,
@@ -247,7 +242,7 @@ class CampaniaController extends BaseController {
 				'redes'         => Session::get('campania.redes') ? json_encode(Session::get('campania.redes')) : null,
 				'status'        => 'draft',
 				'envio'         => Session::get('campania.envio'),
-				'programacion'  => Session::get('campania.envio') == 'programmed' ? Carbon::createFromFormat('d/m/Y H:i', Session::get('fecha') . ' ' . Session::get('hora')) : null,
+				'programacion'  => Session::get('campania.envio') == 'programmed' ? Carbon::createFromFormat('Y-m-d H:i', Session::get('fecha') . ' ' . Session::get('hora')) : null,
 				'notificacion'  => Session::get('campania.notificacion') == 'on' ? true : false
 			));
 			$campania->listas()->attach(Session::get('campania.listas'));
@@ -291,6 +286,7 @@ class CampaniaController extends BaseController {
 			Session::put('campania.status', 		$campania->status);
 			Session::put('campania.envio', 			$campania->envio);
 			Session::put('campania.notificacion', 	$campania->notificacion);
+			Session::put('campania.programacion', 	$campania->programacion);
 
 			foreach ($campania->listas as $lista) {
 				Session::push('campania.listas', $lista->id);
@@ -352,6 +348,7 @@ class CampaniaController extends BaseController {
 		Session::put('campania.status', 		$campania->status);
 		Session::put('campania.envio', 			$campania->envio);
 		Session::put('campania.notificacion', 	$campania->notificacion);
+		Session::put('campania.programacion', 	$campania->programacion);
 
 		foreach ($campania->listas as $lista) {
 			Session::push('campania.listas', $lista->id);

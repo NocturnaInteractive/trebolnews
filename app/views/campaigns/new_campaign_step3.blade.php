@@ -252,14 +252,14 @@
                                         <div id="programar_envio">
                                             <div id="programar_fecha">
                                                 <p class="titulo_envio">Fecha:</p>
-                                                <div id="fecha-form">
-                                                    <input type="text" id="datepicker" placeholder="DD/MM/AAAA" name="fecha" />
+                                                <div >
+                                                    <input type="date" id="datepicker" name="fecha" class="link_clasic" />
                                                 </div>
                                             </div><!--fin programar_fecha-->
                                             <div id="programar_horario">
                                                 <p class="titulo_envio">Hora:</p>
-                                                <div id="horarioforma">
-                                                    <input name="hora" type="text" placeholder="00:00" class="timepicker" style="width: 178px;" />
+                                                <div>
+                                                    <input name="hora" type="time" class="timepicker" style="width: 178px;" />
                                                     <!-- <input type="text" placeholder="00" /> -->
                                                 </div>
                                                 <!-- <select id="hora" SIZE="1">

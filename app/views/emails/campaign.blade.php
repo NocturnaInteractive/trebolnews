@@ -31,7 +31,6 @@
 			?>
 		@else
 			<?php 
-				Log::info(json_encode((array)$campaign));
 				echo View::make('emails/non_suscriptor_footer', array( 'entity' => $campaign->entity , 'host' => $host ) );
 			?>
 		@endif
