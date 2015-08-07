@@ -9,7 +9,6 @@ class SendEmailQueue extends \BaseController {
 			$response = $client->post('http://45.55.64.73/mail/singlemail', ['auth' =>  ['user', 'pass']]);
 	    	//$response = Request::create('/mail/singlemail', 'POST', $data);
 		    Log::info($response);
-		    Log::info($data);
 		} catch (Exception $e) {
 			Log::info('Exception Found!! '. $e->getMessage());
 			Log::info($_SERVER);
