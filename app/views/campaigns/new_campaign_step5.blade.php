@@ -176,7 +176,7 @@
 								<img src="{{ asset('internas/imagenes/programar_clasico.png') }}" width="107" height="100">
 								<p id="horario_programado">Entrega Programada:<br>
 									<?php
-									$prog = Carbon::createFromFormat('d/m/Y', Session::get('campania.programacion'));
+									$prog = Carbon::createFromFormat('Y-m-d H:i:s', Session::get('campania.programacion'));
 									$dias = Config::get('trebolnews.dias');
 									$meses = Config::get('trebolnews.meses');
 									?>
