@@ -60,18 +60,13 @@ class MailController extends \BaseController {
 
 	public function sendSingleMail($data){
 		try {
-		    Log::info('Setting Campaign...');
 	    	$campaign = (object) $data['campaign'];
-			Log::info('Setting Contact...');
 	    	$contacto = (object) $data['contact'];
-			Log::info('Setting View...');
 	    	$campaignView = $this->getCampaignView($campaign);
 	    	$campaignView->suscriptor->name  = $contacto->nombre;
 			$campaignView->suscriptor->last  = $contacto->apellido;
 			$campaignView->suscriptor->email = $contacto->email;
 
-			
-			Log::info('Setting Data...');
 			$data = array( 
 				'email' => 'maxi@nocturnainteractive.com', 
 				'async' => true, 
@@ -89,6 +84,7 @@ class MailController extends \BaseController {
 			Log::info('Email Sent to '.$campaignView->suscriptor->email);
 
 		} catch (Exception $e) {
+			Log::info('Exception Found!! '. $e->getMessage());
 		    echo 'Exception Found!! ',  $e->getMessage(), "\n";
 		}
 
