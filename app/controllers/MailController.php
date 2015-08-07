@@ -97,12 +97,10 @@ class MailController extends \BaseController {
 		$campaignView->id = $campaign->id;
 		$campaignView->template = $campaign->contenido;
 		$campaignView->user_id = $campaign->id_usuario;
-		$campaignView->entity = '';
+		$campaignView->entity = $owner->nombre . ' ' . $user->apellido;
 
 		if (isset($owner->empresa)){
 			$campaignView->entity = $owner->empresa;
-		} else {
-			$campaignView->entity = $owner->nombre . ' ' . $user->apellido;
 		}
 
 		$campaignView->suscriptor = new stdClass();
