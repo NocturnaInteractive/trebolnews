@@ -98,6 +98,7 @@ class MailController extends \BaseController {
 
 		$campaignView = new stdClass();
 		$campaignView->id = $campaign->id;
+		$campaignView->user_id = $campaign->id_usuario;
 		$campaignView->template = $campaign->contenido;
 		$campaignView->suscriptor = new stdClass();
 
