@@ -43,4 +43,21 @@ class CarpetaController extends BaseController {
         Carpeta::destroy(Input::get('id'));
     }
 
+    public function folders() {
+        $userId = Auth::user()->id;
+        $folders = Carpeta::where('id_usuario', $userId)->get();
+        return Response::json($folders);
+    }
+
+    public function allImages() {
+        $userId = Auth::user()->id;
+        $folders = Carpeta::where('id_usuario', $userId)->get(['id']);
+        $foldersId = array();
+        for($i = 0; $i<count($folders); $i++){
+            array_push($foldersId, $folders[$i]->id);
+        }
+        $images = Imagen::whereIn('id_carpeta',$foldersId)->get();
+        return Response::json($images);
+    }
+
 }

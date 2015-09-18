@@ -23,7 +23,8 @@ Route::group(array(
     Route::post('guardar_imagen', 'ImagenController@guardar');
     Route::post('mover_imagen', 'ImagenController@mover');
     Route::any('trash_image', 'ImagenController@trash');
-    Route::post('search_bank', 'ImagenController@search_bank');
+    Route::any('search_bank', 'ImagenController@search_bank');
+    
     // Route::post('eliminar_carpeta', 'CarpetaController@eliminar');
 
     Route::post('guardar_campania', 'CampaniaController@guardar_campania');

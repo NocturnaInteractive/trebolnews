@@ -33,6 +33,9 @@ Route::get('gracias', array(
     }
 ));
 
+Route::get('library/folders', 'CarpetaController@folders');
+Route::get('library/folders/images/all', 'CarpetaController@allImages');
+
 
 Route::get('/checkout/{planId}/{months}',function($planId, $months){
     $action = 'index';

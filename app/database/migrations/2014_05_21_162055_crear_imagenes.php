@@ -10,7 +10,7 @@ class CrearImagenes extends Migration {
             $table->increments('id');
             $table->integer('id_carpeta')->unsigned();
             $table->string('nombre');
-            $table->integer('id_categoria')->unsigned();
+            $table->integer('id_categoria')->unsigned()->nullable();
             $table->string('archivo');
             $table->timestamps();
             $table->softDeletes();

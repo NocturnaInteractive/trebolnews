@@ -35,9 +35,17 @@
             </a>
         </td>
         <td class="nombrelibreria">{{ $imagen->nombre }}</td>
-        <?php $dim = getimagesize($imagen->archivo); ?>
-        <td>{{ $dim[0] . ' x ' . $dim[1] }}</td>
-        <td>{{ round(filesize($imagen->archivo) / 1024, 2, PHP_ROUND_HALF_DOWN) . ' Kb' }}</td>
+        <?php 
+            try {
+                $dim = getimagesize($imagen->archivo); 
+                $filesize = round(filesize($imagen->archivo) / 1024, 2, PHP_ROUND_HALF_DOWN) . ' Kb';
+            } catch (Exception $e) {
+                $dim = array(0,0);
+                $filesize = '0kb';
+            }
+        ?>
+        <td>{{ $dim[0] . 'px x ' . $dim[1] }}px</td>
+        <td>{{ $filesize }}</td>
         <td>
             <a class="ver_libreria" href="#">
                 <img src="{{ asset('internas/imagenes/ojoicono.png') }}" width="28" height="25">

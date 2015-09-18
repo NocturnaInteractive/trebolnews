@@ -111,8 +111,78 @@ $(function() {
 	*****************/
 
 	if( $('.step4').length > 0 ){
+		var libraryImages = [];
+		var windowOrigin = window.top.location.origin + '/';
+		$.get('/library/folders/images/all', function(data){
+			libraryImages.push(['Imagen Actual', '']);
+			data.forEach(function(item, index){
+				libraryImages.push([item.nombre, windowOrigin + item.archivo]);
+			});
+		});
 		$('#txt_campania').ckeditor({
 			height: '296px'
+		});
+		CKEDITOR.on('dialogDefinition', function( ev ) {
+		    // Take the dialog window name and its definition from the event data.
+		    var dialogName = ev.data.name;
+		    var dialogDefinition = ev.data.definition;
+
+		    if ( dialogName == 'image' ) {
+		    	var lastImage = null;
+		        // memo: dialogDefinition.onShow = ... throws JS error (C.preview not defined) 
+         
+		        // Get a reference to the 'Link Info' tab. 
+		        var infoTab = dialogDefinition.getContents('info'); 
+		        // Remove unnecessary widgets 
+		        infoTab.remove( 'ratioLock' ); 
+		        //infoTab.remove( 'txtHeight' );
+		        //infoTab.remove( 'txtWidth' ); 
+		        infoTab.remove( 'txtAlt' );
+		        infoTab.remove( 'txtBorder'); 
+		        infoTab.remove( 'txtHSpace'); 
+		        infoTab.remove( 'txtVSpace'); 
+		        infoTab.remove( 'cmbAlign' ); 
+	            infoTab.add( {
+                    id : 'library',
+                    type : 'select',
+                    label : 'Imagenes de mi Libreria',
+                    'default':'',
+                    items: libraryImages,
+                    onChange:function(){
+                    	var d = CKEDITOR.dialog.getCurrent();
+                    	lastImage = lastImage || d.getValueOf('info','txtUrl');
+                    	
+                    	//if selected option is different from default placeholder
+                    	if(this.items[0][1] != this.getValue()) {
+	                    	d.setValueOf("info", "txtUrl", this.getValue());
+                    	} else {
+	                    	d.setValueOf("info", "txtUrl", lastImage);	
+                    	}
+                    } 
+                });
+
+
+		        dialogDefinition.onLoad = function () { 
+		            var dialog = CKEDITOR.dialog.getCurrent(); 
+		             
+		            var elem = dialog.getContentElement('info','htmlPreview');     
+		            //elem.getElement().hide(); 
+		         
+		            dialog.hidePage( 'Link' ); 
+		            dialog.hidePage( 'advanced' ); 
+		            dialog.hidePage( 'Upload' ); // works now (CKEditor v3.6.4) 
+		            this.selectPage('info'); 
+
+		             
+		            /*var uploadTab = dialogDefinition.getContents('Upload'); 
+		            var uploadButton = uploadTab.get('uploadButton'); 
+		            uploadButton['filebrowser']['onSelect'] = function( fileUrl, errorMessage ) { 
+		                //$("input.cke_dialog_ui_input_text").val(fileUrl); 
+		                dialog.getContentElement('info', 'txtUrl').setValue(fileUrl); 
+		                //$(".cke_dialog_ui_button_ok span").click(); 
+		            }*/ 
+		        }; 
+		    }
 		});
 
 		$('.btn_guardar').on('click', _events.saveHandler);
